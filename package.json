@@ -3,8 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "serve": "vite preview"
+    "build": "tsc --noEmit && vite build",
+    "serve": "vite preview",
+    "lint": "eslint . --ext .ts,.tsx,.js",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js --fix",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "react": "^17.0.0",

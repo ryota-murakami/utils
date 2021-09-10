@@ -1,13 +1,16 @@
 {
   "name": "utility-collective",
+  "license": "MIT",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc --noEmit && vite build",
-    "serve": "vite preview",
+    "vite:dev": "vite",
+    "vite:build": "tsc -p vite.tsconfig.json && vite build",
+    "vite:typecheck": "tsc -p vite.tsconfig.json",
+    "vite:serve": "vite preview",
+    "utility:build": "tsc -p utility.tsconfig.json",
+    "utility:typecheck": "tsc --noEmit -p utility.tsconfig.json",
     "lint": "eslint . --ext .ts,.tsx,.js",
-    "lint:fix": "eslint . --ext .ts,.tsx,.js --fix",
-    "typecheck": "tsc --noEmit"
+    "lint:fix": "eslint . --ext .ts,.tsx,.js --fix"
   },
   "dependencies": {
     "react": "^17.0.0",

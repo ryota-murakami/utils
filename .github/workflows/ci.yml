@@ -7,7 +7,7 @@ on:
     branches:
       - main
 jobs:
-  build-test-lint-typecheck:
+  build-test-lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: '16.8'
       - run: yarn install
-      - run: yarn build
+      - run: yarn vite:build
 #      - run: yarn test
       - run: yarn lint
-      - run: yarn typecheck
+      - run: yarn utility:build

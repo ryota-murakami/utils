@@ -1,14 +1,14 @@
 {
   "name": "utility-collective",
   "license": "MIT",
-  "version": "0.0.0",
   "scripts": {
     "vite:dev": "vite",
-    "vite:build": "tsc -p vite.tsconfig.json && vite build",
-    "vite:typecheck": "tsc -p vite.tsconfig.json",
+    "vite:build": "tsc -p react/tsconfig.json && vite build",
+    "vite:typecheck": "tsc -p react/tsconfig.json",
     "vite:serve": "vite preview",
-    "utility:build": "tsc -p utility.tsconfig.json",
-    "utility:typecheck": "tsc --noEmit -p utility.tsconfig.json",
+    "utility:build": "tsc --noEmit -p utility/tsconfig.json",
+    "utility:typecheck": "tsc --noEmit -p utility/tsconfig.json",
+    "typecheck": "yarn utility:typecheck && yarn vite:typecheck",
     "lint": "eslint . --ext .ts,.tsx,.js",
     "lint:fix": "eslint . --ext .ts,.tsx,.js --fix"
   },

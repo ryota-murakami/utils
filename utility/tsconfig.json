@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2016",
+    "target": "ESNext",
     "lib": [
       "dom",
       "dom.iterable",
@@ -17,9 +17,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "outDir": "./utility_build"
   },
   "include": [
-    "./react"
+    "./**/*"
   ]
 }

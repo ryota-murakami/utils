@@ -5,7 +5,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [reactRefresh()],
   build: {
-    outDir: './vite_build',
+    outDir: './build_vite',
     sourcemap: true,
   },
 })

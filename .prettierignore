@@ -1,7 +1,8 @@
 .git
 .idea
-images
 .all-contributorsrc
 .eslintignore
 .gitignore
 LICENSE
+build_utility
+build_vite

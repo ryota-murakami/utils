@@ -1,5 +1,5 @@
 node_modules
 .DS_Store
-vite_build
+build_vite
+build_utility
 *.local
-utility_build

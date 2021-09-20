@@ -15,7 +15,9 @@ jobs:
         with:
           node-version: '16.8'
       - run: yarn install
+      - run: yarn typecheck
       - run: yarn vite:build
+      - run: yarn utility:build
       - run: yarn test
       - run: yarn lint
-      - run: yarn utility:build
+

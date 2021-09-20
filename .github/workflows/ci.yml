@@ -18,7 +18,6 @@ jobs:
       - run: yarn typecheck
       - run: yarn vite:build
       - run: yarn utility:build
-      - run: pwd && ls -l && cd react && ls -l
       - run: yarn test
       - run: yarn lint
 

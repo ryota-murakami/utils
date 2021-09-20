@@ -3,4 +3,3 @@ node_modules
 build_vite
 build_utility
 *.local
-y

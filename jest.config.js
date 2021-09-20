@@ -1,9 +1,9 @@
 const config = {
-  roots: ['.'],
+  roots: ['<rootDir>'],
   verbose: true,
   resetMocks: true,
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/react/setUptests.js'],
+  setupFilesAfterEnv: ['<rootDir>/setUptests.js'],
   testMatch: [
     '<rootDir>/react/**/*.test.{js,jsx,ts,tsx}',
     '<rootDir>/utility/**/*.test.{js,ts}',

@@ -9,7 +9,7 @@
     "utility:build": "tsc --noEmit -p utility/tsconfig.json",
     "utility:typecheck": "tsc --noEmit -p utility/tsconfig.json",
     "typecheck": "yarn utility:typecheck && yarn vite:typecheck",
-    "test": "jest",
+    "test": "jest --notify",
     "lint": "eslint . --ext .ts,.tsx,.js",
     "lint:fix": "eslint . --ext .ts,.tsx,.js --fix"
   },

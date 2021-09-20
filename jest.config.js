@@ -1,5 +1,5 @@
 const config = {
-  roots: ['<rootDir>'],
+  roots: ['.'],
   verbose: true,
   resetMocks: true,
   testEnvironment: 'jsdom',

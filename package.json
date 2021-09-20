@@ -49,6 +49,6 @@
     "node-notifier": "^10.0.0",
     "prettier": "^2.4.1",
     "typescript": "^4.3.2",
-    "vite": "^2.5.4"
+    "vite": "^2.5.10"
   }
 }

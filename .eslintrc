@@ -46,9 +46,9 @@
     "no-console": "error",
     "prettier/prettier": [
       "warn",
+      {},
       {
-        "singleQuote": true,
-        "semi": false
+        usePrettierrc: true
       }
     ],
     'import/order': [

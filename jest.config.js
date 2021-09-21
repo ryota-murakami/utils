@@ -1,6 +1,8 @@
 const config = {
   roots: ['<rootDir>'],
   verbose: true,
+  notify: true,
+  notifyMode: 'always',
   resetMocks: true,
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/react/setupTests.js'],

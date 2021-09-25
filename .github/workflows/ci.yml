@@ -7,7 +7,7 @@ on:
     branches:
       - main
 jobs:
-  typecheck-build-test-lint:
+  typecheck:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,8 +16,32 @@ jobs:
           node-version: '16.8'
       - run: yarn install
       - run: yarn typecheck
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '16.8'
+      - run: yarn install
       - run: yarn vite:build
       - run: yarn utility:build
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '16.8'
+      - run: yarn install
       - run: yarn test
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '16.8'
+      - run: yarn install
       - run: yarn lint
 

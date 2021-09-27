@@ -51,3 +51,5 @@ export type IsAny<T, True, False = never> = true | false extends (
   : False
 
 export type CastAny<T, CastTo> = IsAny<T, CastTo, T>
+
+export function assertIsDefined<T>(x: T | undefined): asserts x is T {}

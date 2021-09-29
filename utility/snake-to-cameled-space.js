@@ -52,4 +52,10 @@ Log at making proccess
 
 let str = process.argv[2]
 
-console.log(str.split('-').map(s => (s.charAt(0).toUpperCase() + s.slice(1))).join(' '))
+// eslint-disable-next-line no-console
+console.log(
+  str
+    .split('-')
+    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+    .join(' ')
+)

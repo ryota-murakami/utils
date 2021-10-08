@@ -1,10 +1,6 @@
 // from https://github.com/reduxjs/react-redux/blob/7a3e2fd11c9898e28700cad963757b523e215ab4/src/utils/shallowEqualScalar.js
-'use strict'
 
-exports.__esModule = true
-exports['default'] = shallowEqualScalar
-
-function shallowEqualScalar(objA, objB) {
+export default function shallowEqualScalar(objA, objB) {
   if (objA === objB) {
     return true
   }
@@ -42,5 +38,3 @@ function shallowEqualScalar(objA, objB) {
 
   return true
 }
-
-module.exports = exports['default']

@@ -55,3 +55,6 @@ export type CastAny<T, CastTo> = IsAny<T, CastTo, T>
 export function assertIsDefined<T>(x: T | undefined): asserts x is T {}
 
 export type AnyFunction = (...args: any[]) => any
+
+// skip unnecessary generics position
+export type _ = any

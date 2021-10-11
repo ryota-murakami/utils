@@ -1,6 +1,5 @@
 {
   "name": "utility-collective",
-  "license": "MIT",
   "scripts": {
     "vite:dev": "vite",
     "vite:build": "vite build",

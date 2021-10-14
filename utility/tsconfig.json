@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "..",
     "target": "ESNext",
     "lib": [
       "dom",
@@ -19,6 +20,6 @@
     "outDir": "./build_utility"
   },
   "include": [
-    "./**/*"
+    "../utility"
   ]
 }

@@ -7,7 +7,7 @@
     "vite:serve": "vite preview",
     "ut:build": "tsc -p utility/tsconfig.json",
     "ut:typecheck": "tsc --noEmit -p utility/tsconfig.json",
-    "typecheck": "yarn utility:typecheck && yarn vite:typecheck",
+    "typecheck": "yarn ut:typecheck && yarn vite:typecheck",
     "test": "jest",
     "lint": "eslint . --ext .ts,.tsx,.js",
     "lint:fix": "eslint . --ext .ts,.tsx,.js --fix",

@@ -1,3 +1,6 @@
+const path = require('path')
+
+const fromRoot = (d) => path.join(__dirname, d)
 const config = {
   roots: ['<rootDir>'],
   verbose: true,
@@ -11,7 +14,7 @@ const config = {
     '<rootDir>/utility/**/*.test.{js,ts}',
   ],
   transform: {
-    '^.+\\.[jt]sx?$': 'babel-jest',
+    '^.+\\.[jt]sx?$': 'esbuild-jest',
     '^.+\\.css$': '<rootDir>/jest/cssTransform.js',
     '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)':
       '<rootDir>/jest/fileTransform.js',
@@ -21,9 +24,10 @@ const config = {
     '^.+\\.module\\.(css|sass|scss)$',
   ],
   moduleDirectories: ['node_modules'],
-  moduleFileExtensions: ['js', 'mjs', 'jsx', 'ts', 'tsx', 'json', 'node'],
+  moduleFileExtensions: ['js', 'mjs', 'jsx', 'ts', 'tsx', 'json'],
   moduleNameMapper: {
-    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+    'react/(.*)': fromRoot('react/$1'),
+    'utility/(.*)': fromRoot('utility/$1'),
   },
   watchPlugins: [
     'jest-watch-typeahead/filename',

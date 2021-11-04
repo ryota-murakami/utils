@@ -1,6 +1,3 @@
-const path = require('path')
-
-const fromRoot = (d) => path.join(__dirname, d)
 const config = {
   roots: ['<rootDir>'],
   verbose: true,
@@ -26,8 +23,7 @@ const config = {
   moduleDirectories: ['node_modules'],
   moduleFileExtensions: ['js', 'mjs', 'jsx', 'ts', 'tsx', 'json'],
   moduleNameMapper: {
-    'react/(.*)': fromRoot('react/$1'),
-    'utility/(.*)': fromRoot('utility/$1'),
+    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
   },
   watchPlugins: [
     'jest-watch-typeahead/filename',

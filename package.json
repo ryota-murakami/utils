@@ -2,7 +2,7 @@
   "name": "utility-collective",
   "license": "MIT",
   "scripts": {
-    "vite:dev": "vite",
+    "dev": "vite",
     "vite:build": "vite build",
     "vite:typecheck": "tsc -p react/tsconfig.json",
     "vite:serve": "vite preview",

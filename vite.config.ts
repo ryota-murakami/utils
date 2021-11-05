@@ -8,4 +8,7 @@ export default defineConfig({
     outDir: './build_vite',
     sourcemap: true,
   },
+  server: {
+    open: true,
+  },
 })

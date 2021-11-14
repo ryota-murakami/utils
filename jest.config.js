@@ -12,9 +12,9 @@ const config = {
   ],
   transform: {
     '^.+\\.[jt]sx?$': 'esbuild-jest',
-    '^.+\\.css$': '<rootDir>/jest/cssTransform.js',
+    '^.+\\.css$': '<rootDir>/.jest/cssTransform.js',
     '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)':
-      '<rootDir>/jest/fileTransform.js',
+      '<rootDir>/.jest/fileTransform.js',
   },
   transformIgnorePatterns: [
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',

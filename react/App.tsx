@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 
+import useReferentialEqual from './hooks/useReferentialEqual'
 import logo from './logo.svg'
 import './App.css'
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function App() {
   const [count, setCount] = useState(0)
+  useReferentialEqual(count)
 
   return (
     <div className="App">

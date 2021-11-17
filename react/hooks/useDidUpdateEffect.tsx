@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 /**
  * Simulate componentDidUpdate() method of Class Component
  * https://reactjs.org/docs/react-component.html#componentdidupdate

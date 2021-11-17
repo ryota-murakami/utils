@@ -11391,10 +11391,10 @@ store2@^2.12.0:
   resolved "https://registry.yarnpkg.com/store2/-/store2-2.12.0.tgz#e1f1b7e1a59b6083b2596a8d067f6ee88fd4d3cf"
   integrity sha512-7t+/wpKLanLzSnQPX8WAcuLCCeuSHoWdQuh9SB3xD0kNOM38DNf+0Oa+wmvxmYueRzkmh6IcdKFtvTa+ecgPDw==
 
-storybook-builder-vite@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/storybook-builder-vite/-/storybook-builder-vite-0.1.6.tgz#7b243d59814b9308b23e2e36cb74492d5a0e63a1"
-  integrity sha512-kQgHkw5x1qyZw+nj2ebZfCQVOuzgC4+WDoVXba+jiaCw0J6C4/l1H2wfQ7vt/dk1qW7bbVoNGsqMbd5coeSgRw==
+storybook-builder-vite@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/storybook-builder-vite/-/storybook-builder-vite-0.1.7.tgz#6622cb1482ec007b234da4644776432c16904e72"
+  integrity sha512-FXV7Zpf/6FqKnZNqr1JDYeLVfOwZj+h3SPGhjOtu1pIT+GAh13+YtnD6UeiMNEWhRtZglwDSqy1eV5oQcghe4A==
   dependencies:
     "@mdx-js/mdx" "^1.6.22"
     "@storybook/csf-tools" "^6.3.3"

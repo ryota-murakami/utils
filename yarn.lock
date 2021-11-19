@@ -3177,7 +3177,7 @@
     "@rollup/pluginutils" "^4.1.1"
     react-refresh "^0.10.0"
 
-"@vitejs/plugin-react@^1.0.1":
+"@vitejs/plugin-react@^1.0.8":
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-react/-/plugin-react-1.0.9.tgz#3166e82cc986512c2e0411138305468488704e86"
   integrity sha512-1iTS/c3z4QWj8aXIItp6zFMI08UQEz5+fGvnahSCFOSIfazKDlCTEUUQJP23zoxFjeKOF+M3/WA0ZatcHUVEqg==
@@ -11391,15 +11391,15 @@ store2@^2.12.0:
   resolved "https://registry.yarnpkg.com/store2/-/store2-2.12.0.tgz#e1f1b7e1a59b6083b2596a8d067f6ee88fd4d3cf"
   integrity sha512-7t+/wpKLanLzSnQPX8WAcuLCCeuSHoWdQuh9SB3xD0kNOM38DNf+0Oa+wmvxmYueRzkmh6IcdKFtvTa+ecgPDw==
 
-storybook-builder-vite@^0.1.7:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/storybook-builder-vite/-/storybook-builder-vite-0.1.7.tgz#6622cb1482ec007b234da4644776432c16904e72"
-  integrity sha512-FXV7Zpf/6FqKnZNqr1JDYeLVfOwZj+h3SPGhjOtu1pIT+GAh13+YtnD6UeiMNEWhRtZglwDSqy1eV5oQcghe4A==
+storybook-builder-vite@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/storybook-builder-vite/-/storybook-builder-vite-0.1.8.tgz#0879f3d02c1999e6962d492167c51e32cc753e14"
+  integrity sha512-ws0yNRJ1DCBK4NzrMiUIEmuM3chnAaVnVPNJQRyvURnPvEVY/8AKcHBOA2YXC81eEkcAg/APFRGteIukeBXvNQ==
   dependencies:
     "@mdx-js/mdx" "^1.6.22"
     "@storybook/csf-tools" "^6.3.3"
     "@storybook/source-loader" "^6.3.12"
-    "@vitejs/plugin-react" "^1.0.1"
+    "@vitejs/plugin-react" "^1.0.8"
     es-module-lexer "^0.9.3"
     glob "^7.2.0"
     glob-promise "^4.2.0"

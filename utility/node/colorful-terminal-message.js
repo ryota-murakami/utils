@@ -18,7 +18,7 @@ var grabbers = [
     '🔥                            🔥',
     '🔥  Do you rely on Greenlock? 🔥',
     '🔥                            🔥',
-    ' 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥'
+    ' 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥',
   ],
 
   [
@@ -29,7 +29,7 @@ var grabbers = [
     '🍒                              🍒',
     '🍒  Do you rely on Greenlock?   🍒',
     '🍒                              🍒',
-    ' 🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒'
+    ' 🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒',
   ],
 
   [
@@ -40,7 +40,7 @@ var grabbers = [
     '👉                             👈',
     '👉  Do you rely on Greenlock?  👈',
     '👉                             👈',
-    ' 👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆 '
+    ' 👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆 ',
   ],
 
   [
@@ -51,29 +51,31 @@ var grabbers = [
     '👀                              👀',
     '👀  Do you rely on Greenlock?   👀',
     '👀                              👀',
-    ' 👀 👀 👀 👀 👀 👀 👀 👀 👀 👀 👀 '
-  ]
+    ' 👀 👀 👀 👀 👀 👀 👀 👀 👀 👀 👀 ',
+  ],
 ]
 
-setTimeout(function() {
-  grabbers[Math.floor(Math.random() * grabbers.length)].concat([
-    '',
-    'Hey! Let\'s Encrypt will \u001b[31mSTOP WORKING\u001b[0m with Greenlock v2 at the end of October,',
-    'and \u001b[31mWITHOUT YOUR HELP\u001b[0m we won\'t get the next release out in time.',
-    '',
-    'If Greenlock has saved you time and money, and taken stress out of your life,',
-    'or you just love it, please reach out to return the favor today:',
-    '',
-    '\u001b[31mSAVE GREENLOCK:\u001b[0m',
-    'https://indiegogo.com/at/greenlock',
-    '',
-    '================================================================================',
-    ''
-  ]).forEach(function(line) {
-    console.info(line)
-  })
+setTimeout(function () {
+  grabbers[Math.floor(Math.random() * grabbers.length)]
+    .concat([
+      '',
+      "Hey! Let's Encrypt will \u001b[31mSTOP WORKING\u001b[0m with Greenlock v2 at the end of October,",
+      "and \u001b[31mWITHOUT YOUR HELP\u001b[0m we won't get the next release out in time.",
+      '',
+      'If Greenlock has saved you time and money, and taken stress out of your life,',
+      'or you just love it, please reach out to return the favor today:',
+      '',
+      '\u001b[31mSAVE GREENLOCK:\u001b[0m',
+      'https://indiegogo.com/at/greenlock',
+      '',
+      '================================================================================',
+      '',
+    ])
+    .forEach(function (line) {
+      console.info(line)
+    })
 }, 300)
 
-setTimeout(function() {
+setTimeout(function () {
   // give time to read
 }, 1500)

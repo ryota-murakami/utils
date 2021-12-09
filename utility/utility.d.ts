@@ -55,3 +55,7 @@ declare type Typify<T> = { [K in keyof T]: T[K] }
 declare type IndexSignature<O extends object> = {
   [P in keyof O]: O[P]
 }
+
+declare type EmptyObject = {
+  [K in string | number]: never
+}

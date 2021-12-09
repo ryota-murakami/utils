@@ -27,7 +27,7 @@
     "@storybook/addon-links": "^6.4.0-beta.8",
     "@storybook/react": "^6.4.0-beta.8",
     "@testing-library/dom": "^8.11.1",
-    "@testing-library/jest-dom": "^5.16.0",
+    "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
     "@testing-library/user-event": "^13.5.0",
@@ -56,10 +56,10 @@
     "node-notifier": "^10.0.0",
     "prettier": "^2.5.1",
     "should": "^13.2.3",
-    "storybook-builder-vite": "^0.1.10",
+    "storybook-builder-vite": "^0.1.11",
     "tsd": "^0.17.0",
     "typescript": "^4.5.2",
-    "vite": "^2.6.14",
+    "vite": "^2.7.1",
     "whatwg-fetch": "^3.6.2"
   }
 }

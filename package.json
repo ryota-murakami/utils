@@ -50,7 +50,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^27.4.3",
+    "jest": "^27.4.5",
     "jest-watch-typeahead": "^0.6.5",
     "msw": "^0.35.0",
     "node-notifier": "^10.0.0",
@@ -58,7 +58,7 @@
     "should": "^13.2.3",
     "storybook-builder-vite": "^0.1.11",
     "tsd": "^0.17.0",
-    "typescript": "^4.5.2",
+    "typescript": "^4.5.4",
     "vite": "^2.7.1",
     "whatwg-fetch": "^3.6.2"
   }

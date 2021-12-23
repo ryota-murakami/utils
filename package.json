@@ -59,7 +59,7 @@
     "storybook-builder-vite": "^0.1.11",
     "tsd": "^0.17.0",
     "typescript": "^4.5.4",
-    "vite": "^2.7.4",
+    "vite": "^2.7.6",
     "whatwg-fetch": "^3.6.2"
   }
 }

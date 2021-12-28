@@ -13,7 +13,8 @@
     "lint": "eslint . --ext .ts,.tsx,.js",
     "lint:fix": "eslint . --ext .ts,.tsx,.js --fix",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "validate": "./scripts/validate"
   },
   "dependencies": {
     "buffer": "^6.0.3",

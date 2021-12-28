@@ -3,7 +3,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "vite:build": "vite build",
+    "build": "vite build",
     "vite:typecheck": "tsc -p react/tsconfig.json",
     "vite:serve": "vite preview",
     "ut:build": "tsc -p utility/tsconfig.json",

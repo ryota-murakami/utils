@@ -5,4 +5,4 @@
 .gitignore
 LICENSE
 build_utility
-build_vite
+dist

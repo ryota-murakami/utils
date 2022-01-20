@@ -2,20 +2,22 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
     "lib": ["es2017", "dom"],
+    "allowJs": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": "./utility-collective",
     "paths": {
-      "@utility-collective/hello-tsc": ["packages/hello-tsc/src/index.ts"]
+      "@utility-collective/react": ["packages/react/index.ts"]
     }
   },
   "exclude": ["utility-collective/node_modules", "tmp"]

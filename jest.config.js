@@ -5,7 +5,7 @@ const config = {
   notifyMode: 'success-change',
   resetMocks: true,
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/react/setupTests.js'],
+  setupFilesAfterEnv: ['<rootDir>/packages/react/setupTests.js'],
   testMatch: [
     '<rootDir>/react/**/*.test.{js,jsx,ts,tsx}',
     '<rootDir>/utility/**/*.test.{js,ts}',
@@ -30,8 +30,8 @@ const config = {
     'jest-watch-typeahead/testname',
   ],
   collectCoverageFrom: [
-    '<rootDir>/react/**/*.{js,jsx,ts,tsx}',
-    '<rootDir>/!react/**/*.d.ts',
+    '<rootDir>/packages/react/**/*.{js,jsx,ts,tsx}',
+    '<rootDir>/!packages/react/**/*.d.ts',
     '<rootDir>/utility/**/*.{js,ts}',
   ],
 }

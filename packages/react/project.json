@@ -1,0 +1,7 @@
+{
+  "root": "packages/react",
+  "sourceRoot": "packages/react",
+  "projectType": "library",
+  "targets": {},
+  "tags": []
+}

@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "vite:typecheck": "tsc -p react/tsconfig.json",
+    "vite:typecheck": "tsc --noEmit -p packages/react/tsconfig.json",
     "vite:serve": "vite preview",
     "ut:build": "tsc -p utility/tsconfig.json",
     "ut:typecheck": "tsc --noEmit -p utility/tsconfig.json",
@@ -33,6 +33,7 @@
     "@nrwl/jest": "13.4.6",
     "@nrwl/js": "^13.4.6",
     "@nrwl/linter": "13.4.6",
+    "@nrwl/node": "^13.4.6",
     "@nrwl/tao": "13.4.6",
     "@nrwl/workspace": "13.4.6",
     "@storybook/addon-actions": "^6.4.0-beta.8",

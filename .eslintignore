@@ -2,3 +2,4 @@ node_modules
 build_utility
 dist
 genertors
+packages/is-email

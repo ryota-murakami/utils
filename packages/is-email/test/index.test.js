@@ -2,7 +2,7 @@
 
 var assert = require('proclaim')
 
-var isEmail = require('../lib')
+var isEmail = require('../lib/index')
 
 describe('is-email', function () {
   it('should recognize valid email addresses', function () {

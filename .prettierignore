@@ -6,3 +6,5 @@
 LICENSE
 build_utility
 dist
+/dist
+/coverage

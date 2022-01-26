@@ -82,7 +82,7 @@
     "jest-watch-typeahead": "^0.6.5",
     "msw": "^0.35.0",
     "node-notifier": "^10.0.0",
-    "nx": "^13.4.6",
+    "nx": "^13.5.3",
     "postcss": "^8.4.5",
     "postcss-loader": "^6.2.1",
     "prettier": "2.5.1",
@@ -96,4 +96,3 @@
     "whatwg-fetch": "^3.6.2"
   }
 }
-

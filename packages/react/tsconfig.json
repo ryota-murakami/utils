@@ -6,6 +6,6 @@
   "files": [],
   "include": [
     "./**/*",
-    "../../utility/utility.d.ts"
+    "../utility/utility.d.ts"
   ]
 }

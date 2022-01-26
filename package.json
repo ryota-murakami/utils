@@ -27,8 +27,7 @@
     "copy-to-clipboard": "^3.3.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "styled-components": "^5.3.3",
-    "tslib": "^2.0.0"
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@nrwl/cli": "13.5.3",

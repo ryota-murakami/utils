@@ -1,6 +1,8 @@
 {
   "name": "utility-collective",
   "license": "MIT",
+  "private": true,
+  "workspaces": ["packages/is-email"],
   "scripts": {
     "dev": "vite",
     "build": "vite build",

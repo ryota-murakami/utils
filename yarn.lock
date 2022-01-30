@@ -1682,12 +1682,12 @@
     v8-compile-cache "2.3.0"
     yargs-parser "20.0.0"
 
-"@nrwl/cli@13.6.1":
-  version "13.6.1"
-  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-13.6.1.tgz#25bba4e1e8fd516ba239c2cab8677d86a6d109c9"
-  integrity sha512-e6iEM5CKbwm67MK3daAEYuxX9kXeUBtbV4mEPU0mX6q7cqSMd0PdVVHpdZMkJtbUG+c2CD+IayoVOdJryAh4Vw==
+"@nrwl/cli@13.7.1":
+  version "13.7.1"
+  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-13.7.1.tgz#da23bade4c8cf2dec0d122d0979302dd2e5d4330"
+  integrity sha512-UfupcHb0P2/yvNs/TjPM6uQyH9nZYNySPqTL1tV9ItO8vPm4YnO3jd+NrO3WWzrBCZVfwX8LHZ2PTtBGkCA01w==
   dependencies:
-    "@nrwl/tao" "13.6.1"
+    "@nrwl/tao" "13.7.1"
     chalk "4.1.0"
     enquirer "~2.3.6"
     v8-compile-cache "2.3.0"
@@ -1816,10 +1816,10 @@
     tslib "^2.3.0"
     yargs-parser "20.0.0"
 
-"@nrwl/tao@13.6.1":
-  version "13.6.1"
-  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-13.6.1.tgz#6862b22ba1255435263f291a7db9c3f903b8e08e"
-  integrity sha512-F+ldBZjm8CspTs/n6lBcHFGmRumRV5zTeSCD2p8z6kdAzpDQjuIAPU2O5kRSe0/S1WZ74zNA4SjqprA21zDBGg==
+"@nrwl/tao@13.7.1":
+  version "13.7.1"
+  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-13.7.1.tgz#1f257232c38324521cd7c1478896f4c0e948216a"
+  integrity sha512-Ho7OHIu82aT/6hCSAZ1nxgmFAmTVt6TM6oxeg+/J4JTizCbevjrEFxS7RQ7GYsW/a8NxOTTMq6rTMln3W2OPzg==
   dependencies:
     chalk "4.1.0"
     enquirer "~2.3.6"
@@ -1827,7 +1827,7 @@
     fs-extra "^9.1.0"
     ignore "^5.0.4"
     jsonc-parser "3.0.0"
-    nx "13.6.1"
+    nx "13.7.1"
     rxjs "^6.5.4"
     rxjs-for-await "0.0.2"
     semver "7.3.4"
@@ -12032,12 +12032,12 @@ nx@13.5.3:
   dependencies:
     "@nrwl/cli" "13.5.3"
 
-nx@13.6.1, nx@^13.6.1:
-  version "13.6.1"
-  resolved "https://registry.yarnpkg.com/nx/-/nx-13.6.1.tgz#4672b463f4c9a6b4a855a9d98b08efcd861f5ac5"
-  integrity sha512-155nM2WJR9TGKXhOdWE07/1nKa4QCSjyoeLPh641U6Bs/6uVtXkJoNJdIeaGDHPIpwQQdhM/1SoZFbVmj5//wQ==
+nx@13.7.1, nx@^13.7.1:
+  version "13.7.1"
+  resolved "https://registry.yarnpkg.com/nx/-/nx-13.7.1.tgz#5f07ab6e4c0d262c28e833f5970ce385d0dec521"
+  integrity sha512-/jKcS8t88ESwP6gRZ8Mg3sy86D/9YquLEoAcBVxR/bkoAZLQLXcdrJRQbx+yT5Wo8iJXzCC+wEyrDueJLJLaAQ==
   dependencies:
-    "@nrwl/cli" "13.6.1"
+    "@nrwl/cli" "13.7.1"
 
 oauth-sign@~0.9.0:
   version "0.9.0"

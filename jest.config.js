@@ -7,8 +7,8 @@ const config = {
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/packages/react/setupTests.js'],
   testMatch: [
-    '<rootDir>/react/**/*.test.{js,jsx,ts,tsx}',
-    '<rootDir>/utility/**/*.test.{js,ts}',
+    '<rootDir>/packages/react/**/*.test.{js,jsx,ts,tsx}',
+    '<rootDir>/packages/utility/**/*.test.{js,ts}',
   ],
   transform: {
     '^.+\\.[jt]sx?$': 'esbuild-jest',

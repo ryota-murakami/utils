@@ -82,7 +82,7 @@
     "msw": "^0.35.0",
     "node-notifier": "^10.0.1",
     "nx": "^13.8.3",
-    "postcss": "^8.4.6",
+    "postcss": "^8.4.7",
     "postcss-loader": "^6.2.1",
     "prettier": "2.5.1",
     "should": "^13.2.3",

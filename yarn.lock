@@ -1785,12 +1785,12 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@nrwl/cli@13.10.2":
-  version "13.10.2"
-  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-13.10.2.tgz#dea96a771fd1809b9fc6e5ecf64ada119d8cb60b"
-  integrity sha512-e9TK7CBaOb2jvnnuypPTox+l3vr1Lubjrq7rvyVrUDfSFsRe33Em1FTEdT7RCwjzF1ypvGkF0Fm2Cxi9/ljxVg==
+"@nrwl/cli@13.10.3":
+  version "13.10.3"
+  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-13.10.3.tgz#bb884bacfd6b22107e5b7078bf27b89b1d5371f5"
+  integrity sha512-E5vBW3pSg0fW6F8VS2hTd5nf2UulJQcXGNK5jKVV9AwIfWUT1Sm91GmngU/OmS0uAaqzcikTPP19BUUn8hR05Q==
   dependencies:
-    nx "13.10.2"
+    nx "13.10.3"
 
 "@nrwl/cli@13.8.3":
   version "13.8.3"
@@ -1910,12 +1910,12 @@
     webpack-merge "^5.8.0"
     webpack-node-externals "^3.0.0"
 
-"@nrwl/tao@13.10.2":
-  version "13.10.2"
-  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-13.10.2.tgz#76dad0d2fd4eae95b867014fe842a56529159ec4"
-  integrity sha512-Eq/u4tRRRtrMYBormdeTrRFj/rpcP5fsa3QrwcHjUSNnQDM/FZ9kt7fRgbnh+2QzdTJnU4QmaX6t4Kt+qYtsTQ==
+"@nrwl/tao@13.10.3":
+  version "13.10.3"
+  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-13.10.3.tgz#e7b184d4a62c41edd16ef5ab40e060a1a894bac1"
+  integrity sha512-m4nyxAmJ1jh8LeLx0Pf2msrAJWyKjE2N/mqggU4/PyGiAWcnnMbKcT0zuKwYYiJLjk+xMF9zcWSXF3i/fKJ1Iw==
   dependencies:
-    nx "13.10.2"
+    nx "13.10.3"
 
 "@nrwl/tao@13.8.3":
   version "13.8.3"
@@ -12431,13 +12431,13 @@ nwsapi@^2.2.0:
   resolved "https://registry.yarnpkg.com/nwsapi/-/nwsapi-2.2.0.tgz#204879a9e3d068ff2a55139c2c772780681a38b7"
   integrity sha512-h2AatdwYH+JHiZpv7pt/gSX1XoRGb7L/qSIeuqA6GwYoF9w1vP1cw42TO0aI2pNyshRK5893hNSl+1//vHK7hQ==
 
-nx@13.10.2, nx@^13.10.2:
-  version "13.10.2"
-  resolved "https://registry.yarnpkg.com/nx/-/nx-13.10.2.tgz#4e0227233cb5c468ce99cfba53a8773439a12de4"
-  integrity sha512-6ac/7DO66asndgsMVC+YR5oa0jfEmmXjmE19gvIuAJtii00dSKd6o+n1G8lbl8RPZcz43wVY0zwV/eMpCSNFXw==
+nx@13.10.3, nx@^13.10.3:
+  version "13.10.3"
+  resolved "https://registry.yarnpkg.com/nx/-/nx-13.10.3.tgz#407b941c30f597f5835c081f7224fe6ecbf8ebfc"
+  integrity sha512-EPQhNA12IgmGmluERRQF/rzSL0dC+y949T5XJVwzKSt1RJfCKA3ojrEAYX584JZSGYFW9X+RnhFxe+5VZas21w==
   dependencies:
-    "@nrwl/cli" "13.10.2"
-    "@nrwl/tao" "13.10.2"
+    "@nrwl/cli" "13.10.3"
+    "@nrwl/tao" "13.10.3"
     "@parcel/watcher" "2.0.4"
     "@swc-node/register" "^1.4.2"
     "@swc/core" "^1.2.152"

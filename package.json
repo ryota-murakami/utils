@@ -21,7 +21,7 @@
     "validate": "./scripts/validate"
   },
   "dependencies": {
-    "@headlessui/react": "^1.5.0",
+    "@headlessui/react": "^1.6.0",
     "@heroicons/react": "^1.0.6",
     "buffer": "^6.0.3",
     "copy-to-clipboard": "^3.3.1",

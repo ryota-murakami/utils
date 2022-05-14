@@ -21,7 +21,7 @@
     "validate": "./scripts/validate"
   },
   "dependencies": {
-    "@headlessui/react": "^1.6.0",
+    "@headlessui/react": "^1.6.1",
     "@heroicons/react": "^1.0.6",
     "buffer": "^6.0.3",
     "copy-to-clipboard": "^3.3.1",
@@ -91,7 +91,7 @@
     "ts-jest": "27.0.5",
     "tsd": "^0.17.0",
     "typescript": "^4.6.4",
-    "vite": "^2.9.7",
+    "vite": "^2.9.8",
     "whatwg-fetch": "^3.6.2"
   }
 }

@@ -1,8 +1,0 @@
-{
-  "version": 2,
-  "projects": {
-    "is-email": "packages/is-email",
-    "react": "packages/react",
-    "utility": "packages/utility"
-  }
-}

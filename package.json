@@ -2,17 +2,10 @@
   "name": "utility-collective",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "packages/is-email"
-  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "vite:typecheck": "tsc --noEmit -p packages/react/tsconfig.json",
-    "vite:serve": "vite preview",
-    "ut:build": "tsc -p packages/utility/tsconfig.json",
-    "ut:typecheck": "tsc --noEmit -p packages/utility/tsconfig.json",
-    "typecheck": "yarn ut:typecheck && yarn vite:typecheck",
+    "typecheck": "tsc --noEmit",
     "test": "jest",
     "lint": "eslint . --ext .ts,.tsx,.js",
     "lint:fix": "eslint . --ext .ts,.tsx,.js --fix",
@@ -30,14 +23,6 @@
     "styled-components": "^5.3.5"
   },
   "devDependencies": {
-    "@nrwl/cli": "13.8.3",
-    "@nrwl/eslint-plugin-nx": "13.8.3",
-    "@nrwl/jest": "13.8.3",
-    "@nrwl/js": "13.8.3",
-    "@nrwl/linter": "13.8.3",
-    "@nrwl/node": "13.8.3",
-    "@nrwl/tao": "13.8.3",
-    "@nrwl/workspace": "13.8.3",
     "@storybook/addon-actions": "^6.5.0-alpha.23",
     "@storybook/addon-essentials": "^6.5.0-alpha.23",
     "@storybook/addon-links": "^6.5.0-alpha.23",
@@ -81,7 +66,6 @@
     "jest-watch-typeahead": "^0.6.5",
     "msw": "^0.35.0",
     "node-notifier": "^10.0.1",
-    "nx": "^13.10.3",
     "postcss": "^8.4.13",
     "postcss-loader": "^6.2.1",
     "prettier": "2.5.1",
@@ -95,4 +79,3 @@
     "whatwg-fetch": "^3.6.2"
   }
 }
-

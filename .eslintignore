@@ -1,5 +1,3 @@
 node_modules
-build_utility
+dist/utility
 dist
-genertors
-packages/is-email

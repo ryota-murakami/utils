@@ -5,11 +5,8 @@ const config = {
   notifyMode: 'success-change',
   resetMocks: true,
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/packages/react/setupTests.js'],
-  testMatch: [
-    '<rootDir>/packages/react/**/*.test.{js,jsx,ts,tsx}',
-    '<rootDir>/packages/utility/**/*.test.{js,ts}',
-  ],
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
+  testMatch: ['<rootDir>/src/**/*.test.{js,jsx,ts,tsx}'],
   transform: {
     '^.+\\.[jt]sx?$': 'esbuild-jest',
     '^.+\\.css$': '<rootDir>/.jest/cssTransform.js',

@@ -16,4 +16,3 @@ jobs:
           node-version: '16.8'
       - run: yarn install
       - run: yarn build
-      - run: yarn ut:build

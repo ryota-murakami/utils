@@ -8,17 +8,16 @@
   "plugins": [
     "jsx-a11y",
     "import",
+    "sort-keys-fix",
     "react-hooks",
     "@typescript-eslint",
-    "prettier",
-    "cypress"
+    "prettier"
   ],
   "env": {
     "browser": true,
     "node": true,
     "es6": true,
-    "jest": true,
-    "cypress/globals": true
+    "jest": true
   },
   "globals": {
     "JSX": "readonly"
@@ -26,6 +25,9 @@
   "settings": {
     "react": {
       "version": "detect"
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
       "node": {
@@ -36,7 +38,12 @@
           ".tsx"
         ]
       },
-      "typescript": {}
+      "typescript": {
+        "alwaysTryTypes": true,
+        // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+        "project": ["tsconfig.json"]
+      }
+
     }
   },
   "rules": {

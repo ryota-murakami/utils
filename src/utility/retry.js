@@ -16,7 +16,7 @@ async function retry(tryFunction, options = {}) {
     tries += 1
     try {
       // eslint-disable-next-line no-await-in-loop
-      output = await tryFunction({ tries, bail })
+      output = await tryFunction({ bail, tries })
       break
     } catch (err) {
       if (tries >= retries) {

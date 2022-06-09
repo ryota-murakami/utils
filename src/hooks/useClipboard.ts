@@ -32,5 +32,5 @@ export function useClipboard(text: string, timeout = 1500): ReturnType {
     }
   }, [timeout, hasCopied])
 
-  return { value: text, onCopy, hasCopied }
+  return { hasCopied, onCopy, value: text }
 }

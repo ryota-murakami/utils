@@ -5,7 +5,7 @@ export function getImageRect(
     const img = new Image()
 
     img.addEventListener('load', () => {
-      resolve({ width: img.naturalWidth, height: img.naturalHeight })
+      resolve({ height: img.naturalHeight, width: img.naturalWidth })
     })
 
     img.addEventListener('error', reject)

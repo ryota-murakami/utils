@@ -210,8 +210,8 @@ const startEndpoint = (endpoint, config, args, previous) => {
     httpMode === 'https'
       ? https.createServer(
           {
-            key: fs.readFileSync(args['--ssl-key']),
             cert: fs.readFileSync(args['--ssl-cert']),
+            key: fs.readFileSync(args['--ssl-key']),
           },
           serverHandler
         )
@@ -284,9 +284,9 @@ const startEndpoint = (endpoint, config, args, previous) => {
 
       console.log(
         boxen(message, {
-          padding: 1,
           borderColor: 'green',
           margin: 1,
+          padding: 1,
         })
       )
     } else {
@@ -395,32 +395,35 @@ const loadConfig = async (cwd, entry, args) => {
 
   try {
     args = arg({
-      '--help': Boolean,
-      '--version': Boolean,
-      '--listen': [parseEndpoint],
-      '--single': Boolean,
-      '--debug': Boolean,
       '--config': String,
+      '--cors': Boolean,
+      '--debug': Boolean,
+      '--help': Boolean,
+      '--listen': [parseEndpoint],
       '--no-clipboard': Boolean,
       '--no-compression': Boolean,
       '--no-etag': Boolean,
-      '--symlinks': Boolean,
-      '--cors': Boolean,
       '--no-port-switching': Boolean,
+      '--single': Boolean,
       '--ssl-cert': String,
       '--ssl-key': String,
-      '-h': '--help',
-      '-v': '--version',
-      '-l': '--listen',
-      '-s': '--single',
-      '-d': '--debug',
-      '-c': '--config',
-      '-n': '--no-clipboard',
-      '-u': '--no-compression',
-      '-S': '--symlinks',
+      '--symlinks': Boolean,
+      '--version': Boolean,
       '-C': '--cors',
+      '-S': '--symlinks',
+      '-c': '--config',
+      '-d': '--debug',
+      '-h': '--help',
+      '-l': '--listen',
+      '-n': '--no-clipboard',
       // This is deprecated and only for backwards-compatibility.
       '-p': '--listen',
+
+      '-s': '--single',
+
+      '-u': '--no-compression',
+
+      '-v': '--version',
     })
   } catch (err) {
     console.error(error(err.message))
@@ -463,8 +466,8 @@ const loadConfig = async (cwd, entry, args) => {
     // As the first rewrite rule, make `--single` work
     config.rewrites = [
       {
-        source: '**',
         destination: '/index.html',
+        source: '**',
       },
       ...existingRewrites,
     ]

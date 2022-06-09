@@ -32,17 +32,17 @@ import React, { Fragment, useState } from 'react'
 import Header from '../components/Header'
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
+  { current: true, href: '#', icon: HomeIcon, name: 'Dashboard' },
+  { current: false, href: '#', icon: UsersIcon, name: 'Team' },
+  { current: false, href: '#', icon: FolderIcon, name: 'Projects' },
+  { current: false, href: '#', icon: CalendarIcon, name: 'Calendar' },
+  { current: false, href: '#', icon: InboxIcon, name: 'Documents' },
+  { current: false, href: '#', icon: ChartBarIcon, name: 'Reports' },
 ]
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { href: '#', name: 'Your Profile' },
+  { href: '#', name: 'Settings' },
+  { href: '#', name: 'Sign out' },
 ]
 
 function classNames(...classes: string[]): string {

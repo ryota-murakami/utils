@@ -4,8 +4,8 @@ import React from 'react'
 import FacebookBorderRadius from './FacebookBorderRadius'
 
 export default {
-  title: 'Style/FacebookBorderRadius',
   component: FacebookBorderRadius,
+  title: 'Style/FacebookBorderRadius',
 } as ComponentMeta<typeof FacebookBorderRadius>
 
 export const Template: ComponentStory<typeof FacebookBorderRadius> = (args) => (

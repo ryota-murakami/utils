@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTFF-8">
+</head>
+<body>
+<p class="tweet">こんにちは</p>
+<p class="tweet">こんげつは</p>
+<p class="tweet">こんりんざい</p>
+<p class="tweet">こんばんは</p>
+
+<div id="count"></div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+  $(function(){
+
+    var counter = (function(n) {
+      var i = n;
+      return function () {
+        return ++i;
+      }
+    }(0));
+
+    $(".tweet").each(function(){
+      var text = $(this).html();
+      $(this).html(text.replace("こん","■"));
+      $("#count").append("<p>" + text +"　count　"+ counter() + "</p>");
+    });
+  });
+</script>
+</body>
+</html>

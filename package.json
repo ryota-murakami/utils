@@ -30,7 +30,7 @@
     "@storybook/addon-links": "^7.0.0-alpha.1",
     "@storybook/addons": "^7.0.0-alpha.1",
     "@storybook/builder-webpack5": "^7.0.0-alpha.1",
-    "@storybook/core": "^6.5.8",
+    "@storybook/core": "^6.5.9",
     "@storybook/core-server": "^7.0.0-alpha.1",
     "@storybook/manager-webpack5": "^7.0.0-alpha.1",
     "@storybook/node-logger": "^7.0.0-alpha.1",

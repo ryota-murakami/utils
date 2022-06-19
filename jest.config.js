@@ -14,7 +14,7 @@ const config = {
   resetMocks: true,
   roots: ['<rootDir>'],
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
-  testEnvironment: 'jsdom',
+  testEnvironment: 'node',
   testMatch: ['<rootDir>/src/**/*.test.{js,jsx,ts,tsx}'],
   transform: {
     '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)':

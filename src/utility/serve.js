@@ -466,7 +466,7 @@ const loadConfig = async (cwd, entry, args) => {
     // As the first rewrite rule, make `--single` work
     config.rewrites = [
       {
-        destination: '/index.html',
+        destination: '/long.index.html',
         source: '**',
       },
       ...existingRewrites,

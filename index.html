@@ -1,13 +1,82 @@
+
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/react/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<html class="h-full">
+<head>
+  <title>Raycast Store</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script nonce="0788f4e42f61f80810b0ee073227c561">
+    //<![CDATA[
+    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="5yMnXTtYH4t6PRFiV1YOVxPRr6YU7piN";analytics._cdn="https://cdn.segment.com";analytics.SNIPPET_VERSION="4.15.0";
+      analytics.load("5yMnXTtYH4t6PRFiV1YOVxPRr6YU7piN");
+      analytics.page();
+    }}();
+
+    //]]>
+  </script>
+  <meta name="csrf-param" content="authenticity_token" />
+  <meta name="csrf-token" content="q66xaZmgvPzN9WNeT51MG-nRrjwJuEM2BEJ-59Nt0rwEVFVqWMgFh5jEKP7pwrCGJrfkpG7Z-kHJwD6V5_OVgQ" />
+  <meta name="csp-nonce" content="0788f4e42f61f80810b0ee073227c561" />
+  <link rel="stylesheet" href="https://assets.raycast.com/assets/tailwind-f88c550cc99be7620c0ec6136f43c72c2e0957dfc212dfacd92ec31ae35b892c.css" media="all" data-turbo-track="reload" />
+  <link rel="stylesheet" href="https://assets.raycast.com/assets/application-2b54bcaf97d23f9f453c6a3fad22e43b15ba7ec97619535c1bbac633daf46afd.css" media="all" data-turbo-track="reload" />
+  <script src="https://assets.raycast.com/assets/application-39a8753cdf71830f1b255617aa40cadf7ab52b2c232b9dd16620b113404b5aa8.js" data-turbo-track="reload"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="https://assets.raycast.com/assets/favicon-6d5c845af6b93d392052ffc54c2521a21b0f31dfec178f85902a60b2bf04037e.png" />
+</head>
+<body class="h-full w-full bg-black-purple text-white ">
+<div class="absolute w-full">
+
+</div>
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-hidden w-full h-full flex items-center justify-center">
+  <svg width="1260" height="940" viewBox="0 0 1260 940" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
+    <g opacity="0.45" filter="url(#filter0_f)">
+      <circle cx="630" cy="470" r="330" fill="url(#paint0_radial)"/>
+    </g>
+    <defs>
+      <filter id="filter0_f" x="0" y="-160" width="1260" height="1260" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+        <feGaussianBlur stdDeviation="150" result="effect1_foregroundBlur"/>
+      </filter>
+      <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(421 618.5) rotate(10.5208) scale(548.216)">
+        <stop offset="0.338542" stop-color="#E82525" stop-opacity="0.5"/>
+        <stop offset="0.84375" stop-color="#7619EB" stop-opacity="0.5"/>
+        <stop offset="1" stop-color="#64ECFF" stop-opacity="0.5"/>
+      </radialGradient>
+    </defs>
+  </svg>
+
+</div>
+
+<div class="grid grid-cols-1 grid-rows-layout h-full z-10 relative">
+  <div class="flex justify-center pt-[100px]">
+    <div class="self-end w-48 mb-24 text-48 relative flex justify-center text-6xl text-white text-opacity-60">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon">
+        <path d="M7.99683 14.5635C11.5959 14.5635 14.5667 11.5928 14.5667 8C14.5667 4.40723 11.5896 1.43652 7.99048 1.43652C4.39771 1.43652 1.43335 4.40723 1.43335 8C1.43335 11.5928 4.40405 14.5635 7.99683 14.5635ZM7.99683 10.1963C6.20679 10.1963 4.81665 10.8374 4.1438 11.5737C3.28052 10.6406 2.75366 9.38379 2.75366 8C2.75366 5.08643 5.08325 2.75049 7.99048 2.75049C10.9041 2.75049 13.2463 5.08643 13.2527 8C13.2527 9.38379 12.7258 10.6406 11.8562 11.5801C11.1833 10.8374 9.79321 10.1963 7.99683 10.1963ZM7.99683 9.15527C9.22827 9.16797 10.1868 8.11426 10.1868 6.75586C10.1868 5.47363 9.22192 4.40088 7.99683 4.40088C6.77808 4.40088 5.80688 5.47363 5.81323 6.75586C5.81958 8.11426 6.77173 9.14893 7.99683 9.15527Z" fill="currentColor"/>
+      </svg>
+
+    </div>
+
+  </div>
+  <div class="mx-auto px-24 lg:px-32 w-full max-w-[456px]">
+    <div class="w-320 mx-auto flex flex-col items-center">
+      <h1 class="text-24 font-semibold mb-24">Choose your username</h1>
+      <span class="text-13 text-opacity-60 text-white text-center">
+    Your Developer username will be visible in the Raycast Extension Store
+  </span>
+      <form data-turbo="false" class="mt-24 flex flex-col items-center w-full" id="edit_user_0c971eb4-6128-42b9-abfe-f06161c86058" action="/handles" accept-charset="UTF-8" method="post"><input type="hidden" name="_method" value="patch" autocomplete="off" /><input type="hidden" name="authenticity_token" value="ykmRf5kyr5yyZzySw_-HBBU3fKx3dosplY68MF5E-k7IbpGqQUz1QPIj6U4zjOMwVwxsZgxHqFG1c716d5Tb8A" autocomplete="off" />
+        <input autofocus="autofocus" class="mb-16 border border-white border-opacity-20 focus:border-opacity-100 focus:outline-none rounded py-12 px-16 text-16 bg-transparent self-stretch" type="text" name="user[handle]" id="user_handle" />
+        <input type="submit" name="commit" value="Confirm" class="rounded bg-white text-16 text-grayFixed-600 py-12 cursor-pointer transition transition-opacity duration-200 hover:opacity-80 self-stretch" data-disable-with="Confirm" />
+      </form></div>
+
+  </div>
+  <div class="flex justify-center py-64">
+    <a class="self-end" href="https://raycast.com">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 20.6613V24L0 16L1.6704 14.3296L8 20.6613ZM11.3387 24H8L16 32L17.6704 30.3296L11.3387 24ZM30.3253 17.6704L31.9957 16L15.9957 0L14.3296 1.67467L20.6592 8.00427H16.8341L12.416 3.59467L10.7456 5.26507L13.4933 8.0128H11.5733V20.4309H23.9915V18.5109L26.7392 21.2587L28.4096 19.5883L23.9915 15.1701V11.3451L30.3253 17.6704ZM8.83413 7.17227L7.15947 8.84267L8.95146 10.6347L10.6219 8.96427L8.83413 7.17227ZM23.0421 21.3803L21.3717 23.0507L23.1637 24.8427L24.8341 23.1723L23.0421 21.3803ZM5.25013 10.7541L3.57973 12.4245L7.99787 16.8427V13.5019L5.25013 10.7541ZM18.5024 24.0064H15.1637L19.5819 28.4245L21.2523 26.7541L18.5024 24.0064Z" fill="currentColor" />
+      </svg>
+    </a>
+  </div>
+</div>
+</body>
 </html>

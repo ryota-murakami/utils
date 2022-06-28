@@ -1,0 +1,6 @@
+{
+  "extends": ["typescript-react-pro"],
+  "rules": {
+    "no-console": "off"
+  }
+}

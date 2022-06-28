@@ -1,6 +1,6 @@
 {
-  "root": "packages/react",
-  "sourceRoot": "packages/react",
+  "root": "packages/utility",
+  "sourceRoot": "packages/utility",
   "projectType": "library",
   "targets": {},
   "tags": []

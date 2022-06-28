@@ -21,7 +21,7 @@ const handler = require('serve-handler')
 const checkForUpdate = require('update-check')
 
 // Utilities
-const pkg = require('../../package.json')
+const pkg = require('../package.json')
 
 const readFile = promisify(fs.readFile)
 const compressionHandler = promisify(compression())

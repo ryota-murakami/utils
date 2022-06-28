@@ -1,0 +1,10 @@
+.git
+.idea
+.all-contributorsrc
+.eslintignore
+.gitignore
+LICENSE
+build_utility
+dist
+/dist
+/coverage

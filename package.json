@@ -2,9 +2,6 @@
   "name": "laboratory",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "packages/**/*"
-  ],
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "jest",

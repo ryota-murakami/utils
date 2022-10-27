@@ -1,5 +1,5 @@
 {
-  "name": "laboratory",
+  "name": "laboratory-react",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -7,12 +7,12 @@
     "build": "vite build",
     "typecheck": "tsc --noEmit",
     "test": "jest",
-    "lint": "eslint . --ext .ts,.tsx,.js",
-    "lint:fix": "eslint . --ext .ts,.tsx,.js --fix",
+    "lint": "eslint  --ext .ts,.tsx,.js",
+    "lint:fix": "eslint  --ext .ts,.tsx,.js --fix",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "sb:upgrade": "sb upgrade --prerelease",
-    "validate": "./scripts/validate",
+    "validate": "scripts/validate",
     "serve": "serve static"
   },
   "dependencies": {

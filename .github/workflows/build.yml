@@ -1,4 +1,4 @@
-name: Test
+name: Build
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ on:
     branches:
       - main
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,4 +15,4 @@ jobs:
         with:
           node-version: '18.1.0'
       - run: yarn install
-      - run: yarn test
+      - run: yarn build

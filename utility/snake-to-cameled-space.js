@@ -50,7 +50,7 @@ Log at making proccess
 >
 */
 
-let str = process.argv[2]
+const str = process.argv[2]
 
 console.log(
   str

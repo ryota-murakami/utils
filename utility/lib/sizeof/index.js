@@ -21,7 +21,7 @@ function allProperties(obj) {
 }
 
 function sizeOfObject(seen, object) {
-  if (object == null) {
+  if (object === null) {
     return 0
   }
 

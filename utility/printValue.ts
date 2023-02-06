@@ -8,13 +8,13 @@ const symbolToString =
 const SYMBOL_REGEXP = /^Symbol\((.*)\)(.*)$/
 
 function printNumber(val: any) {
-  if (val != +val) return 'NaN'
+  if (val !== +val) return 'NaN'
   const isNegativeZero = val === 0 && 1 / val < 0
   return isNegativeZero ? '-0' : '' + val
 }
 
 function printSimpleValue(val: any, quoteStrings = false) {
-  if (val == null || val === true || val === false) return '' + val
+  if (val === null || val === true || val === false) return '' + val
 
   const typeOf = typeof val
   if (typeOf === 'number') return printNumber(val)

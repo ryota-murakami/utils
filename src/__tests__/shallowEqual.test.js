@@ -1,4 +1,4 @@
-import shallowEqual from '../shallowEqual'
+import shallowEqual from '../util/shallowEqual'
 
 describe('shallowEqual', () => {
   it('should return true if arguments fields are equal', () => {

@@ -1,4 +1,4 @@
-import { arrayFillmap } from '../../src/util/ArrayFilllmap'
+import { arrayFillmap } from '../util/ArrayFilllmap'
 
 test('run arrayFillmap', () => {
   const res = arrayFillmap(10, (v, i) => {

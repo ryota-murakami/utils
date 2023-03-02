@@ -1,8 +1,6 @@
 // from https://github.com/reduxjs/redux-toolkit/blob/4fbd29f0032f1ebb9e2e621ab48bbff5266e312c/packages/toolkit/src/query/tsHelpers.ts
 
 export function assertCast<T>(v: any): asserts v is T {}
-
-export type NoInfer<T> = [T][T extends any ? 0 : never]
 export function safeAssign<T extends Record<string, unknown>>(
   target: T,
   ...args: Array<Partial<NoInfer<T>>>

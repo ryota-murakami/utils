@@ -3,7 +3,7 @@ import { renderHook } from '@testing-library/react'
 import useDidUpdateEffect from './useDidUpdateEffect'
 
 test('useUpdateEffect simulates componentDidUpdate', () => {
-  const effect = jest.fn()
+  const effect = vi.fn()
   const { rerender } = renderHook(() => useDidUpdateEffect(effect))
 
   expect(effect).toHaveBeenCalledTimes(0)

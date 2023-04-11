@@ -57,7 +57,7 @@
     "all-contributors-cli": "^6.24.0",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^8.3.0",
-    "concurrently": "^7.5.0",
+    "concurrently": "^8.0.1",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-config-ts-prefixer": "^0.7.0",

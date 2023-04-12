@@ -1,7 +1,7 @@
 import type { ComponentStory, ComponentMeta } from '@storybook/react'
 import React from 'react'
 
-import { Header } from './Header'
+import { Header } from 'src/styles/stories/Header'
 
 export default {
   component: Header,

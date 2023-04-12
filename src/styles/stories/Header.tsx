@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Button } from './Button'
-import './header.css'
+import { Button } from 'src/styles/stories/Button'
+import 'src/styles/stories/header.css'
 
 type User = {
   name: string

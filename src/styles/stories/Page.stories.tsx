@@ -2,7 +2,7 @@ import type { ComponentStory, ComponentMeta } from '@storybook/react'
 import { within, userEvent } from '@storybook/testing-library'
 import React from 'react'
 
-import { Page } from './Page'
+import { Page } from 'src/styles/stories/Page'
 
 export default {
   component: Page,

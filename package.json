@@ -16,9 +16,7 @@
     "typecheck": "tsc --noEmit",
     "prettier": "prettier --write \"**/*.+(json|yml|css|md|mdx)\"",
     "clean": "rimraf node_modules yarn.lock package-lock.json dist",
-    "validate": "./scripts/validate",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "validate": "./scripts/validate"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.4",
@@ -31,14 +29,6 @@
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.0",
-    "@storybook/addon-actions": "^7.0.2",
-    "@storybook/addon-essentials": "^7.0.2",
-    "@storybook/addon-interactions": "^7.0.2",
-    "@storybook/addon-links": "^7.0.2",
-    "@storybook/builder-vite": "^7.0.2",
-    "@storybook/react": "^7.0.2",
-    "@storybook/testing-library": "^0.1.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/line-clamp": "^0.4.2",
@@ -52,11 +42,8 @@
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.50.0",
     "@typescript-eslint/parser": "^5.50.0",
-    "@vitejs/plugin-react": "^3.1.0",
     "@vitejs/plugin-react-swc": "^3.2.0",
-    "all-contributors-cli": "^6.24.0",
     "autoprefixer": "^10.4.13",
-    "babel-loader": "^9.1.2",
     "concurrently": "^8.0.1",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.6.0",
@@ -67,7 +54,6 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-sort-keys-fix": "^1.1.2",
-    "identity-obj-proxy": "^3.0.0",
     "jsdom": "^21.1.1",
     "msw": "^1.2.1",
     "node-notifier": "^10.0.1",

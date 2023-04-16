@@ -16,6 +16,7 @@ export default {
 export const LoggedOut = {}
 
 export const LoggedIn = {
+  // @ts-expect-error
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const loginButton = await canvas.getByRole('button', { name: /Log in/i })

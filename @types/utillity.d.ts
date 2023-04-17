@@ -1,3 +1,15 @@
+type Concrete<Type> = {
+  [Property in keyof Type]-?: Type[Property]
+}
+
+type MaybeUser = {
+  id: string
+  name?: string
+  age?: number
+}
+
+type User = Concrete<MaybeUser>
+
 // from https://github.com/reduxjs/redux-toolkit/blob/4fbd29f0032f1ebb9e2e621ab48bbff5266e312c/packages/toolkit/src/query/tsHelpers.ts
 declare type Id<T> = { [K in keyof T]: T[K] } & Record<string, unknown>
 

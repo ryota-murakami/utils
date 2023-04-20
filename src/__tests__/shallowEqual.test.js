@@ -1,4 +1,4 @@
-import shallowEqual from '../isomorphic-utils/shallowEqual'
+import shallowEqual from '../universual/shallowEqual'
 
 describe('shallowEqual', () => {
   it('should return true if arguments fields are equal', () => {

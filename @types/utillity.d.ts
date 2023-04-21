@@ -76,3 +76,5 @@ declare type Awaitable<T> = T | PromiseLike<T>
 declare type Nullable<T> = T | null | undefined
 declare type Arrayable<T> = T | Array<T>
 declare type ArgumentsType<T> = T extends (...args: infer U) => any ? U : never
+
+type Falsy = false | 0 | 0n | '' | null | undefined

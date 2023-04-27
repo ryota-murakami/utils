@@ -40,11 +40,7 @@
     "@storybook/blocks": "^7.0.7",
     "@storybook/react": "^7.0.7",
     "@storybook/react-vite": "^7.0.7",
-<<<<<<< HEAD
     "@storybook/testing-library": "^0.1.0",
-=======
-    "@storybook/testing-library": "^0.0.14-next.2",
->>>>>>> b7738c42f5f2786742e3cdcbe91e3fe52973dd49
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/line-clamp": "^0.4.2",
@@ -81,11 +77,7 @@
     "serve": "^14.0.1",
     "should": "^13.2.3",
     "storybook": "^7.0.7",
-<<<<<<< HEAD
     "tailwindcss": "^3.2.2",
-=======
-    "tailwindcss": "^3.3.2",
->>>>>>> b7738c42f5f2786742e3cdcbe91e3fe52973dd49
     "typescript": "^5.0.4",
     "vite": "^4.3.1",
     "vite-plugin-environment": "^1.1.3",

@@ -30,7 +30,7 @@
     "history": "^5.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.10"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.7",
@@ -40,7 +40,11 @@
     "@storybook/blocks": "^7.0.7",
     "@storybook/react": "^7.0.7",
     "@storybook/react-vite": "^7.0.7",
+<<<<<<< HEAD
     "@storybook/testing-library": "^0.1.0",
+=======
+    "@storybook/testing-library": "^0.0.14-next.2",
+>>>>>>> b7738c42f5f2786742e3cdcbe91e3fe52973dd49
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/line-clamp": "^0.4.2",
@@ -49,15 +53,15 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
-    "@types/react": "^18.0.37",
-    "@types/react-dom": "^18.0.8",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.1",
     "@types/styled-components": "^5.1.26",
-    "@typescript-eslint/eslint-plugin": "^5.59.0",
-    "@typescript-eslint/parser": "^5.59.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
     "@vitejs/plugin-react-swc": "^3.2.0",
     "autoprefixer": "^10.4.13",
     "concurrently": "^8.0.1",
-    "eslint": "^8.35.0",
+    "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-config-ts-prefixer": "^0.7.0",
     "eslint-import-resolver-typescript": "^3.5.3",
@@ -70,16 +74,20 @@
     "msw": "^1.2.1",
     "node-notifier": "^10.0.1",
     "postcss": "^8.4.22",
-    "prettier": "^2.8.3",
+    "prettier": "^2.8.8",
     "prettier-plugin-tailwind-css": "^1.5.0",
     "prop-types": "^15.8.1",
     "rimraf": "^5.0.0",
     "serve": "^14.0.1",
     "should": "^13.2.3",
     "storybook": "^7.0.7",
+<<<<<<< HEAD
     "tailwindcss": "^3.2.2",
+=======
+    "tailwindcss": "^3.3.2",
+>>>>>>> b7738c42f5f2786742e3cdcbe91e3fe52973dd49
     "typescript": "^5.0.4",
-    "vite": "^4.2.2",
+    "vite": "^4.3.1",
     "vite-plugin-environment": "^1.1.3",
     "vitest": "^0.30.1"
   }

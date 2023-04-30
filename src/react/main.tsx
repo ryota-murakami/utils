@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
+import Pages from './pages'
+
 import './index.css'
 
 import App from './App'
@@ -13,7 +15,7 @@ if (process.env.NODE_ENV === 'development') {
       worker.start()
     })
     .then(() => {
-      root.render(<App />)
+      root.render(<Pages />)
     })
 } else {
   root.render(<App />)

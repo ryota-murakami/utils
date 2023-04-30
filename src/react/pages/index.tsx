@@ -15,6 +15,7 @@
   ```
 */
 import { Dialog, Menu, Transition } from '@headlessui/react'
+import {MagnifyingGlassIcon} from '@heroicons/react/24/solid' 
 import {
   BellIcon,
   CalendarIcon,
@@ -22,11 +23,10 @@ import {
   FolderIcon,
   HomeIcon,
   InboxIcon,
-  MenuAlt2Icon,
+  Bars3BottomLeftIcon,
   UsersIcon,
-  XIcon, // @ts-ignore https://github.com/tailwindlabs/heroicons/issues/252
-} from '@heroicons/react/outline' // @ts-ignore https://github.com/tailwindlabs/heroicons/issues/252
-import { SearchIcon } from '@heroicons/react/solid'
+  XMarkIcon, // @ts-ignore https://github.com/tailwindlabs/heroicons/issues/252
+} from '@heroicons/react/24/outline' // @ts-ignore https://github.com/tailwindlabs/heroicons/issues/252
 import React, { Fragment, useState } from 'react'
 
 import Header from '../components/Header'
@@ -97,7 +97,7 @@ const Index: React.FC = () => {
                     onClick={() => setSidebarOpen(false)}
                   >
                     <span className="sr-only">Close sidebar</span>
-                    <XIcon className="w-6 h-6 text-white" aria-hidden="true" />
+                    <XMarkIcon className="w-6 h-6 text-white" aria-hidden="true" />
                   </button>
                 </div>
               </Transition.Child>
@@ -183,7 +183,7 @@ const Index: React.FC = () => {
             onClick={() => setSidebarOpen(true)}
           >
             <span className="sr-only">Open sidebar</span>
-            <MenuAlt2Icon className="w-6 h-6" aria-hidden="true" />
+            <Bars3BottomLeftIcon className="w-6 h-6" aria-hidden="true" />
           </button>
           <div className="flex justify-between flex-1 px-4">
             <div className="flex flex-1">
@@ -197,7 +197,7 @@ const Index: React.FC = () => {
                 </label>
                 <div className="focus-within:text-gray-600 relative w-full text-gray-400">
                   <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
-                    <SearchIcon className="w-5 h-5" aria-hidden="true" />
+                    <MagnifyingGlassIcon className="w-5 h-5" aria-hidden="true" />
                   </div>
                   <input
                     id="search-field"

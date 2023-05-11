@@ -15,7 +15,6 @@
   ```
 */
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import {MagnifyingGlassIcon} from '@heroicons/react/24/solid' 
 import {
   BellIcon,
   CalendarIcon,
@@ -25,8 +24,9 @@ import {
   InboxIcon,
   Bars3BottomLeftIcon,
   UsersIcon,
-  XMarkIcon, // @ts-ignore https://github.com/tailwindlabs/heroicons/issues/252
-} from '@heroicons/react/24/outline' // @ts-ignore https://github.com/tailwindlabs/heroicons/issues/252
+  XMarkIcon,
+} from '@heroicons/react/24/outline'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import React, { Fragment, useState } from 'react'
 
 import Header from '../components/Header'
@@ -97,7 +97,10 @@ const Index: React.FC = () => {
                     onClick={() => setSidebarOpen(false)}
                   >
                     <span className="sr-only">Close sidebar</span>
-                    <XMarkIcon className="w-6 h-6 text-white" aria-hidden="true" />
+                    <XMarkIcon
+                      className="w-6 h-6 text-white"
+                      aria-hidden="true"
+                    />
                   </button>
                 </div>
               </Transition.Child>
@@ -197,7 +200,10 @@ const Index: React.FC = () => {
                 </label>
                 <div className="focus-within:text-gray-600 relative w-full text-gray-400">
                   <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
-                    <MagnifyingGlassIcon className="w-5 h-5" aria-hidden="true" />
+                    <MagnifyingGlassIcon
+                      className="w-5 h-5"
+                      aria-hidden="true"
+                    />
                   </div>
                   <input
                     id="search-field"

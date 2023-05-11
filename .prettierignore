@@ -5,3 +5,4 @@ node_modules
 LICENSE
 dist
 dist-ssr
+tsc-dist

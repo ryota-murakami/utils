@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "tsc": "tsc",
     "serve": "serve dist",
     "test": "vitest --run",
     "test:watch": "vitest",

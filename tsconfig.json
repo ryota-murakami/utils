@@ -13,10 +13,13 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
     "jsx": "react-jsx",
     "types": ["vitest/globals"],
     "baseUrl": "./",
+    "outDir": "tsc-dist",
+    "declaration": true
   },
-  "include": ["src", "@types"]
+  "include": ["src", "@types"],
+  "exclude": ["mocks","src/**/*.stories.*"]
 }

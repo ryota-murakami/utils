@@ -4,6 +4,7 @@ export default defineConfig({
   plugins: [EnvironmentPlugin([])],
   test: {
     environment: 'jsdom',
+    exclude: ['tsc-dist'],
     globals: true,
     setupFiles: ['./setupTests.ts'],
   },

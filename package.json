@@ -24,7 +24,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.18",
-    "@js-temporal/polyfill": "^0.4.3",
+    "@js-temporal/polyfill": "^0.4.4",
     "buffer": "^6.0.3",
     "chalk": "4.1.2",
     "copy-to-clipboard": "^3.3.2",

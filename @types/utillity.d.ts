@@ -77,3 +77,19 @@ declare type Arrayable<T> = T | Array<T>
 declare type ArgumentsType<T> = T extends (...args: infer U) => any ? U : never
 
 type Falsy = false | 0 | 0n | '' | null | undefined
+
+declare type RemoveUnderscoreFirstLetter<S extends string> =
+  S extends `${infer FirstLetter}${infer U}`
+    ? `${FirstLetter extends '_' ? U : `${FirstLetter}${U}`}`
+    : S
+
+declare type CamelToSnakeCase<S extends string> =
+  S extends `${infer T}${infer U}`
+    ? `${T extends Capitalize<T> ? '_' : ''}${RemoveUnderscoreFirstLetter<
+        Lowercase<T>
+      >}${CamelToSnakeCase<U>}`
+    : S
+
+declare type KeysToSnakeCase<T extends object> = {
+  [K in keyof T as CamelToSnakeCase<K & string>]: T[K]
+}

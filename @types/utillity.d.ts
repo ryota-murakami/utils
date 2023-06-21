@@ -78,6 +78,10 @@ declare type ArgumentsType<T> = T extends (...args: infer U) => any ? U : never
 
 type Falsy = false | 0 | 0n | '' | null | undefined
 
+interface VoidFunction {
+  (): void
+}
+
 declare type RemoveUnderscoreFirstLetter<S extends string> =
   S extends `${infer FirstLetter}${infer U}`
     ? `${FirstLetter extends '_' ? U : `${FirstLetter}${U}`}`

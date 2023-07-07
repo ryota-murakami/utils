@@ -7,7 +7,7 @@
 
 Place for Storing useful code fragments from especially OSS library.
 
-
+```js
 Clone Object
 // Spread Method
 let clone = { ...userDetails }
@@ -38,3 +38,4 @@ Array remove item at particular index
 array.splice(index, 1)
 Copy Array
 let newArray = [...array];
+```

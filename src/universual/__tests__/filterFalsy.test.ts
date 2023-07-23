@@ -1,4 +1,4 @@
-import { filterFalsy } from '../universual/array/filterFalsy'
+import { filterFalsy } from '../array/filterFalsy'
 
 describe('filterFalsy', () => {
   it('should filter falsy values', () => {

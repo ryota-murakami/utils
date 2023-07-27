@@ -7,6 +7,22 @@
 
 Place for Storing useful code fragments from especially OSS library.
 
+```
+├── src
+│   ├── bworser # JavaScript code that contains Browser API
+│   ├── node # Javascript/Typescript code that contains Node.js API
+│   ├── react # React Compoments/JS/TS/CSS/assets(SVG etc) code that works effectively React Project   
+│   ├── universual # Javascript/Typescript that works both einvironment Browser and Node.js
+
+```
+
+
+
+
+
+
+
+
 ```js
 Clone Object
 // Spread Method

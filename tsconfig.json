@@ -21,8 +21,8 @@
     "declaration": true
   },
   "include": [
-    "packages", "@types"],
+    "src", "@types"],
   "exclude": ["mocks",
-    "packages/**/*.stories.*"
+    "src/**/*.stories.*"
   ]
 }

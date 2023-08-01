@@ -3,7 +3,7 @@
  * @param {(event: Event) => void} callback
  * @return {(event: Event) => void}
  */
-function debounce(
+export function debounce(
   timeout: number,
   callback: (event: Event) => void
 ): (event: Event) => void {

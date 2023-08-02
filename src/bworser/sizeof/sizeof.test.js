@@ -1,7 +1,5 @@
 'use strict'
 
-/* global describe, it */
-
 var should = require('should')
 
 var sizeof = require('./index')

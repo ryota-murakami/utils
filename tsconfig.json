@@ -2,7 +2,11 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -13,16 +17,19 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": false,
     "jsx": "react-jsx",
-    "types": ["vitest/globals"],
+    "types": [
+      "vitest/globals"
+    ],
     "baseUrl": "./",
-    "outDir": "tsc-dist",
     "declaration": true
   },
   "include": [
-    "src", "@types"],
-  "exclude": ["mocks",
+    "src",
+    "@types"
+  ],
+  "exclude": [
+    "mocks",
     "src/**/*.stories.*"
   ]
 }

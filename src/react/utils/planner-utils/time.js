@@ -155,8 +155,8 @@ export function getIntervalRange(startDate, stopDate) {
         months.push(
           subtract(
             fromString(`${stopZone.year}-${zeropad(stopMonth + 1)}-01`),
-            1 // ms
-          )
+            1, // ms
+          ),
         )
       }
 

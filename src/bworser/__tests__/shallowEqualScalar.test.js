@@ -15,12 +15,12 @@ describe('shallowEqualScalar', () => {
     expect(
       shallowEqualScalar(
         { a: 1, b: 2, c: undefined },
-        { a: 1, b: 2, c: undefined }
-      )
+        { a: 1, b: 2, c: undefined },
+      ),
     ).toBe(true)
 
     expect(shallowEqualScalar({ a: 1, b: 2, c: 3 }, { a: 1, b: 2, c: 3 })).toBe(
-      true
+      true,
     )
   })
 
@@ -39,7 +39,7 @@ describe('shallowEqualScalar', () => {
   it('should return false if arguments have field that are objects', () => {
     const o = {}
     expect(shallowEqualScalar({ a: 1, b: 2, c: o }, { a: 1, b: 2, c: o })).toBe(
-      false
+      false,
     )
   })
 
@@ -47,8 +47,8 @@ describe('shallowEqualScalar', () => {
     expect(
       shallowEqualScalar(
         { a: 1, b: 2, c: undefined },
-        { a: 1, bb: 2, c: undefined }
-      )
+        { a: 1, bb: 2, c: undefined },
+      ),
     ).toBe(false)
   })
 })

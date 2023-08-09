@@ -26,7 +26,7 @@ export const invariant = function (
   c?: any,
   d?: any,
   e?: any,
-  f?: any
+  f?: any,
 ): void {
   /* eslint-enable @typescript-eslint/explicit-module-boundary-types */
   if (NODE_ENV !== 'production') {
@@ -40,7 +40,7 @@ export const invariant = function (
     if (format === undefined) {
       error = new Error(
         'Minified exception occurred; use the non-minified dev environment ' +
-          'for the full error message and additional helpful warnings.'
+          'for the full error message and additional helpful warnings.',
       )
     } else {
       const args = [a, b, c, d, e, f]
@@ -48,7 +48,7 @@ export const invariant = function (
       error = new Error(
         format.replace(/%s/g, function () {
           return args[argIndex++]
-        })
+        }),
       )
       error.name = 'Invariant Violation'
     }

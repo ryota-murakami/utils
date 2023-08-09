@@ -46,6 +46,6 @@ export default function printValue(value: any, quoteStrings?: boolean) {
       if (result !== null) return result
       return value
     },
-    2
+    2,
   )
 }

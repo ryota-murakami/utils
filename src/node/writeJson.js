@@ -6,7 +6,7 @@ export function writeJson(fileName, object) {
     const obj = { [fileName]: object }
     fs.writeFileSync(
       fileName + '.json',
-      JSON.stringify(obj, null, 2).replace(/\n/g, os.EOL) + os.EOL
+      JSON.stringify(obj, null, 2).replace(/\n/g, os.EOL) + os.EOL,
     )
     return
   }
@@ -14,6 +14,6 @@ export function writeJson(fileName, object) {
   RegExp.prototype.toJSON = RegExp.prototype.toString
   fs.writeFileSync(
     fileName + '.json',
-    JSON.stringify(object, null, 2).replace(/\n/g, os.EOL) + os.EOL
+    JSON.stringify(object, null, 2).replace(/\n/g, os.EOL) + os.EOL,
   )
 }

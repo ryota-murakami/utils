@@ -92,7 +92,7 @@ export function drawTextToCenterWithin(context, text, x, y, width, height) {
     text,
     x + width / 2 - textWidth / 2,
     y + height / 2 + VERTICAL_TEXT_OFFSET,
-    textWidth
+    textWidth,
   )
 }
 
@@ -158,7 +158,7 @@ export function drawAvatarCircle(context, avatar, x, y, width, height, radius) {
     x,
     y,
     imageWidth,
-    imageHeight
+    imageHeight,
   )
 
   context.restore()

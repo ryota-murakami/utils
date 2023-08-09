@@ -3,7 +3,7 @@ import shallowEqual from '../shallowEqual'
 describe('shallowEqual', () => {
   it('should return true if arguments fields are equal', () => {
     expect(
-      shallowEqual({ a: 1, b: 2, c: undefined }, { a: 1, b: 2, c: undefined })
+      shallowEqual({ a: 1, b: 2, c: undefined }, { a: 1, b: 2, c: undefined }),
     ).toBe(true)
 
     expect(shallowEqual({ a: 1, b: 2, c: 3 }, { a: 1, b: 2, c: 3 })).toBe(true)
@@ -22,7 +22,7 @@ describe('shallowEqual', () => {
 
   it('should return false if arguments have different keys', () => {
     expect(
-      shallowEqual({ a: 1, b: 2, c: undefined }, { a: 1, bb: 2, c: undefined })
+      shallowEqual({ a: 1, b: 2, c: undefined }, { a: 1, bb: 2, c: undefined }),
     ).toBe(false)
   })
 })

@@ -2,7 +2,7 @@
 
 export default function shallowEqual(
   objA: Record<string, unknown>,
-  objB: Record<string, unknown>
+  objB: Record<string, unknown>,
 ): boolean {
   if (objA === objB) {
     return true

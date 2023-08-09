@@ -21,7 +21,7 @@ class Queue {
   process = () => {
     const scheduled = this.pendingEntries.splice(
       0,
-      this.concurrency - this.inFlight
+      this.concurrency - this.inFlight,
     )
     this.inFlight += scheduled.length
     scheduled.forEach(async (task) => {
@@ -55,7 +55,7 @@ class Queue {
       },
       {
         delay: 50,
-      }
+      },
     )
 }
 

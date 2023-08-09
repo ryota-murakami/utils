@@ -121,7 +121,7 @@ const Index: React.FC = () => {
                         item.current
                           ? 'bg-indigo-800 text-white'
                           : 'text-indigo-100 hover:bg-indigo-600',
-                        'group flex items-center rounded-md px-2 py-2 text-base font-medium'
+                        'group flex items-center rounded-md px-2 py-2 text-base font-medium',
                       )}
                     >
                       <item.icon
@@ -163,7 +163,7 @@ const Index: React.FC = () => {
                       item.current
                         ? 'bg-indigo-800 text-white'
                         : 'text-indigo-100 hover:bg-indigo-600',
-                      'group flex items-center rounded-md px-2 py-2 text-sm font-medium'
+                      'group flex items-center rounded-md px-2 py-2 text-sm font-medium',
                     )}
                   >
                     <item.icon
@@ -250,7 +250,7 @@ const Index: React.FC = () => {
                             href={item.href}
                             className={classNames(
                               active ? 'bg-gray-100' : '',
-                              'block px-4 py-2 text-sm text-gray-700'
+                              'block px-4 py-2 text-sm text-gray-700',
                             )}
                           >
                             {item.name}

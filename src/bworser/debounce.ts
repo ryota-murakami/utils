@@ -5,7 +5,7 @@
  */
 export function debounce(
   timeout: number,
-  callback: (event: Event) => void
+  callback: (event: Event) => void,
 ): (event: Event) => void {
   let timeoutID = 0
   return (event) => {

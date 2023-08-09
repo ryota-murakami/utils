@@ -1,5 +1,5 @@
 export function getImageRect(
-  url: string
+  url: string,
 ): Promise<{ width: number; height: number }> {
   return new Promise((resolve, reject) => {
     const img = new Image()

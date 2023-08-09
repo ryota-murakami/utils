@@ -29,7 +29,7 @@ const Spinner: React.FC = memo(
       ></path>
     </svg>
   ),
-  () => true
+  () => true,
 )
 
 export default Spinner

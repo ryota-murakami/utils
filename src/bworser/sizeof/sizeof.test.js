@@ -56,7 +56,7 @@ describe('sizeof', function () {
     }
 
     sizeof(obj).should.be.equal(
-      ELEMENTS * 2 * ('' + ELEMENTS).length + ELEMENTS * 8
+      ELEMENTS * 2 * ('' + ELEMENTS).length + ELEMENTS * 8,
     )
   })
 
@@ -95,7 +95,7 @@ describe('sizeof', function () {
     const symbol = Symbol(descriptor)
     const value = 'efg'
     sizeof({ [symbol]: value }).should.equal(
-      2 * descriptor.length + 2 * value.length
+      2 * descriptor.length + 2 * value.length,
     )
   })
 

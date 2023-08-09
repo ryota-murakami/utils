@@ -27,7 +27,7 @@ TokenGenerator.prototype.refresh = function (token, refreshOptions) {
   const payload = jwt.verify(
     token,
     this.secretOrPublicKey,
-    refreshOptions.verify
+    refreshOptions.verify,
   )
   delete payload.iat
   delete payload.exp

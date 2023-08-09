@@ -53,7 +53,7 @@ const updateCheck = async (isDebugging) => {
   console.log(
     `${chalk.bgRed('UPDATE AVAILABLE')} The latest version of \`serve\` is ${
       update.latest
-    }`
+    }`,
   )
 }
 
@@ -158,7 +158,7 @@ const parseEndpoint = (str) => {
       return [parseInt(url.port, 10), url.hostname]
     default:
       throw new Error(
-        `Unknown --listen endpoint scheme (protocol): ${url.protocol}`
+        `Unknown --listen endpoint scheme (protocol): ${url.protocol}`,
       )
   }
 }
@@ -213,7 +213,7 @@ const startEndpoint = (endpoint, config, args, previous) => {
             cert: fs.readFileSync(args['--ssl-cert']),
             key: fs.readFileSync(args['--ssl-key']),
           },
-          serverHandler
+          serverHandler,
         )
       : http.createServer(serverHandler)
 
@@ -268,8 +268,8 @@ const startEndpoint = (endpoint, config, args, previous) => {
       if (previous) {
         message += chalk.red(
           `\n\nThis port was picked because ${chalk.underline(
-            previous
-          )} is in use.`
+            previous,
+          )} is in use.`,
         )
       }
 
@@ -287,7 +287,7 @@ const startEndpoint = (endpoint, config, args, previous) => {
           borderColor: 'green',
           margin: 1,
           padding: 1,
-        })
+        }),
       )
     } else {
       const suffix = localAddress ? ` at ${localAddress}` : ''
@@ -324,14 +324,14 @@ const loadConfig = async (cwd, entry, args) => {
       content = JSON.parse(content)
     } catch (err) {
       console.error(
-        error(`Could not parse ${location} as JSON: ${err.message}`)
+        error(`Could not parse ${location} as JSON: ${err.message}`),
       )
       process.exit(1)
     }
 
     if (typeof content !== 'object') {
       console.error(
-        warning(`Didn't find a valid object in ${location}. Skipping...`)
+        warning(`Didn't find a valid object in ${location}. Skipping...`),
       )
       continue
     }
@@ -355,8 +355,8 @@ const loadConfig = async (cwd, entry, args) => {
     if (file === 'now.json' || file === 'package.json') {
       console.error(
         warning(
-          'The config files `now.json` and `package.json` are deprecated. Please use `serve.json`.'
-        )
+          'The config files `now.json` and `package.json` are deprecated. Please use `serve.json`.',
+        ),
       )
     }
 
@@ -367,7 +367,7 @@ const loadConfig = async (cwd, entry, args) => {
     const { public } = config
     config.public = path.relative(
       cwd,
-      public ? path.resolve(entry, public) : entry
+      public ? path.resolve(entry, public) : entry,
     )
   }
 

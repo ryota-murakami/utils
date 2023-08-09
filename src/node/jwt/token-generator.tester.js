@@ -16,7 +16,7 @@ const tokenGenerator = new TokenGenerator('a', 'a', {
 })
 token = tokenGenerator.sign(
   { myclaim: 'something' },
-  { audience: 'myaud', issuer: 'myissuer', jwtid: '1', subject: 'user' }
+  { audience: 'myaud', issuer: 'myissuer', jwtid: '1', subject: 'user' },
 )
 setTimeout(function () {
   token2 = tokenGenerator.refresh(token, {

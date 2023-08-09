@@ -88,7 +88,7 @@ function convertColorToString(colorString) {
 function hexToRgb(hex) {
   if (hex.length === 4) {
     hex = `#${hex.charAt(1)}${hex.charAt(1)}${hex.charAt(2)}${hex.charAt(
-      2
+      2,
     )}${hex.charAt(3)}${hex.charAt(3)}`
   }
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
@@ -165,7 +165,7 @@ export function getLuminance(color) {
     return n <= 0.03928 ? n / 12.92 : ((n + 0.055) / 1.055) ** 2.4
   })
   return Number(
-    (0.2126 * values[0] + 0.7152 * values[1] + 0.0722 * values[2]).toFixed(3)
+    (0.2126 * values[0] + 0.7152 * values[1] + 0.0722 * values[2]).toFixed(3),
   )
 }
 

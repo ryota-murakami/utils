@@ -1,21 +1,9 @@
 import React from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault()
+import { Nushell } from './pages/Nushell'
 
-          // @ts-ignore
-          console.log(e.target.can.value)
-        }}
-      >
-        <input type="text" name="can" />
-        <input type="submit" />
-      </form>
-    </div>
-  )
+function App() {
+  return <Nushell />
 }
 
 export default App

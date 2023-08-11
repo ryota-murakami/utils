@@ -1,3 +1,6 @@
+/**
+ * remove all op
+ */
 declare type Concrete<Type> = {
   [Property in keyof Type]-?: Type[Property]
 }
@@ -97,3 +100,5 @@ declare type CamelToSnakeCase<S extends string> =
 declare type KeysToSnakeCase<T extends object> = {
   [K in keyof T as CamelToSnakeCase<K & string>]: T[K]
 }
+
+type Brand<K, T> = K & { __brand: T }

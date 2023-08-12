@@ -1,4 +1,4 @@
-import { range } from '../range'
+import { range } from '../array/range'
 
 test('range', () => {
   const res = range(1, 10)

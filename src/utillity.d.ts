@@ -1,24 +1,31 @@
 /**
- * remove all op
+ * Creates a new type that has all properties of the input type marked as required.
+ * @template Type - The input type to make concrete.
+ * @typedef {Object} Concrete
+ * @property {Type[Property]} Property - The required property of the concrete type.
+ * @example
+ * // Create a concrete type from a partially defined type
+ * interface PartialUser {
+ *   name?: string;
+ *   age?: number;
+ * }
+ * type User = Concrete<PartialUser>;
+ * const user: User = {
+ *   name: 'John',
+ *   age: 30
+ * };
  */
 declare type Concrete<Type> = {
   [Property in keyof Type]-?: Type[Property]
 }
 
-declare type MaybeUser = {
-  id: string
-  name?: string
-  age?: number
-}
-
-declare type User = Concrete<MaybeUser>
-
-// from https://github.com/reduxjs/redux-toolkit/blob/4fbd29f0032f1ebb9e2e621ab48bbff5266e312c/packages/toolkit/src/query/tsHelpers.ts
-declare type Id<T> = { [K in keyof T]: T[K] } & Record<string, unknown>
-
-declare type WithRequiredProp<T, K extends keyof T> = Omit<T, K> &
-  Required<Pick<T, K>>
-
+/**
+ * A utility type that allows you to override properties of one type with another.
+ *
+ * @template T1 - The base type whose properties will be overridden.
+ * @template T2 - The type containing the properties to override with.
+ * @returns A new type that is the result of overriding the properties of T1 with T2.
+ */
 declare type Override<T1, T2> = T2 extends any ? Omit<T1, keyof T2> & T2 : never
 
 /**
@@ -30,13 +37,17 @@ declare type UnionToIntersection<U> = (
   ? I
   : never
 
-declare type NonOptionalKeys<T> = {
+/**
+ * A utility type that returns the keys of a given object type `T` that are not optional.
+ *
+ * @template T - The object type to extract non-optional keys from.
+ */
+declare type ExtractNonOptionalKeys<T> = {
   [K in keyof T]-?: undefined extends T[K] ? never : K
 }[keyof T]
 
-declare type HasRequiredProps<T, True, False> = NonOptionalKeys<T> extends never
-  ? False
-  : True
+declare type HasRequiredProps<T, True, False> =
+  ExtractNonOptionalKeys<T> extends never ? False : True
 
 declare type OptionalIfAllPropsOptional<T> = HasRequiredProps<T, T, T | never>
 
@@ -101,4 +112,4 @@ declare type KeysToSnakeCase<T extends object> = {
   [K in keyof T as CamelToSnakeCase<K & string>]: T[K]
 }
 
-type Brand<K, T> = K & { __brand: T }
+declare type Brand<K, T> = K & { __brand: T }

@@ -23,8 +23,8 @@ setTimeout(function () {
     jwtid: '2',
     verify: { audience: 'myaud', issuer: 'myissuer' },
   })
-  // eslint-disable-next-line no-console
+
   console.log(jwt.decode(token, { complete: true }))
-  // eslint-disable-next-line no-console
+
   console.log(jwt.decode(token2, { complete: true }))
 }, 3000)

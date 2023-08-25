@@ -1,4 +1,4 @@
-const sleep = (ms: number): Promise<void> =>
+const sleep = async (ms: number): Promise<void> =>
   new Promise((resolve) => setTimeout(resolve, ms))
 
 export default sleep

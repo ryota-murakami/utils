@@ -34,7 +34,6 @@ function printSimpleValue(val: any, quoteStrings = false) {
   return null
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function printValue(value: any, quoteStrings?: boolean) {
   const result = printSimpleValue(value, quoteStrings)
   if (result !== null) return result

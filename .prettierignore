@@ -6,3 +6,4 @@ LICENSE
 dist
 dist-ssr
 tsc-dist
+public/mockServiceWorker.js

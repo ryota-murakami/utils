@@ -4,3 +4,4 @@ dist-ssr
 server
 browser
 tsc-dist
+public/mockServiceWorker.js

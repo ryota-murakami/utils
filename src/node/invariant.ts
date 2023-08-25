@@ -18,7 +18,6 @@
 const NODE_ENV = process.env.NODE_ENV
 
 export const invariant = function (
-  /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
   condition: any,
   format: string,
   a?: any,

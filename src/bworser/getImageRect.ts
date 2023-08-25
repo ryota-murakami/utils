@@ -1,4 +1,4 @@
-export function getImageRect(
+export async function getImageRect(
   url: string,
 ): Promise<{ width: number; height: number }> {
   return new Promise((resolve, reject) => {

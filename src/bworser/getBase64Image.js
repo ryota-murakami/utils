@@ -1,5 +1,5 @@
 // get an image blob from url using fetch
-const getImageBlob = function (url) {
+const getImageBlob = async function (url) {
   return new Promise(async (resolve) => {
     const resposne = await fetch(url, { mode: 'no-cors' })
     const blob = resposne.blob()
@@ -8,7 +8,7 @@ const getImageBlob = function (url) {
 }
 
 // convert a blob to base64
-const blobToBase64 = function (blob) {
+const blobToBase64 = async function (blob) {
   return new Promise((resolve) => {
     const reader = new FileReader()
     reader.onload = function () {

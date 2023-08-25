@@ -39,7 +39,7 @@ class Queue {
     })
   }
 
-  wait = (options = {}) =>
+  wait = async (options = {}) =>
     waitUntil(
       () => {
         if (this.err) {

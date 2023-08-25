@@ -29,10 +29,13 @@
   "include": [
     "setupTests.ts",
     "vitest.config.ts",
-    "src"
+    "src",
+    "./**.js",
+    "./**.ts",
+    "./**.cjs",
+    "./**.mjs"
   ],
   "exclude": [
     "mocks",
-    "src/**/*.stories.*"
   ]
 }

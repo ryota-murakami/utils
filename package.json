@@ -72,7 +72,7 @@
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-storybook": "^0.6.13",
     "jsdom": "^22.1.0",
-    "msw": "^1.2.3",
+    "msw": "^1.2.4",
     "node-notifier": "^10.0.1",
     "postcss": "^8.4.28",
     "prettier": "^3.0.2",

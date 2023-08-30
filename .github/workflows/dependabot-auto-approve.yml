@@ -4,6 +4,9 @@ on:
     types:
       - opened
 
+env:
+  GH_TOKEN: ${{ github.token }}
+
 permissions:
   pull-requests: write
   issues: write
@@ -23,4 +26,4 @@ jobs:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Auto approve
         if: steps.dependabot-metadata.outputs.update-type == 'version-update:semver-patch' || steps.dependabot-metadata.outputs.update-type == 'version-update:semver-minor' || steps.dependabot-metadata.outputs.update-type == 'version-update:semver-patch' || steps.dependabot-metadata.outputs.update-type == 'version-update:semver-major'
-        run: gh pr review --approve
+        run: gh pr review --approve "$PR_URL"

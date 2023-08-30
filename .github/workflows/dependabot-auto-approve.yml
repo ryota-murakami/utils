@@ -4,6 +4,11 @@ on:
     types:
       - opened
 
+permissions:
+  pull-requests: write
+  issues: write
+  repository-projects: write
+
 jobs:
   dependabot:
     if: github.actor == 'dependabot[bot]'

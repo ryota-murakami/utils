@@ -113,3 +113,8 @@ declare type KeysToSnakeCase<T extends object> = {
 }
 
 declare type Brand<K, T> = K & { __brand: T }
+
+// https://www.youtube.com/shorts/2lCCKiWGlC0
+declare type Pretty<T> = {
+  [K in keyof T]: T[K]
+} & {}

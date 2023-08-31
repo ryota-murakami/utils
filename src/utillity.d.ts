@@ -1,58 +1,3 @@
-/**
- * Creates a new type that has all properties of the input type marked as required.
- * @template Type - The input type to make concrete.
- * @typedef {Object} Concrete
- * @property {Type[Property]} Property - The required property of the concrete type.
- * @example
- * // Create a concrete type from a partially defined type
- * interface PartialUser {
- *   name?: string;
- *   age?: number;
- * }
- * type User = Concrete<PartialUser>;
- * const user: User = {
- *   name: 'John',
- *   age: 30
- * };
- */
-declare type Concrete<Type> = {
-  [Property in keyof Type]-?: Type[Property]
-}
-
-/**
- * A utility type that allows you to override properties of one type with another.
- *
- * @template T1 - The base type whose properties will be overridden.
- * @template T2 - The type containing the properties to override with.
- * @returns A new type that is the result of overriding the properties of T1 with T2.
- */
-declare type Override<T1, T2> = T2 extends any ? Omit<T1, keyof T2> & T2 : never
-
-/**
- * Convert a Union type `(A|B)` to an intersection type `(A&B)`
- */
-declare type UnionToIntersection<U> = (
-  U extends any ? (k: U) => void : never
-) extends (k: infer I) => void
-  ? I
-  : never
-
-/**
- * A utility type that returns the keys of a given object type `T` that are not optional.
- *
- * @template T - The object type to extract non-optional keys from.
- */
-declare type ExtractNonOptionalKeys<T> = {
-  [K in keyof T]-?: undefined extends T[K] ? never : K
-}[keyof T]
-
-declare type HasRequiredProps<T, True, False> =
-  ExtractNonOptionalKeys<T> extends never ? False : True
-
-declare type OptionalIfAllPropsOptional<T> = HasRequiredProps<T, T, T | never>
-
-declare type NoInfer<T> = [T][T extends any ? 0 : never]
-
 declare type UnwrapPromise<T> = T extends PromiseLike<infer V> ? V : T
 
 declare type MaybePromise<T> = T | PromiseLike<T>
@@ -92,7 +37,7 @@ declare type ArgumentsType<T> = T extends (...args: infer U) => any ? U : never
 
 type Falsy = false | 0 | 0n | '' | null | undefined
 
-interface VoidFunction {
+declare interface VoidFunction {
   (): void
 }
 
@@ -112,9 +57,51 @@ declare type KeysToSnakeCase<T extends object> = {
   [K in keyof T as CamelToSnakeCase<K & string>]: T[K]
 }
 
-declare type Brand<K, T> = K & { __brand: T }
-
 // https://www.youtube.com/shorts/2lCCKiWGlC0
 declare type Pretty<T> = {
   [K in keyof T]: T[K]
 } & {}
+
+/**
+ Matches any [primitive value](https://developer.mozilla.org/en-US/docs/Glossary/Primitive).
+ */
+declare type Primitive =
+  | null
+  | undefined
+  | string
+  | number
+  | boolean
+  | symbol
+  | bigint
+
+/**
+ Matches a JSON array.
+
+ @category Basic
+ */
+declare type JsonArray = JsonValue[]
+
+/**
+ Matches any valid JSON primitive value.
+
+ @category Basic
+ */
+declare type JsonPrimitive = string | number | boolean | null
+
+/**
+ Matches any valid JSON value.
+
+ @see `Jsonify` if you need to transform a type to one that is assignable to `JsonValue`.
+
+ @category Basic
+ */
+declare type JsonValue = JsonPrimitive | JsonObject | JsonArray
+
+/**
+ Matches a JSON object.
+
+ This type can be usxeful to enforce some input to be JSON-compatible or as a super-type to be extended from. Don't use this as a direct return type as the user would have to double-cast it: `jsonObject as unknown as CustomResponse`. Instead, you could extend your CustomResponse type from it to ensure your type only uses JSON-compatible types: `interface CustomResponse extends JsonObject { … }`.
+
+ @category Basic
+ */
+declare type JsonObject = { [Key in string]?: JsonValue }

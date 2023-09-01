@@ -19,10 +19,10 @@ jobs:
           # Get the PR number
           pr_number=${{ github.event.pull_request.number }}
           
-          # Fetch the status of relevant pull requests
-          pr_status=$(gh pr status --json checksStatus -R ${{ github.repository }} | jq -r ".[] | select(.number == $pr_number) | .checksStatus")
+          gh pr view $pr_number | grep -q "✓ Checks passing"
+          pr_status=$?
           
-          if [ "$pr_status" == "PASS" ]; then
+          if [ "$pr_status" == 0 ]; then
             echo "ALL_CHECKS_PASSED=true" >> $GITHUB_ENV
           else
             echo "Not all checks have passed."

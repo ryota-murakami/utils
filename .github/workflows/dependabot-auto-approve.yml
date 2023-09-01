@@ -5,6 +5,7 @@ permissions:
   pull-requests: write
 
 jobs:
+
   dependabot:
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' }}
@@ -18,7 +19,10 @@ jobs:
           
           # Fetch all check runs for the commit
           response=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github.v3+json" $checks_url)
-          
+          if [ "$response" == "" ]; then
+            echo "Failed to fetch PR reviews."
+            exit 1
+          fi
           # Check if all check runs have completed and succeeded
           all_passed=$(echo "$response" | jq -r 'all(.check_runs[] | select(.status == "completed") .conclusion == "success")')
           

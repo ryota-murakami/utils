@@ -1,3 +1,5 @@
+import { CamelToSnakeCase } from './camelToSnakeCase'
+
 declare type UnwrapPromise<T> = T extends PromiseLike<infer V> ? V : T
 
 declare type MaybePromise<T> = T | PromiseLike<T>
@@ -43,17 +45,7 @@ declare type RemoveUnderscoreFirstLetter<S extends string> =
     ? `${FirstLetter extends '_' ? U : `${FirstLetter}${U}`}`
     : S
 
-declare type CamelToSnakeCase<S extends string> =
-  S extends `${infer T}${infer U}`
-    ? `${T extends Capitalize<T> ? '_' : ''}${RemoveUnderscoreFirstLetter<
-        Lowercase<T>
-      >}${CamelToSnakeCase<U>}`
-    : S
-
 declare type KeysToSnakeCase<T extends object> = {
   [K in keyof T as CamelToSnakeCase<K & string>]: T[K]
 }
 
-declare type KeysToCamelCase<T extends object> = {
-  [K in keyof T as Lowercase<K & string>]: T[K]
-}

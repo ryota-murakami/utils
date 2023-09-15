@@ -3,9 +3,9 @@ import copy from 'copy-to-clipboard'
 import { useState, useCallback, useEffect } from 'react'
 
 interface ReturnType {
-  value: string
-  onCopy: () => void
   hasCopied: boolean
+  onCopy: () => void
+  value: string
 }
 
 /**

@@ -1,6 +1,6 @@
 export async function getImageRect(
   url: string,
-): Promise<{ width: number; height: number }> {
+): Promise<{ height: number; width: number }> {
   return new Promise((resolve, reject) => {
     const img = new Image()
 

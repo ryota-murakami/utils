@@ -11,8 +11,8 @@ const tokenGenerator = new TokenGenerator('a', 'a', {
   algorithm: 'HS256',
   expiresIn: '2m',
   keyid: '1',
-  noTimestamp: false,
   notBefore: '2s',
+  noTimestamp: false,
 })
 token = tokenGenerator.sign(
   { myclaim: 'something' },

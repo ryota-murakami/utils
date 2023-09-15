@@ -410,7 +410,6 @@ const loadConfig = async (cwd, entry, args) => {
       '--symlinks': Boolean,
       '--version': Boolean,
       '-C': '--cors',
-      '-S': '--symlinks',
       '-c': '--config',
       '-d': '--debug',
       '-h': '--help',
@@ -418,6 +417,7 @@ const loadConfig = async (cwd, entry, args) => {
       '-n': '--no-clipboard',
       // This is deprecated and only for backwards-compatibility.
       '-p': '--listen',
+      '-S': '--symlinks',
 
       '-s': '--single',
 

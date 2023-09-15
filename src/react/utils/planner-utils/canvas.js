@@ -25,8 +25,8 @@ export function drawDiagonalStripePattern(backgroundColor, color) {
 }
 
 export function drawTextToFit(context, textOrTexts, rect, options = {}) {
-  const { x, width } = rect
-  let { y, height } = rect
+  const { width, x } = rect
+  let { height, y } = rect
   const { align = 'middle', renderIfClipped = true } = options
 
   const textArray = Array.isArray(textOrTexts) ? textOrTexts : [textOrTexts]

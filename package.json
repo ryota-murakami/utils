@@ -12,6 +12,7 @@
     "dev": "vite",
     "build": "vite build",
     "tsc": "tsc",
+    "tsd": "tsd src/types/__tests__",
     "serve": "serve dist",
     "test": "vitest --run",
     "test:watch": "vitest",
@@ -83,6 +84,7 @@
     "should": "^13.2.3",
     "storybook": "^7.4.1",
     "tailwindcss": "^3.3.3",
+    "ts-expect": "^1.3.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
     "vitest": "^0.34.4"

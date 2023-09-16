@@ -4,6 +4,7 @@ declare type Expand<T> = T extends (...args: infer A) => infer R
   : T extends infer O
   ? { [K in keyof O]: O[K] }
   : never
+
 declare type ExpandRecursively<T> = T extends (...args: infer A) => infer R
   ? (...args: ExpandRecursively<A>) => ExpandRecursively<R>
   : T extends object

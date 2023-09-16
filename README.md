@@ -9,7 +9,10 @@ Place for Storing useful code fragments from especially OSS library.
 
 ```
 ├── src
-│   ├── bworser # Basically universal Typescript/JavaScript and code that depends Browser API
+│   ├── bun # Depens on Bun API
+│   ├── universal # general JS/TS code without specific platform API
+│   ├── bworser # Typescript/JavaScript and code that depends Browser API
 │   ├── node # Javascript/Typescript code that depends Node.js API
 │   ├── react # React Compoments/JS/TS/CSS/assets(SVG etc) code that works effectively React Project
+│   ├── types # Custom Utility Types
 ```

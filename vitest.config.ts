@@ -2,7 +2,7 @@ import { defineConfig } from 'vitest/config'
 export default defineConfig({
   test: {
     environment: 'jsdom',
-    exclude: ['tsc-dist'],
+    exclude: ['tsc-dist', 'src/types'],
     globals: true,
     include: [
       'src/**/*.test.ts',

@@ -22,7 +22,7 @@
   "include": [
     "setupTests.ts",
     "vitest.config.ts",
-    "src",
+    "packages",
     "./**.js",
     "./**.ts",
     "./**.cjs",

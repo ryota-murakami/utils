@@ -1,5 +1,5 @@
 /**
- * 'code-piece-of-complete-guide-to-react-rendering-behavior' -> 'Code Piece Of Complete Guide To React Rendering Behavior'
+ * 'code-piece-of-complete-guide-to-react-client-rendering-behavior' -> 'Code Piece Of Complete Guide To React Rendering Behavior'
  */
 
 const snakeToCameledSpace = (str: string): string =>

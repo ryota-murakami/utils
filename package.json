@@ -13,7 +13,7 @@
     "dev": "vite",
     "build": "vite build",
     "tsc": "tsc",
-    "tsd": "tsd src/types/__tests__",
+    "tsd": "tsd packages/types/__tests__",
     "serve": "serve dist",
     "test": "vitest --run",
     "test:watch": "vitest",

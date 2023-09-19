@@ -1,10 +1,7 @@
 name: Dependabot auto-merge
 on:
-  workflow_run:
-    workflows: ["Build", "Lint", "Test", "Typecheck"]
-    types:
-      - completed
-
+  - pull_request_target
+  
 permissions:
   contents: write
   pull-requests: write
@@ -14,6 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' && github.event.workflow_run.conclusion == 'success' }}
     steps:
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v1.6.0
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          compat-lookup: true
+            
       - name: auto-merge for Dependabot PRs
         run: gh pr merge --auto --merge "$PR_URL"
         env:

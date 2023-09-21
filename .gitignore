@@ -4,4 +4,4 @@ dist
 dist-ssr
 *.local
 tsc-dist
-.env.env
+.env

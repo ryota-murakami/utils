@@ -1,5 +1,8 @@
 name: Dependabot auto-merge
 on:
+  pull_request:
+    branches:
+      - main
   workflow_run:
     workflows: [ "Build", "Lint", "Test", "Typecheck" ]
     types:
@@ -23,7 +26,7 @@ jobs:
         echo "::set-output name=pr_url::$PR_URL"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
+
     - name: auto-merge for Dependabot PRs
       run: gh pr merge --auto --merge "${{ steps.pr_details.outputs.pr_url }}"
       env:

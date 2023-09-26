@@ -14,12 +14,12 @@ const tokenGenerator = new TokenGenerator('a', 'a', {
   notBefore: '2s',
   noTimestamp: false,
 })
-token = tokenGenerator.sign(
+const token = tokenGenerator.sign(
   { myclaim: 'something' },
   { audience: 'myaud', issuer: 'myissuer', jwtid: '1', subject: 'user' },
 )
 setTimeout(function () {
-  token2 = tokenGenerator.refresh(token, {
+  const token2 = tokenGenerator.refresh(token, {
     jwtid: '2',
     verify: { audience: 'myaud', issuer: 'myissuer' },
   })

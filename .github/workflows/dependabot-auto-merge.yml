@@ -14,8 +14,17 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' && github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: auto-merge for Dependabot PRs
-        run: gh pr merge --auto --merge "$PR_URL"
-        env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    - name: Get PR Details
+      id: pr_details
+      run: |
+        PR_ID=$(jq --raw-output .pull_requests[0].id "$GITHUB_EVENT_PATH")
+        PR_DETAILS=$(gh api repos/$GITHUB_REPOSITORY/pulls/$PR_ID)
+        PR_URL=$(echo $PR_DETAILS | jq --raw-output .html_url)
+        echo "::set-output name=pr_url::$PR_URL"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: auto-merge for Dependabot PRs
+      run: gh pr merge --auto --merge "${{ steps.pr_details.outputs.pr_url }}"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

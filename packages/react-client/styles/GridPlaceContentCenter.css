@@ -1,0 +1,9 @@
+.container {
+  height: 100vh;
+  display: gird;
+  place-content: center;
+
+  & .center-text {
+    font-size: 40px;
+  }
+}

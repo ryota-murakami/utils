@@ -1,8 +1,5 @@
 name: Dependabot auto-merge
 on:
-  pull_request:
-    branches:
-      - main
   workflow_run:
     workflows: [ "Build", "Lint", "Test", "Typecheck" ]
     types:

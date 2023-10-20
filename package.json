@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "license": "MIT",
   "volta": {
-    "node": "18.17.1"
+    "node": "18.18.2"
   },
   "packageManager": "pnpm@8.7.5",
   "msw": {

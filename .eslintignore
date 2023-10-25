@@ -5,3 +5,4 @@ server
 browser
 tsc-dist
 public/mockServiceWorker.js
+eslint-rules

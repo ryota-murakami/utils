@@ -27,7 +27,6 @@ export const invariant = function (
   e?: any,
   f?: any,
 ): void {
-  /* eslint-enable @typescript-eslint/explicit-module-boundary-types */
   if (NODE_ENV !== 'production') {
     if (format === undefined) {
       throw new Error('invariant requires an error message argument')

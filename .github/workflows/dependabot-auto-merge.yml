@@ -1,7 +1,6 @@
 name: Dependabot auto-merge
 on:
-  workflow_run:
-    workflows: [ "Build", "Lint", "Test", "Typecheck" ]
+  check_run:
     types:
       - completed
   

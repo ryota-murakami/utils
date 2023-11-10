@@ -74,7 +74,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.6.15",
     "jsdom": "^22.1.0",
-    "msw": "^2.0.4",
+    "msw": "^2.0.5",
     "node-notifier": "^10.0.1",
     "postcss": "^8.4.31",
     "prettier": "^3.0.3",

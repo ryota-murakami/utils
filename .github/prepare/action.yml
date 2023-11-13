@@ -1,0 +1,18 @@
+description: Prepares the repo for a typical CI job
+
+name: Prepare
+
+runs:
+  steps:
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 8
+    - uses: actions/setup-node@v3
+      with:
+        cache: pnpm
+        node-version: '18'
+    - run: |
+        pnpm install --frozen-lockfile
+        pnpm prisma generate
+      shell: bash
+  using: composite

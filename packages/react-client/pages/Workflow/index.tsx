@@ -29,7 +29,7 @@ import {
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import React, { Fragment, useState } from 'react'
 
-import Header from '../components/Header'
+import Header from '../../components/Header'
 
 const navigation = [
   { name: 'Dashboard', current: true, href: '#', icon: HomeIcon },

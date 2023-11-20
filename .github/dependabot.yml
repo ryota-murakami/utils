@@ -8,5 +8,5 @@ updates:
     ignore:
       - dependency-name: 'storybook'
       - dependency-name: '@storybook/*'
-      - dependency-name: 'react-client'
-      - dependency-name: 'react-client-dom'
+      - dependency-name: 'react'
+      - dependency-name: 'react-dom'

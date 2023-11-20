@@ -24,7 +24,7 @@
     "clsx": "^2.0.0",
     "copy-to-clipboard": "^3.3.3",
     "react": "18.3.0-canary-bbb9cb116-20231117",
-    "react-dom": "18.3.0-canary-bbb9cb116-20231117",
+    "react-dom": "18.3.0-next-992911981-20220718",
     "react-router-dom": "^6.19.0",
     "react-spinners": "^0.13.8",
     "styled-components": "^6.1.1",

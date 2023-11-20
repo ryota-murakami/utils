@@ -1,8 +1,9 @@
-node_modules
-dist
+packages/**/node_modules
+packages/**/dist
 dist-ssr
 server
 browser
 tsc-dist
-public/mockServiceWorker.js
+packages/react-client/public/mockServiceWorker.js
 eslint-rules
+node_modules

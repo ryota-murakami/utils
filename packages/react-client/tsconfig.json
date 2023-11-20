@@ -16,18 +16,28 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "types": ["vitest/globals", "@testing-library/jest-dom"],
-    "baseUrl": "./",
+    "types": ["@testing-library/jest-dom", "vitest/globals"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
     "declaration": true
   },
   "include": [
     "setupTests.ts",
     "vitest.config.ts",
-    "packages",
+    "./**/*.js",
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./**/*.cjs",
+    "./**/*.mjs",
     "./**.js",
     "./**.ts",
+    "./**.tsx",
     "./**.cjs",
     "./**.mjs"
   ],
-  "exclude": ["mocks"]
+  "exclude": ["mocks", "node_modules"]
 }

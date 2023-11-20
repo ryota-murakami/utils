@@ -7,7 +7,7 @@ import './index.css'
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 
 if (process.env.NODE_ENV === 'development') {
-  import('../../mocks/browser')
+  import('./mocks/browser')
     .then(({ worker }) => {
       worker.start()
     })

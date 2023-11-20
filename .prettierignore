@@ -1,11 +1,10 @@
 .git
-node_modules
+packages/**/node_modules
 .eslintignore
 .gitignore
 LICENSE
-dist
-dist-ssr
-tsc-dist
-public/mockServiceWorker.js
-
+packages/**/dist
+packages/**/dist-ssr
+packages/**/tsc-dist
+packages/react-client/public/mockServiceWorker.js
 pnpm-lock.yaml

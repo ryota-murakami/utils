@@ -9,7 +9,7 @@ Place for Storing useful code fragments from especially OSS library.
 
 ```
 ├── src
-│   ├── bun # Depens on Bun API
+│   ├── next # Next.js utils
 │   ├── universal # general JS/TS code without specific platform API
 │   ├── bworser # Typescript/JavaScript and code that depends Browser API
 │   ├── node # Javascript/Typescript code that depends Node.js API

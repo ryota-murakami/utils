@@ -1,4 +1,4 @@
-const pageGenerator = require('./generators/pages/index')
+const pageGenerator = require('./generators/pages')
 
 /**
  *

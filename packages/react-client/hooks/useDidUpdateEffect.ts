@@ -4,7 +4,7 @@ import { useRef, useEffect } from 'react'
  * https://reactjs.org/docs/react-component.html#componentdidupdate
  */
 const useDidUpdateEffect = (
-  effect: AnyFunction,
+  effect: (...arg: any[]) => any,
   deps: any[] | undefined = undefined,
 ): void => {
   const mounted = useRef<boolean>()

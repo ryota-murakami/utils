@@ -3,12 +3,12 @@ module.exports = {
   root: true,
   env: {},
   globals: {},
-  extends: ['ts-prefixer'],
+  extends: ['ts-prefixer', 'plugin:jsx-a11y/recommended',],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: ['tsconfig.json'],
   },
-  plugins: [],
+  plugins: ['jsx-a11y'],
   rules: {
     '@typescript-eslint/no-unused-vars': 'off',
     'no-console': 'off',

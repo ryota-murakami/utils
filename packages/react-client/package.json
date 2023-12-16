@@ -72,7 +72,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.6.15",
     "jsdom": "^23.0.1",
-    "msw": "^2.0.10",
+    "msw": "^2.0.11",
     "plop": "^4.0.0",
     "postcss": "^8.4.32",
     "rimraf": "^5.0.5",

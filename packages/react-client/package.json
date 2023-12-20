@@ -34,7 +34,7 @@
     "react-dom": "18.3.0-canary-bbb9cb116-20231117",
     "react-router-dom": "^6.21.0",
     "react-spinners": "^0.13.8",
-    "styled-components": "^6.1.1",
+    "styled-components": "^6.1.2",
     "tailwind-merge": "^2.1.0",
     "tailwindcss-animate": "^1.0.7"
   },

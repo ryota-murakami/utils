@@ -8,14 +8,14 @@
 Place for Storing useful code fragments from especially OSS library.
 
 ```
-├── src
-│   ├── next # Next.js utils
-│   ├── universal # general JS/TS code without specific platform API
-│   ├── bworser # Typescript/JavaScript and code that depends Browser API
-│   ├── node # Javascript/Typescript code that depends Node.js API
-│   ├── react # React Compoments/JS/TS/CSS/assets(SVG etc) code that works effectively React Project
-│   ├── types # Custom Utility Types
+├── packages/
+│   ├── universal # general JS/TS code without specific platform API
+│   ├── bworser # Typescript/JavaScript and code that depends Browser API
+│   ├── node # Javascript/Typescript code that depends Node.js API
+│   ├── react-client # React Compoments/JS/TS/CSS/assets(SVG etc) code that works effectively React Project
+│   ├── types # Custom Utility Types
 ```
+
 
 | README | [OpenID Connect (OIDC)](./packages/docs/OIDC.md) | [TBD](TBD.md) | [TBD](TBD.md) | [TBD](TBD.md) |
 

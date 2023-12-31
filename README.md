@@ -14,7 +14,9 @@ Place for Storing useful code fragments from especially OSS library.
 │   ├── node # Javascript/Typescript code that depends Node.js API
 │   ├── react-client # React Compoments/JS/TS/CSS/assets(SVG etc) code that works effectively React Project
 │   ├── types # Custom Utility Types
+│   ├── docs # Markdown Document something I've learned
 ```
+
 
 
 | README | [OpenID Connect (OIDC)](./packages/docs/OIDC.md) | [TBD](TBD.md) | [TBD](TBD.md) | [TBD](TBD.md) |

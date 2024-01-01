@@ -5,14 +5,17 @@ module.exports = {
   globals: {},
   extends: ['ts-prefixer', 'plugin:jsx-a11y/recommended',],
   parser: '@typescript-eslint/parser',
-  parserOptions: {
-    project: ['tsconfig.json'],
-  },
   plugins: ['jsx-a11y'],
   rules: {
     '@typescript-eslint/no-unused-vars': 'off',
     'no-console': 'off',
   },
   settings: {},
-  overrides: [],
+  overrides: [
+    {
+      parserOptions: {
+        project: ['tsconfig.json']
+      },
+    },
+  ],
 }

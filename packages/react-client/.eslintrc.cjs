@@ -13,6 +13,7 @@ module.exports = {
   settings: {},
   overrides: [
     {
+      files: ['.ts,.tsx,.js,.jsx,.cjs,.mjs'],
       parserOptions: {
         project: ['tsconfig.json']
       },

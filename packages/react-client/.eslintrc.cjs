@@ -15,7 +15,7 @@ module.exports = {
     {
       files: ['.ts,.tsx,.js,.jsx,.cjs,.mjs'],
       parserOptions: {
-        project: ['tsconfig.json']
+        project: ['./packages/react-client/tsconfig.json']
       },
     },
   ],

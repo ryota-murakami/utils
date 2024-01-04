@@ -1,4 +1,5 @@
-export function Spacer({
+import { memo } from 'react'
+export const Spacer = memo(function Spacer({
   size,
 }: {
   /**
@@ -54,4 +55,4 @@ export function Spacer({
   }
   const className = options[size]
   return <div className={className} />
-}
+})

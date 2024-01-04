@@ -2,8 +2,8 @@
 to: <%= path %>/<%= Name %>/<%= Name %>.tsx
 ---
 <%
-  const Name = h.changeCase.pascal(name);
-%>import React from 'react';
+  const Name = h.changeCase.pascal(name)
+%>import React from 'react'
 
 type Props = {};
 

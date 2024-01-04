@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react'
 import { BrowserRouter, Routes as RouteList, Route } from 'react-router-dom'
-import './index.css'
+import './global.css'
 
 import { Loading } from './components/Loading'
 import NotFound from './pages/NotFound'

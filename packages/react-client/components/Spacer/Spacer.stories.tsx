@@ -19,15 +19,16 @@ export default meta
 
 type Story = StoryObj<typeof Spacer>
 
-export const md: Story = {
-  args: {
-    size: 'md',
-  },
-}
 
 export const lg: Story = {
   args: {
     size: 'lg',
+  },
+}
+
+export const md: Story = {
+  args: {
+    size: 'md',
   },
 }
 

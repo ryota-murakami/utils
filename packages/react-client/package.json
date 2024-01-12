@@ -33,7 +33,7 @@
     "lucide-react": "^0.309.0",
     "react": "18.3.0-canary-bbb9cb116-20231117",
     "react-dom": "18.3.0-canary-bbb9cb116-20231117",
-    "react-router-dom": "^6.21.1",
+    "react-router-dom": "^6.21.2",
     "react-spinners": "^0.13.8",
     "styled-components": "^6.1.8",
     "tailwind-merge": "^2.2.0",

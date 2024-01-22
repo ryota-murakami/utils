@@ -85,8 +85,8 @@ importers:
         specifier: ^3.3.3
         version: 3.3.3
       lucide-react:
-        specifier: ^0.312.0
-        version: 0.312.0(react@18.3.0-canary-bbb9cb116-20231117)
+        specifier: ^0.314.0
+        version: 0.314.0(react@18.3.0-canary-bbb9cb116-20231117)
       react:
         specifier: 18.3.0-canary-bbb9cb116-20231117
         version: 18.3.0-canary-bbb9cb116-20231117
@@ -8783,8 +8783,8 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /lucide-react@0.312.0(react@18.3.0-canary-bbb9cb116-20231117):
-    resolution: {integrity: sha512-3UZsqyswRXjW4t+nw+InICewSimjPKHuSxiFYqTshv9xkK3tPPntXk/lvXc9pKlXIxm3v9WKyoxcrB6YHhP+dg==}
+  /lucide-react@0.314.0(react@18.3.0-canary-bbb9cb116-20231117):
+    resolution: {integrity: sha512-c2zOW7TOyKxPCaSs1og2lFdoI3SR4iii3yrZJU2Zpdc78nOw4fUmrcFNultaCiwZcr4CyiKdzjMdvKNlBBk+UQ==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:

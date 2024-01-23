@@ -36,7 +36,7 @@
     "react-router-dom": "^6.21.3",
     "react-spinners": "^0.13.8",
     "styled-components": "^6.1.8",
-    "tailwind-merge": "^2.2.0",
+    "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {

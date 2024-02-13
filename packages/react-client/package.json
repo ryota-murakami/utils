@@ -74,7 +74,7 @@
     "eslint-plugin-storybook": "^0.6.15",
     "hygen": "^6.2.11",
     "jsdom": "^24.0.0",
-    "msw": "^2.1.7",
+    "msw": "^2.2.0",
     "plop": "^4.0.1",
     "postcss": "^8.4.35",
     "rimraf": "^5.0.5",

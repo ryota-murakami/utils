@@ -76,8 +76,8 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0
       classed-components:
-        specifier: ^2.0.0
-        version: 2.0.0(react@18.3.0-canary-bbb9cb116-20231117)
+        specifier: ^2.0.1
+        version: 2.0.1(react@18.3.0-canary-bbb9cb116-20231117)
       clsx:
         specifier: ^2.1.0
         version: 2.1.0
@@ -5721,19 +5721,15 @@ packages:
       clsx: 2.0.0
     dev: false
 
-  /classed-components@2.0.0(react@18.3.0-canary-bbb9cb116-20231117):
-    resolution: {integrity: sha512-rq4HAMTuTsfPZUc1JihEvBCmgTUVixKPemhsKYaBGXR4TqYvqRcx1+4TXDF1mlMqHJOiL0z92KSxpQTbcke2Ng==}
+  /classed-components@2.0.1(react@18.3.0-canary-bbb9cb116-20231117):
+    resolution: {integrity: sha512-SVDX4VHUB+COzh2f3aqRCrgcWMoCOtaYa3oJP0GEDjV4bn3kJYRQP84UnNg4z47zsp/EcOSWnKrg00cubsOrzQ==}
     engines: {node: '>=6.0.0'}
     peerDependencies:
       react: '*'
     dependencies:
       '@emotion/is-prop-valid': 1.2.1
-      classnames: 2.3.2
+      clsx: 2.1.0
       react: 18.3.0-canary-bbb9cb116-20231117
-    dev: false
-
-  /classnames@2.3.2:
-    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
     dev: false
 
   /clean-stack@2.2.0:

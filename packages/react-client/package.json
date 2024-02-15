@@ -27,7 +27,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-switch": "^1.0.3",
     "class-variance-authority": "^0.7.0",
-    "classed-components": "^2.0.0",
+    "classed-components": "^2.0.1",
     "clsx": "^2.1.0",
     "copy-to-clipboard": "^3.3.3",
     "lucide-react": "^0.330.0",

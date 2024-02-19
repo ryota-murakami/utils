@@ -12,7 +12,6 @@ Place for Storing useful code fragments from especially OSS library.
 │   ├── universal # general JS/TS code without specific platform API
 │   ├── bworser # Typescript/JavaScript and code that depends Browser API
 │   ├── node # Javascript/Typescript code that depends Node.js API
-│   ├── react-client # React Compoments/JS/TS/CSS/assets(SVG etc) code that works effectively React Project
 │   ├── types # Custom Utility Types
 │   ├── docs # Markdown Document something I've learned
 ```

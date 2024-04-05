@@ -30,7 +30,7 @@
     "rimraf": "^5.0.5",
     "serve": "^14.2.1",
     "should": "^13.2.3",
-    "typescript": "^5.4.3",
+    "typescript": "^5.4.4",
     "vitest": "^1.4.0"
   }
 }

@@ -9,7 +9,7 @@
     "build": "pnpm -r build",
     "tsc": "tsc",
     "tsd": "tsd packages/types/__tests__",
-    "test": "pnpm -r test",
+    "test": "vitest",
     "test:watch": "vitest",
     "lint": "pnpm -r lint",
     "lint:fix": "pnpm -r lint:fix",
@@ -24,8 +24,10 @@
     "history": "^5.3.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.2",
+    "@types/node": "^20.12.7",
     "concurrently": "^8.2.2",
-    "node-notifier": "^10.0.1",
+    "jsdom": "^24.0.0",
     "prettier": "^3.2.5",
     "rimraf": "^5.0.5",
     "serve": "^14.2.1",

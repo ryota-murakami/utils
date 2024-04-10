@@ -1,3 +1,6 @@
+/**
+ * @vitest-environment jsdom
+ */
 import { filterFalsy } from '../array/filterFalsy'
 
 describe('filterFalsy', () => {

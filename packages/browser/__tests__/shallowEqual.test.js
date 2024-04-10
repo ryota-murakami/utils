@@ -1,3 +1,6 @@
+/**
+ * @vitest-environment jsdom
+ */
 import shallowEqual from '../shallowEqual'
 
 describe('shallowEqual', () => {

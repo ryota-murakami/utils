@@ -22,8 +22,8 @@ importers:
         version: 5.3.0
     devDependencies:
       '@testing-library/jest-dom':
-        specifier: ^6.4.2
-        version: 6.4.3(vitest@1.6.0)
+        specifier: ^6.4.5
+        version: 6.4.5(vitest@1.6.0)
       '@types/node':
         specifier: ^20.12.8
         version: 20.12.8
@@ -447,8 +447,8 @@ packages:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
     dev: true
 
-  /@testing-library/jest-dom@6.4.3(vitest@1.6.0):
-    resolution: {integrity: sha512-d1NUtNEN0hSUB/XWdF1GgdlD5S2tS0huQb2tkFL2usXRatR/EiHS6AhLtDcCb/iD9CS7kRmbAHt2O5JadkKyuA==}
+  /@testing-library/jest-dom@6.4.5(vitest@1.6.0):
+    resolution: {integrity: sha512-AguB9yvTXmCnySBP1lWjfNNUwpbElsaQ567lt2VdGqAdHtpieLgjmcVyv1q7PMIvLbgpDdkWV5Ydv3FEejyp2A==}
     engines: {node: '>=14', npm: '>=6', yarn: '>=1'}
     peerDependencies:
       '@jest/globals': '>= 28'

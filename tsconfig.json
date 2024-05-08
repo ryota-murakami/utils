@@ -12,6 +12,6 @@
     "rootDir": "packages",              // Specify the root directory of input files
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["packages/**/*.{ts,js}"],     // The files to be compiled by TypeScript
+  "include": ["packages/**/*.{ts,js,d.ts}"],     // The files to be compiled by TypeScript
   "exclude": ["node_modules"]     // Files that compiler should ignore
 }

@@ -9,7 +9,7 @@
     "skipLibCheck": true,         // Skip type checking of declaration files
     "outDir": "dist",             // Specify output directory path
     "sourceMap": true,            // Create source map files to allow for debugging
-    "rootDir": "packages",              // Specify the root directory of input files
+    "rootDir": ".",              // Specify the root directory of input files
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
   "include": ["packages/**/*.{ts,js,d.ts}"],     // The files to be compiled by TypeScript

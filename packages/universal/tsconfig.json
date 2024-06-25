@@ -16,6 +16,9 @@
     "moduleResolution": "NodeNext",
     "module": "NodeNext",
     "outDir": "dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "types": [
+      "vitest/globals"
+    ]
   },
 }

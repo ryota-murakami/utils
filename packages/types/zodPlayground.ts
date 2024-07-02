@@ -6,6 +6,5 @@ const schema = z
     age: z.number(),
   })
   .nullish()
-const data = schema.safeParse({namelist: null, age: null})
 
-console.log(data)
+console.log(schema.safeParse({}))

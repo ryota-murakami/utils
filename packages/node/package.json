@@ -7,11 +7,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "zod": "^3.23.8"
-  },
-  "devDependencies": {
-    "tsx": "^4.15.7"
-  }
+  "license": "ISC"
 }

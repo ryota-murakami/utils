@@ -1,17 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ESNext",           // Specify what version of ECMAScript you want to compile the TS down to
-    "module": "commonjs",         // Specify the module system
-    "strict": true,               // Enable a wide range of type checking behaviors
-    "esModuleInterop": true,      // Add interoperability between CommonJS and ES Modules via creation of namespace objects for all imports
-    "forceConsistentCasingInFileNames": true,    // Disallowing inconsistently-cased references to the same file
-    "allowJs": true,              // Allow javascript files to be compiled
-    "skipLibCheck": true,         // Skip type checking of declaration files
-    "outDir": "dist",             // Specify output directory path
-    "sourceMap": true,            // Create source map files to allow for debugging
-    "rootDir": ".",              // Specify the root directory of input files
-    "types": ["vitest/globals", "@testing-library/jest-dom"]
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "es2022",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true
   },
-  "include": ["packages/**/*.{ts,js,d.ts}"],     // The files to be compiled by TypeScript
-  "exclude": ["node_modules"]     // Files that compiler should ignore
+  "exclude": ["node_modules"]
 }

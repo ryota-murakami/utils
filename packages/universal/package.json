@@ -1,0 +1,6 @@
+{
+  "name": "universal",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}

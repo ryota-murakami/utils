@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     /* Base Options: */
+    "types": [
+      "vitest/globals",
+      "@testing-library/jest-dom"
+    ],
     "esModuleInterop": true,
     "skipLibCheck": true,
     "target": "es2022",
@@ -8,7 +12,7 @@
     "resolveJsonModule": true,
     "moduleDetection": "force",
     "isolatedModules": true,
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": false,
     /* If transpiling with TypeScript: */
     "module": "NodeNext",
     "outDir": "dist",

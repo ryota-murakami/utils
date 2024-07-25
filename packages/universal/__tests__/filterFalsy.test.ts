@@ -1,7 +1,4 @@
-/**
- * @vitest-environment jsdom
- */
-import { filterFalsy } from '../../universal/filterFalsy'
+import { filterFalsy } from '../filterFalsy'
 
 describe('filterFalsy', () => {
   it('should filter falsy values', () => {

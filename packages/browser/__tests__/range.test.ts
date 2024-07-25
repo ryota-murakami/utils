@@ -1,6 +1,3 @@
-/**
- * @vitest-environment jsdom
- */
 import { range } from '../array/range'
 
 test('range', () => {

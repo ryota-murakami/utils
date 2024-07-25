@@ -1,6 +1,3 @@
-/**
- * @vitest-environment jsdom
- */
 import shallowEqualScalar from '../shallowEqualScalar'
 
 describe('shallowEqualScalar', () => {

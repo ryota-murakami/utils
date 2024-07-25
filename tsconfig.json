@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    /* Base Options: */
     "types": [
       "vitest/globals",
       "@testing-library/jest-dom"
@@ -9,15 +8,14 @@
     "skipLibCheck": true,
     "target": "es2022",
     "allowJs": true,
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "moduleDetection": "force",
     "isolatedModules": true,
     "verbatimModuleSyntax": false,
-    /* If transpiling with TypeScript: */
     "module": "NodeNext",
     "outDir": "dist",
     "sourceMap": true,
-    /* If your code runs in the DOM: */
     "lib": ["es2022", "dom", "dom.iterable"]
   },
   "exclude": ["node_modules"]

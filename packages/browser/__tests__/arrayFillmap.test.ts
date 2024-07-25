@@ -1,6 +1,3 @@
-/**
- * @vitest-environment jsdom
- */
 import { arrayFillmap } from '../array/arrayFilllmap'
 
 test('run arrayFillmap', () => {

@@ -26,6 +26,6 @@
     "prettier": "^3.3.3",
     "rimraf": "^6.0.0",
     "typescript": "^5.7.2",
-    "vitest": "^2.1.4"
+    "vitest": "^2.1.5"
   }
 }

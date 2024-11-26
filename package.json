@@ -23,7 +23,7 @@
     "eslint-import-resolver-typescript": "^3.6.3",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "prettier": "^3.3.3",
+    "prettier": "^3.4.0",
     "rimraf": "^6.0.0",
     "typescript": "^5.7.2",
     "vitest": "^2.1.5"

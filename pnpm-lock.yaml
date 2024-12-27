@@ -40,7 +40,7 @@ importers:
         version: 5.7.2
       vitest:
         specifier: ^2.1.8
-        version: 2.1.8(@types/node@22.3.0)(happy-dom@15.11.7)(jsdom@24.1.0)
+        version: 2.1.8(@types/node@22.3.0)(happy-dom@16.0.0)(jsdom@24.1.0)
 
   packages/browser:
     dependencies:
@@ -58,8 +58,8 @@ importers:
         specifier: ^14.5.2
         version: 14.5.2(@testing-library/dom@10.4.0)
       happy-dom:
-        specifier: ^15.11.7
-        version: 15.11.7
+        specifier: ^16.0.0
+        version: 16.0.0
       should:
         specifier: ^13.2.3
         version: 13.2.3
@@ -1292,8 +1292,8 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
-  happy-dom@15.11.7:
-    resolution: {integrity: sha512-KyrFvnl+J9US63TEzwoiJOQzZBJY7KgBushJA8X61DMbNsH+2ONkDuLDnCnwUiPTF42tLoEmrPyoqbenVA5zrg==}
+  happy-dom@16.0.0:
+    resolution: {integrity: sha512-Br2gCVyasiuBFSunZpgkKJ84ruoM/a1e6OnJj3MU1O2pz9+HDBc03WD00/DNQ2xnQpLlpGwU37TaubonvlZWIQ==}
     engines: {node: '>=18.0.0'}
 
   has-bigints@1.0.2:
@@ -3019,7 +3019,8 @@ snapshots:
       graceful-fs: 4.2.11
       tapable: 2.2.1
 
-  entities@4.5.0: {}
+  entities@4.5.0:
+    optional: true
 
   es-abstract@1.23.3:
     dependencies:
@@ -3463,9 +3464,8 @@ snapshots:
 
   graphemer@1.4.0: {}
 
-  happy-dom@15.11.7:
+  happy-dom@16.0.0:
     dependencies:
-      entities: 4.5.0
       webidl-conversions: 7.0.0
       whatwg-mimetype: 3.0.0
 
@@ -4265,7 +4265,7 @@ snapshots:
       '@types/node': 22.3.0
       fsevents: 2.3.3
 
-  vitest@2.1.8(@types/node@22.3.0)(happy-dom@15.11.7)(jsdom@24.1.0):
+  vitest@2.1.8(@types/node@22.3.0)(happy-dom@16.0.0)(jsdom@24.1.0):
     dependencies:
       '@vitest/expect': 2.1.8
       '@vitest/mocker': 2.1.8(vite@5.3.3(@types/node@22.3.0))
@@ -4289,7 +4289,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.3.0
-      happy-dom: 15.11.7
+      happy-dom: 16.0.0
       jsdom: 24.1.0
     transitivePeerDependencies:
       - less

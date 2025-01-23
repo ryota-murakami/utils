@@ -10,7 +10,7 @@ Place for Storing useful code fragments from especially OSS library.
 ```
 ├── packages/
 │   ├── universal # general JS/TS code without specific platform API
-│   ├── bworser # Typescript/JavaScript and code that depends Browser API
+│   ├── browser # Typescript/JavaScript and code that depends Browser API
 │   ├── node # Javascript/Typescript code that depends Node.js API
 │   ├── types # Custom Utility Types
 │   ├── docs # Markdown Document something I've learned

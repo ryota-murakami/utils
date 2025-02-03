@@ -12,7 +12,7 @@
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/user-event": "^14.6.1",
-    "happy-dom": "^16.7.3",
+    "happy-dom": "^16.8.1",
     "should": "^13.2.3"
   }
 }

@@ -40,7 +40,7 @@ importers:
         version: 5.7.3
       vitest:
         specifier: ^3.0.6
-        version: 3.0.6(@types/node@22.3.0)(happy-dom@17.1.0)(jsdom@24.1.0)(tsx@4.19.3)
+        version: 3.0.6(@types/node@22.3.0)(happy-dom@17.1.1)(jsdom@24.1.0)(tsx@4.19.3)
 
   packages/browser:
     dependencies:
@@ -58,8 +58,8 @@ importers:
         specifier: ^14.6.1
         version: 14.6.1(@testing-library/dom@10.4.0)
       happy-dom:
-        specifier: ^17.1.0
-        version: 17.1.0
+        specifier: ^17.1.1
+        version: 17.1.1
       should:
         specifier: ^13.2.3
         version: 13.2.3
@@ -1396,8 +1396,8 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
-  happy-dom@17.1.0:
-    resolution: {integrity: sha512-9tUhXyePCjzUMycaHS/IzrIpF69xiq/laAT7golk4MtZ6t8ft5+Rv7U3lfrs2b4NMH0JTL3EhZzjfahrPmOnaQ==}
+  happy-dom@17.1.1:
+    resolution: {integrity: sha512-OSTkBlmD/6Do7gCd7nZB5iFq1bF9VQg/iFmjHmxvVX2S1UiOpo6sT+aFNnu3XUsB8hCZb9+GZ0G1g1TaMiAggw==}
     engines: {node: '>=18.0.0'}
 
   has-bigints@1.0.2:
@@ -3718,7 +3718,7 @@ snapshots:
 
   graphemer@1.4.0: {}
 
-  happy-dom@17.1.0:
+  happy-dom@17.1.1:
     dependencies:
       webidl-conversions: 7.0.0
       whatwg-mimetype: 3.0.0
@@ -4549,7 +4549,7 @@ snapshots:
       fsevents: 2.3.3
       tsx: 4.19.3
 
-  vitest@3.0.6(@types/node@22.3.0)(happy-dom@17.1.0)(jsdom@24.1.0)(tsx@4.19.3):
+  vitest@3.0.6(@types/node@22.3.0)(happy-dom@17.1.1)(jsdom@24.1.0)(tsx@4.19.3):
     dependencies:
       '@vitest/expect': 3.0.6
       '@vitest/mocker': 3.0.6(vite@6.1.1(@types/node@22.3.0)(tsx@4.19.3))
@@ -4573,7 +4573,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.3.0
-      happy-dom: 17.1.0
+      happy-dom: 17.1.1
       jsdom: 24.1.0
     transitivePeerDependencies:
       - jiti

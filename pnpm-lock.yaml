@@ -70,8 +70,8 @@ importers:
         specifier: 5.4.1
         version: 5.4.1
       zod:
-        specifier: ^3.24.2
-        version: 3.24.2
+        specifier: ^3.24.3
+        version: 3.24.3
     devDependencies:
       tsx:
         specifier: ^4.19.3
@@ -80,8 +80,8 @@ importers:
   packages/types:
     dependencies:
       zod:
-        specifier: ^3.24.2
-        version: 3.24.2
+        specifier: ^3.24.3
+        version: 3.24.3
     devDependencies:
       ts-expect:
         specifier: ^1.3.0
@@ -94,8 +94,8 @@ packages:
   '@adobe/css-tools@4.4.0':
     resolution: {integrity: sha512-Ff9+ksdQQB3rMncgqDK78uLznstjyfIf2Arnh22pW8kBpLs6rpKDwgnZT46hin5Hl1WzazzK64DOrhSwYpS7bQ==}
 
-  '@asamuzakjp/css-color@3.1.1':
-    resolution: {integrity: sha512-hpRD68SV2OMcZCsrbdkccTw5FXjNDLo5OuqSHyHZfwweGsDWZwDJ2+gONyNAbazZclobMirACLw0lk8WVxIqxA==}
+  '@asamuzakjp/css-color@3.1.2':
+    resolution: {integrity: sha512-nwgc7jPn3LpZ4JWsoHtuwBsad1qSSLDDX634DdG0PBJofIuIEtSWk4KkRmuXyu178tjuHAbwiMNNzwqIyLYxZw==}
 
   '@babel/code-frame@7.24.7':
     resolution: {integrity: sha512-BcYH1CVJBO9tvyIZ2jVeXgSIMvGZ2FDRvDdOIVQyuklNKSsx+eppDEBq/g47Ayw+RqNFE+URvOShmf+f/qwAlA==}
@@ -2101,8 +2101,8 @@ packages:
     resolution: {integrity: sha512-Loo5UUvLD9ScZ6jh8beX1T6sO1w2/MpCRpEP7V280GKMVUQ0Jzar2U3UJPsrdbziLEMMhu3Ujnq//rhiFuIeag==}
     engines: {node: '>=6'}
 
-  tr46@5.1.0:
-    resolution: {integrity: sha512-IUWnUK7ADYR5Sl1fZlO1INDUhVhatWl7BtJWsIhwJ0UAK7ilzzIa8uIqOO/aYVWHZPJkKbEL+362wrzoeRF7bw==}
+  tr46@5.1.1:
+    resolution: {integrity: sha512-hdF5ZgjTqgAntKkklYw0R03MG2x/bSzTtkxmIRw/sTNV8YXsCJ1tfLAX23lhxhHJlEf3CRCOCGGWw3vI3GaSPw==}
     engines: {node: '>=18'}
 
   ts-api-utils@1.3.0:
@@ -2334,14 +2334,14 @@ packages:
     resolution: {integrity: sha512-cYVsTjKl8b+FrnidjibDWskAv7UKOfcwaVZdp/it9n1s9fU3IkgDbhdIRKCW4JDsAlECJY0ytoVPT3sK6kideA==}
     engines: {node: '>=18'}
 
-  zod@3.24.2:
-    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
+  zod@3.24.3:
+    resolution: {integrity: sha512-HhY1oqzWCQWuUqvBFnsyrtZRhyPeR7SUGv+C4+MsisMuVfSPx8HpwWqH8tRahSlt6M3PiFAcoeFhZAqIXTxoSg==}
 
 snapshots:
 
   '@adobe/css-tools@4.4.0': {}
 
-  '@asamuzakjp/css-color@3.1.1':
+  '@asamuzakjp/css-color@3.1.2':
     dependencies:
       '@csstools/css-calc': 2.1.2(@csstools/css-parser-algorithms@3.0.4(@csstools/css-tokenizer@3.0.3))(@csstools/css-tokenizer@3.0.3)
       '@csstools/css-color-parser': 3.0.8(@csstools/css-parser-algorithms@3.0.4(@csstools/css-tokenizer@3.0.3))(@csstools/css-tokenizer@3.0.3)
@@ -3137,7 +3137,7 @@ snapshots:
 
   cssstyle@4.3.0:
     dependencies:
-      '@asamuzakjp/css-color': 3.1.1
+      '@asamuzakjp/css-color': 3.1.2
       rrweb-cssom: 0.8.0
     optional: true
 
@@ -4436,7 +4436,7 @@ snapshots:
       url-parse: 1.5.10
     optional: true
 
-  tr46@5.1.0:
+  tr46@5.1.1:
     dependencies:
       punycode: 2.3.1
     optional: true
@@ -4617,7 +4617,7 @@ snapshots:
 
   whatwg-url@14.2.0:
     dependencies:
-      tr46: 5.1.0
+      tr46: 5.1.1
       webidl-conversions: 7.0.0
     optional: true
 
@@ -4681,4 +4681,4 @@ snapshots:
 
   yoctocolors-cjs@2.1.2: {}
 
-  zod@3.24.2: {}
+  zod@3.24.3: {}

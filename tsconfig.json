@@ -8,7 +8,7 @@
     "skipLibCheck": true,
     "target": "es2022",
     "allowJs": true,
-    "moduleResolution": "bundler",
+    "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "moduleDetection": "force",
     "isolatedModules": true,

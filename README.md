@@ -7,7 +7,7 @@
 
 Place for Storing useful code fragments from especially OSS library.
 
-```
+```graphql
 ├── packages/
 │   ├── universal # general JS/TS code without specific platform API
 │   ├── browser # Typescript/JavaScript and code that depends Browser API

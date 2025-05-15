@@ -2,7 +2,7 @@
   "name": "browser",
   "version": "1.0.0",
   "scripts": {
-    "test": "vitest",
+    "test": "vitest --run",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

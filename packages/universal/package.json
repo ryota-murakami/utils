@@ -1,7 +1,7 @@
 {
   "name": "universal",
   "scripts": {
-    "test": "vitest",
+    "test": "vitest --run",
     "typecheck": "tsc --noEmit"
   }
 }

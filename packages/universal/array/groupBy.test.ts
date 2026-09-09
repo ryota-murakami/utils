@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 import { groupBy } from './groupBy.js'
 
 describe('groupBy', () => {
   describe('basic functionality', () => {
-    it('should group objects by a property', () => {
+    test('should group objects by a property', () => {
       const users = [
         { id: 1, role: 'admin', name: 'Alice' },
         { id: 2, role: 'user', name: 'Bob' },
@@ -26,7 +26,7 @@ describe('groupBy', () => {
       })
     })
 
-    it('should group numbers by even/odd', () => {
+    test('should group numbers by even/odd', () => {
       const numbers = [1, 2, 3, 4, 5, 6]
       const result = groupBy(numbers, (n) => (n % 2 === 0 ? 'even' : 'odd'))
 
@@ -36,7 +36,7 @@ describe('groupBy', () => {
       })
     })
 
-    it('should group strings by length', () => {
+    test('should group strings by length', () => {
       const words = ['apple', 'pie', 'banana', 'cat', 'dog']
       const result = groupBy(words, (str) => str.length)
 
@@ -47,7 +47,7 @@ describe('groupBy', () => {
       })
     })
 
-    it('should use index parameter in key function', () => {
+    test('should use index parameter in key function', () => {
       const items = ['a', 'b', 'c', 'd']
       const result = groupBy(items, (_, index) =>
         index < 2 ? 'first-half' : 'second-half',
@@ -61,26 +61,26 @@ describe('groupBy', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle empty arrays', () => {
+    test('should handle empty arrays', () => {
       const result = groupBy([], () => 'group')
       expect(result).toEqual({})
     })
 
-    it('should handle single element arrays', () => {
+    test('should handle single element arrays', () => {
       const result = groupBy([42], (n) => (n > 40 ? 'large' : 'small'))
       expect(result).toEqual({
         large: [42],
       })
     })
 
-    it('should handle all items mapping to same key', () => {
+    test('should handle all items mapping to same key', () => {
       const result = groupBy([1, 2, 3, 4], () => 'same')
       expect(result).toEqual({
         same: [1, 2, 3, 4],
       })
     })
 
-    it('should handle each item mapping to unique key', () => {
+    test('should handle each item mapping to unique key', () => {
       const result = groupBy([1, 2, 3], (_, index) => `item-${index}`)
       expect(result).toEqual({
         'item-0': [1],
@@ -91,7 +91,7 @@ describe('groupBy', () => {
   })
 
   describe('type safety', () => {
-    it('should work with string keys', () => {
+    test('should work with string keys', () => {
       const items = ['apple', 'banana', 'apricot', 'cherry']
       const result = groupBy(items, (str) => str.charAt(0))
 
@@ -106,7 +106,7 @@ describe('groupBy', () => {
       expect(Array.isArray(result.a)).toBe(true)
     })
 
-    it('should work with number keys', () => {
+    test('should work with number keys', () => {
       const items = [10, 20, 15, 25, 30]
       const result = groupBy(items, (n) => Math.floor(n / 10))
 
@@ -117,7 +117,7 @@ describe('groupBy', () => {
       })
     })
 
-    it('should work with symbol keys', () => {
+    test('should work with symbol keys', () => {
       const sym1 = Symbol('group1')
       const sym2 = Symbol('group2')
 
@@ -130,7 +130,7 @@ describe('groupBy', () => {
   })
 
   describe('complex data types', () => {
-    it('should group objects with nested properties', () => {
+    test('should group objects with nested properties', () => {
       const data = [
         { user: { department: 'engineering' }, score: 95 },
         { user: { department: 'marketing' }, score: 87 },
@@ -145,7 +145,7 @@ describe('groupBy', () => {
       expect(result.sales).toHaveLength(1)
     })
 
-    it('should group by computed properties', () => {
+    test('should group by computed properties', () => {
       const products = [
         { name: 'Laptop', price: 1200 },
         { name: 'Phone', price: 800 },
@@ -169,7 +169,7 @@ describe('groupBy', () => {
   })
 
   describe('immutability', () => {
-    it('should not modify the original array', () => {
+    test('should not modify the original array', () => {
       const original = [1, 2, 3, 4, 5]
       const originalCopy = [...original]
 
@@ -178,7 +178,7 @@ describe('groupBy', () => {
       expect(original).toEqual(originalCopy)
     })
 
-    it('should not modify original objects in the array', () => {
+    test('should not modify original objects in the array', () => {
       const users = [
         { id: 1, name: 'Alice', role: 'admin' },
         { id: 2, name: 'Bob', role: 'user' },
@@ -194,7 +194,7 @@ describe('groupBy', () => {
   })
 
   describe('performance', () => {
-    it('should handle large arrays efficiently', () => {
+    test('should handle large arrays efficiently', () => {
       const largeArray = Array.from({ length: 10000 }, (_, i) => ({
         id: i,
         category: `category-${i % 100}`,
@@ -211,7 +211,7 @@ describe('groupBy', () => {
   })
 
   describe('error handling', () => {
-    it('should handle key function throwing errors', () => {
+    test('should handle key function throwing errors', () => {
       const items = [1, 2, 3]
       const keyGetter = (n: number) => {
         if (n === 2) throw new Error('Key error')
@@ -221,7 +221,7 @@ describe('groupBy', () => {
       expect(() => groupBy(items, keyGetter)).toThrow('Key error')
     })
 
-    it('should handle null/undefined values in array', () => {
+    test('should handle null/undefined values in array', () => {
       const items = [1, null, undefined, 2, null]
       const result = groupBy(items, (item) =>
         item === null ? 'null' : item === undefined ? 'undefined' : 'number',

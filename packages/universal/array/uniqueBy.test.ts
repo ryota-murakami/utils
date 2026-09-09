@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 import { uniqueBy } from './uniqueBy.js'
 
 describe('uniqueBy', () => {
   describe('basic functionality', () => {
-    it('should remove duplicates by object property', () => {
+    test('should remove duplicates by object property', () => {
       const users = [
         { id: 1, name: 'Alice', email: 'alice@example.com' },
         { id: 2, name: 'Bob', email: 'bob@example.com' },
@@ -23,7 +23,7 @@ describe('uniqueBy', () => {
       expect(result).toHaveLength(3)
     })
 
-    it('should preserve first occurrence', () => {
+    test('should preserve first occurrence', () => {
       const items = [
         { value: 'a', position: 1 },
         { value: 'b', position: 2 },
@@ -41,14 +41,14 @@ describe('uniqueBy', () => {
       ])
     })
 
-    it('should work with primitive arrays', () => {
+    test('should work with primitive arrays', () => {
       const numbers = [1, 2, 3, 2, 4, 1, 5]
       const result = uniqueBy(numbers, (n) => n)
 
       expect(result).toEqual([1, 2, 3, 4, 5])
     })
 
-    it('should use index parameter in key function', () => {
+    test('should use index parameter in key function', () => {
       const items = ['a', 'b', 'c', 'd']
       const result = uniqueBy(items, (_, index) => index % 2) // Even/odd indices
 
@@ -57,14 +57,14 @@ describe('uniqueBy', () => {
   })
 
   describe('key function variations', () => {
-    it('should work with string keys', () => {
+    test('should work with string keys', () => {
       const words = ['apple', 'pie', 'banana', 'cat', 'dog']
       const result = uniqueBy(words, (str) => str.length)
 
       expect(result).toEqual(['apple', 'pie', 'banana']) // First 5-char, first 3-char, first 6-char
     })
 
-    it('should work with computed keys', () => {
+    test('should work with computed keys', () => {
       const products = [
         { name: 'Laptop', price: 1000, category: 'electronics' },
         { name: 'Phone', price: 500, category: 'electronics' },
@@ -81,7 +81,7 @@ describe('uniqueBy', () => {
       ])
     })
 
-    it('should work with complex key computations', () => {
+    test('should work with complex key computations', () => {
       const items = [
         { x: 1, y: 1 },
         { x: 2, y: 3 },
@@ -102,29 +102,29 @@ describe('uniqueBy', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle empty arrays', () => {
+    test('should handle empty arrays', () => {
       const result = uniqueBy([], () => 'key')
       expect(result).toEqual([])
     })
 
-    it('should handle single element arrays', () => {
+    test('should handle single element arrays', () => {
       const result = uniqueBy([42], (n) => n)
       expect(result).toEqual([42])
     })
 
-    it('should handle arrays with no duplicates', () => {
+    test('should handle arrays with no duplicates', () => {
       const items = [1, 2, 3, 4, 5]
       const result = uniqueBy(items, (n) => n)
       expect(result).toEqual([1, 2, 3, 4, 5])
     })
 
-    it('should handle arrays with all duplicates', () => {
+    test('should handle arrays with all duplicates', () => {
       const items = ['same', 'same', 'same', 'same']
       const result = uniqueBy(items, (s) => s)
       expect(result).toEqual(['same'])
     })
 
-    it('should handle null/undefined keys', () => {
+    test('should handle null/undefined keys', () => {
       const items = [
         { key: null, value: 1 },
         { key: undefined, value: 2 },
@@ -144,7 +144,7 @@ describe('uniqueBy', () => {
   })
 
   describe('type safety', () => {
-    it('should work with object keys', () => {
+    test('should work with object keys', () => {
       const data = [
         { ref: { id: 1 }, name: 'First' },
         { ref: { id: 1 }, name: 'Second' },
@@ -158,14 +158,14 @@ describe('uniqueBy', () => {
       expect(result[1]?.name).toBe('Third')
     })
 
-    it('should work with boolean keys', () => {
+    test('should work with boolean keys', () => {
       const numbers = [1, 2, 3, 4, 5, 6]
       const result = uniqueBy(numbers, (n) => n % 2 === 0)
 
       expect(result).toEqual([1, 2]) // First odd and first even
     })
 
-    it('should work with symbol keys', () => {
+    test('should work with symbol keys', () => {
       const sym1 = Symbol('key1')
       const sym2 = Symbol('key2')
 
@@ -185,7 +185,7 @@ describe('uniqueBy', () => {
   })
 
   describe('immutability', () => {
-    it('should not modify the original array', () => {
+    test('should not modify the original array', () => {
       const original = [1, 2, 3, 2, 1]
       const originalCopy = [...original]
 
@@ -194,7 +194,7 @@ describe('uniqueBy', () => {
       expect(original).toEqual(originalCopy)
     })
 
-    it('should not modify original objects', () => {
+    test('should not modify original objects', () => {
       const users = [
         { id: 1, name: 'Alice' },
         { id: 2, name: 'Bob' },
@@ -211,7 +211,7 @@ describe('uniqueBy', () => {
   })
 
   describe('performance', () => {
-    it('should handle large arrays efficiently', () => {
+    test('should handle large arrays efficiently', () => {
       const largeArray = Array.from({ length: 10000 }, (_, i) => ({
         id: i % 1000, // 1000 unique IDs, 10 duplicates each
         value: `item-${i}`,
@@ -225,7 +225,7 @@ describe('uniqueBy', () => {
       expect(endTime - startTime).toBeLessThan(50) // Should be reasonably fast
     })
 
-    it('should use Set for efficient key lookups', () => {
+    test('should use Set for efficient key lookups', () => {
       // This test ensures we're using Set internally for O(1) lookups
       const items = Array.from({ length: 1000 }, (_, i) => ({ key: i % 100 }))
 
@@ -236,7 +236,7 @@ describe('uniqueBy', () => {
   })
 
   describe('error handling', () => {
-    it('should handle key function throwing errors', () => {
+    test('should handle key function throwing errors', () => {
       const items = [1, 2, 3]
       const keyGetter = (n: number) => {
         if (n === 2) throw new Error('Key error')
@@ -246,7 +246,7 @@ describe('uniqueBy', () => {
       expect(() => uniqueBy(items, keyGetter)).toThrow('Key error')
     })
 
-    it('should handle complex key types', () => {
+    test('should handle complex key types', () => {
       const items = [
         { data: [1, 2, 3] },
         { data: [1, 2, 3] },

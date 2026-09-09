@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest'
 
 import { getBase64Image } from './getBase64Image.js'
 
@@ -52,11 +52,11 @@ describe('getBase64Image', () => {
   })
 
   describe('basic functionality', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(typeof getBase64Image).toBe('function')
     })
 
-    it('should return a Promise', async () => {
+    test('should return a Promise', async () => {
       // Set up the mock to immediately resolve
       mockFileReader.readAsDataURL = vi.fn(() => {
         mockFileReader.result = 'data:image/png;base64,test'
@@ -72,7 +72,7 @@ describe('getBase64Image', () => {
       return result
     })
 
-    it('should fetch image and convert to base64', async () => {
+    test('should fetch image and convert to base64', async () => {
       const mockBase64 =
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=='
 
@@ -95,7 +95,7 @@ describe('getBase64Image', () => {
   })
 
   describe('fetch behavior', () => {
-    it('should call fetch with no-cors mode', async () => {
+    test('should call fetch with no-cors mode', async () => {
       mockFileReader.readAsDataURL = vi.fn(() => {
         mockFileReader.result = 'data:image/png;base64,test'
         if (mockFileReader.onload) {
@@ -109,7 +109,7 @@ describe('getBase64Image', () => {
       expect(global.fetch).toHaveBeenCalledWith(url, { mode: 'no-cors' })
     })
 
-    it('should handle different image URLs', async () => {
+    test('should handle different image URLs', async () => {
       mockFileReader.readAsDataURL = vi.fn(() => {
         mockFileReader.result = 'data:image/jpeg;base64,test'
         if (mockFileReader.onload) {
@@ -130,7 +130,7 @@ describe('getBase64Image', () => {
       }
     })
 
-    it('should call blob() on fetch response', async () => {
+    test('should call blob() on fetch response', async () => {
       const mockBlobFn = vi.fn(async () => Promise.resolve(mockBlob))
       global.fetch = vi.fn(async () =>
         Promise.resolve({
@@ -154,7 +154,7 @@ describe('getBase64Image', () => {
   })
 
   describe('FileReader behavior', () => {
-    it('should create new FileReader instance', async () => {
+    test('should create new FileReader instance', async () => {
       mockFileReader.readAsDataURL = vi.fn(() => {
         mockFileReader.result = 'data:image/png;base64,test'
         if (mockFileReader.onload) {
@@ -167,7 +167,7 @@ describe('getBase64Image', () => {
       expect(global.FileReader).toHaveBeenCalledTimes(1)
     })
 
-    it('should set onload handler', async () => {
+    test('should set onload handler', async () => {
       let onloadCalled = false
       mockFileReader.readAsDataURL = vi.fn(() => {
         expect(mockFileReader.onload).toBeInstanceOf(Function)
@@ -183,7 +183,7 @@ describe('getBase64Image', () => {
       expect(onloadCalled).toBe(true)
     })
 
-    it('should call readAsDataURL with blob', async () => {
+    test('should call readAsDataURL with blob', async () => {
       mockFileReader.readAsDataURL = vi.fn(() => {
         mockFileReader.result = 'data:image/png;base64,test'
         if (mockFileReader.onload) {
@@ -196,7 +196,7 @@ describe('getBase64Image', () => {
       expect(mockFileReader.readAsDataURL).toHaveBeenCalledWith(mockBlob)
     })
 
-    it('should return the result from FileReader', async () => {
+    test('should return the result from FileReader', async () => {
       const expectedBase64 =
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=='
 
@@ -214,7 +214,7 @@ describe('getBase64Image', () => {
   })
 
   describe('error handling', () => {
-    it('should handle fetch errors', async () => {
+    test('should handle fetch errors', async () => {
       global.fetch = vi.fn(async () =>
         Promise.reject(new Error('Network error')),
       )
@@ -224,7 +224,7 @@ describe('getBase64Image', () => {
       ).rejects.toThrow('Network error')
     })
 
-    it('should handle blob conversion errors', async () => {
+    test('should handle blob conversion errors', async () => {
       global.fetch = vi.fn(async () =>
         Promise.resolve({
           blob: async () => Promise.reject(new Error('Blob error')),
@@ -238,7 +238,7 @@ describe('getBase64Image', () => {
       ).rejects.toThrow('Blob error')
     })
 
-    it('should handle FileReader errors', async () => {
+    test('should handle FileReader errors', async () => {
       // Set up fetch mock to return a valid blob
       global.fetch = vi.fn(async () =>
         Promise.resolve({
@@ -288,7 +288,7 @@ describe('getBase64Image', () => {
     ]
 
     imageTypes.forEach(({ type, base64 }) => {
-      it(`should handle ${type} images`, async () => {
+      test(`should handle ${type} images`, async () => {
         mockBlob.type = type
 
         mockFileReader.readAsDataURL = vi.fn(() => {
@@ -309,7 +309,7 @@ describe('getBase64Image', () => {
   })
 
   describe('real-world scenarios', () => {
-    it('should handle large images', async () => {
+    test('should handle large images', async () => {
       mockBlob.size = 5 * 1024 * 1024 // 5MB
       const largeBase64 = 'data:image/png;base64,' + 'A'.repeat(1000)
 
@@ -326,7 +326,7 @@ describe('getBase64Image', () => {
       expect(result.length).toBeGreaterThan(1000)
     })
 
-    it('should handle empty blob', async () => {
+    test('should handle empty blob', async () => {
       mockBlob.size = 0
 
       mockFileReader.readAsDataURL = vi.fn(() => {
@@ -341,7 +341,7 @@ describe('getBase64Image', () => {
       expect(result).toBe('data:image/png;base64,')
     })
 
-    it('should work with relative URLs', async () => {
+    test('should work with relative URLs', async () => {
       mockFileReader.readAsDataURL = vi.fn(() => {
         mockFileReader.result = 'data:image/png;base64,RELATIVE_IMAGE'
         if (mockFileReader.onload) {
@@ -357,7 +357,7 @@ describe('getBase64Image', () => {
       expect(result).toBe('data:image/png;base64,RELATIVE_IMAGE')
     })
 
-    it('should work with data URLs', async () => {
+    test('should work with data URLs', async () => {
       const dataUrl =
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=='
 
@@ -376,7 +376,7 @@ describe('getBase64Image', () => {
   })
 
   describe('performance considerations', () => {
-    it('should handle multiple concurrent conversions', async () => {
+    test('should handle multiple concurrent conversions', async () => {
       const urls = [
         'https://example.com/image1.png',
         'https://example.com/image2.jpg',
@@ -403,7 +403,7 @@ describe('getBase64Image', () => {
       expect(global.FileReader).toHaveBeenCalledTimes(3)
     })
 
-    it('should not leak memory with multiple FileReader instances', async () => {
+    test('should not leak memory with multiple FileReader instances', async () => {
       const iterations = 10
 
       mockFileReader.readAsDataURL = vi.fn(() => {
@@ -422,12 +422,12 @@ describe('getBase64Image', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle null/undefined URL', async () => {
+    test('should handle null/undefined URL', async () => {
       await expect(getBase64Image(null)).rejects.toThrow()
       await expect(getBase64Image(undefined)).rejects.toThrow()
     })
 
-    it('should handle empty string URL', async () => {
+    test('should handle empty string URL', async () => {
       mockFileReader.readAsDataURL = vi.fn(() => {
         mockFileReader.result = 'data:image/png;base64,EMPTY_URL'
         if (mockFileReader.onload) {
@@ -441,7 +441,7 @@ describe('getBase64Image', () => {
       expect(result).toBe('data:image/png;base64,EMPTY_URL')
     })
 
-    it('should handle very long URLs', async () => {
+    test('should handle very long URLs', async () => {
       const longUrl = 'https://example.com/' + 'a'.repeat(2000) + '.png'
 
       mockFileReader.readAsDataURL = vi.fn(() => {

@@ -1,6 +1,6 @@
 import http from 'http'
 
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest'
 
 // Mock http module
 vi.mock('http', () => ({
@@ -39,7 +39,7 @@ describe('simpleServer', () => {
     vi.resetModules()
   })
 
-  it('should create server with correct configuration', async () => {
+  test('should create server with correct configuration', async () => {
     // Import the module which will execute immediately
     await import('./simpleServer.js')
 
@@ -59,7 +59,7 @@ describe('simpleServer', () => {
     )
   })
 
-  it('should handle HTTP requests correctly', async () => {
+  test('should handle HTTP requests correctly', async () => {
     await import('./simpleServer.js')
 
     // Mock request and response objects
@@ -79,7 +79,7 @@ describe('simpleServer', () => {
     expect(mockRes.end).toHaveBeenCalledWith('Hello World')
   })
 
-  it('should use correct hostname and port constants', async () => {
+  test('should use correct hostname and port constants', async () => {
     await import('./simpleServer.js')
 
     expect(mockServer.listen).toHaveBeenCalledWith(
@@ -89,7 +89,7 @@ describe('simpleServer', () => {
     )
   })
 
-  it('should respond with Hello World for any request', async () => {
+  test('should respond with Hello World for any request', async () => {
     await import('./simpleServer.js')
 
     const createMultipleRequests = (count) => {
@@ -118,7 +118,7 @@ describe('simpleServer', () => {
     })
   })
 
-  it('should handle different HTTP methods the same way', async () => {
+  test('should handle different HTTP methods the same way', async () => {
     await import('./simpleServer.js')
 
     const httpMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH']
@@ -142,7 +142,7 @@ describe('simpleServer', () => {
     })
   })
 
-  it('should handle requests with different URLs the same way', async () => {
+  test('should handle requests with different URLs the same way', async () => {
     await import('./simpleServer.js')
 
     const urls = ['/', '/api', '/users', '/products/123', '/very/long/path']
@@ -166,7 +166,7 @@ describe('simpleServer', () => {
     })
   })
 
-  it('should start server immediately when module is imported', async () => {
+  test('should start server immediately when module is imported', async () => {
     const consoleSpy = vi.spyOn(console, 'log')
 
     await import('./simpleServer.js')
@@ -180,7 +180,7 @@ describe('simpleServer', () => {
   })
 
   describe('response handling', () => {
-    it('should set correct content type header', async () => {
+    test('should set correct content type header', async () => {
       await import('./simpleServer.js')
 
       const mockRes = {
@@ -198,7 +198,7 @@ describe('simpleServer', () => {
       )
     })
 
-    it('should set 200 status code', async () => {
+    test('should set 200 status code', async () => {
       await import('./simpleServer.js')
 
       const mockRes = {
@@ -212,7 +212,7 @@ describe('simpleServer', () => {
       expect(mockRes.statusCode).toBe(200)
     })
 
-    it('should end response with Hello World', async () => {
+    test('should end response with Hello World', async () => {
       await import('./simpleServer.js')
 
       const mockRes = {

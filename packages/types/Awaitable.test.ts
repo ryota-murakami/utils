@@ -1,10 +1,10 @@
-import { describe, it, expectTypeOf } from 'vitest'
+import { describe, test, expectTypeOf } from 'vitest'
 
 // Import the Awaitable type
 type Awaitable<T> = T | Promise<T>
 
 describe('Awaitable type', () => {
-  it('should accept synchronous values', () => {
+  test('should accept synchronous values', () => {
     // Synchronous string
     expectTypeOf<string>().toMatchTypeOf<Awaitable<string>>()
 
@@ -21,7 +21,7 @@ describe('Awaitable type', () => {
     expectTypeOf<string[]>().toMatchTypeOf<Awaitable<string[]>>()
   })
 
-  it('should accept promises of values', () => {
+  test('should accept promises of values', () => {
     // Promise of string
     expectTypeOf<Promise<string>>().toMatchTypeOf<Awaitable<string>>()
 
@@ -40,7 +40,7 @@ describe('Awaitable type', () => {
     expectTypeOf<Promise<string[]>>().toMatchTypeOf<Awaitable<string[]>>()
   })
 
-  it('should work with complex types', () => {
+  test('should work with complex types', () => {
     interface User {
       id: number
       name: string
@@ -64,7 +64,7 @@ describe('Awaitable type', () => {
     >()
   })
 
-  it('should work with union types', () => {
+  test('should work with union types', () => {
     type StringOrNumber = string | number
 
     // Synchronous union
@@ -77,7 +77,7 @@ describe('Awaitable type', () => {
     >()
   })
 
-  it('should work with nullable types', () => {
+  test('should work with nullable types', () => {
     // Nullable values
     expectTypeOf<string | null>().toMatchTypeOf<Awaitable<string | null>>()
     expectTypeOf<Promise<string | null>>().toMatchTypeOf<
@@ -93,7 +93,7 @@ describe('Awaitable type', () => {
     >()
   })
 
-  it('should work with void and never types', () => {
+  test('should work with void and never types', () => {
     // Void type (common for side-effect functions)
     expectTypeOf<void>().toMatchTypeOf<Awaitable<void>>()
     expectTypeOf<Promise<void>>().toMatchTypeOf<Awaitable<void>>()
@@ -103,7 +103,7 @@ describe('Awaitable type', () => {
     // The type system correctly prevents invalid assignments to never types
   })
 
-  it('should work in function signatures', () => {
+  test('should work in function signatures', () => {
     // Function that can return sync or async value
     const getValue = async (useAsync: boolean): Promise<Awaitable<string>> => {
       return useAsync ? Promise.resolve('async') : 'sync'
@@ -124,7 +124,7 @@ describe('Awaitable type', () => {
     expectTypeOf(processValue).parameter(0).toEqualTypeOf<Awaitable<number>>()
   })
 
-  it('should work with generic constraints', () => {
+  test('should work with generic constraints', () => {
     // Generic function with Awaitable constraint
     async function processAwaitable<T>(value: Awaitable<T>): Promise<T> {
       return Promise.resolve(value)
@@ -140,7 +140,7 @@ describe('Awaitable type', () => {
   })
 
   describe('practical usage examples', () => {
-    it('should work with data fetching patterns', () => {
+    test('should work with data fetching patterns', () => {
       interface DataFetcher<T> {
         get(id: string): Awaitable<T>
         getMultiple(ids: string[]): Awaitable<T[]>
@@ -168,7 +168,7 @@ describe('Awaitable type', () => {
       expectTypeOf(asyncFetcher.get).returns.toMatchTypeOf<Awaitable<User>>()
     })
 
-    it('should work with cache patterns', () => {
+    test('should work with cache patterns', () => {
       interface Cache<T> {
         get(key: string): Awaitable<T | undefined>
         set(key: string, value: T): Awaitable<void>
@@ -198,7 +198,7 @@ describe('Awaitable type', () => {
       >()
     })
 
-    it('should work with middleware patterns', () => {
+    test('should work with middleware patterns', () => {
       type Middleware<T> = (input: T) => Awaitable<T>
 
       // Sync middleware
@@ -214,7 +214,7 @@ describe('Awaitable type', () => {
       expectTypeOf(asyncMiddleware).returns.toMatchTypeOf<Awaitable<string>>()
     })
 
-    it('should work with plugin systems', () => {
+    test('should work with plugin systems', () => {
       interface Plugin {
         name: string
         init(): Awaitable<void>
@@ -243,7 +243,7 @@ describe('Awaitable type', () => {
       expectTypeOf(asyncPlugin.init).returns.toMatchTypeOf<Awaitable<void>>()
     })
 
-    it('should work with config loaders', () => {
+    test('should work with config loaders', () => {
       interface ConfigLoader<T> {
         load(path: string): Awaitable<T>
         validate(config: T): Awaitable<boolean>
@@ -276,7 +276,7 @@ describe('Awaitable type', () => {
   })
 
   describe('edge cases and complex scenarios', () => {
-    it('should handle nested promises correctly', () => {
+    test('should handle nested promises correctly', () => {
       // Awaitable should not create Promise<Promise<T>>
       expectTypeOf<Promise<string>>().toMatchTypeOf<Awaitable<string>>()
 
@@ -286,7 +286,7 @@ describe('Awaitable type', () => {
       >()
     })
 
-    it('should work with conditional types', () => {
+    test('should work with conditional types', () => {
       type ConditionalAwaitable<T> = T extends string ? Awaitable<T> : T
 
       expectTypeOf<string>().toMatchTypeOf<ConditionalAwaitable<string>>()
@@ -296,7 +296,7 @@ describe('Awaitable type', () => {
       expectTypeOf<number>().toMatchTypeOf<ConditionalAwaitable<number>>()
     })
 
-    it('should work with mapped types', () => {
+    test('should work with mapped types', () => {
       type AwaitableFields<T> = {
         [K in keyof T]: Awaitable<T[K]>
       }

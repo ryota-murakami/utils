@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Plus } from 'lucide-react'
-import { describe, it, expect, vi } from 'vitest'
+import { describe, test, expect, vi } from 'vitest'
 
 import { Button } from './button'
 
 describe('Button', () => {
   describe('rendering', () => {
-    it('renders a button element by default', () => {
+    test('renders a button element by default', () => {
       render(<Button>Click me</Button>)
 
       const button = screen.getByRole('button', { name: /click me/i })
@@ -15,13 +15,13 @@ describe('Button', () => {
       expect(button.tagName).toBe('BUTTON')
     })
 
-    it('renders children correctly', () => {
+    test('renders children correctly', () => {
       render(<Button>Test Button</Button>)
 
       expect(screen.getByText('Test Button')).toBeInTheDocument()
     })
 
-    it('renders as child component when asChild is true', () => {
+    test('renders as child component when asChild is true', () => {
       render(
         <Button asChild>
           <a href="/test">Link Button</a>
@@ -36,42 +36,42 @@ describe('Button', () => {
   })
 
   describe('variants', () => {
-    it('applies default variant styles', () => {
+    test('applies default variant styles', () => {
       render(<Button>Default Button</Button>)
 
       const button = screen.getByRole('button')
       expect(button).toHaveClass('bg-primary', 'text-primary-foreground')
     })
 
-    it('applies destructive variant styles', () => {
+    test('applies destructive variant styles', () => {
       render(<Button variant="destructive">Delete</Button>)
 
       const button = screen.getByRole('button')
       expect(button).toHaveClass('bg-destructive', 'text-white')
     })
 
-    it('applies outline variant styles', () => {
+    test('applies outline variant styles', () => {
       render(<Button variant="outline">Outline</Button>)
 
       const button = screen.getByRole('button')
       expect(button).toHaveClass('border', 'bg-background')
     })
 
-    it('applies secondary variant styles', () => {
+    test('applies secondary variant styles', () => {
       render(<Button variant="secondary">Secondary</Button>)
 
       const button = screen.getByRole('button')
       expect(button).toHaveClass('bg-secondary', 'text-secondary-foreground')
     })
 
-    it('applies ghost variant styles', () => {
+    test('applies ghost variant styles', () => {
       render(<Button variant="ghost">Ghost</Button>)
 
       const button = screen.getByRole('button')
       expect(button).toHaveClass('hover:bg-accent')
     })
 
-    it('applies link variant styles', () => {
+    test('applies link variant styles', () => {
       render(<Button variant="link">Link</Button>)
 
       const button = screen.getByRole('button')
@@ -80,28 +80,28 @@ describe('Button', () => {
   })
 
   describe('sizes', () => {
-    it('applies default size styles', () => {
+    test('applies default size styles', () => {
       render(<Button>Default Size</Button>)
 
       const button = screen.getByRole('button')
       expect(button).toHaveClass('h-9', 'px-4', 'py-2')
     })
 
-    it('applies small size styles', () => {
+    test('applies small size styles', () => {
       render(<Button size="sm">Small</Button>)
 
       const button = screen.getByRole('button')
       expect(button).toHaveClass('h-8', 'px-3')
     })
 
-    it('applies large size styles', () => {
+    test('applies large size styles', () => {
       render(<Button size="lg">Large</Button>)
 
       const button = screen.getByRole('button')
       expect(button).toHaveClass('h-10', 'px-6')
     })
 
-    it('applies icon size styles', () => {
+    test('applies icon size styles', () => {
       render(
         <Button size="icon">
           <Plus className="h-4 w-4" />
@@ -114,7 +114,7 @@ describe('Button', () => {
   })
 
   describe('states', () => {
-    it('handles disabled state', () => {
+    test('handles disabled state', () => {
       render(<Button disabled>Disabled Button</Button>)
 
       const button = screen.getByRole('button')
@@ -125,14 +125,14 @@ describe('Button', () => {
       )
     })
 
-    it('passes through custom className', () => {
+    test('passes through custom className', () => {
       render(<Button className="custom-class">Custom</Button>)
 
       const button = screen.getByRole('button')
       expect(button).toHaveClass('custom-class')
     })
 
-    it('includes data-slot attribute', () => {
+    test('includes data-slot attribute', () => {
       render(<Button>Test</Button>)
 
       const button = screen.getByRole('button')
@@ -141,7 +141,7 @@ describe('Button', () => {
   })
 
   describe('interactions', () => {
-    it('handles click events', async () => {
+    test('handles click events', async () => {
       const user = userEvent.setup()
       const handleClick = vi.fn()
 
@@ -153,7 +153,7 @@ describe('Button', () => {
       expect(handleClick).toHaveBeenCalledTimes(1)
     })
 
-    it('does not trigger click when disabled', async () => {
+    test('does not trigger click when disabled', async () => {
       const user = userEvent.setup()
       const handleClick = vi.fn()
 
@@ -169,7 +169,7 @@ describe('Button', () => {
       expect(handleClick).not.toHaveBeenCalled()
     })
 
-    it('handles keyboard navigation', async () => {
+    test('handles keyboard navigation', async () => {
       const user = userEvent.setup()
       const handleClick = vi.fn()
 
@@ -184,14 +184,14 @@ describe('Button', () => {
   })
 
   describe('accessibility', () => {
-    it('has proper button role', () => {
+    test('has proper button role', () => {
       render(<Button>Accessible Button</Button>)
 
       const button = screen.getByRole('button')
       expect(button).toBeInTheDocument()
     })
 
-    it('supports custom aria attributes', () => {
+    test('supports custom aria attributes', () => {
       render(
         <Button aria-label="Custom label" aria-describedby="description">
           Button
@@ -203,7 +203,7 @@ describe('Button', () => {
       expect(button).toHaveAttribute('aria-describedby', 'description')
     })
 
-    it('maintains focus styles', () => {
+    test('maintains focus styles', () => {
       render(<Button>Focusable Button</Button>)
 
       const button = screen.getByRole('button')
@@ -212,7 +212,7 @@ describe('Button', () => {
   })
 
   describe('with icons', () => {
-    it('renders button with icon', () => {
+    test('renders button with icon', () => {
       render(
         <Button>
           <Plus className="h-4 w-4" />
@@ -225,7 +225,7 @@ describe('Button', () => {
       expect(screen.getByRole('button')).toBeInTheDocument()
     })
 
-    it('renders icon-only button', () => {
+    test('renders icon-only button', () => {
       render(
         <Button size="icon" aria-label="Add">
           <Plus className="h-4 w-4" />
@@ -239,7 +239,7 @@ describe('Button', () => {
   })
 
   describe('forwarded props', () => {
-    it('forwards HTML button props', () => {
+    test('forwards HTML button props', () => {
       render(
         <Button type="submit" form="test-form" data-testid="submit-button">
           Submit

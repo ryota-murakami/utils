@@ -1,23 +1,23 @@
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 // The function is currently defined inline in the file, so we'll copy it for testing
 const varToString = (varObj) => Object.keys(varObj)[0]
 
 describe('varToString', () => {
-  it('should extract variable name from object with single property', () => {
+  test('should extract variable name from object with single property', () => {
     const testVar = 42
     const result = varToString({ testVar })
     expect(result).toBe('testVar')
   })
 
-  it('should return first property name when multiple properties exist', () => {
+  test('should return first property name when multiple properties exist', () => {
     const firstVar = 1
     const secondVar = 2
     const result = varToString({ firstVar, secondVar })
     expect(result).toBe('firstVar')
   })
 
-  it('should work with different variable types', () => {
+  test('should work with different variable types', () => {
     const stringVar = 'hello'
     expect(varToString({ stringVar })).toBe('stringVar')
 
@@ -34,7 +34,7 @@ describe('varToString', () => {
     expect(varToString({ objectVar })).toBe('objectVar')
   })
 
-  it('should work with function variables', () => {
+  test('should work with function variables', () => {
     const myFunction = () => {}
     expect(varToString({ myFunction })).toBe('myFunction')
 
@@ -42,7 +42,7 @@ describe('varToString', () => {
     expect(varToString({ namedFunction })).toBe('namedFunction')
   })
 
-  it('should work with complex variable names', () => {
+  test('should work with complex variable names', () => {
     const camelCaseVar = 'test'
     expect(varToString({ camelCaseVar })).toBe('camelCaseVar')
 
@@ -56,12 +56,12 @@ describe('varToString', () => {
     expect(varToString({ _underscoreVar })).toBe('_underscoreVar')
   })
 
-  it('should handle empty object gracefully', () => {
+  test('should handle empty object gracefully', () => {
     const result = varToString({})
     expect(result).toBeUndefined()
   })
 
-  it('should work with literal property values', () => {
+  test('should work with literal property values', () => {
     const result1 = varToString({ literalString: 'value' })
     expect(result1).toBe('literalString')
 
@@ -69,7 +69,7 @@ describe('varToString', () => {
     expect(result2).toBe('literalNumber')
   })
 
-  it('should preserve variable name regardless of value', () => {
+  test('should preserve variable name regardless of value', () => {
     const myVar = null
     expect(varToString({ myVar })).toBe('myVar')
 
@@ -83,7 +83,7 @@ describe('varToString', () => {
     expect(varToString({ emptyStringVar })).toBe('emptyStringVar')
   })
 
-  it('should work in practical debugging scenarios', () => {
+  test('should work in practical debugging scenarios', () => {
     // Simulating the use case shown in the original file
     const someVar = 42
     const displayName = varToString({ someVar })
@@ -99,7 +99,7 @@ describe('varToString', () => {
     expect(varToString({ userActive })).toBe('userActive')
   })
 
-  it('should work with destructured assignments', () => {
+  test('should work with destructured assignments', () => {
     const obj = { prop1: 'value1', prop2: 'value2' }
     const { prop1, prop2 } = obj
 

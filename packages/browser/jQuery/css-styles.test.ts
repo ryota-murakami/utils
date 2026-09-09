@@ -1,5 +1,5 @@
 /// <reference path="./global.d.ts" />
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, test, expect, beforeEach } from 'vitest'
 import './core.js'
 
 describe('jQuery CSS and Style Methods', () => {
@@ -9,7 +9,7 @@ describe('jQuery CSS and Style Methods', () => {
   })
 
   describe('.css()', () => {
-    it('should get CSS property value', () => {
+    test('should get CSS property value', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" style="color: red; font-size: 16px;"></div>'
@@ -20,7 +20,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect($('#test').css('font-size')).toBe('16px')
     })
 
-    it('should get computed CSS property value', () => {
+    test('should get computed CSS property value', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" style="width: 100px; height: 50px;"></div>'
@@ -30,7 +30,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect($('#test').css('height')).toBe('50px')
     })
 
-    it('should return undefined for non-existent property', () => {
+    test('should return undefined for non-existent property', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -39,7 +39,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect(result === '' || result === undefined).toBe(true)
     })
 
-    it('should get property from first element only', () => {
+    test('should get property from first element only', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item" style="color: red;"></div>
@@ -51,7 +51,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect(color === 'red' || color === 'rgb(255, 0, 0)').toBe(true)
     })
 
-    it('should set CSS property value', () => {
+    test('should set CSS property value', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -63,7 +63,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect(element?.style.color).toBe('blue')
     })
 
-    it('should set CSS properties on multiple elements', () => {
+    test('should set CSS properties on multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item">Item 1</div>
@@ -79,7 +79,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect((items[1] as HTMLElement).style.backgroundColor).toBe('yellow')
     })
 
-    it('should set multiple CSS properties with object', () => {
+    test('should set multiple CSS properties with object', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -97,7 +97,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect(element.style.backgroundColor).toBe('yellow')
     })
 
-    it('should handle both camelCase and kebab-case property names', () => {
+    test('should handle both camelCase and kebab-case property names', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -114,7 +114,7 @@ describe('jQuery CSS and Style Methods', () => {
       ).toBe('blue')
     })
 
-    it('should accept function for CSS value', () => {
+    test('should accept function for CSS value', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item" style="width: 100px; height: 10px;">Item 1</div>
@@ -132,7 +132,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect((items[1] as HTMLElement).style.height).toBe('30px') // 20 + (1 * 10)
     })
 
-    it('should add px unit for numeric values on appropriate properties', () => {
+    test('should add px unit for numeric values on appropriate properties', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -148,7 +148,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect(element.style.marginTop).toBe('20px')
     })
 
-    it('should not add px unit for unitless properties', () => {
+    test('should not add px unit for unitless properties', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -164,7 +164,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect(element.style.fontWeight).toBe('700')
     })
 
-    it('should return jQuery object for chaining when setting', () => {
+    test('should return jQuery object for chaining when setting', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -176,7 +176,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect(result[0]).toBe(document.getElementById('test'))
     })
 
-    it('should handle empty collection', () => {
+    test('should handle empty collection', () => {
       // Test getting
       expect($('.non-existent').css('color')).toBeUndefined()
 
@@ -187,7 +187,7 @@ describe('jQuery CSS and Style Methods', () => {
   })
 
   describe('.width()', () => {
-    it('should get element width', () => {
+    test('should get element width', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" style="width: 100px; padding: 10px; border: 2px solid red; margin: 5px;"></div>'
@@ -196,7 +196,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect($('#test').width()).toBe(100)
     })
 
-    it('should set element width', () => {
+    test('should set element width', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -208,7 +208,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect(element.style.width).toBe('150px')
     })
 
-    it('should set width on multiple elements', () => {
+    test('should set width on multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item">Item 1</div>
@@ -224,7 +224,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect((items[1] as HTMLElement).style.width).toBe('200px')
     })
 
-    it('should accept string values with units', () => {
+    test('should accept string values with units', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -236,7 +236,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect(element.style.width).toBe('50%')
     })
 
-    it('should accept function parameter', () => {
+    test('should accept function parameter', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item" style="width: 100px;">Item 1</div>
@@ -254,7 +254,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect((items[1] as HTMLElement).style.width).toBe('250px') // 200 + (1 * 50)
     })
 
-    it('should return jQuery object for chaining when setting', () => {
+    test('should return jQuery object for chaining when setting', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -268,7 +268,7 @@ describe('jQuery CSS and Style Methods', () => {
   })
 
   describe('.height()', () => {
-    it('should get element height', () => {
+    test('should get element height', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" style="height: 80px; padding: 10px; border: 2px solid red; margin: 5px;"></div>'
@@ -277,7 +277,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect($('#test').height()).toBe(80)
     })
 
-    it('should set element height', () => {
+    test('should set element height', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -289,7 +289,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect(element.style.height).toBe('120px')
     })
 
-    it('should set height on multiple elements', () => {
+    test('should set height on multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item">Item 1</div>
@@ -305,7 +305,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect((items[1] as HTMLElement).style.height).toBe('150px')
     })
 
-    it('should return jQuery object for chaining when setting', () => {
+    test('should return jQuery object for chaining when setting', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -319,7 +319,7 @@ describe('jQuery CSS and Style Methods', () => {
   })
 
   describe('.innerWidth()', () => {
-    it('should get element inner width (including padding)', () => {
+    test('should get element inner width (including padding)', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" style="width: 100px; padding: 10px; border: 2px solid red; margin: 5px;"></div>'
@@ -328,7 +328,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect($('#test').innerWidth()).toBe(120) // 100 + 10 + 10
     })
 
-    it('should set element inner width', () => {
+    test('should set element inner width', () => {
       // Setup
       document.body.innerHTML = '<div id="test" style="padding: 5px;"></div>'
 
@@ -342,7 +342,7 @@ describe('jQuery CSS and Style Methods', () => {
   })
 
   describe('.innerHeight()', () => {
-    it('should get element inner height (including padding)', () => {
+    test('should get element inner height (including padding)', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" style="height: 80px; padding: 15px; border: 2px solid red; margin: 5px;"></div>'
@@ -351,7 +351,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect($('#test').innerHeight()).toBe(110) // 80 + 15 + 15
     })
 
-    it('should set element inner height', () => {
+    test('should set element inner height', () => {
       // Setup
       document.body.innerHTML = '<div id="test" style="padding: 10px;"></div>'
 
@@ -365,7 +365,7 @@ describe('jQuery CSS and Style Methods', () => {
   })
 
   describe('.outerWidth()', () => {
-    it('should get element outer width (including padding and border)', () => {
+    test('should get element outer width (including padding and border)', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" style="width: 100px; padding: 10px; border: 2px solid red; margin: 5px;"></div>'
@@ -374,7 +374,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect($('#test').outerWidth()).toBe(124) // 100 + 10 + 10 + 2 + 2
     })
 
-    it('should get element outer width including margin when includeMargin is true', () => {
+    test('should get element outer width including margin when includeMargin is true', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" style="width: 100px; padding: 10px; border: 2px solid red; margin: 5px;"></div>'
@@ -383,7 +383,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect($('#test').outerWidth(true)).toBe(134) // 100 + 10 + 10 + 2 + 2 + 5 + 5
     })
 
-    it('should set element outer width', () => {
+    test('should set element outer width', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" style="padding: 5px; border: 1px solid red;"></div>'
@@ -398,7 +398,7 @@ describe('jQuery CSS and Style Methods', () => {
   })
 
   describe('.outerHeight()', () => {
-    it('should get element outer height (including padding and border)', () => {
+    test('should get element outer height (including padding and border)', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" style="height: 80px; padding: 15px; border: 3px solid red; margin: 5px;"></div>'
@@ -407,7 +407,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect($('#test').outerHeight()).toBe(116) // 80 + 15 + 15 + 3 + 3
     })
 
-    it('should get element outer height including margin when includeMargin is true', () => {
+    test('should get element outer height including margin when includeMargin is true', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" style="height: 80px; padding: 15px; border: 3px solid red; margin: 5px;"></div>'
@@ -416,7 +416,7 @@ describe('jQuery CSS and Style Methods', () => {
       expect($('#test').outerHeight(true)).toBe(126) // 80 + 15 + 15 + 3 + 3 + 5 + 5
     })
 
-    it('should set element outer height', () => {
+    test('should set element outer height', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" style="padding: 8px; border: 2px solid red;"></div>'

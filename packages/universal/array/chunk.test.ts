@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 import { chunk } from './chunk.js'
 
 describe('chunk', () => {
   describe('basic functionality', () => {
-    it('should split array into equal chunks', () => {
+    test('should split array into equal chunks', () => {
       const result = chunk([1, 2, 3, 4, 5, 6], 2)
       expect(result).toEqual([
         [1, 2],
@@ -13,7 +13,7 @@ describe('chunk', () => {
       ])
     })
 
-    it('should handle arrays that divide evenly', () => {
+    test('should handle arrays that divide evenly', () => {
       const result = chunk(['a', 'b', 'c', 'd', 'e', 'f'], 3)
       expect(result).toEqual([
         ['a', 'b', 'c'],
@@ -21,70 +21,70 @@ describe('chunk', () => {
       ])
     })
 
-    it('should handle arrays that do not divide evenly', () => {
+    test('should handle arrays that do not divide evenly', () => {
       const result = chunk([1, 2, 3, 4, 5, 6, 7], 3)
       expect(result).toEqual([[1, 2, 3], [4, 5, 6], [7]])
     })
 
-    it('should handle single element chunks', () => {
+    test('should handle single element chunks', () => {
       const result = chunk([1, 2, 3], 1)
       expect(result).toEqual([[1], [2], [3]])
     })
 
-    it('should handle chunk size larger than array', () => {
+    test('should handle chunk size larger than array', () => {
       const result = chunk([1, 2, 3], 5)
       expect(result).toEqual([[1, 2, 3]])
     })
 
-    it('should handle chunk size equal to array length', () => {
+    test('should handle chunk size equal to array length', () => {
       const result = chunk([1, 2, 3, 4], 4)
       expect(result).toEqual([[1, 2, 3, 4]])
     })
   })
 
   describe('edge cases', () => {
-    it('should handle empty arrays', () => {
+    test('should handle empty arrays', () => {
       const result = chunk([], 2)
       expect(result).toEqual([])
     })
 
-    it('should handle single element arrays', () => {
+    test('should handle single element arrays', () => {
       const result = chunk([42], 2)
       expect(result).toEqual([[42]])
     })
 
-    it('should handle large chunk sizes', () => {
+    test('should handle large chunk sizes', () => {
       const result = chunk([1, 2], 100)
       expect(result).toEqual([[1, 2]])
     })
   })
 
   describe('error handling', () => {
-    it('should throw error for zero size', () => {
+    test('should throw error for zero size', () => {
       expect(() => chunk([1, 2, 3], 0)).toThrow(
         'Chunk size must be a positive integer, received: 0',
       )
     })
 
-    it('should throw error for negative size', () => {
+    test('should throw error for negative size', () => {
       expect(() => chunk([1, 2, 3], -1)).toThrow(
         'Chunk size must be a positive integer, received: -1',
       )
     })
 
-    it('should throw error for non-integer size', () => {
+    test('should throw error for non-integer size', () => {
       expect(() => chunk([1, 2, 3], 2.5)).toThrow(
         'Chunk size must be a positive integer, received: 2.5',
       )
     })
 
-    it('should throw error for NaN size', () => {
+    test('should throw error for NaN size', () => {
       expect(() => chunk([1, 2, 3], NaN)).toThrow(
         'Chunk size must be a positive integer, received: NaN',
       )
     })
 
-    it('should throw error for Infinity size', () => {
+    test('should throw error for Infinity size', () => {
       expect(() => chunk([1, 2, 3], Infinity)).toThrow(
         'Chunk size must be a positive integer, received: Infinity',
       )
@@ -92,7 +92,7 @@ describe('chunk', () => {
   })
 
   describe('type safety', () => {
-    it('should work with different data types', () => {
+    test('should work with different data types', () => {
       const strings = chunk(['apple', 'banana', 'cherry', 'date'], 2)
       expect(strings).toEqual([
         ['apple', 'banana'],
@@ -122,7 +122,7 @@ describe('chunk', () => {
       ])
     })
 
-    it('should preserve array element types', () => {
+    test('should preserve array element types', () => {
       interface User {
         id: number
         name: string
@@ -143,7 +143,7 @@ describe('chunk', () => {
   })
 
   describe('immutability', () => {
-    it('should not modify the original array', () => {
+    test('should not modify the original array', () => {
       const original = [1, 2, 3, 4, 5]
       const originalCopy = [...original]
 
@@ -152,7 +152,7 @@ describe('chunk', () => {
       expect(original).toEqual(originalCopy)
     })
 
-    it('should create new arrays for chunks', () => {
+    test('should create new arrays for chunks', () => {
       const original = [1, 2, 3, 4]
       const result = chunk(original, 2)
 
@@ -161,7 +161,7 @@ describe('chunk', () => {
       expect(original).toEqual([1, 2, 3, 4])
     })
 
-    it('should not modify original objects in chunks', () => {
+    test('should not modify original objects in chunks', () => {
       const users = [
         { id: 1, name: 'Alice' },
         { id: 2, name: 'Bob' },
@@ -176,7 +176,7 @@ describe('chunk', () => {
   })
 
   describe('performance', () => {
-    it('should handle large arrays efficiently', () => {
+    test('should handle large arrays efficiently', () => {
       const largeArray = Array.from({ length: 10000 }, (_, i) => i)
 
       const startTime = performance.now()
@@ -189,7 +189,7 @@ describe('chunk', () => {
       expect(endTime - startTime).toBeLessThan(50) // Should be reasonably fast
     })
 
-    it('should handle many small chunks efficiently', () => {
+    test('should handle many small chunks efficiently', () => {
       const array = Array.from({ length: 1000 }, (_, i) => i)
 
       const startTime = performance.now()
@@ -204,7 +204,7 @@ describe('chunk', () => {
   })
 
   describe('practical use cases', () => {
-    it('should work for pagination scenarios', () => {
+    test('should work for pagination scenarios', () => {
       const items = Array.from({ length: 25 }, (_, i) => `item-${i}`)
       const pageSize = 10
       const pages = chunk(items, pageSize)
@@ -215,7 +215,7 @@ describe('chunk', () => {
       expect(pages[2]).toHaveLength(5) // Last page with remaining items
     })
 
-    it('should work for batch processing scenarios', () => {
+    test('should work for batch processing scenarios', () => {
       const tasks = Array.from({ length: 17 }, (_, i) => `task-${i}`)
       const batchSize = 5
       const batches = chunk(tasks, batchSize)
@@ -227,7 +227,7 @@ describe('chunk', () => {
       expect(batches[3]).toHaveLength(2) // Last batch with remaining items
     })
 
-    it('should work for creating matrices', () => {
+    test('should work for creating matrices', () => {
       const flatMatrix = [1, 2, 3, 4, 5, 6, 7, 8, 9]
       const matrix = chunk(flatMatrix, 3)
 
@@ -240,7 +240,7 @@ describe('chunk', () => {
   })
 
   describe('readonly arrays', () => {
-    it('should work with readonly arrays', () => {
+    test('should work with readonly arrays', () => {
       const readonlyArray: readonly number[] = [1, 2, 3, 4, 5]
       const result = chunk(readonlyArray, 2)
 

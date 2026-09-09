@@ -1,4 +1,4 @@
-import { describe, it, expect, afterEach, vi } from 'vitest'
+import { describe, test, expect, afterEach, vi } from 'vitest'
 
 import { yyyy_mm_dd } from './yyyy-mm-dd.js'
 
@@ -7,7 +7,7 @@ describe('yyyy_mm_dd', () => {
     vi.useRealTimers()
   })
 
-  it('should return current date in YYYY-MM-DD format', () => {
+  test('should return current date in YYYY-MM-DD format', () => {
     // Mock a specific date
     const mockDate = new Date('2023-12-25T10:30:45.123Z')
     vi.useFakeTimers()
@@ -17,7 +17,7 @@ describe('yyyy_mm_dd', () => {
     expect(result).toBe('2023-12-25')
   })
 
-  it('should return correct format for different dates', () => {
+  test('should return correct format for different dates', () => {
     // Test January 1st
     const jan1 = new Date('2024-01-01T00:00:00.000Z')
     vi.useFakeTimers()
@@ -35,7 +35,7 @@ describe('yyyy_mm_dd', () => {
     expect(yyyy_mm_dd()).toBe('2024-02-29')
   })
 
-  it('should handle single digit months and days with zero padding', () => {
+  test('should handle single digit months and days with zero padding', () => {
     // Test early month/day
     const earlyDate = new Date('2023-01-05T15:30:00.000Z')
     vi.useFakeTimers()
@@ -48,7 +48,7 @@ describe('yyyy_mm_dd', () => {
     expect(yyyy_mm_dd()).toBe('2023-03-07')
   })
 
-  it('should work across different time zones (returns UTC date)', () => {
+  test('should work across different time zones (returns UTC date)', () => {
     // The function uses toISOString() which always returns UTC
     const utcDate = new Date('2023-07-15T23:30:00.000Z')
     vi.useFakeTimers()
@@ -61,7 +61,7 @@ describe('yyyy_mm_dd', () => {
     expect(yyyy_mm_dd()).toBe('2023-07-15')
   })
 
-  it('should return string in correct format structure', () => {
+  test('should return string in correct format structure', () => {
     const mockDate = new Date('2023-06-15T12:00:00.000Z')
     vi.useFakeTimers()
     vi.setSystemTime(mockDate)
@@ -76,7 +76,7 @@ describe('yyyy_mm_dd', () => {
     expect(result.split('-')[2]).toHaveLength(2) // day
   })
 
-  it('should work with various years', () => {
+  test('should work with various years', () => {
     // Test year 2000
     const y2k = new Date('2000-06-15T12:00:00.000Z')
     vi.useFakeTimers()
@@ -94,7 +94,7 @@ describe('yyyy_mm_dd', () => {
     expect(yyyy_mm_dd()).toBe('2001-02-28')
   })
 
-  it('should consistently split ISO string correctly', () => {
+  test('should consistently split ISO string correctly', () => {
     // The function relies on splitting 'YYYY-MM-DDTHH:mm:ss.sssZ' on 'T'
     const testDate = new Date('2023-08-20T14:25:10.500Z')
     vi.useFakeTimers()
@@ -107,7 +107,7 @@ describe('yyyy_mm_dd', () => {
     expect(yyyy_mm_dd()).toBe(datePart)
   })
 
-  it('should handle edge case months', () => {
+  test('should handle edge case months', () => {
     // Test all months to ensure proper zero-padding
     const testDates = [
       ['2023-01-15', '2023-01-15'],

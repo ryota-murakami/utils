@@ -1,6 +1,6 @@
 import path from 'node:path'
 
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, test, vi } from 'vitest'
 
 import { getIWriteCodeDashboardData } from '@/lib/i-write-code/activity'
 
@@ -22,7 +22,7 @@ describe('getIWriteCodeDashboardData', () => {
     vi.useRealTimers()
   })
 
-  it('creates metrics, categories, and heatmap data from the local activity log', async () => {
+  test('creates metrics, categories, and heatmap data from the local activity log', async () => {
     vi.useFakeTimers()
     vi.setSystemTime(new Date('2026-03-24T12:00:00.000Z'))
     process.env.I_WRITE_CODE_ACTIVITY_FILE = FIXTURE_ACTIVITY_FILE
@@ -74,7 +74,7 @@ describe('getIWriteCodeDashboardData', () => {
     ).toBe(true)
   })
 
-  it('returns an empty dashboard state when the log file is missing', async () => {
+  test('returns an empty dashboard state when the log file is missing', async () => {
     vi.useFakeTimers()
     vi.setSystemTime(new Date('2026-03-24T12:00:00.000Z'))
     process.env.I_WRITE_CODE_ACTIVITY_FILE = MISSING_ACTIVITY_FILE

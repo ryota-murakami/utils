@@ -1,5 +1,5 @@
 /// <reference path="./global.d.ts" />
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, test, expect, beforeEach } from 'vitest'
 import './core.js'
 
 describe('jQuery DOM Traversal Methods', () => {
@@ -9,7 +9,7 @@ describe('jQuery DOM Traversal Methods', () => {
   })
 
   describe('.find()', () => {
-    it('should find descendant elements by selector', () => {
+    test('should find descendant elements by selector', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">
@@ -31,7 +31,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[2]?.textContent).toBe('Span 1')
     })
 
-    it('should find elements by tag name', () => {
+    test('should find elements by tag name', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">
@@ -50,7 +50,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[1]?.textContent).toBe('Para 2')
     })
 
-    it('should return empty collection if no matches found', () => {
+    test('should return empty collection if no matches found', () => {
       // Setup
       document.body.innerHTML = '<div id="container"><p>Test</p></div>'
 
@@ -61,7 +61,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result).toHaveProperty('length', 0)
     })
 
-    it('should work on multiple elements', () => {
+    test('should work on multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="container">
@@ -81,7 +81,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[1]?.textContent).toBe('Item 2')
     })
 
-    it('should return jQuery object for chaining', () => {
+    test('should return jQuery object for chaining', () => {
       // Setup
       document.body.innerHTML = '<div id="test"><p>Test</p></div>'
 
@@ -95,7 +95,7 @@ describe('jQuery DOM Traversal Methods', () => {
   })
 
   describe('.parent()', () => {
-    it('should get immediate parent element', () => {
+    test('should get immediate parent element', () => {
       // Setup
       document.body.innerHTML = `
         <div id="grandparent">
@@ -113,7 +113,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[0]?.id).toBe('parent')
     })
 
-    it('should filter parent by selector', () => {
+    test('should filter parent by selector', () => {
       // Setup
       document.body.innerHTML = `
         <div id="grandparent" class="container">
@@ -135,7 +135,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result2[0]?.id).toBe('parent')
     })
 
-    it('should work on multiple elements', () => {
+    test('should work on multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div id="parent1">
@@ -155,7 +155,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[1]?.id).toBe('parent2')
     })
 
-    it('should return empty collection for elements without parent', () => {
+    test('should return empty collection for elements without parent', () => {
       // Test - body element (which has html as parent, but let's test root elements)
       const result = $('html').parent()
 
@@ -165,7 +165,7 @@ describe('jQuery DOM Traversal Methods', () => {
   })
 
   describe('.parents()', () => {
-    it('should get all ancestor elements', () => {
+    test('should get all ancestor elements', () => {
       // Setup
       document.body.innerHTML = `
         <div id="great-grandparent">
@@ -187,7 +187,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[2]?.id).toBe('great-grandparent')
     })
 
-    it('should filter ancestors by selector', () => {
+    test('should filter ancestors by selector', () => {
       // Setup
       document.body.innerHTML = `
         <div id="root" class="container">
@@ -208,7 +208,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[1]?.id).toBe('root')
     })
 
-    it('should work on multiple elements', () => {
+    test('should work on multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="ancestor">
@@ -232,7 +232,7 @@ describe('jQuery DOM Traversal Methods', () => {
   })
 
   describe('.children()', () => {
-    it('should get direct child elements', () => {
+    test('should get direct child elements', () => {
       // Setup
       document.body.innerHTML = `
         <div id="parent">
@@ -254,7 +254,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[2]?.tagName).toBe('DIV')
     })
 
-    it('should filter children by selector', () => {
+    test('should filter children by selector', () => {
       // Setup
       document.body.innerHTML = `
         <div id="parent">
@@ -273,7 +273,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[1]?.textContent).toBe('Para 2')
     })
 
-    it('should work on multiple elements', () => {
+    test('should work on multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="parent">
@@ -295,7 +295,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[2]?.textContent).toBe('Child 2A')
     })
 
-    it('should return empty collection if no children', () => {
+    test('should return empty collection if no children', () => {
       // Setup
       document.body.innerHTML = '<div id="empty"></div>'
 
@@ -308,7 +308,7 @@ describe('jQuery DOM Traversal Methods', () => {
   })
 
   describe('.siblings()', () => {
-    it('should get all sibling elements', () => {
+    test('should get all sibling elements', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">
@@ -327,7 +327,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[1]?.id).toBe('last')
     })
 
-    it('should filter siblings by selector', () => {
+    test('should filter siblings by selector', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">
@@ -347,7 +347,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[1]?.textContent).toBe('Para 2')
     })
 
-    it('should work on multiple elements', () => {
+    test('should work on multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -368,7 +368,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result).toHaveProperty('length', 3)
     })
 
-    it('should return empty collection if no siblings', () => {
+    test('should return empty collection if no siblings', () => {
       // Setup
       document.body.innerHTML =
         '<div id="container"><p id="only">Only child</p></div>'
@@ -382,7 +382,7 @@ describe('jQuery DOM Traversal Methods', () => {
   })
 
   describe('.next()', () => {
-    it('should get immediately following sibling', () => {
+    test('should get immediately following sibling', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -400,7 +400,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[0]?.id).toBe('second')
     })
 
-    it('should filter next sibling by selector', () => {
+    test('should filter next sibling by selector', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -421,7 +421,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result2[0]?.id).toBe('third')
     })
 
-    it('should return empty collection if no next sibling', () => {
+    test('should return empty collection if no next sibling', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -437,7 +437,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result).toHaveProperty('length', 0)
     })
 
-    it('should work on multiple elements', () => {
+    test('should work on multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -461,7 +461,7 @@ describe('jQuery DOM Traversal Methods', () => {
   })
 
   describe('.prev()', () => {
-    it('should get immediately preceding sibling', () => {
+    test('should get immediately preceding sibling', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -479,7 +479,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[0]?.id).toBe('first')
     })
 
-    it('should filter previous sibling by selector', () => {
+    test('should filter previous sibling by selector', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -500,7 +500,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result2).toHaveProperty('length', 0)
     })
 
-    it('should return empty collection if no previous sibling', () => {
+    test('should return empty collection if no previous sibling', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -518,7 +518,7 @@ describe('jQuery DOM Traversal Methods', () => {
   })
 
   describe('.closest()', () => {
-    it('should get closest ancestor matching selector', () => {
+    test('should get closest ancestor matching selector', () => {
       // Setup
       document.body.innerHTML = `
         <div id="root" class="container">
@@ -538,7 +538,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[0]?.id).toBe('parent')
     })
 
-    it('should include self if it matches selector', () => {
+    test('should include self if it matches selector', () => {
       // Setup
       document.body.innerHTML = `
         <div id="parent">
@@ -554,7 +554,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[0]?.id).toBe('child')
     })
 
-    it('should return empty collection if no ancestor matches', () => {
+    test('should return empty collection if no ancestor matches', () => {
       // Setup
       document.body.innerHTML = `
         <div id="parent">
@@ -569,7 +569,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result).toHaveProperty('length', 0)
     })
 
-    it('should work on multiple elements', () => {
+    test('should work on multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="ancestor">
@@ -593,7 +593,7 @@ describe('jQuery DOM Traversal Methods', () => {
   })
 
   describe('.filter()', () => {
-    it('should filter elements by selector', () => {
+    test('should filter elements by selector', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -612,7 +612,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[1]?.textContent).toBe('Keep 2')
     })
 
-    it('should filter elements by function', () => {
+    test('should filter elements by function', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -633,7 +633,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[1]?.textContent).toBe('Para 3')
     })
 
-    it('should return empty collection if no matches', () => {
+    test('should return empty collection if no matches', () => {
       // Setup
       document.body.innerHTML = '<div><p>Test</p></div>'
 
@@ -646,7 +646,7 @@ describe('jQuery DOM Traversal Methods', () => {
   })
 
   describe('.not()', () => {
-    it('should remove elements matching selector', () => {
+    test('should remove elements matching selector', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -666,7 +666,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[1]?.textContent).toBe('Keep 2')
     })
 
-    it('should remove elements by function', () => {
+    test('should remove elements by function', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -687,7 +687,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[1]?.textContent).toBe('Para 3')
     })
 
-    it('should return all elements if no matches to remove', () => {
+    test('should return all elements if no matches to remove', () => {
       // Setup
       document.body.innerHTML = '<div><p>Test 1</p><p>Test 2</p></div>'
 
@@ -700,7 +700,7 @@ describe('jQuery DOM Traversal Methods', () => {
   })
 
   describe('.eq()', () => {
-    it('should return element at specified index', () => {
+    test('should return element at specified index', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -718,7 +718,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[0]?.textContent).toBe('Para 1')
     })
 
-    it('should support negative indices', () => {
+    test('should support negative indices', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -736,7 +736,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[0]?.textContent).toBe('Para 2')
     })
 
-    it('should return empty collection for out of bounds index', () => {
+    test('should return empty collection for out of bounds index', () => {
       // Setup
       document.body.innerHTML = '<div><p>Test</p></div>'
 
@@ -749,7 +749,7 @@ describe('jQuery DOM Traversal Methods', () => {
   })
 
   describe('.first()', () => {
-    it('should return first element', () => {
+    test('should return first element', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -767,7 +767,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[0]?.textContent).toBe('First')
     })
 
-    it('should return empty collection if no elements', () => {
+    test('should return empty collection if no elements', () => {
       // Test
       const result = $('nonexistent').first()
 
@@ -777,7 +777,7 @@ describe('jQuery DOM Traversal Methods', () => {
   })
 
   describe('.last()', () => {
-    it('should return last element', () => {
+    test('should return last element', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -795,7 +795,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[0]?.textContent).toBe('Last')
     })
 
-    it('should return empty collection if no elements', () => {
+    test('should return empty collection if no elements', () => {
       // Test
       const result = $('nonexistent').last()
 
@@ -805,7 +805,7 @@ describe('jQuery DOM Traversal Methods', () => {
   })
 
   describe('chaining traversal methods', () => {
-    it('should allow chaining of traversal methods', () => {
+    test('should allow chaining of traversal methods', () => {
       // Setup
       document.body.innerHTML = `
         <div id="root">
@@ -824,7 +824,7 @@ describe('jQuery DOM Traversal Methods', () => {
       expect(result[0]?.textContent).toBe('Sibling')
     })
 
-    it('should maintain jQuery object properties during chaining', () => {
+    test('should maintain jQuery object properties during chaining', () => {
       // Setup
       document.body.innerHTML = '<div><p>Test</p></div>'
 

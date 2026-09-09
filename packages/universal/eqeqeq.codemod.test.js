@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 import transformer from './eqeqeq.codemod.js'
 
@@ -21,7 +21,7 @@ const mockJscodeshift = (source) => ({
 })
 
 describe('eqeqeq.codemod', () => {
-  it('should transform == to === in binary expressions', () => {
+  test('should transform == to === in binary expressions', () => {
     const mockApi = {
       // Add jscodeshift to the function itself for the direct call
       jscodeshift: Object.assign(mockJscodeshift, {
@@ -45,7 +45,7 @@ describe('eqeqeq.codemod', () => {
     expect(result).toBe('if (a === b) { return true; }')
   })
 
-  it('should handle multiple == operators', () => {
+  test('should handle multiple == operators', () => {
     const mockApi = {
       jscodeshift: Object.assign(mockJscodeshift, {
         BinaryExpression: 'BinaryExpression',
@@ -68,7 +68,7 @@ describe('eqeqeq.codemod', () => {
     expect(result).toBe('if (a === b && c === d) { return true; }')
   })
 
-  it('should not affect === operators', () => {
+  test('should not affect === operators', () => {
     const mockApi = {
       jscodeshift: Object.assign(mockJscodeshift, {
         BinaryExpression: 'BinaryExpression',
@@ -91,7 +91,7 @@ describe('eqeqeq.codemod', () => {
     expect(result).toBe('if (a === b) { return true; }')
   })
 
-  it('should handle empty source', () => {
+  test('should handle empty source', () => {
     const mockApi = {
       jscodeshift: Object.assign(mockJscodeshift, {
         BinaryExpression: 'BinaryExpression',
@@ -115,7 +115,7 @@ describe('eqeqeq.codemod', () => {
   })
 
   describe('real-world code examples', () => {
-    it('should handle function comparisons', () => {
+    test('should handle function comparisons', () => {
       const mockApi = {
         jscodeshift: Object.assign(mockJscodeshift, {
           BinaryExpression: 'BinaryExpression',
@@ -142,7 +142,7 @@ describe('eqeqeq.codemod', () => {
       expect(result).toContain('a === b')
     })
 
-    it('should handle object property comparisons', () => {
+    test('should handle object property comparisons', () => {
       const mockApi = {
         jscodeshift: Object.assign(mockJscodeshift, {
           BinaryExpression: 'BinaryExpression',
@@ -168,7 +168,7 @@ describe('eqeqeq.codemod', () => {
       )
     })
 
-    it('should handle null and undefined comparisons', () => {
+    test('should handle null and undefined comparisons', () => {
       const mockApi = {
         jscodeshift: Object.assign(mockJscodeshift, {
           BinaryExpression: 'BinaryExpression',
@@ -196,7 +196,7 @@ describe('eqeqeq.codemod', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle complex expressions', () => {
+    test('should handle complex expressions', () => {
       const mockApi = {
         jscodeshift: Object.assign(mockJscodeshift, {
           BinaryExpression: 'BinaryExpression',
@@ -219,7 +219,7 @@ describe('eqeqeq.codemod', () => {
       expect(result).toBe('if ((a + b) === (c * d)) { return true; }')
     })
 
-    it('should handle array and function call comparisons', () => {
+    test('should handle array and function call comparisons', () => {
       const mockApi = {
         jscodeshift: Object.assign(mockJscodeshift, {
           BinaryExpression: 'BinaryExpression',
@@ -244,7 +244,7 @@ describe('eqeqeq.codemod', () => {
   })
 
   describe('transformation correctness', () => {
-    it('should maintain code structure and spacing', () => {
+    test('should maintain code structure and spacing', () => {
       // This is a conceptual test since our mock is simplified
       const mockApi = {
         jscodeshift: Object.assign(mockJscodeshift, {
@@ -271,7 +271,7 @@ describe('eqeqeq.codemod', () => {
       expect(result).not.toMatch(/(?<!=)==(?!=)/)
     })
 
-    it('should be idempotent (running twice should have same result)', () => {
+    test('should be idempotent (running twice should have same result)', () => {
       const mockApi = {
         jscodeshift: Object.assign(mockJscodeshift, {
           BinaryExpression: 'BinaryExpression',

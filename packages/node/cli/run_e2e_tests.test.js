@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events'
 
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('run_e2e_tests', () => {
   let mockProcess
@@ -97,7 +97,7 @@ describe('run_e2e_tests', () => {
   })
 
   describe('initialization and build process', () => {
-    it('should start build process immediately', async () => {
+    test('should start build process immediately', async () => {
       // Call build function explicitly
       runE2ETests.build()
 
@@ -110,13 +110,13 @@ describe('run_e2e_tests', () => {
       )
     })
 
-    it('should set build timeout', async () => {
+    test('should set build timeout', async () => {
       runE2ETests.build()
 
       expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), 60000)
     })
 
-    it('should log build start message', async () => {
+    test('should log build start message', async () => {
       runE2ETests.build()
 
       expect(consoleLogSpy).toHaveBeenCalledWith(
@@ -124,7 +124,7 @@ describe('run_e2e_tests', () => {
       )
     })
 
-    it('should handle build completion', async () => {
+    test('should handle build completion', async () => {
       runE2ETests.build()
 
       // Simulate build completion
@@ -136,7 +136,7 @@ describe('run_e2e_tests', () => {
       )
     })
 
-    it('should handle build timeout', async () => {
+    test('should handle build timeout', async () => {
       runE2ETests.build()
 
       // Get the timeout callback and execute it
@@ -151,7 +151,7 @@ describe('run_e2e_tests', () => {
   })
 
   describe('server startup process', () => {
-    it('should start server after build completion', async () => {
+    test('should start server after build completion', async () => {
       // Setup server process mock
       const serverProcess = createMockProcess()
       mockSpawn
@@ -174,7 +174,7 @@ describe('run_e2e_tests', () => {
       )
     })
 
-    it('should read .env.local for server environment', async () => {
+    test('should read .env.local for server environment', async () => {
       // Setup server process mock
       const serverProcess = createMockProcess()
       mockSpawn
@@ -191,7 +191,7 @@ describe('run_e2e_tests', () => {
       })
     })
 
-    it('should set server timeout', async () => {
+    test('should set server timeout', async () => {
       // Setup server process mock
       const serverProcess = createMockProcess()
       mockSpawn
@@ -212,7 +212,7 @@ describe('run_e2e_tests', () => {
       )
     })
 
-    it('should detect server startup from stdout', async () => {
+    test('should detect server startup from stdout', async () => {
       // Setup server process mock
       const serverProcess = createMockProcess()
       mockSpawn
@@ -232,7 +232,7 @@ describe('run_e2e_tests', () => {
       )
     })
 
-    it('should handle EADDRINUSE error', async () => {
+    test('should handle EADDRINUSE error', async () => {
       // Setup server process mock
       const serverProcess = createMockProcess()
       mockSpawn
@@ -256,7 +256,7 @@ describe('run_e2e_tests', () => {
       expect(processExitSpy).toHaveBeenCalledWith(1)
     })
 
-    it('should handle server errors', async () => {
+    test('should handle server errors', async () => {
       // Setup server process mock
       const serverProcess = createMockProcess()
       mockSpawn
@@ -279,7 +279,7 @@ describe('run_e2e_tests', () => {
   })
 
   describe('e2e test execution', () => {
-    it('should start e2e tests after server is ready', async () => {
+    test('should start e2e tests after server is ready', async () => {
       // Setup all processes mock
       const serverProcess = createMockProcess()
       const testProcess = createMockProcess()
@@ -306,7 +306,7 @@ describe('run_e2e_tests', () => {
       )
     })
 
-    it('should log e2e test start', async () => {
+    test('should log e2e test start', async () => {
       // Setup all processes mock
       const serverProcess = createMockProcess()
       const testProcess = createMockProcess()
@@ -326,7 +326,7 @@ describe('run_e2e_tests', () => {
       )
     })
 
-    it('should handle e2e test completion', async () => {
+    test('should handle e2e test completion', async () => {
       // Setup all processes mock
       const serverProcess = createMockProcess()
       const testProcess = createMockProcess()
@@ -350,7 +350,7 @@ describe('run_e2e_tests', () => {
       expect(processExitSpy).toHaveBeenCalledWith(0)
     })
 
-    it('should handle e2e test failures', async () => {
+    test('should handle e2e test failures', async () => {
       // Setup all mocks before calling build
       const serverProcess = createMockProcess()
       const testProcess = createMockProcess()
@@ -376,7 +376,7 @@ describe('run_e2e_tests', () => {
       expect(processExitSpy).toHaveBeenCalledWith(1)
     })
 
-    it('should handle e2e test stderr as failure', async () => {
+    test('should handle e2e test stderr as failure', async () => {
       // Setup all mocks before calling build
       const serverProcess = createMockProcess()
       const testProcess = createMockProcess()
@@ -401,7 +401,7 @@ describe('run_e2e_tests', () => {
   })
 
   describe('process cleanup', () => {
-    it('should kill build process on exit', async () => {
+    test('should kill build process on exit', async () => {
       runE2ETests.build()
 
       const buildProcess = mockProcess
@@ -413,7 +413,7 @@ describe('run_e2e_tests', () => {
       expect(buildProcess.kill).toHaveBeenCalled()
     })
 
-    it('should handle process kill errors gracefully', async () => {
+    test('should handle process kill errors gracefully', async () => {
       runE2ETests.build()
 
       const buildProcess = mockProcess
@@ -430,7 +430,7 @@ describe('run_e2e_tests', () => {
       )
     })
 
-    it('should log shutdown messages', async () => {
+    test('should log shutdown messages', async () => {
       runE2ETests.build()
 
       const timeoutCallback = setTimeoutSpy.mock.calls[0][0]
@@ -446,7 +446,7 @@ describe('run_e2e_tests', () => {
   })
 
   describe('logging and formatting', () => {
-    it('should format log output correctly', async () => {
+    test('should format log output correctly', async () => {
       runE2ETests.build()
 
       // Test the format function indirectly by checking stdout handling
@@ -459,7 +459,7 @@ describe('run_e2e_tests', () => {
       expect(consoleLogSpy).toHaveBeenCalled()
     })
 
-    it('should use bright logging for important messages', async () => {
+    test('should use bright logging for important messages', async () => {
       runE2ETests.build()
 
       // Check for ANSI color codes in logs (using actual ANSI escape sequences)
@@ -470,7 +470,7 @@ describe('run_e2e_tests', () => {
       expect(brightLogs.length).toBeGreaterThan(0)
     })
 
-    it('should use dim logging for process output', async () => {
+    test('should use dim logging for process output', async () => {
       runE2ETests.build()
 
       mockProcess.stdout.emit('data', 'Build output message')
@@ -483,7 +483,7 @@ describe('run_e2e_tests', () => {
       expect(dimLogs.length).toBeGreaterThan(0)
     })
 
-    it('should use error logging for failures', async () => {
+    test('should use error logging for failures', async () => {
       runE2ETests.build()
 
       const timeoutCallback = setTimeoutSpy.mock.calls[0][0]
@@ -501,7 +501,7 @@ describe('run_e2e_tests', () => {
   })
 
   describe('full workflow integration', () => {
-    it('should complete successful end-to-end workflow', async () => {
+    test('should complete successful end-to-end workflow', async () => {
       // Setup mocks for all processes
       const serverProcess = createMockProcess()
       const testProcess = createMockProcess()
@@ -541,7 +541,7 @@ describe('run_e2e_tests', () => {
       )
     })
 
-    it('should handle workflow failure at any stage', async () => {
+    test('should handle workflow failure at any stage', async () => {
       runE2ETests.build()
 
       // Fail at build stage
@@ -556,7 +556,7 @@ describe('run_e2e_tests', () => {
   })
 
   describe('environment and configuration', () => {
-    it('should use correct working directory', async () => {
+    test('should use correct working directory', async () => {
       runE2ETests.build()
 
       expect(mockSpawn).toHaveBeenCalledWith(
@@ -568,7 +568,7 @@ describe('run_e2e_tests', () => {
       )
     })
 
-    it('should merge environment variables for server', async () => {
+    test('should merge environment variables for server', async () => {
       // Setup server process mock
       const serverProcess = createMockProcess()
       mockSpawn

@@ -1,7 +1,7 @@
 import { render, screen, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import * as React from 'react'
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, test, expect, vi, beforeEach } from 'vitest'
 
 import {
   UserProfile,
@@ -34,7 +34,7 @@ describe('UserProfile', () => {
   })
 
   describe('loading states', () => {
-    it('shows loading state while promise is pending', () => {
+    test('shows loading state while promise is pending', () => {
       // Create a promise that never resolves to keep loading state visible
       const neverResolvingPromise = new Promise<User>(() => {})
 
@@ -44,7 +44,7 @@ describe('UserProfile', () => {
       expect(screen.getByRole('status')).toBeInTheDocument()
     })
 
-    it('transitions from loading to content when promise resolves', async () => {
+    test('transitions from loading to content when promise resolves', async () => {
       const userPromise = Promise.resolve({
         id: 1,
         email: 'test@example.com',
@@ -65,7 +65,7 @@ describe('UserProfile', () => {
   })
 
   describe('successful data loading', () => {
-    it('displays user information when data loads successfully', async () => {
+    test('displays user information when data loads successfully', async () => {
       const userPromise = Promise.resolve({
         id: 1,
         email: 'test@example.com',
@@ -88,7 +88,7 @@ describe('UserProfile', () => {
       ).not.toBeInTheDocument()
     })
 
-    it('formats the creation date correctly', async () => {
+    test('formats the creation date correctly', async () => {
       const userPromise = Promise.resolve({
         id: 1,
         email: 'test@example.com',
@@ -108,7 +108,7 @@ describe('UserProfile', () => {
   })
 
   describe('UserProfileError component', () => {
-    it('displays error message', () => {
+    test('displays error message', () => {
       const error = new Error('User not found')
       render(<UserProfileError error={error} />)
 
@@ -117,14 +117,14 @@ describe('UserProfile', () => {
       expect(screen.getByRole('alert')).toBeInTheDocument()
     })
 
-    it('displays generic error when no error provided', () => {
+    test('displays generic error when no error provided', () => {
       render(<UserProfileError />)
 
       expect(screen.getByText(/failed to load user/i)).toBeInTheDocument()
       expect(screen.getByText('An error occurred')).toBeInTheDocument()
     })
 
-    it('provides retry functionality when onRetryAction is provided', async () => {
+    test('provides retry functionality when onRetryAction is provided', async () => {
       const onRetryAction = vi.fn()
       render(
         <UserProfileError
@@ -141,7 +141,7 @@ describe('UserProfile', () => {
       expect(onRetryAction).toHaveBeenCalledOnce()
     })
 
-    it('does not show retry button when onRetryAction is not provided', () => {
+    test('does not show retry button when onRetryAction is not provided', () => {
       render(<UserProfileError error={new Error('Server error')} />)
 
       expect(
@@ -151,7 +151,7 @@ describe('UserProfile', () => {
   })
 
   describe('UserProfileLoading component', () => {
-    it('renders loading state with proper accessibility', () => {
+    test('renders loading state with proper accessibility', () => {
       render(<UserProfileLoading />)
 
       const loadingStatus = screen.getByRole('status')
@@ -161,7 +161,7 @@ describe('UserProfile', () => {
   })
 
   describe('different user data scenarios', () => {
-    it('handles users with empty name', async () => {
+    test('handles users with empty name', async () => {
       const userPromise = Promise.resolve({
         id: 2,
         email: 'minimal@example.com',
@@ -178,7 +178,7 @@ describe('UserProfile', () => {
       expect(screen.getByText(/no name provided/i)).toBeInTheDocument()
     })
 
-    it('handles users with very recent creation dates', async () => {
+    test('handles users with very recent creation dates', async () => {
       const recentDate = new Date()
       recentDate.setMinutes(recentDate.getMinutes() - 5) // 5 minutes ago
 
@@ -198,7 +198,7 @@ describe('UserProfile', () => {
       expect(screen.getByText(/a few minutes ago/i)).toBeInTheDocument()
     })
 
-    it('handles users with creation dates a few hours ago', async () => {
+    test('handles users with creation dates a few hours ago', async () => {
       const hoursAgo = new Date()
       hoursAgo.setHours(hoursAgo.getHours() - 3) // 3 hours ago
 
@@ -218,7 +218,7 @@ describe('UserProfile', () => {
       expect(screen.getByText(/3 hours ago/i)).toBeInTheDocument()
     })
 
-    it('handles null user response', async () => {
+    test('handles null user response', async () => {
       const userPromise = Promise.resolve(null as unknown as User)
 
       await act(async () => {
@@ -230,7 +230,7 @@ describe('UserProfile', () => {
   })
 
   describe('accessibility', () => {
-    it('provides proper loading announcements', () => {
+    test('provides proper loading announcements', () => {
       // Create a promise that never resolves to keep loading state visible
       const neverResolvingPromise = new Promise<User>(() => {})
 
@@ -241,7 +241,7 @@ describe('UserProfile', () => {
       expect(loadingStatus).toHaveTextContent(/loading user profile/i)
     })
 
-    it('removes loading status after data loads', async () => {
+    test('removes loading status after data loads', async () => {
       const userPromise = Promise.resolve({
         id: 1,
         email: 'test@example.com',
@@ -256,7 +256,7 @@ describe('UserProfile', () => {
       expect(screen.queryByRole('status')).not.toBeInTheDocument()
     })
 
-    it('provides semantic structure for user information', async () => {
+    test('provides semantic structure for user information', async () => {
       const userPromise = Promise.resolve({
         id: 1,
         email: 'test@example.com',

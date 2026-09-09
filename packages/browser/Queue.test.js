@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest'
 
 import Queue from './Queue.js'
 
@@ -12,7 +12,7 @@ describe('Queue', () => {
   })
 
   describe('constructor', () => {
-    it('should create a queue with default concurrency of 1', () => {
+    test('should create a queue with default concurrency of 1', () => {
       const worker = vi.fn()
       const queue = new Queue(worker)
 
@@ -23,21 +23,21 @@ describe('Queue', () => {
       expect(queue.err).toBeNull()
     })
 
-    it('should create a queue with custom concurrency', () => {
+    test('should create a queue with custom concurrency', () => {
       const worker = vi.fn()
       const queue = new Queue(worker, { concurrency: 5 })
 
       expect(queue.concurrency).toBe(5)
     })
 
-    it('should handle empty options object', () => {
+    test('should handle empty options object', () => {
       const worker = vi.fn()
       const queue = new Queue(worker, {})
 
       expect(queue.concurrency).toBe(1)
     })
 
-    it('should handle undefined options', () => {
+    test('should handle undefined options', () => {
       const worker = vi.fn()
       const queue = new Queue(worker, undefined)
 
@@ -46,7 +46,7 @@ describe('Queue', () => {
   })
 
   describe('push', () => {
-    it('should add tasks to pending entries', () => {
+    test('should add tasks to pending entries', () => {
       const worker = vi.fn(async () => {})
       const queue = new Queue(worker)
 
@@ -58,7 +58,7 @@ describe('Queue', () => {
       expect(queue.inFlight).toBe(1)
     })
 
-    it('should concatenate multiple push calls', () => {
+    test('should concatenate multiple push calls', () => {
       const worker = vi.fn(async () => {})
       const queue = new Queue(worker)
 
@@ -73,7 +73,7 @@ describe('Queue', () => {
       expect(queue.inFlight).toBe(1)
     })
 
-    it('should trigger processing when tasks are added', () => {
+    test('should trigger processing when tasks are added', () => {
       const worker = vi.fn(async () => {})
       const queue = new Queue(worker, { concurrency: 2 })
       const processSpy = vi.spyOn(queue, 'process')
@@ -85,7 +85,7 @@ describe('Queue', () => {
   })
 
   describe('process', () => {
-    it('should process tasks up to concurrency limit', () => {
+    test('should process tasks up to concurrency limit', () => {
       const worker = vi.fn(async () => {})
       const queue = new Queue(worker, { concurrency: 2 })
 
@@ -97,7 +97,7 @@ describe('Queue', () => {
       expect(worker).toHaveBeenCalledTimes(2)
     })
 
-    it('should process all tasks when concurrency is higher than task count', () => {
+    test('should process all tasks when concurrency is higher than task count', () => {
       const worker = vi.fn(async () => {})
       const queue = new Queue(worker, { concurrency: 10 })
 
@@ -108,7 +108,7 @@ describe('Queue', () => {
       expect(worker).toHaveBeenCalledTimes(3)
     })
 
-    it('should call worker with correct task parameters', () => {
+    test('should call worker with correct task parameters', () => {
       const worker = vi.fn(async () => {})
       const queue = new Queue(worker)
 
@@ -120,7 +120,7 @@ describe('Queue', () => {
   })
 
   describe('error handling', () => {
-    it('should capture errors from worker functions', async () => {
+    test('should capture errors from worker functions', async () => {
       const workerError = new Error('Worker failed')
       const worker = vi.fn(async () => {
         throw workerError
@@ -135,7 +135,7 @@ describe('Queue', () => {
       expect(queue.err).toEqual(workerError)
     })
 
-    it('should continue processing other tasks when one fails', async () => {
+    test('should continue processing other tasks when one fails', async () => {
       const worker = vi.fn(async (task) => {
         if (task.id === 2) {
           throw new Error('Task 2 failed')
@@ -155,7 +155,7 @@ describe('Queue', () => {
   })
 
   describe('wait functionality', () => {
-    it('should resolve immediately if queue is already empty', async () => {
+    test('should resolve immediately if queue is already empty', async () => {
       const worker = vi.fn(async () => {})
       const queue = new Queue(worker)
 
@@ -164,7 +164,7 @@ describe('Queue', () => {
       expect(result).toBeUndefined()
     })
 
-    it('should resolve when concurrency > pending entries', async () => {
+    test('should resolve when concurrency > pending entries', async () => {
       const worker = vi.fn(async () => {})
       const queue = new Queue(worker, { concurrency: 5 })
 
@@ -176,7 +176,7 @@ describe('Queue', () => {
       expect(result).toBeUndefined()
     })
 
-    it('should reject with error when worker fails', async () => {
+    test('should reject with error when worker fails', async () => {
       const workerError = new Error('Worker failed')
       const worker = vi.fn(async () => {
         throw workerError
@@ -191,7 +191,7 @@ describe('Queue', () => {
       await expect(queue.wait({ empty: true })).rejects.toThrow('Worker failed')
     })
 
-    it('should clear pending entries when error occurs during wait', async () => {
+    test('should clear pending entries when error occurs during wait', async () => {
       const worker = vi.fn(async () => {
         throw new Error('Worker failed')
       })
@@ -211,7 +211,7 @@ describe('Queue', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle empty task arrays', () => {
+    test('should handle empty task arrays', () => {
       const worker = vi.fn(async () => {})
       const queue = new Queue(worker)
 
@@ -222,7 +222,7 @@ describe('Queue', () => {
       expect(worker).not.toHaveBeenCalled()
     })
 
-    it('should handle concurrency of 0', () => {
+    test('should handle concurrency of 0', () => {
       const worker = vi.fn(async () => {})
       const queue = new Queue(worker, { concurrency: 0 })
 
@@ -235,7 +235,7 @@ describe('Queue', () => {
       expect(worker).toHaveBeenCalledTimes(1)
     })
 
-    it('should handle very large concurrency values', () => {
+    test('should handle very large concurrency values', () => {
       const worker = vi.fn(async () => {})
       const queue = new Queue(worker, { concurrency: 1000 })
 
@@ -247,7 +247,7 @@ describe('Queue', () => {
       expect(worker).toHaveBeenCalledTimes(100)
     })
 
-    it('should handle tasks with circular references', () => {
+    test('should handle tasks with circular references', () => {
       const worker = vi.fn(async (task) => task.value)
       const queue = new Queue(worker)
 
@@ -260,7 +260,7 @@ describe('Queue', () => {
       expect(worker).toHaveBeenCalledTimes(1)
     })
 
-    it('should handle synchronous workers', () => {
+    test('should handle synchronous workers', () => {
       const processedTasks = []
       const worker = vi.fn((task) => {
         processedTasks.push(task.id)
@@ -276,7 +276,7 @@ describe('Queue', () => {
       expect(queue.pendingEntries).toHaveLength(1)
     })
 
-    it('should handle worker returning different types of values', () => {
+    test('should handle worker returning different types of values', () => {
       const worker = vi.fn(async (task) => {
         switch (task.type) {
           case 'string':
@@ -309,7 +309,7 @@ describe('Queue', () => {
   })
 
   describe('real world scenarios', () => {
-    it('should handle typical API request queue', () => {
+    test('should handle typical API request queue', () => {
       const results = []
       const worker = vi.fn(async (request) => {
         // Simulate API call
@@ -333,7 +333,7 @@ describe('Queue', () => {
       expect(queue.pendingEntries).toHaveLength(1)
     })
 
-    it('should handle file processing queue', () => {
+    test('should handle file processing queue', () => {
       const processedFiles = []
       const worker = vi.fn(async (file) => {
         processedFiles.push(file.name)

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest'
 
 import {
   randomNumber,
@@ -9,7 +9,7 @@ import {
 
 describe('random utilities', () => {
   describe('randomNumber', () => {
-    it('should return numbers between 1 and the specified number (inclusive)', () => {
+    test('should return numbers between 1 and the specified number (inclusive)', () => {
       // Run test multiple times to check range
       for (let i = 0; i < 100; i++) {
         const result = randomNumber(6)
@@ -19,14 +19,14 @@ describe('random utilities', () => {
       }
     })
 
-    it('should return 1 when input is 1', () => {
+    test('should return 1 when input is 1', () => {
       // With number = 1, Math.floor(Math.random() * 1) + 1 should always be 1
       for (let i = 0; i < 50; i++) {
         expect(randomNumber(1)).toBe(1)
       }
     })
 
-    it('should handle large numbers', () => {
+    test('should handle large numbers', () => {
       const largeNumber = 1000000
       for (let i = 0; i < 50; i++) {
         const result = randomNumber(largeNumber)
@@ -36,7 +36,7 @@ describe('random utilities', () => {
       }
     })
 
-    it('should produce different values over multiple calls', () => {
+    test('should produce different values over multiple calls', () => {
       const results = new Set()
       for (let i = 0; i < 100; i++) {
         results.add(randomNumber(100))
@@ -45,7 +45,7 @@ describe('random utilities', () => {
       expect(results.size).toBeGreaterThan(50)
     })
 
-    it('should work with decimal inputs (uses decimal directly)', () => {
+    test('should work with decimal inputs (uses decimal directly)', () => {
       // Function uses decimal directly: Math.floor(Math.random() * 6.7) + 1
       for (let i = 0; i < 50; i++) {
         const result = randomNumber(6.7) // Can return 1-7 because Math.floor(6.7 * 0.999) + 1 = 7
@@ -56,21 +56,21 @@ describe('random utilities', () => {
     })
 
     describe('edge cases', () => {
-      it('should handle zero input', () => {
+      test('should handle zero input', () => {
         // Math.floor(Math.random() * 0) + 1 should always be 1
         for (let i = 0; i < 10; i++) {
           expect(randomNumber(0)).toBe(1)
         }
       })
 
-      it('should handle negative input', () => {
+      test('should handle negative input', () => {
         // Math.floor(Math.random() * negative) + 1 might behave unexpectedly
         const result = randomNumber(-5)
         expect(typeof result).toBe('number')
         // The exact behavior with negative numbers may vary
       })
 
-      it('should handle very small positive numbers', () => {
+      test('should handle very small positive numbers', () => {
         for (let i = 0; i < 10; i++) {
           const result = randomNumber(0.1)
           expect(result).toBe(1) // Math.floor(Math.random() * 0.1) + 1 = 1
@@ -87,7 +87,7 @@ describe('random utilities', () => {
         vi.restoreAllMocks()
       })
 
-      it('should use Math.random correctly', () => {
+      test('should use Math.random correctly', () => {
         vi.mocked(Math.random).mockReturnValue(0.5)
 
         const result = randomNumber(10)
@@ -95,14 +95,14 @@ describe('random utilities', () => {
         expect(result).toBe(6) // Math.floor(0.5 * 10) + 1 = 5 + 1 = 6
       })
 
-      it('should handle minimum Math.random value (0)', () => {
+      test('should handle minimum Math.random value (0)', () => {
         vi.mocked(Math.random).mockReturnValue(0)
 
         const result = randomNumber(10)
         expect(result).toBe(1) // Math.floor(0 * 10) + 1 = 0 + 1 = 1
       })
 
-      it('should handle maximum Math.random value (0.999...)', () => {
+      test('should handle maximum Math.random value (0.999...)', () => {
         vi.mocked(Math.random).mockReturnValue(0.9999999)
 
         const result = randomNumber(10)
@@ -112,7 +112,7 @@ describe('random utilities', () => {
   })
 
   describe('randomNumberRange', () => {
-    it('should return numbers within the specified range (inclusive)', () => {
+    test('should return numbers within the specified range (inclusive)', () => {
       for (let i = 0; i < 100; i++) {
         const result = randomNumberRange(5, 15)
         expect(result).toBeGreaterThanOrEqual(5)
@@ -121,7 +121,7 @@ describe('random utilities', () => {
       }
     })
 
-    it('should work with negative ranges', () => {
+    test('should work with negative ranges', () => {
       for (let i = 0; i < 100; i++) {
         const result = randomNumberRange(-10, -5)
         expect(result).toBeGreaterThanOrEqual(-10)
@@ -130,7 +130,7 @@ describe('random utilities', () => {
       }
     })
 
-    it('should work with ranges crossing zero', () => {
+    test('should work with ranges crossing zero', () => {
       for (let i = 0; i < 100; i++) {
         const result = randomNumberRange(-3, 3)
         expect(result).toBeGreaterThanOrEqual(-3)
@@ -139,7 +139,7 @@ describe('random utilities', () => {
       }
     })
 
-    it('should return the same value when min equals max', () => {
+    test('should return the same value when min equals max', () => {
       for (let i = 0; i < 50; i++) {
         expect(randomNumberRange(7, 7)).toBe(7)
         expect(randomNumberRange(-5, -5)).toBe(-5)
@@ -147,7 +147,7 @@ describe('random utilities', () => {
       }
     })
 
-    it('should produce different values over multiple calls', () => {
+    test('should produce different values over multiple calls', () => {
       const results = new Set()
       for (let i = 0; i < 100; i++) {
         results.add(randomNumberRange(1, 50))
@@ -156,7 +156,7 @@ describe('random utilities', () => {
       expect(results.size).toBeGreaterThan(25)
     })
 
-    it('should handle large ranges', () => {
+    test('should handle large ranges', () => {
       for (let i = 0; i < 50; i++) {
         const result = randomNumberRange(1000, 2000)
         expect(result).toBeGreaterThanOrEqual(1000)
@@ -166,13 +166,13 @@ describe('random utilities', () => {
     })
 
     describe('edge cases', () => {
-      it('should handle reversed parameters (max < min)', () => {
+      test('should handle reversed parameters (max < min)', () => {
         // This might produce unexpected results, but should not crash
         const result = randomNumberRange(10, 5)
         expect(typeof result).toBe('number')
       })
 
-      it('should handle decimal inputs', () => {
+      test('should handle decimal inputs', () => {
         for (let i = 0; i < 50; i++) {
           const result = randomNumberRange(1.5, 5.7)
           // Function uses decimals directly: Math.floor(Math.random() * (5.7 - 1.5 + 1)) + 1.5
@@ -183,7 +183,7 @@ describe('random utilities', () => {
         }
       })
 
-      it('should handle very large numbers', () => {
+      test('should handle very large numbers', () => {
         const result = randomNumberRange(
           Number.MAX_SAFE_INTEGER - 10,
           Number.MAX_SAFE_INTEGER,
@@ -202,7 +202,7 @@ describe('random utilities', () => {
         vi.restoreAllMocks()
       })
 
-      it('should use Math.random correctly for range calculation', () => {
+      test('should use Math.random correctly for range calculation', () => {
         vi.mocked(Math.random).mockReturnValue(0.5)
 
         const result = randomNumberRange(10, 20)
@@ -210,14 +210,14 @@ describe('random utilities', () => {
         expect(result).toBe(15) // Math.floor(0.5 * (20-10+1)) + 10 = 5 + 10 = 15
       })
 
-      it('should return min value when Math.random returns 0', () => {
+      test('should return min value when Math.random returns 0', () => {
         vi.mocked(Math.random).mockReturnValue(0)
 
         const result = randomNumberRange(10, 20)
         expect(result).toBe(10)
       })
 
-      it('should return max value when Math.random returns 0.999...', () => {
+      test('should return max value when Math.random returns 0.999...', () => {
         vi.mocked(Math.random).mockReturnValue(0.9999999)
 
         const result = randomNumberRange(10, 20)
@@ -227,7 +227,7 @@ describe('random utilities', () => {
   })
 
   describe('randomInArray', () => {
-    it('should return an element from the array', () => {
+    test('should return an element from the array', () => {
       const array = ['apple', 'banana', 'cherry', 'date']
 
       for (let i = 0; i < 100; i++) {
@@ -236,7 +236,7 @@ describe('random utilities', () => {
       }
     })
 
-    it('should work with different array types', () => {
+    test('should work with different array types', () => {
       const numbers = [1, 2, 3, 4, 5]
       const booleans = [true, false]
       const mixed = [1, 'hello', true, null, { key: 'value' }]
@@ -248,7 +248,7 @@ describe('random utilities', () => {
       }
     })
 
-    it('should return the only element for single-element arrays', () => {
+    test('should return the only element for single-element arrays', () => {
       const singleElement = ['only']
 
       for (let i = 0; i < 50; i++) {
@@ -256,7 +256,7 @@ describe('random utilities', () => {
       }
     })
 
-    it('should produce different values over multiple calls for larger arrays', () => {
+    test('should produce different values over multiple calls for larger arrays', () => {
       const largeArray = Array.from({ length: 50 }, (_, i) => i)
       const results = new Set()
 
@@ -268,7 +268,7 @@ describe('random utilities', () => {
       expect(results.size).toBeGreaterThan(25)
     })
 
-    it('should work with arrays containing objects', () => {
+    test('should work with arrays containing objects', () => {
       const objects = [
         { id: 1, name: 'first' },
         { id: 2, name: 'second' },
@@ -283,7 +283,7 @@ describe('random utilities', () => {
       }
     })
 
-    it('should work with arrays containing functions', () => {
+    test('should work with arrays containing functions', () => {
       const functions = [() => 'first', () => 'second', () => 'third']
 
       for (let i = 0; i < 50; i++) {
@@ -293,7 +293,7 @@ describe('random utilities', () => {
       }
     })
 
-    it('should preserve reference equality', () => {
+    test('should preserve reference equality', () => {
       const obj1 = { value: 1 }
       const obj2 = { value: 2 }
       const array = [obj1, obj2]
@@ -305,7 +305,7 @@ describe('random utilities', () => {
     })
 
     describe('edge cases', () => {
-      it('should handle empty arrays', () => {
+      test('should handle empty arrays', () => {
         const emptyArray: unknown[] = []
 
         // This should return undefined (accessing non-existent index)
@@ -313,7 +313,7 @@ describe('random utilities', () => {
         expect(result).toBeUndefined()
       })
 
-      it('should handle arrays with undefined elements', () => {
+      test('should handle arrays with undefined elements', () => {
         const arrayWithUndefined = [1, undefined, 3]
 
         for (let i = 0; i < 50; i++) {
@@ -322,7 +322,7 @@ describe('random utilities', () => {
         }
       })
 
-      it('should handle arrays with null elements', () => {
+      test('should handle arrays with null elements', () => {
         const arrayWithNull = [1, null, 3]
 
         for (let i = 0; i < 50; i++) {
@@ -331,7 +331,7 @@ describe('random utilities', () => {
         }
       })
 
-      it('should handle sparse arrays', () => {
+      test('should handle sparse arrays', () => {
         const sparseArray = [1, , 3] // Has empty slot at index 1
 
         for (let i = 0; i < 50; i++) {
@@ -343,7 +343,7 @@ describe('random utilities', () => {
         }
       })
 
-      it('should handle very large arrays', () => {
+      test('should handle very large arrays', () => {
         const largeArray = Array.from({ length: 10000 }, (_, i) => i)
 
         for (let i = 0; i < 50; i++) {
@@ -364,7 +364,7 @@ describe('random utilities', () => {
         vi.restoreAllMocks()
       })
 
-      it('should use Math.random correctly for index calculation', () => {
+      test('should use Math.random correctly for index calculation', () => {
         const array = ['a', 'b', 'c', 'd', 'e']
         vi.mocked(Math.random).mockReturnValue(0.4)
 
@@ -373,7 +373,7 @@ describe('random utilities', () => {
         expect(result).toBe('c') // Math.floor(0.4 * 5) = 2, array[2] = 'c'
       })
 
-      it('should return first element when Math.random returns 0', () => {
+      test('should return first element when Math.random returns 0', () => {
         const array = ['first', 'second', 'third']
         vi.mocked(Math.random).mockReturnValue(0)
 
@@ -381,7 +381,7 @@ describe('random utilities', () => {
         expect(result).toBe('first')
       })
 
-      it('should return last element when Math.random returns 0.999...', () => {
+      test('should return last element when Math.random returns 0.999...', () => {
         const array = ['first', 'second', 'third']
         vi.mocked(Math.random).mockReturnValue(0.9999999)
 
@@ -391,7 +391,7 @@ describe('random utilities', () => {
     })
 
     describe('type safety', () => {
-      it('should maintain type safety with typed arrays', () => {
+      test('should maintain type safety with typed arrays', () => {
         const numbers: number[] = [1, 2, 3, 4, 5]
         const strings: string[] = ['a', 'b', 'c']
 
@@ -402,7 +402,7 @@ describe('random utilities', () => {
         expect(typeof stringResult).toBe('string')
       })
 
-      it('should work with union types', () => {
+      test('should work with union types', () => {
         const mixed: (string | number)[] = [1, 'hello', 2, 'world']
 
         for (let i = 0; i < 50; i++) {
@@ -416,7 +416,7 @@ describe('random utilities', () => {
   })
 
   describe('integration and distribution tests', () => {
-    it('should have roughly uniform distribution for randomNumber', () => {
+    test('should have roughly uniform distribution for randomNumber', () => {
       const counts = new Array(6).fill(0)
       const iterations = 6000
 
@@ -432,7 +432,7 @@ describe('random utilities', () => {
       })
     })
 
-    it('should have roughly uniform distribution for randomNumberRange', () => {
+    test('should have roughly uniform distribution for randomNumberRange', () => {
       const min = 5
       const max = 9
       const range = max - min + 1
@@ -451,7 +451,7 @@ describe('random utilities', () => {
       })
     })
 
-    it('should have roughly uniform distribution for randomInArray', () => {
+    test('should have roughly uniform distribution for randomInArray', () => {
       const array = ['a', 'b', 'c', 'd', 'e']
       const counts = new Map(array.map((item) => [item, 0]))
       const iterations = 5000
@@ -483,16 +483,16 @@ describe('random utilities', () => {
     })
 
     describe('basic functionality', () => {
-      it('should be a function', () => {
+      test('should be a function', () => {
         expect(typeof rand).toBe('function')
       })
 
-      it('should return a number', () => {
+      test('should return a number', () => {
         const result = rand()
         expect(typeof result).toBe('number')
       })
 
-      it('should return values between 0 and 100', () => {
+      test('should return values between 0 and 100', () => {
         for (let i = 0; i < 1000; i++) {
           const result = rand()
           expect(result).toBeGreaterThanOrEqual(0)
@@ -500,13 +500,13 @@ describe('random utilities', () => {
         }
       })
 
-      it('should use Math.random internally', () => {
+      test('should use Math.random internally', () => {
         const mathRandomSpy = vi.spyOn(Math, 'random')
         rand()
         expect(mathRandomSpy).toHaveBeenCalledTimes(1)
       })
 
-      it('should scale Math.random output by 100', () => {
+      test('should scale Math.random output by 100', () => {
         Math.random = vi.fn().mockReturnValue(0.5)
         expect(rand()).toBe(50)
 
@@ -517,12 +517,12 @@ describe('random utilities', () => {
         expect(rand()).toBe(75)
       })
 
-      it('should handle edge case when Math.random returns 0', () => {
+      test('should handle edge case when Math.random returns 0', () => {
         Math.random = vi.fn().mockReturnValue(0)
         expect(rand()).toBe(0)
       })
 
-      it('should handle edge case when Math.random returns close to 1', () => {
+      test('should handle edge case when Math.random returns close to 1', () => {
         Math.random = vi.fn().mockReturnValue(0.999999)
         const result = rand()
         expect(result).toBeCloseTo(99.9999)
@@ -531,7 +531,7 @@ describe('random utilities', () => {
     })
 
     describe('probability distribution', () => {
-      it('should generate a roughly uniform distribution', () => {
+      test('should generate a roughly uniform distribution', () => {
         const buckets = new Array(10).fill(0)
         const iterations = 10000
 
@@ -549,7 +549,7 @@ describe('random utilities', () => {
         })
       })
 
-      it('should generate different values on consecutive calls', () => {
+      test('should generate different values on consecutive calls', () => {
         Math.random = originalMathRandom
 
         const values = new Set()
@@ -563,7 +563,7 @@ describe('random utilities', () => {
     })
 
     describe('performance', () => {
-      it('should generate numbers efficiently', () => {
+      test('should generate numbers efficiently', () => {
         const start = performance.now()
         for (let i = 0; i < 100000; i++) {
           rand()

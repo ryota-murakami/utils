@@ -1,5 +1,5 @@
 /// <reference path="./global.d.ts" />
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, test, expect, beforeEach } from 'vitest'
 import './core.js'
 
 describe('jQuery DOM Removal Methods', () => {
@@ -9,7 +9,7 @@ describe('jQuery DOM Removal Methods', () => {
   })
 
   describe('.remove()', () => {
-    it('should remove elements from the DOM', () => {
+    test('should remove elements from the DOM', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">
@@ -28,7 +28,7 @@ describe('jQuery DOM Removal Methods', () => {
       expect(document.getElementById('container')?.children.length).toBe(1)
     })
 
-    it('should remove single element', () => {
+    test('should remove single element', () => {
       // Setup
       document.body.innerHTML = '<div id="target">Remove me</div>'
 
@@ -40,7 +40,7 @@ describe('jQuery DOM Removal Methods', () => {
       expect(document.body.innerHTML).toBe('')
     })
 
-    it('should remove element with all its children', () => {
+    test('should remove element with all its children', () => {
       // Setup
       document.body.innerHTML = `
         <div id="parent">
@@ -59,7 +59,7 @@ describe('jQuery DOM Removal Methods', () => {
       expect(document.body.innerHTML.trim()).toBe('')
     })
 
-    it('should return the removed elements', () => {
+    test('should return the removed elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item">Item 1</div>
@@ -76,7 +76,7 @@ describe('jQuery DOM Removal Methods', () => {
       expect(document.querySelectorAll('.item').length).toBe(0)
     })
 
-    it('should handle empty collection', () => {
+    test('should handle empty collection', () => {
       // Test
       const result = $('.non-existent').remove()
 
@@ -86,7 +86,7 @@ describe('jQuery DOM Removal Methods', () => {
   })
 
   describe('.empty()', () => {
-    it('should remove all child nodes from elements', () => {
+    test('should remove all child nodes from elements', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">
@@ -107,7 +107,7 @@ describe('jQuery DOM Removal Methods', () => {
       expect(container?.innerHTML).toBe('')
     })
 
-    it('should empty multiple elements', () => {
+    test('should empty multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="container">
@@ -129,7 +129,7 @@ describe('jQuery DOM Removal Methods', () => {
       })
     })
 
-    it('should remove text nodes', () => {
+    test('should remove text nodes', () => {
       // Setup
       document.body.innerHTML = '<div id="test">Text content</div>'
 
@@ -142,7 +142,7 @@ describe('jQuery DOM Removal Methods', () => {
       expect(element?.childNodes.length).toBe(0)
     })
 
-    it('should remove child elements completely', () => {
+    test('should remove child elements completely', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">
@@ -161,7 +161,7 @@ describe('jQuery DOM Removal Methods', () => {
       expect(document.getElementById('container')?.innerHTML).toBe('')
     })
 
-    it('should return jQuery object for chaining', () => {
+    test('should return jQuery object for chaining', () => {
       // Setup
       document.body.innerHTML = '<div id="test"><p>Content</p></div>'
 
@@ -174,7 +174,7 @@ describe('jQuery DOM Removal Methods', () => {
       expect(result[0]?.innerHTML).toBe('')
     })
 
-    it('should handle empty collection', () => {
+    test('should handle empty collection', () => {
       // Test
       const result = $('.non-existent').empty()
 
@@ -184,7 +184,7 @@ describe('jQuery DOM Removal Methods', () => {
   })
 
   describe('.detach()', () => {
-    it('should remove elements from DOM but preserve data and events', () => {
+    test('should remove elements from DOM but preserve data and events', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">
@@ -204,7 +204,7 @@ describe('jQuery DOM Removal Methods', () => {
       expect(detached[0]?.textContent).toBe('Detach me')
     })
 
-    it('should detach multiple elements', () => {
+    test('should detach multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <ul>
@@ -225,7 +225,7 @@ describe('jQuery DOM Removal Methods', () => {
       expect(detached[1]?.textContent).toBe('Item 3')
     })
 
-    it('should allow reattaching detached elements', () => {
+    test('should allow reattaching detached elements', () => {
       // Setup
       document.body.innerHTML = `
         <div id="source">
@@ -246,7 +246,7 @@ describe('jQuery DOM Removal Methods', () => {
       )
     })
 
-    it('should preserve element properties when detached', () => {
+    test('should preserve element properties when detached', () => {
       // Setup
       document.body.innerHTML =
         '<input type="text" id="input" value="test value">'
@@ -263,7 +263,7 @@ describe('jQuery DOM Removal Methods', () => {
       expect(detachedInput.disabled).toBe(true)
     })
 
-    it('should handle empty collection', () => {
+    test('should handle empty collection', () => {
       // Test
       const result = $('.non-existent').detach()
 
@@ -271,7 +271,7 @@ describe('jQuery DOM Removal Methods', () => {
       expect(result).toHaveProperty('length', 0)
     })
 
-    it('should return detached elements for chaining', () => {
+    test('should return detached elements for chaining', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">

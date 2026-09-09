@@ -1,10 +1,10 @@
-import { describe, it, expectTypeOf } from 'vitest'
+import { describe, test, expectTypeOf } from 'vitest'
 
 // Import the Nullable type
 type Nullable<T> = T | null
 
 describe('Nullable type', () => {
-  it('should accept original type values', () => {
+  test('should accept original type values', () => {
     // Original string value
     expectTypeOf<string>().toMatchTypeOf<Nullable<string>>()
 
@@ -21,7 +21,7 @@ describe('Nullable type', () => {
     expectTypeOf<string[]>().toMatchTypeOf<Nullable<string[]>>()
   })
 
-  it('should accept null values', () => {
+  test('should accept null values', () => {
     // Null for any nullable type
     expectTypeOf<null>().toMatchTypeOf<Nullable<string>>()
     expectTypeOf<null>().toMatchTypeOf<Nullable<number>>()
@@ -30,7 +30,7 @@ describe('Nullable type', () => {
     expectTypeOf<null>().toMatchTypeOf<Nullable<any[]>>()
   })
 
-  it('should work with primitive types', () => {
+  test('should work with primitive types', () => {
     // String
     type NullableString = Nullable<string>
     expectTypeOf<string>().toMatchTypeOf<NullableString>()
@@ -47,7 +47,7 @@ describe('Nullable type', () => {
     expectTypeOf<null>().toMatchTypeOf<NullableBoolean>()
   })
 
-  it('should work with complex types', () => {
+  test('should work with complex types', () => {
     interface User {
       id: number
       name: string
@@ -70,7 +70,7 @@ describe('Nullable type', () => {
     expectTypeOf<null>().toMatchTypeOf<NullableResponse>()
   })
 
-  it('should work with union types', () => {
+  test('should work with union types', () => {
     type StringOrNumber = string | number
     type NullableStringOrNumber = Nullable<StringOrNumber>
 
@@ -87,7 +87,7 @@ describe('Nullable type', () => {
     >().toEqualTypeOf<NullableStringOrNumber>()
   })
 
-  it('should work with array types', () => {
+  test('should work with array types', () => {
     // Nullable array of strings
     type NullableStringArray = Nullable<string[]>
     expectTypeOf<string[]>().toMatchTypeOf<NullableStringArray>()
@@ -98,7 +98,7 @@ describe('Nullable type', () => {
     expectTypeOf<(string | null)[]>().toEqualTypeOf<ArrayOfNullableStrings>()
   })
 
-  it('should distinguish from undefined types', () => {
+  test('should distinguish from undefined types', () => {
     type NullableString = Nullable<string>
     type OptionalString = string | undefined
 
@@ -113,7 +113,7 @@ describe('Nullable type', () => {
     // expectTypeOf<null>().toMatchTypeOf<OptionalString>()
   })
 
-  it('should work in function signatures', () => {
+  test('should work in function signatures', () => {
     // Function accepting nullable parameter
     const processValue = (value: Nullable<string>): string => {
       return value ?? 'default'
@@ -129,7 +129,7 @@ describe('Nullable type', () => {
     expectTypeOf(processValue).returns.toEqualTypeOf<string>()
   })
 
-  it('should work with optional properties', () => {
+  test('should work with optional properties', () => {
     interface UserProfile {
       id: number
       name: string
@@ -149,7 +149,7 @@ describe('Nullable type', () => {
   })
 
   describe('practical usage examples', () => {
-    it('should work with database entity patterns', () => {
+    test('should work with database entity patterns', () => {
       interface User {
         id: number
         name: string
@@ -167,7 +167,7 @@ describe('Nullable type', () => {
       expectTypeOf<null>().toMatchTypeOf<User['deletedAt']>()
     })
 
-    it('should work with API response patterns', () => {
+    test('should work with API response patterns', () => {
       interface ApiResponse<T> {
         data: Nullable<T>
         error: Nullable<string>
@@ -202,7 +202,7 @@ describe('Nullable type', () => {
       >()
     })
 
-    it('should work with form validation patterns', () => {
+    test('should work with form validation patterns', () => {
       interface FormState {
         email: string
         password: string
@@ -219,7 +219,7 @@ describe('Nullable type', () => {
       expectTypeOf<null>().toMatchTypeOf<FormState['errors']['email']>()
     })
 
-    it('should work with caching patterns', () => {
+    test('should work with caching patterns', () => {
       interface CacheEntry<T> {
         value: Nullable<T>
         timestamp: number
@@ -243,7 +243,7 @@ describe('Nullable type', () => {
       expectTypeOf<null>().toMatchTypeOf<UserCacheEntry['expiresAt']>()
     })
 
-    it('should work with search and filter patterns', () => {
+    test('should work with search and filter patterns', () => {
       interface SearchParams {
         query: string
         category: Nullable<string>
@@ -265,7 +265,7 @@ describe('Nullable type', () => {
       expectTypeOf<null>().toMatchTypeOf<SearchParams['sortBy']>()
     })
 
-    it('should work with parent-child relationship patterns', () => {
+    test('should work with parent-child relationship patterns', () => {
       interface TreeNode<T> {
         id: string
         value: T
@@ -287,7 +287,7 @@ describe('Nullable type', () => {
   })
 
   describe('type utilities and combinations', () => {
-    it('should work with NonNullable utility', () => {
+    test('should work with NonNullable utility', () => {
       type NullableString = Nullable<string>
       type NonNullableString = NonNullable<NullableString>
 
@@ -298,7 +298,7 @@ describe('Nullable type', () => {
       // The type system correctly prevents: const test: NonNullableString = null
     })
 
-    it('should work with mapped types', () => {
+    test('should work with mapped types', () => {
       type NullableFields<T> = {
         [K in keyof T]: Nullable<T[K]>
       }
@@ -319,7 +319,7 @@ describe('Nullable type', () => {
       expectTypeOf<null>().toMatchTypeOf<NullableUser['name']>()
     })
 
-    it('should work with conditional types', () => {
+    test('should work with conditional types', () => {
       type NullableIfString<T> = T extends string ? Nullable<T> : T
 
       // String becomes nullable
@@ -329,7 +329,7 @@ describe('Nullable type', () => {
       expectTypeOf<number>().toEqualTypeOf<NullableIfString<number>>()
     })
 
-    it('should work with Pick and Omit', () => {
+    test('should work with Pick and Omit', () => {
       interface User {
         id: number
         name: string

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest'
 import z from 'zod'
 
 describe('or zodPlayground', () => {
@@ -13,14 +13,14 @@ describe('or zodPlayground', () => {
   })
 
   describe('zod import functionality', () => {
-    it('should import zod successfully', () => {
+    test('should import zod successfully', () => {
       expect(z).toBeDefined()
       expect(typeof z.string).toBe('function')
       expect(typeof z.number).toBe('function')
       expect(typeof z.object).toBe('function')
     })
 
-    it('should have core zod methods available', () => {
+    test('should have core zod methods available', () => {
       const expectedMethods = [
         'string',
         'number',
@@ -42,7 +42,7 @@ describe('or zodPlayground', () => {
   })
 
   describe('zod or/union functionality examples', () => {
-    it('should demonstrate union types with z.union()', () => {
+    test('should demonstrate union types with z.union()', () => {
       const stringOrNumber = z.union([z.string(), z.number()])
 
       const validInputs = ['hello', 42, '', 0, -1, 3.14]
@@ -62,7 +62,7 @@ describe('or zodPlayground', () => {
       })
     })
 
-    it('should demonstrate or() method with schemas', () => {
+    test('should demonstrate or() method with schemas', () => {
       const stringOrNumber = z.string().or(z.number())
 
       expect(stringOrNumber.safeParse('hello').success).toBe(true)
@@ -70,7 +70,7 @@ describe('or zodPlayground', () => {
       expect(stringOrNumber.safeParse(true).success).toBe(false)
     })
 
-    it('should handle complex union types', () => {
+    test('should handle complex union types', () => {
       const userSchema = z.object({
         id: z.number(),
         name: z.string(),
@@ -92,7 +92,7 @@ describe('or zodPlayground', () => {
       expect(userOrAdmin.safeParse({ id: 1 }).success).toBe(false)
     })
 
-    it('should demonstrate multiple union options', () => {
+    test('should demonstrate multiple union options', () => {
       const multiUnion = z.union([
         z.string(),
         z.number(),
@@ -120,7 +120,7 @@ describe('or zodPlayground', () => {
   })
 
   describe('discriminated unions', () => {
-    it('should handle discriminated unions with literal types', () => {
+    test('should handle discriminated unions with literal types', () => {
       const shapeSchema = z.discriminatedUnion('type', [
         z.object({
           type: z.literal('circle'),
@@ -142,7 +142,7 @@ describe('or zodPlayground', () => {
       expect(shapeSchema.safeParse(invalid).success).toBe(false)
     })
 
-    it('should provide specific error messages for discriminated unions', () => {
+    test('should provide specific error messages for discriminated unions', () => {
       const eventSchema = z.discriminatedUnion('eventType', [
         z.object({
           eventType: z.literal('click'),
@@ -170,7 +170,7 @@ describe('or zodPlayground', () => {
   })
 
   describe('literal unions and enums', () => {
-    it('should handle literal value unions', () => {
+    test('should handle literal value unions', () => {
       const statusSchema = z.union([
         z.literal('pending'),
         z.literal('approved'),
@@ -183,7 +183,7 @@ describe('or zodPlayground', () => {
       expect(statusSchema.safeParse('invalid').success).toBe(false)
     })
 
-    it('should handle enum schemas as alternative to unions', () => {
+    test('should handle enum schemas as alternative to unions', () => {
       const statusEnum = z.enum(['pending', 'approved', 'rejected'])
 
       expect(statusEnum.safeParse('pending').success).toBe(true)
@@ -192,7 +192,7 @@ describe('or zodPlayground', () => {
       expect(statusEnum.safeParse('invalid').success).toBe(false)
     })
 
-    it('should handle numeric literal unions', () => {
+    test('should handle numeric literal unions', () => {
       const versionSchema = z.union([z.literal(1), z.literal(2), z.literal(3)])
 
       expect(versionSchema.safeParse(1).success).toBe(true)
@@ -204,7 +204,7 @@ describe('or zodPlayground', () => {
   })
 
   describe('optional and nullable with or', () => {
-    it('should handle optional fields with or patterns', () => {
+    test('should handle optional fields with or patterns', () => {
       const configSchema = z.object({
         host: z.string(),
         port: z.number().or(z.string()), // Port can be number or string
@@ -224,7 +224,7 @@ describe('or zodPlayground', () => {
       })
     })
 
-    it('should handle nullable or undefined patterns', () => {
+    test('should handle nullable or undefined patterns', () => {
       const optionalString = z.string().or(z.null()).or(z.undefined())
 
       expect(optionalString.safeParse('hello').success).toBe(true)
@@ -233,7 +233,7 @@ describe('or zodPlayground', () => {
       expect(optionalString.safeParse(123).success).toBe(false)
     })
 
-    it('should handle nullish as alternative to or patterns', () => {
+    test('should handle nullish as alternative to or patterns', () => {
       const nullishString = z.string().nullish() // Equivalent to .or(z.null()).or(z.undefined())
 
       expect(nullishString.safeParse('hello').success).toBe(true)
@@ -244,7 +244,7 @@ describe('or zodPlayground', () => {
   })
 
   describe('error handling and type inference', () => {
-    it('should provide clear error messages for union failures', () => {
+    test('should provide clear error messages for union failures', () => {
       const stringOrNumberSchema = z.string().or(z.number())
       const result = stringOrNumberSchema.safeParse(true)
 
@@ -259,7 +259,7 @@ describe('or zodPlayground', () => {
       }
     })
 
-    it('should infer correct types for unions', () => {
+    test('should infer correct types for unions', () => {
       const stringOrNumber = z.string().or(z.number())
       type StringOrNumber = z.infer<typeof stringOrNumber>
 
@@ -271,7 +271,7 @@ describe('or zodPlayground', () => {
       expect(stringOrNumber.safeParse(value2).success).toBe(true)
     })
 
-    it('should work with parse() method for valid union data', () => {
+    test('should work with parse() method for valid union data', () => {
       const stringOrNumber = z.string().or(z.number())
 
       expect(() => stringOrNumber.parse('hello')).not.toThrow()
@@ -284,7 +284,7 @@ describe('or zodPlayground', () => {
   })
 
   describe('complex union scenarios', () => {
-    it('should handle nested object unions', () => {
+    test('should handle nested object unions', () => {
       const apiResponseSchema = z.union([
         z.object({
           success: z.literal(true),
@@ -316,7 +316,7 @@ describe('or zodPlayground', () => {
       expect(apiResponseSchema.safeParse(errorResponse).success).toBe(true)
     })
 
-    it('should handle array unions', () => {
+    test('should handle array unions', () => {
       const mixedArraySchema = z.union([
         z.array(z.string()),
         z.array(z.number()),
@@ -329,7 +329,7 @@ describe('or zodPlayground', () => {
       expect(mixedArraySchema.safeParse(['mixed', 123]).success).toBe(false)
     })
 
-    it('should handle function unions (if supported)', () => {
+    test('should handle function unions (if supported)', () => {
       // Zod doesn't typically handle functions, but we can test the concept
       const stringOrNumberOrBoolean = z.union([
         z.string(),
@@ -356,12 +356,16 @@ describe('or zodPlayground', () => {
   })
 
   describe('performance considerations', () => {
-    it('should handle large union types efficiently', () => {
+    test('should handle large union types efficiently', () => {
       // Create a union with many literal options
       const options = Array.from({ length: 100 }, (_, i) =>
         z.literal(`option${i}`),
       )
-      const largeUnion = z.union([options[0]!, options[1]!, ...options.slice(2)] as [z.ZodLiteral<any>, z.ZodLiteral<any>, ...z.ZodLiteral<any>[]])
+      const largeUnion = z.union([
+        options[0]!,
+        options[1]!,
+        ...options.slice(2),
+      ] as [z.ZodLiteral<any>, z.ZodLiteral<any>, ...z.ZodLiteral<any>[]])
 
       const startTime = performance.now()
       const result = largeUnion.safeParse('option50')
@@ -371,7 +375,7 @@ describe('or zodPlayground', () => {
       expect(endTime - startTime).toBeLessThan(50) // Should be reasonably fast
     })
 
-    it('should handle union validation errors efficiently', () => {
+    test('should handle union validation errors efficiently', () => {
       const complexUnion = z.union([
         z.object({ type: z.literal('A'), valueA: z.string() }),
         z.object({ type: z.literal('B'), valueB: z.number() }),
@@ -390,7 +394,7 @@ describe('or zodPlayground', () => {
   })
 
   describe('real-world usage patterns', () => {
-    it('should handle configuration object unions', () => {
+    test('should handle configuration object unions', () => {
       const databaseConfigSchema = z.union([
         z.object({
           type: z.literal('sqlite'),
@@ -429,7 +433,7 @@ describe('or zodPlayground', () => {
       })
     })
 
-    it('should handle API payload unions', () => {
+    test('should handle API payload unions', () => {
       const apiPayloadSchema = z.union([
         z.object({
           action: z.literal('create'),

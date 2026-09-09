@@ -1,5 +1,5 @@
 /// <reference path="./global.d.ts" />
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, test, expect, beforeEach } from 'vitest'
 import './core.js'
 
 describe('jQuery Core - $()', () => {
@@ -9,7 +9,7 @@ describe('jQuery Core - $()', () => {
   })
 
   describe('Element Selection', () => {
-    it('should select elements by tag name', () => {
+    test('should select elements by tag name', () => {
       // Setup
       document.body.innerHTML = `
         <div>First div</div>
@@ -26,7 +26,7 @@ describe('jQuery Core - $()', () => {
       expect(divs[1]?.textContent).toBe('Second div')
     })
 
-    it('should select elements by ID', () => {
+    test('should select elements by ID', () => {
       // Setup
       document.body.innerHTML = `
         <div id="test-id">Selected by ID</div>
@@ -41,7 +41,7 @@ describe('jQuery Core - $()', () => {
       expect(element[0]?.textContent).toBe('Selected by ID')
     })
 
-    it('should select elements by class', () => {
+    test('should select elements by class', () => {
       // Setup
       document.body.innerHTML = `
         <div class="test-class">First with class</div>
@@ -58,7 +58,7 @@ describe('jQuery Core - $()', () => {
       expect(elements[1]?.textContent).toBe('Second with class')
     })
 
-    it('should select multiple classes', () => {
+    test('should select multiple classes', () => {
       // Setup
       document.body.innerHTML = `
         <div class="class1 class2">Both classes</div>
@@ -74,7 +74,7 @@ describe('jQuery Core - $()', () => {
       expect(elements[0]?.textContent).toBe('Both classes')
     })
 
-    it('should select elements by attribute', () => {
+    test('should select elements by attribute', () => {
       // Setup
       document.body.innerHTML = `
         <input type="text" value="Text input">
@@ -90,7 +90,7 @@ describe('jQuery Core - $()', () => {
       expect((textInputs[0] as HTMLInputElement)?.value).toBe('Text input')
     })
 
-    it('should support complex CSS selectors', () => {
+    test('should support complex CSS selectors', () => {
       // Setup
       document.body.innerHTML = `
         <ul>
@@ -108,7 +108,7 @@ describe('jQuery Core - $()', () => {
       expect(activeItem[0]?.textContent).toBe('Item 2')
     })
 
-    it('should return empty collection for non-existent elements', () => {
+    test('should return empty collection for non-existent elements', () => {
       // Test
       const elements = $('.non-existent')
 
@@ -118,7 +118,7 @@ describe('jQuery Core - $()', () => {
   })
 
   describe('DOM Creation', () => {
-    it('should create simple elements', () => {
+    test('should create simple elements', () => {
       // Test
       const div = $('<div>')
 
@@ -127,7 +127,7 @@ describe('jQuery Core - $()', () => {
       expect(div[0]?.tagName.toLowerCase()).toBe('div')
     })
 
-    it('should create elements with attributes', () => {
+    test('should create elements with attributes', () => {
       // Test
       const link = $('<a href="https://example.com">Link</a>')
 
@@ -138,7 +138,7 @@ describe('jQuery Core - $()', () => {
       expect(link[0]?.textContent).toBe('Link')
     })
 
-    it('should create elements with classes', () => {
+    test('should create elements with classes', () => {
       // Test
       const div = $('<div class="new-class">Content</div>')
 
@@ -147,7 +147,7 @@ describe('jQuery Core - $()', () => {
       expect(div[0]?.textContent).toBe('Content')
     })
 
-    it('should create self-closing elements', () => {
+    test('should create self-closing elements', () => {
       // Test
       const img = $('<img src="test.jpg" />')
 
@@ -158,7 +158,7 @@ describe('jQuery Core - $()', () => {
   })
 
   describe('Context Selection', () => {
-    it('should select within a specific context', () => {
+    test('should select within a specific context', () => {
       // Setup
       document.body.innerHTML = `
         <div id="context1">
@@ -178,7 +178,7 @@ describe('jQuery Core - $()', () => {
       expect(spans[0]?.textContent).toBe('Inside context1')
     })
 
-    it('should accept jQuery object as context', () => {
+    test('should accept jQuery object as context', () => {
       // Setup
       document.body.innerHTML = `
         <div class="container">
@@ -198,7 +198,7 @@ describe('jQuery Core - $()', () => {
   })
 
   describe('Special Characters', () => {
-    it('should handle IDs with special characters', () => {
+    test('should handle IDs with special characters', () => {
       // Setup
       document.body.innerHTML = `
         <div id="test.id">ID with dot</div>
@@ -218,7 +218,7 @@ describe('jQuery Core - $()', () => {
   })
 
   describe('Collection Behavior', () => {
-    it('should be array-like with length property', () => {
+    test('should be array-like with length property', () => {
       // Setup
       document.body.innerHTML = `
         <div>1</div>
@@ -234,7 +234,7 @@ describe('jQuery Core - $()', () => {
       expect(divs.length).toBe(3)
     })
 
-    it('should allow index access', () => {
+    test('should allow index access', () => {
       // Setup
       document.body.innerHTML = `
         <div>First</div>
@@ -251,7 +251,7 @@ describe('jQuery Core - $()', () => {
       expect(divs[2]).toBeUndefined()
     })
 
-    it('should be iterable', () => {
+    test('should be iterable', () => {
       // Setup
       document.body.innerHTML = `
         <span>A</span>
@@ -273,7 +273,7 @@ describe('jQuery Core - $()', () => {
   })
 
   describe('Ready Function', () => {
-    it('should accept ready callback', () => {
+    test('should accept ready callback', () => {
       let callbackExecuted = false
 
       // Test
@@ -290,7 +290,7 @@ describe('jQuery Core - $()', () => {
   })
 
   describe('Window and Document Selection', () => {
-    it('should wrap window object', () => {
+    test('should wrap window object', () => {
       // Test
       const $window = $(window)
 
@@ -299,7 +299,7 @@ describe('jQuery Core - $()', () => {
       expect($window[0]).toBe(window)
     })
 
-    it('should wrap document object', () => {
+    test('should wrap document object', () => {
       // Test
       const $document = $(document)
 
@@ -310,7 +310,7 @@ describe('jQuery Core - $()', () => {
   })
 
   describe('DOM Element Wrapping', () => {
-    it('should wrap a single DOM element', () => {
+    test('should wrap a single DOM element', () => {
       // Setup
       const div = document.createElement('div')
       div.textContent = 'Test'
@@ -324,7 +324,7 @@ describe('jQuery Core - $()', () => {
       expect($div[0]?.textContent).toBe('Test')
     })
 
-    it('should wrap NodeList', () => {
+    test('should wrap NodeList', () => {
       // Setup
       document.body.innerHTML = `
         <p>1</p>

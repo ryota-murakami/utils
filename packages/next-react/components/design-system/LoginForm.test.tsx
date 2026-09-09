@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { http, HttpResponse } from 'msw'
-import { describe, it, expect, vi } from 'vitest'
+import { describe, test, expect, vi } from 'vitest'
 
 import { server } from '../../mocks/server'
 
@@ -9,7 +9,7 @@ import { LoginForm } from './LoginForm'
 
 describe('LoginForm', () => {
   describe('rendering', () => {
-    it('renders all form elements', () => {
+    test('renders all form elements', () => {
       render(<LoginForm />)
 
       expect(screen.getByLabelText(/email/i)).toBeInTheDocument()
@@ -19,14 +19,14 @@ describe('LoginForm', () => {
       ).toBeInTheDocument()
     })
 
-    it('renders with proper form attributes', () => {
+    test('renders with proper form attributes', () => {
       render(<LoginForm />)
 
       const form = screen.getByRole('form', { name: /login/i })
       expect(form).toBeInTheDocument()
     })
 
-    it('email input has correct type and attributes', () => {
+    test('email input has correct type and attributes', () => {
       render(<LoginForm />)
 
       const emailInput = screen.getByLabelText(/email/i)
@@ -34,7 +34,7 @@ describe('LoginForm', () => {
       expect(emailInput).toHaveAttribute('autocomplete', 'email')
     })
 
-    it('password input has correct type and attributes', () => {
+    test('password input has correct type and attributes', () => {
       render(<LoginForm />)
 
       const passwordInput = screen.getByLabelText(/password/i)
@@ -44,7 +44,7 @@ describe('LoginForm', () => {
   })
 
   describe('form validation', () => {
-    it('shows validation errors for empty fields', async () => {
+    test('shows validation errors for empty fields', async () => {
       const user = userEvent.setup()
       render(<LoginForm />)
 
@@ -57,7 +57,7 @@ describe('LoginForm', () => {
       ).toBeInTheDocument()
     })
 
-    it('shows validation error for short password', async () => {
+    test('shows validation error for short password', async () => {
       const user = userEvent.setup()
       render(<LoginForm />)
 
@@ -72,7 +72,7 @@ describe('LoginForm', () => {
       ).toBeInTheDocument()
     })
 
-    it('clears validation errors when user corrects input', async () => {
+    test('clears validation errors when user corrects input', async () => {
       const user = userEvent.setup()
       render(<LoginForm />)
 
@@ -98,7 +98,7 @@ describe('LoginForm', () => {
   })
 
   describe('form submission', () => {
-    it('submits form with valid credentials', async () => {
+    test('submits form with valid credentials', async () => {
       const user = userEvent.setup()
 
       render(<LoginForm />)
@@ -115,7 +115,7 @@ describe('LoginForm', () => {
       expect(await screen.findByText(/welcome back/i)).toBeInTheDocument()
     })
 
-    it('disables submit button during loading', async () => {
+    test('disables submit button during loading', async () => {
       const user = userEvent.setup()
 
       // Mock a delayed response
@@ -147,7 +147,7 @@ describe('LoginForm', () => {
       expect(await screen.findByText(/welcome back/i)).toBeInTheDocument()
     })
 
-    it('shows loading spinner during submission', async () => {
+    test('shows loading spinner during submission', async () => {
       const user = userEvent.setup()
 
       // Mock a delayed response
@@ -185,7 +185,7 @@ describe('LoginForm', () => {
   })
 
   describe('error handling', () => {
-    it('displays server error message for invalid credentials', async () => {
+    test('displays server error message for invalid credentials', async () => {
       const user = userEvent.setup()
 
       render(<LoginForm />)
@@ -204,7 +204,7 @@ describe('LoginForm', () => {
       expect(screen.getByRole('alert')).toBeInTheDocument()
     })
 
-    it('displays network error message', async () => {
+    test('displays network error message', async () => {
       const user = userEvent.setup()
 
       render(<LoginForm />)
@@ -220,7 +220,7 @@ describe('LoginForm', () => {
       expect(await screen.findByText(/network error/i)).toBeInTheDocument()
     })
 
-    it('clears error message on new submission', async () => {
+    test('clears error message on new submission', async () => {
       const user = userEvent.setup()
 
       render(<LoginForm />)
@@ -250,7 +250,7 @@ describe('LoginForm', () => {
       })
     })
 
-    it('handles custom error scenarios with MSW', async () => {
+    test('handles custom error scenarios with MSW', async () => {
       const user = userEvent.setup()
 
       // Override handler for this specific test
@@ -278,7 +278,7 @@ describe('LoginForm', () => {
   })
 
   describe('success handling', () => {
-    it('displays success message after successful login', async () => {
+    test('displays success message after successful login', async () => {
       const user = userEvent.setup()
 
       render(<LoginForm />)
@@ -294,7 +294,7 @@ describe('LoginForm', () => {
       expect(await screen.findByText(/welcome back/i)).toBeInTheDocument()
     })
 
-    it('calls onSuccess callback when provided', async () => {
+    test('calls onSuccess callback when provided', async () => {
       const user = userEvent.setup()
       const onSuccess = vi.fn()
 
@@ -318,7 +318,7 @@ describe('LoginForm', () => {
   })
 
   describe('accessibility', () => {
-    it('associates error messages with form fields', async () => {
+    test('associates error messages with form fields', async () => {
       const user = userEvent.setup()
       render(<LoginForm />)
 
@@ -334,7 +334,7 @@ describe('LoginForm', () => {
       expect(emailInput).toHaveAttribute('aria-invalid', 'true')
     })
 
-    it('announces errors to screen readers', async () => {
+    test('announces errors to screen readers', async () => {
       const user = userEvent.setup()
       render(<LoginForm />)
 
@@ -347,7 +347,7 @@ describe('LoginForm', () => {
       expect(errorRegions[1]).toBeInTheDocument()
     })
 
-    it('provides proper focus management', async () => {
+    test('provides proper focus management', async () => {
       const user = userEvent.setup()
       render(<LoginForm />)
 
@@ -367,7 +367,7 @@ describe('LoginForm', () => {
   })
 
   describe('keyboard navigation', () => {
-    it('submits form when Enter is pressed in form fields', async () => {
+    test('submits form when Enter is pressed in form fields', async () => {
       const user = userEvent.setup()
 
       render(<LoginForm />)

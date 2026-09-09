@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest'
 
 import { openInNewTab } from './openInNewTab.js'
 
@@ -38,37 +38,37 @@ describe('openInNewTab', () => {
   })
 
   describe('basic functionality', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(typeof openInNewTab).toBe('function')
     })
 
-    it('should create an anchor element', () => {
+    test('should create an anchor element', () => {
       openInNewTab('https://example.com')
 
       expect(document.createElement).toHaveBeenCalledWith('a')
       expect(document.createElement).toHaveBeenCalledTimes(1)
     })
 
-    it('should set target to _blank', () => {
+    test('should set target to _blank', () => {
       openInNewTab('https://example.com')
 
       expect(mockAnchor.target).toBe('_blank')
     })
 
-    it('should set href to the provided URL', () => {
+    test('should set href to the provided URL', () => {
       const url = 'https://example.com'
       openInNewTab(url)
 
       expect(mockAnchor.href).toBe(url)
     })
 
-    it('should call click on the anchor element', () => {
+    test('should call click on the anchor element', () => {
       openInNewTab('https://example.com')
 
       expect(mockAnchor.click).toHaveBeenCalledTimes(1)
     })
 
-    it('should not return any value', () => {
+    test('should not return any value', () => {
       const result = openInNewTab('https://example.com')
 
       expect(result).toBeUndefined()
@@ -76,7 +76,7 @@ describe('openInNewTab', () => {
   })
 
   describe('URL handling', () => {
-    it('should handle HTTPS URLs', () => {
+    test('should handle HTTPS URLs', () => {
       const url = 'https://secure.example.com/path'
       openInNewTab(url)
 
@@ -85,7 +85,7 @@ describe('openInNewTab', () => {
       expect(mockAnchor.click).toHaveBeenCalled()
     })
 
-    it('should handle HTTP URLs', () => {
+    test('should handle HTTP URLs', () => {
       const url = 'http://example.com'
       openInNewTab(url)
 
@@ -94,7 +94,7 @@ describe('openInNewTab', () => {
       expect(mockAnchor.click).toHaveBeenCalled()
     })
 
-    it('should handle URLs with paths and query parameters', () => {
+    test('should handle URLs with paths and query parameters', () => {
       const url = 'https://example.com/path/to/page?param1=value1&param2=value2'
       openInNewTab(url)
 
@@ -103,7 +103,7 @@ describe('openInNewTab', () => {
       expect(mockAnchor.click).toHaveBeenCalled()
     })
 
-    it('should handle URLs with fragments', () => {
+    test('should handle URLs with fragments', () => {
       const url = 'https://example.com/page#section1'
       openInNewTab(url)
 
@@ -112,7 +112,7 @@ describe('openInNewTab', () => {
       expect(mockAnchor.click).toHaveBeenCalled()
     })
 
-    it('should handle relative URLs', () => {
+    test('should handle relative URLs', () => {
       const url = '/relative/path'
       openInNewTab(url)
 
@@ -121,7 +121,7 @@ describe('openInNewTab', () => {
       expect(mockAnchor.click).toHaveBeenCalled()
     })
 
-    it('should handle protocol-relative URLs', () => {
+    test('should handle protocol-relative URLs', () => {
       const url = '//example.com/path'
       openInNewTab(url)
 
@@ -130,7 +130,7 @@ describe('openInNewTab', () => {
       expect(mockAnchor.click).toHaveBeenCalled()
     })
 
-    it('should handle file URLs', () => {
+    test('should handle file URLs', () => {
       const url = 'file:///path/to/file.html'
       openInNewTab(url)
 
@@ -139,7 +139,7 @@ describe('openInNewTab', () => {
       expect(mockAnchor.click).toHaveBeenCalled()
     })
 
-    it('should handle data URLs', () => {
+    test('should handle data URLs', () => {
       const url = 'data:text/html,<h1>Hello World</h1>'
       openInNewTab(url)
 
@@ -148,7 +148,7 @@ describe('openInNewTab', () => {
       expect(mockAnchor.click).toHaveBeenCalled()
     })
 
-    it('should handle blob URLs', () => {
+    test('should handle blob URLs', () => {
       const url = 'blob:https://example.com/12345-6789'
       openInNewTab(url)
 
@@ -159,7 +159,7 @@ describe('openInNewTab', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle empty string URL', () => {
+    test('should handle empty string URL', () => {
       openInNewTab('')
 
       expect(mockAnchor.href).toBe('')
@@ -167,7 +167,7 @@ describe('openInNewTab', () => {
       expect(mockAnchor.click).toHaveBeenCalled()
     })
 
-    it('should handle URLs with special characters', () => {
+    test('should handle URLs with special characters', () => {
       const url =
         'https://example.com/path with spaces/file?query=value with spaces'
       openInNewTab(url)
@@ -177,7 +177,7 @@ describe('openInNewTab', () => {
       expect(mockAnchor.click).toHaveBeenCalled()
     })
 
-    it('should handle URLs with international characters', () => {
+    test('should handle URLs with international characters', () => {
       const url = 'https://例え.テスト/パス'
       openInNewTab(url)
 
@@ -186,7 +186,7 @@ describe('openInNewTab', () => {
       expect(mockAnchor.click).toHaveBeenCalled()
     })
 
-    it('should handle very long URLs', () => {
+    test('should handle very long URLs', () => {
       const longPath = 'a'.repeat(2000)
       const url = `https://example.com/${longPath}`
       openInNewTab(url)
@@ -196,7 +196,7 @@ describe('openInNewTab', () => {
       expect(mockAnchor.click).toHaveBeenCalled()
     })
 
-    it('should handle malformed URLs gracefully', () => {
+    test('should handle malformed URLs gracefully', () => {
       const malformedUrls = [
         'ht tp://example.com',
         'https://',
@@ -220,7 +220,7 @@ describe('openInNewTab', () => {
   })
 
   describe('multiple calls', () => {
-    it('should create new anchor element for each call', () => {
+    test('should create new anchor element for each call', () => {
       openInNewTab('https://example1.com')
       openInNewTab('https://example2.com')
       openInNewTab('https://example3.com')
@@ -229,7 +229,7 @@ describe('openInNewTab', () => {
       expect(mockAnchor.click).toHaveBeenCalledTimes(3)
     })
 
-    it('should handle rapid successive calls', () => {
+    test('should handle rapid successive calls', () => {
       const urls = [
         'https://example1.com',
         'https://example2.com',
@@ -246,7 +246,7 @@ describe('openInNewTab', () => {
   })
 
   describe('security considerations', () => {
-    it('should not prevent potentially harmful URLs (delegates to browser)', () => {
+    test('should not prevent potentially harmful URLs (delegates to browser)', () => {
       const potentiallyHarmfulUrls = [
         'javascript:alert("xss")',
         'data:text/html,<script>alert("xss")</script>',
@@ -264,7 +264,7 @@ describe('openInNewTab', () => {
       })
     })
 
-    it('should use _blank target for security (prevents window.opener access)', () => {
+    test('should use _blank target for security (prevents window.opener access)', () => {
       openInNewTab('https://external-site.com')
 
       expect(mockAnchor.target).toBe('_blank')
@@ -272,7 +272,7 @@ describe('openInNewTab', () => {
   })
 
   describe('browser compatibility patterns', () => {
-    it('should work with real DOM elements', () => {
+    test('should work with real DOM elements', () => {
       // Test with actual DOM implementation
       document.createElement = originalCreateElement
 
@@ -284,7 +284,7 @@ describe('openInNewTab', () => {
       spy.mockRestore()
     })
 
-    it('should handle click method not being available', () => {
+    test('should handle click method not being available', () => {
       // Test edge case where click method might not exist
       const anchorWithoutClick = {
         target: '',
@@ -302,7 +302,7 @@ describe('openInNewTab', () => {
   })
 
   describe('performance considerations', () => {
-    it('should not accumulate DOM elements', () => {
+    test('should not accumulate DOM elements', () => {
       // Elements should not be added to the DOM
       const initialChildCount = document.body.children.length
 
@@ -314,7 +314,7 @@ describe('openInNewTab', () => {
       expect(document.body.children.length).toBe(initialChildCount)
     })
 
-    it('should be efficient for multiple calls', () => {
+    test('should be efficient for multiple calls', () => {
       const startTime = performance.now()
 
       for (let i = 0; i < 100; i++) {
@@ -331,7 +331,7 @@ describe('openInNewTab', () => {
   })
 
   describe('real world usage patterns', () => {
-    it('should work in event handlers', () => {
+    test('should work in event handlers', () => {
       const mockButton = {
         addEventListener: vi.fn(),
       }
@@ -347,7 +347,7 @@ describe('openInNewTab', () => {
       expect(mockAnchor.click).toHaveBeenCalled()
     })
 
-    it('should work with dynamic URLs', () => {
+    test('should work with dynamic URLs', () => {
       const baseUrl = 'https://api.example.com'
       const userId = '12345'
       const dynamicUrl = `${baseUrl}/users/${userId}/profile`
@@ -359,7 +359,7 @@ describe('openInNewTab', () => {
       expect(mockAnchor.click).toHaveBeenCalled()
     })
 
-    it('should work with conditional logic', () => {
+    test('should work with conditional logic', () => {
       const shouldOpenInNewTab = true
       const url = 'https://example.com'
 

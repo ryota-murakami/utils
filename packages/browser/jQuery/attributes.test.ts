@@ -1,5 +1,5 @@
 /// <reference path="./global.d.ts" />
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, test, expect, beforeEach } from 'vitest'
 import './core.js'
 
 describe('jQuery Attribute Methods', () => {
@@ -9,7 +9,7 @@ describe('jQuery Attribute Methods', () => {
   })
 
   describe('.attr()', () => {
-    it('should get attribute value', () => {
+    test('should get attribute value', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" title="Hello" data-value="123"></div>'
@@ -20,7 +20,7 @@ describe('jQuery Attribute Methods', () => {
       expect($('#test').attr('data-value')).toBe('123')
     })
 
-    it('should return undefined for non-existent attribute', () => {
+    test('should return undefined for non-existent attribute', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -29,7 +29,7 @@ describe('jQuery Attribute Methods', () => {
       expect($('#test').attr('data-missing')).toBeUndefined()
     })
 
-    it('should get attribute from first element only', () => {
+    test('should get attribute from first element only', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item" title="First"></div>
@@ -40,7 +40,7 @@ describe('jQuery Attribute Methods', () => {
       expect($('.item').attr('title')).toBe('First')
     })
 
-    it('should set attribute value', () => {
+    test('should set attribute value', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -53,7 +53,7 @@ describe('jQuery Attribute Methods', () => {
       )
     })
 
-    it('should set attributes on multiple elements', () => {
+    test('should set attributes on multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item"></div>
@@ -69,7 +69,7 @@ describe('jQuery Attribute Methods', () => {
       expect(items[1]?.getAttribute('data-index')).toBe('value')
     })
 
-    it('should set multiple attributes with object', () => {
+    test('should set multiple attributes with object', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -87,7 +87,7 @@ describe('jQuery Attribute Methods', () => {
       expect(element?.getAttribute('aria-label')).toBe('Test Label')
     })
 
-    it('should accept function for attribute value', () => {
+    test('should accept function for attribute value', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item" data-index="0"></div>
@@ -105,7 +105,7 @@ describe('jQuery Attribute Methods', () => {
       expect(items[1]?.getAttribute('title')).toBe('Item 1 - no value')
     })
 
-    it('should handle boolean attributes correctly', () => {
+    test('should handle boolean attributes correctly', () => {
       // Setup
       document.body.innerHTML = '<input id="test" />'
 
@@ -119,7 +119,7 @@ describe('jQuery Attribute Methods', () => {
       expect(input.hasAttribute('readonly')).toBe(true)
     })
 
-    it('should return jQuery object for chaining when setting', () => {
+    test('should return jQuery object for chaining when setting', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -131,7 +131,7 @@ describe('jQuery Attribute Methods', () => {
       expect(result[0]).toBe(document.getElementById('test'))
     })
 
-    it('should handle empty collection', () => {
+    test('should handle empty collection', () => {
       // Test getting
       expect($('.non-existent').attr('title')).toBeUndefined()
 
@@ -142,7 +142,7 @@ describe('jQuery Attribute Methods', () => {
   })
 
   describe('.removeAttr()', () => {
-    it('should remove single attribute', () => {
+    test('should remove single attribute', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" title="Hello" data-value="123"></div>'
@@ -156,7 +156,7 @@ describe('jQuery Attribute Methods', () => {
       expect(element?.hasAttribute('data-value')).toBe(true)
     })
 
-    it('should remove multiple attributes (space-separated)', () => {
+    test('should remove multiple attributes (space-separated)', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" title="Hello" data-value="123" aria-label="Test"></div>'
@@ -171,7 +171,7 @@ describe('jQuery Attribute Methods', () => {
       expect(element?.hasAttribute('aria-label')).toBe(true)
     })
 
-    it('should remove attributes from multiple elements', () => {
+    test('should remove attributes from multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item" title="Item 1"></div>
@@ -187,7 +187,7 @@ describe('jQuery Attribute Methods', () => {
       expect(items[1]?.hasAttribute('title')).toBe(false)
     })
 
-    it('should return jQuery object for chaining', () => {
+    test('should return jQuery object for chaining', () => {
       // Setup
       document.body.innerHTML = '<div id="test" title="Hello"></div>'
 
@@ -199,7 +199,7 @@ describe('jQuery Attribute Methods', () => {
       expect(result[0]).toBe(document.getElementById('test'))
     })
 
-    it('should handle empty collection', () => {
+    test('should handle empty collection', () => {
       // Test - should not throw
       const result = $('.non-existent').removeAttr('title')
       expect(result).toHaveProperty('length', 0)
@@ -207,7 +207,7 @@ describe('jQuery Attribute Methods', () => {
   })
 
   describe('.prop()', () => {
-    it('should get property value', () => {
+    test('should get property value', () => {
       // Setup
       document.body.innerHTML =
         '<input type="checkbox" id="checkbox" checked />'
@@ -217,7 +217,7 @@ describe('jQuery Attribute Methods', () => {
       expect($('#checkbox').prop('type')).toBe('checkbox')
     })
 
-    it('should get property from first element only', () => {
+    test('should get property from first element only', () => {
       // Setup
       document.body.innerHTML = `
         <input type="checkbox" class="check" checked />
@@ -228,7 +228,7 @@ describe('jQuery Attribute Methods', () => {
       expect($('.check').prop('checked')).toBe(true)
     })
 
-    it('should set property value', () => {
+    test('should set property value', () => {
       // Setup
       document.body.innerHTML = '<input type="checkbox" id="checkbox" />'
 
@@ -240,7 +240,7 @@ describe('jQuery Attribute Methods', () => {
       expect(checkbox.checked).toBe(true)
     })
 
-    it('should set properties on multiple elements', () => {
+    test('should set properties on multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <input type="checkbox" class="check" />
@@ -258,7 +258,7 @@ describe('jQuery Attribute Methods', () => {
       expect(checkboxes[1]?.checked).toBe(true)
     })
 
-    it('should set multiple properties with object', () => {
+    test('should set multiple properties with object', () => {
       // Setup
       document.body.innerHTML = '<input id="input" />'
 
@@ -276,7 +276,7 @@ describe('jQuery Attribute Methods', () => {
       expect(input.value).toBe('test')
     })
 
-    it('should accept function for property value', () => {
+    test('should accept function for property value', () => {
       // Setup
       document.body.innerHTML = `
         <input class="input" value="old1" />
@@ -296,7 +296,7 @@ describe('jQuery Attribute Methods', () => {
       expect(inputs[1]?.value).toBe('new1-old2')
     })
 
-    it('should handle select element options', () => {
+    test('should handle select element options', () => {
       // Setup
       document.body.innerHTML = `
         <select id="select">
@@ -315,7 +315,7 @@ describe('jQuery Attribute Methods', () => {
       ).toBe(0)
     })
 
-    it('should return proper types for different properties', () => {
+    test('should return proper types for different properties', () => {
       // Setup
       document.body.innerHTML = `
         <input type="text" id="text" value="test" disabled />
@@ -328,7 +328,7 @@ describe('jQuery Attribute Methods', () => {
       expect($('#div').prop('tabIndex')).toBe(5)
     })
 
-    it('should return jQuery object for chaining when setting', () => {
+    test('should return jQuery object for chaining when setting', () => {
       // Setup
       document.body.innerHTML = '<input id="test" />'
 
@@ -340,7 +340,7 @@ describe('jQuery Attribute Methods', () => {
       expect(result[0]).toBe(document.getElementById('test'))
     })
 
-    it('should handle empty collection', () => {
+    test('should handle empty collection', () => {
       // Test getting
       expect($('.non-existent').prop('checked')).toBeUndefined()
 
@@ -351,7 +351,7 @@ describe('jQuery Attribute Methods', () => {
   })
 
   describe('.removeProp()', () => {
-    it('should remove custom properties', () => {
+    test('should remove custom properties', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
       const element = document.getElementById('test') as any
@@ -366,7 +366,7 @@ describe('jQuery Attribute Methods', () => {
       expect(element.anotherProp).toBe(123)
     })
 
-    it('should not remove native properties', () => {
+    test('should not remove native properties', () => {
       // Setup
       document.body.innerHTML = '<div id="test" class="myclass"></div>'
 
@@ -378,7 +378,7 @@ describe('jQuery Attribute Methods', () => {
       expect(element?.className).toBe('myclass')
     })
 
-    it('should remove properties from multiple elements', () => {
+    test('should remove properties from multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item"></div>
@@ -396,7 +396,7 @@ describe('jQuery Attribute Methods', () => {
       expect(items[1].customProp).toBeUndefined()
     })
 
-    it('should return jQuery object for chaining', () => {
+    test('should return jQuery object for chaining', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -408,7 +408,7 @@ describe('jQuery Attribute Methods', () => {
       expect(result[0]).toBe(document.getElementById('test'))
     })
 
-    it('should handle empty collection', () => {
+    test('should handle empty collection', () => {
       // Test - should not throw
       const result = $('.non-existent').removeProp('customProp')
       expect(result).toHaveProperty('length', 0)
@@ -416,7 +416,7 @@ describe('jQuery Attribute Methods', () => {
   })
 
   describe('attr vs prop differences', () => {
-    it('should handle checked attribute vs property correctly', () => {
+    test('should handle checked attribute vs property correctly', () => {
       // Setup
       document.body.innerHTML =
         '<input type="checkbox" id="cb" checked="checked" />'
@@ -434,7 +434,7 @@ describe('jQuery Attribute Methods', () => {
       expect($('#cb').prop('checked')).toBe(false)
     })
 
-    it('should handle value attribute vs property correctly', () => {
+    test('should handle value attribute vs property correctly', () => {
       // Setup
       document.body.innerHTML =
         '<input type="text" id="input" value="initial" />'

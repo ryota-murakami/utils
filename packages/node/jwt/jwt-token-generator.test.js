@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, test, expect, beforeEach } from 'vitest'
 
 import TokenGenerator from './token-generator.js'
 
@@ -16,7 +16,7 @@ describe('TokenGenerator', () => {
   })
 
   describe('constructor', () => {
-    it('should create instance with provided keys and options', () => {
+    test('should create instance with provided keys and options', () => {
       expect(generator.secretOrPrivateKey).toBe(secret)
       expect(generator.secretOrPublicKey).toBe(secret)
       expect(generator.options).toEqual({
@@ -25,7 +25,7 @@ describe('TokenGenerator', () => {
       })
     })
 
-    it('should handle different private and public keys', () => {
+    test('should handle different private and public keys', () => {
       const privateKey = 'private-key'
       const publicKey = 'public-key'
       const gen = new TokenGenerator(privateKey, publicKey, {})
@@ -34,14 +34,14 @@ describe('TokenGenerator', () => {
       expect(gen.secretOrPublicKey).toBe(publicKey)
     })
 
-    it('should handle empty options', () => {
+    test('should handle empty options', () => {
       const gen = new TokenGenerator(secret, secret, {})
       expect(gen.options).toEqual({})
     })
   })
 
   describe('sign()', () => {
-    it('should sign a token with provided payload', () => {
+    test('should sign a token with provided payload', () => {
       const token = generator.sign(payload)
 
       expect(typeof token).toBe('string')
@@ -54,7 +54,7 @@ describe('TokenGenerator', () => {
       expect(decoded.email).toBe(payload.email)
     })
 
-    it('should apply default options from constructor', () => {
+    test('should apply default options from constructor', () => {
       const token = generator.sign(payload)
       const decoded = jwt.verify(token, secret)
 
@@ -62,7 +62,7 @@ describe('TokenGenerator', () => {
       expect(decoded.iat).toBeDefined() // issued at should be set
     })
 
-    it('should override default options with signOptions', () => {
+    test('should override default options with signOptions', () => {
       const token = generator.sign(payload, {
         expiresIn: '2h',
         jwtid: 'custom-id',
@@ -75,7 +75,7 @@ describe('TokenGenerator', () => {
       expect(expirationTime).toBeGreaterThanOrEqual(7200) // 2 hours in seconds
     })
 
-    it('should handle empty payload', () => {
+    test('should handle empty payload', () => {
       const token = generator.sign({})
       const decoded = jwt.verify(token, secret)
 
@@ -83,7 +83,7 @@ describe('TokenGenerator', () => {
       expect(decoded.iat).toBeDefined()
     })
 
-    it('should handle complex nested payload', () => {
+    test('should handle complex nested payload', () => {
       const complexPayload = {
         user: {
           id: 123,
@@ -103,7 +103,7 @@ describe('TokenGenerator', () => {
       expect(decoded.metadata.version).toBe('1.0')
     })
 
-    it('should handle different algorithms', () => {
+    test('should handle different algorithms', () => {
       const genHS256 = new TokenGenerator(secret, secret, {
         algorithm: 'HS256',
       })
@@ -135,7 +135,7 @@ describe('TokenGenerator', () => {
       return new Promise((resolve) => setTimeout(resolve, 1000))
     })
 
-    it('should refresh token with same payload but new timestamps', () => {
+    test('should refresh token with same payload but new timestamps', () => {
       const refreshedToken = generator.refresh(originalToken, {
         verify: { algorithms: ['HS256'] },
         jwtid: 'refreshed-id',
@@ -158,7 +158,7 @@ describe('TokenGenerator', () => {
       expect(refreshedDecoded.jti).not.toBe(originalDecoded.jti)
     })
 
-    it('should remove standard JWT claims from refreshed token', () => {
+    test('should remove standard JWT claims from refreshed token', () => {
       const refreshedToken = generator.refresh(originalToken, {
         verify: { algorithms: ['HS256'] },
       })
@@ -174,7 +174,7 @@ describe('TokenGenerator', () => {
       expect(refreshedDecoded.role).toBe(payload.role)
     })
 
-    it('should handle refresh without jwtid option', () => {
+    test('should handle refresh without jwtid option', () => {
       const refreshedToken = generator.refresh(originalToken, {
         verify: { algorithms: ['HS256'] },
       })
@@ -183,7 +183,7 @@ describe('TokenGenerator', () => {
       expect(decoded.jti).toBeUndefined()
     })
 
-    it('should throw error for invalid token during refresh', () => {
+    test('should throw error for invalid token during refresh', () => {
       expect(() => {
         generator.refresh('invalid.token.here', {
           verify: { algorithms: ['HS256'] },
@@ -191,7 +191,7 @@ describe('TokenGenerator', () => {
       }).toThrow()
     })
 
-    it('should throw error for expired token during refresh', async () => {
+    test('should throw error for expired token during refresh', async () => {
       const expiredToken = generator.sign(payload, { expiresIn: '10ms' })
 
       // Wait for token to expire
@@ -204,7 +204,7 @@ describe('TokenGenerator', () => {
       }).toThrow('jwt expired')
     })
 
-    it('should throw error for token signed with different algorithm', () => {
+    test('should throw error for token signed with different algorithm', () => {
       const differentAlgoGenerator = new TokenGenerator(secret, secret, {
         algorithm: 'HS512',
       })
@@ -217,7 +217,7 @@ describe('TokenGenerator', () => {
       }).toThrow()
     })
 
-    it('should handle refresh with different verify options', () => {
+    test('should handle refresh with different verify options', () => {
       const refreshedToken = generator.refresh(originalToken, {
         verify: {
           algorithms: ['HS256'],
@@ -234,7 +234,7 @@ describe('TokenGenerator', () => {
   })
 
   describe('integration scenarios', () => {
-    it('should handle multiple refresh cycles', () => {
+    test('should handle multiple refresh cycles', () => {
       let currentToken = generator.sign(payload, { jwtid: 'gen-1' })
 
       for (let i = 2; i <= 5; i++) {
@@ -250,7 +250,7 @@ describe('TokenGenerator', () => {
       }
     })
 
-    it('should work with asymmetric keys (RS256)', { timeout: 10000 }, () => {
+    test('should work with asymmetric keys (RS256)', { timeout: 10000 }, () => {
       // Generate RSA key pair for testing
       const crypto = require('crypto')
       const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
@@ -283,7 +283,7 @@ describe('TokenGenerator', () => {
       expect(refreshedDecoded.jti).toBe('rsa-refresh')
     })
 
-    it('should preserve all custom claims during refresh', () => {
+    test('should preserve all custom claims during refresh', () => {
       const complexPayload = {
         userId: 123,
         roles: ['admin', 'user'],
@@ -315,14 +315,14 @@ describe('TokenGenerator', () => {
   })
 
   describe('error handling', () => {
-    it('should throw error for null/undefined payload', () => {
+    test('should throw error for null/undefined payload', () => {
       expect(() => generator.sign(null)).toThrow(
         'Expected "payload" to be a plain object',
       )
       expect(() => generator.sign(undefined)).toThrow('payload is required')
     })
 
-    it('should handle various refresh options', () => {
+    test('should handle various refresh options', () => {
       const token = generator.sign(payload)
 
       // Empty verify options should work
@@ -335,7 +335,7 @@ describe('TokenGenerator', () => {
       expect(typeof refreshedToken).toBe('string')
     })
 
-    it('should handle token verification with wrong secret', () => {
+    test('should handle token verification with wrong secret', () => {
       const token = generator.sign(payload)
       const wrongSecretGenerator = new TokenGenerator(
         'wrong-secret',

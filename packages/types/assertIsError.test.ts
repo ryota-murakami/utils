@@ -7,12 +7,12 @@ class CustomError extends Error {
 
 describe('assertIsError', () => {
   describe('should not throw when passed valid Error instances', () => {
-    it('should accept a basic Error instance', () => {
+    test('should accept a basic Error instance', () => {
       const error = new Error('test error')
       expect(() => assertIsError(error)).not.toThrow()
     })
 
-    it('should accept built-in Error subclasses', () => {
+    test('should accept built-in Error subclasses', () => {
       const typeError = new TypeError('type error')
       const referenceError = new ReferenceError('reference error')
       const syntaxError = new SyntaxError('syntax error')
@@ -24,28 +24,28 @@ describe('assertIsError', () => {
       expect(() => assertIsError(rangeError)).not.toThrow()
     })
 
-    it('should accept custom Error subclasses', () => {
+    test('should accept custom Error subclasses', () => {
       const customError = new CustomError('custom error')
       expect(() => assertIsError(customError)).not.toThrow()
     })
   })
 
   describe('should throw AssertionError when passed non-Error values', () => {
-    it('should throw when passed null', () => {
+    test('should throw when passed null', () => {
       expect(() => assertIsError(null)).toThrow()
       expect(() => assertIsError(null)).toThrow(
         "Expected 'error' to be Error, but received null",
       )
     })
 
-    it('should throw when passed undefined', () => {
+    test('should throw when passed undefined', () => {
       expect(() => assertIsError(undefined)).toThrow()
       expect(() => assertIsError(undefined)).toThrow(
         "Expected 'error' to be Error, but received undefined",
       )
     })
 
-    it('should throw when passed a string', () => {
+    test('should throw when passed a string', () => {
       const value = 'error string'
       expect(() => assertIsError(value)).toThrow()
       expect(() => assertIsError(value)).toThrow(
@@ -53,7 +53,7 @@ describe('assertIsError', () => {
       )
     })
 
-    it('should throw when passed a number', () => {
+    test('should throw when passed a number', () => {
       const value = 42
       expect(() => assertIsError(value)).toThrow()
       expect(() => assertIsError(value)).toThrow(
@@ -61,7 +61,7 @@ describe('assertIsError', () => {
       )
     })
 
-    it('should throw when passed a boolean', () => {
+    test('should throw when passed a boolean', () => {
       expect(() => assertIsError(true)).toThrow()
       expect(() => assertIsError(true)).toThrow(
         "Expected 'error' to be Error, but received true",
@@ -73,7 +73,7 @@ describe('assertIsError', () => {
       )
     })
 
-    it('should throw when passed an array', () => {
+    test('should throw when passed an array', () => {
       const value = [1, 2, 3]
       expect(() => assertIsError(value)).toThrow()
       expect(() => assertIsError(value)).toThrow(
@@ -81,7 +81,7 @@ describe('assertIsError', () => {
       )
     })
 
-    it('should throw when passed a plain object', () => {
+    test('should throw when passed a plain object', () => {
       const value = { message: 'looks like error', name: 'FakeError' }
       expect(() => assertIsError(value)).toThrow()
       expect(() => assertIsError(value)).toThrow(
@@ -89,7 +89,7 @@ describe('assertIsError', () => {
       )
     })
 
-    it('should throw when passed an error-like object that is not an Error instance', () => {
+    test('should throw when passed an error-like object that is not an Error instance', () => {
       const errorLike = {
         message: 'I look like an error',
         name: 'FakeError',
@@ -101,7 +101,7 @@ describe('assertIsError', () => {
       )
     })
 
-    it('should throw when passed a function', () => {
+    test('should throw when passed a function', () => {
       const fn = () => 'error'
       expect(() => assertIsError(fn)).toThrow()
       expect(() => assertIsError(fn)).toThrow(
@@ -111,7 +111,7 @@ describe('assertIsError', () => {
   })
 
   describe('AssertionError properties', () => {
-    it('should throw an error with name "AssertionError"', () => {
+    test('should throw an error with name "AssertionError"', () => {
       try {
         assertIsError('not an error')
       } catch (error) {
@@ -120,7 +120,7 @@ describe('assertIsError', () => {
       }
     })
 
-    it('should throw an error that extends Error', () => {
+    test('should throw an error that extends Error', () => {
       try {
         assertIsError(123)
       } catch (error) {
@@ -130,7 +130,7 @@ describe('assertIsError', () => {
   })
 
   describe('TypeScript type assertion behavior', () => {
-    it('should narrow the type after successful assertion', () => {
+    test('should narrow the type after successful assertion', () => {
       const unknownValue: unknown = new Error('test')
 
       // Before assertion, TypeScript doesn't know it's an Error
@@ -142,7 +142,7 @@ describe('assertIsError', () => {
       expect((unknownValue as Error).name).toBe('Error')
     })
 
-    it('should work with custom Error types', () => {
+    test('should work with custom Error types', () => {
       const unknownValue: unknown = new CustomError('custom test')
 
       assertIsError<CustomError>(unknownValue)

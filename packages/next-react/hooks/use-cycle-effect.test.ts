@@ -1,18 +1,18 @@
 import { renderHook } from '@testing-library/react'
-import { describe, it, expect, vi } from 'vitest'
+import { describe, test, expect, vi } from 'vitest'
 
 import { useCycleEffect } from './use-cycle-effect'
 
 describe('useCycleEffect', () => {
   // Without deps → same as `useEffect(fn)` (fires every render).
   describe('without a deps argument', () => {
-    it('calls the effect on the initial render', () => {
+    test('calls the effect on the initial render', () => {
       const effect = vi.fn()
       renderHook(() => useCycleEffect(effect))
       expect(effect).toHaveBeenCalledOnce()
     })
 
-    it('calls the effect on every subsequent re-render', () => {
+    test('calls the effect on every subsequent re-render', () => {
       const effect = vi.fn()
       const { rerender } = renderHook(() => useCycleEffect(effect))
 
@@ -26,7 +26,7 @@ describe('useCycleEffect', () => {
 
   // With empty deps `[]` → mount only (allowed here; useRenderEffect rejects it).
   describe('with empty deps `[]` (mount only)', () => {
-    it('calls the effect on mount and never again', () => {
+    test('calls the effect on mount and never again', () => {
       const effect = vi.fn()
       const { rerender } = renderHook(() => useCycleEffect(effect, []))
 
@@ -37,7 +37,7 @@ describe('useCycleEffect', () => {
       expect(effect).toHaveBeenCalledTimes(1)
     })
 
-    it('runs the cleanup on unmount', () => {
+    test('runs the cleanup on unmount', () => {
       const cleanup = vi.fn()
       const effect = vi.fn(() => cleanup)
       const { unmount } = renderHook(() => useCycleEffect(effect, []))
@@ -50,13 +50,13 @@ describe('useCycleEffect', () => {
 
   // With non-empty deps → standard `useEffect(fn, deps)` behavior.
   describe('with a non-empty deps argument (mount + dep changes)', () => {
-    it('calls the effect on the initial render with a single dep', () => {
+    test('calls the effect on the initial render with a single dep', () => {
       const effect = vi.fn()
       renderHook(() => useCycleEffect(effect, [0]))
       expect(effect).toHaveBeenCalledOnce()
     })
 
-    it('does not re-fire when the dep value is unchanged across renders', () => {
+    test('does not re-fire when the dep value is unchanged across renders', () => {
       const effect = vi.fn()
       const dep = 'stable'
       const { rerender } = renderHook(() => useCycleEffect(effect, [dep]))
@@ -68,7 +68,7 @@ describe('useCycleEffect', () => {
       expect(effect).toHaveBeenCalledTimes(1)
     })
 
-    it('re-fires when a single dep changes', () => {
+    test('re-fires when a single dep changes', () => {
       const effect = vi.fn()
       let dep = 0
       const { rerender } = renderHook(() => useCycleEffect(effect, [dep]))
@@ -85,7 +85,7 @@ describe('useCycleEffect', () => {
       expect(effect).toHaveBeenCalledTimes(3)
     })
 
-    it('re-fires when any of multiple deps change', () => {
+    test('re-fires when any of multiple deps change', () => {
       const effect = vi.fn()
       let firstDep: { liked: boolean } = { liked: false }
       let secondDep = 0
@@ -108,7 +108,7 @@ describe('useCycleEffect', () => {
       expect(effect).toHaveBeenCalledTimes(3)
     })
 
-    it('runs the cleanup before the next effect when a dep changes', () => {
+    test('runs the cleanup before the next effect when a dep changes', () => {
       const cleanup = vi.fn()
       const effect = vi.fn(() => cleanup)
       let dep = 0
@@ -128,7 +128,7 @@ describe('useCycleEffect', () => {
       expect(effect).toHaveBeenCalledTimes(2)
     })
 
-    it('runs the cleanup on unmount when deps are provided', () => {
+    test('runs the cleanup on unmount when deps are provided', () => {
       const cleanup = vi.fn()
       const effect = vi.fn(() => cleanup)
       const { unmount } = renderHook(() => useCycleEffect(effect, [1, 2]))

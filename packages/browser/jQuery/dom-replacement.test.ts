@@ -1,5 +1,5 @@
 /// <reference path="./global.d.ts" />
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, test, expect, beforeEach } from 'vitest'
 import './core.js'
 
 describe('jQuery DOM Replacement Methods', () => {
@@ -9,7 +9,7 @@ describe('jQuery DOM Replacement Methods', () => {
   })
 
   describe('.replaceWith()', () => {
-    it('should replace element with HTML string', () => {
+    test('should replace element with HTML string', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">
@@ -31,7 +31,7 @@ describe('jQuery DOM Replacement Methods', () => {
       )
     })
 
-    it('should replace multiple elements', () => {
+    test('should replace multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -50,7 +50,7 @@ describe('jQuery DOM Replacement Methods', () => {
       expect(document.querySelectorAll('.keep').length).toBe(1)
     })
 
-    it('should replace with DOM element', () => {
+    test('should replace with DOM element', () => {
       // Setup
       document.body.innerHTML = '<p id="target">Replace me</p>'
       const newElement = document.createElement('div')
@@ -66,7 +66,7 @@ describe('jQuery DOM Replacement Methods', () => {
       expect(document.getElementById('new')?.textContent).toBe('New element')
     })
 
-    it('should replace with jQuery object', () => {
+    test('should replace with jQuery object', () => {
       // Setup
       document.body.innerHTML = `
         <p id="target">Replace me</p>
@@ -82,7 +82,7 @@ describe('jQuery DOM Replacement Methods', () => {
       expect(document.getElementById('replacement')?.style.display).toBe('none')
     })
 
-    it('should accept function parameter', () => {
+    test('should accept function parameter', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -104,7 +104,7 @@ describe('jQuery DOM Replacement Methods', () => {
       expect(newItems[1]?.textContent).toBe('Replaced item 1')
     })
 
-    it('should return the removed elements', () => {
+    test('should return the removed elements', () => {
       // Setup
       document.body.innerHTML = `
         <p class="target">Item 1</p>
@@ -123,7 +123,7 @@ describe('jQuery DOM Replacement Methods', () => {
       expect(removed[1]?.parentNode).toBeNull()
     })
 
-    it('should handle empty collection', () => {
+    test('should handle empty collection', () => {
       // Test
       const result = $('.non-existent').replaceWith('<span>Test</span>')
 
@@ -132,7 +132,7 @@ describe('jQuery DOM Replacement Methods', () => {
       expect(document.querySelectorAll('span').length).toBe(0)
     })
 
-    it('should maintain correct order when replacing multiple elements', () => {
+    test('should maintain correct order when replacing multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -158,7 +158,7 @@ describe('jQuery DOM Replacement Methods', () => {
   })
 
   describe('.replaceAll()', () => {
-    it('should replace all target elements', () => {
+    test('should replace all target elements', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -179,7 +179,7 @@ describe('jQuery DOM Replacement Methods', () => {
       })
     })
 
-    it('should work with selector string', () => {
+    test('should work with selector string', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">
@@ -196,7 +196,7 @@ describe('jQuery DOM Replacement Methods', () => {
       expect(document.getElementById('new')?.textContent).toBe('New content')
     })
 
-    it('should work with element', () => {
+    test('should work with element', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">
@@ -216,7 +216,7 @@ describe('jQuery DOM Replacement Methods', () => {
       )
     })
 
-    it('should work with jQuery object', () => {
+    test('should work with jQuery object', () => {
       // Setup
       document.body.innerHTML = `
         <ul>
@@ -233,7 +233,7 @@ describe('jQuery DOM Replacement Methods', () => {
       expect(document.querySelectorAll('.new').length).toBe(2)
     })
 
-    it('should return the replacement elements', () => {
+    test('should return the replacement elements', () => {
       // Setup
       document.body.innerHTML = `
         <p class="target">Target 1</p>
@@ -254,7 +254,7 @@ describe('jQuery DOM Replacement Methods', () => {
       expect(result[1]?.parentNode).not.toBeNull()
     })
 
-    it('should handle empty targets', () => {
+    test('should handle empty targets', () => {
       // Test
       const result = $('<span>Test</span>').replaceAll('.non-existent')
 
@@ -263,7 +263,7 @@ describe('jQuery DOM Replacement Methods', () => {
       expect(document.querySelectorAll('span').length).toBe(0)
     })
 
-    it('should clone elements when replacing multiple targets', () => {
+    test('should clone elements when replacing multiple targets', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -285,7 +285,7 @@ describe('jQuery DOM Replacement Methods', () => {
       expect(replacements[0]).not.toBe(replacements[1])
     })
 
-    it('should move existing elements when replacing single target', () => {
+    test('should move existing elements when replacing single target', () => {
       // Setup
       document.body.innerHTML = `
         <div id="source">
@@ -305,7 +305,7 @@ describe('jQuery DOM Replacement Methods', () => {
       expect(document.getElementById('replace')).toBeNull()
     })
 
-    it('should maintain document order', () => {
+    test('should maintain document order', () => {
       // Setup
       document.body.innerHTML = `
         <div>

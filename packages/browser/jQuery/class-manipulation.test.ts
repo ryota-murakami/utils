@@ -1,5 +1,5 @@
 /// <reference path="./global.d.ts" />
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, test, expect, beforeEach } from 'vitest'
 import './core.js'
 
 describe('jQuery Class Manipulation Methods', () => {
@@ -9,7 +9,7 @@ describe('jQuery Class Manipulation Methods', () => {
   })
 
   describe('.hasClass()', () => {
-    it('should return true if element has the class', () => {
+    test('should return true if element has the class', () => {
       // Setup
       document.body.innerHTML = '<div id="test" class="foo bar baz"></div>'
 
@@ -19,7 +19,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect($('#test').hasClass('baz')).toBe(true)
     })
 
-    it('should return false if element does not have the class', () => {
+    test('should return false if element does not have the class', () => {
       // Setup
       document.body.innerHTML = '<div id="test" class="foo bar"></div>'
 
@@ -28,7 +28,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect($('#test').hasClass('missing')).toBe(false)
     })
 
-    it('should return false for empty class name', () => {
+    test('should return false for empty class name', () => {
       // Setup
       document.body.innerHTML = '<div id="test" class="foo bar"></div>'
 
@@ -37,7 +37,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect($('#test').hasClass(' ')).toBe(false)
     })
 
-    it('should handle element with no class attribute', () => {
+    test('should handle element with no class attribute', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -45,7 +45,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect($('#test').hasClass('foo')).toBe(false)
     })
 
-    it('should check first element in collection', () => {
+    test('should check first element in collection', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item active">First</div>
@@ -56,12 +56,12 @@ describe('jQuery Class Manipulation Methods', () => {
       expect($('.item').hasClass('active')).toBe(true)
     })
 
-    it('should return false for empty collection', () => {
+    test('should return false for empty collection', () => {
       // Test & Assert
       expect($('.non-existent').hasClass('foo')).toBe(false)
     })
 
-    it('should handle multiple classes in className', () => {
+    test('should handle multiple classes in className', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" class="  foo   bar  baz  "></div>'
@@ -74,7 +74,7 @@ describe('jQuery Class Manipulation Methods', () => {
   })
 
   describe('.addClass()', () => {
-    it('should add single class to element', () => {
+    test('should add single class to element', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -86,7 +86,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('new-class')
     })
 
-    it('should add class to existing classes', () => {
+    test('should add class to existing classes', () => {
       // Setup
       document.body.innerHTML = '<div id="test" class="existing"></div>'
 
@@ -98,7 +98,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('existing new-class')
     })
 
-    it('should add multiple classes (space-separated)', () => {
+    test('should add multiple classes (space-separated)', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -110,7 +110,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('class1 class2 class3')
     })
 
-    it('should not add duplicate classes', () => {
+    test('should not add duplicate classes', () => {
       // Setup
       document.body.innerHTML = '<div id="test" class="existing"></div>'
 
@@ -122,7 +122,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('existing new-class')
     })
 
-    it('should add classes to multiple elements', () => {
+    test('should add classes to multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item">Item 1</div>
@@ -138,7 +138,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(items[1]?.className).toBe('item active')
     })
 
-    it('should accept function parameter', () => {
+    test('should accept function parameter', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item">Item 0</div>
@@ -156,7 +156,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(items[1]?.className).toBe('item index-1 item-modified')
     })
 
-    it('should handle empty string gracefully', () => {
+    test('should handle empty string gracefully', () => {
       // Setup
       document.body.innerHTML = '<div id="test" class="existing"></div>'
 
@@ -168,7 +168,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('existing')
     })
 
-    it('should return jQuery object for chaining', () => {
+    test('should return jQuery object for chaining', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -180,7 +180,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(result[0]).toBe(document.getElementById('test'))
     })
 
-    it('should handle empty collection', () => {
+    test('should handle empty collection', () => {
       // Test - should not throw
       const result = $('.non-existent').addClass('test')
       expect(result).toHaveProperty('length', 0)
@@ -188,7 +188,7 @@ describe('jQuery Class Manipulation Methods', () => {
   })
 
   describe('.removeClass()', () => {
-    it('should remove single class from element', () => {
+    test('should remove single class from element', () => {
       // Setup
       document.body.innerHTML = '<div id="test" class="foo bar baz"></div>'
 
@@ -200,7 +200,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('foo baz')
     })
 
-    it('should remove multiple classes (space-separated)', () => {
+    test('should remove multiple classes (space-separated)', () => {
       // Setup
       document.body.innerHTML = '<div id="test" class="foo bar baz qux"></div>'
 
@@ -212,7 +212,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('foo baz')
     })
 
-    it('should remove all classes if no parameter provided', () => {
+    test('should remove all classes if no parameter provided', () => {
       // Setup
       document.body.innerHTML = '<div id="test" class="foo bar baz"></div>'
 
@@ -224,7 +224,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('')
     })
 
-    it('should handle non-existent class gracefully', () => {
+    test('should handle non-existent class gracefully', () => {
       // Setup
       document.body.innerHTML = '<div id="test" class="foo bar"></div>'
 
@@ -236,7 +236,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('foo bar')
     })
 
-    it('should remove classes from multiple elements', () => {
+    test('should remove classes from multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item active">Item 1</div>
@@ -252,7 +252,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(items[1]?.className).toBe('item')
     })
 
-    it('should accept function parameter', () => {
+    test('should accept function parameter', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item active-0">Item 0</div>
@@ -270,7 +270,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(items[1]?.className).toBe('item')
     })
 
-    it('should handle element with no class attribute', () => {
+    test('should handle element with no class attribute', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -282,7 +282,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('')
     })
 
-    it('should return jQuery object for chaining', () => {
+    test('should return jQuery object for chaining', () => {
       // Setup
       document.body.innerHTML = '<div id="test" class="foo"></div>'
 
@@ -294,7 +294,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(result[0]).toBe(document.getElementById('test'))
     })
 
-    it('should handle empty collection', () => {
+    test('should handle empty collection', () => {
       // Test - should not throw
       const result = $('.non-existent').removeClass('test')
       expect(result).toHaveProperty('length', 0)
@@ -302,7 +302,7 @@ describe('jQuery Class Manipulation Methods', () => {
   })
 
   describe('.toggleClass()', () => {
-    it('should add class if not present', () => {
+    test('should add class if not present', () => {
       // Setup
       document.body.innerHTML = '<div id="test" class="existing"></div>'
 
@@ -314,7 +314,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('existing new-class')
     })
 
-    it('should remove class if present', () => {
+    test('should remove class if present', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" class="existing toggle-me"></div>'
@@ -327,7 +327,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('existing')
     })
 
-    it('should toggle multiple classes (space-separated)', () => {
+    test('should toggle multiple classes (space-separated)', () => {
       // Setup
       document.body.innerHTML = '<div id="test" class="foo bar"></div>'
 
@@ -339,7 +339,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('foo baz')
     })
 
-    it('should force add class when switch is true', () => {
+    test('should force add class when switch is true', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" class="existing toggle-me"></div>'
@@ -352,7 +352,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('existing toggle-me')
     })
 
-    it('should force remove class when switch is false', () => {
+    test('should force remove class when switch is false', () => {
       // Setup
       document.body.innerHTML = '<div id="test" class="existing"></div>'
 
@@ -364,7 +364,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('existing')
     })
 
-    it('should toggle classes on multiple elements', () => {
+    test('should toggle classes on multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item active">Item 1</div>
@@ -380,7 +380,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(items[1]?.className).toBe('item active') // added
     })
 
-    it('should accept function parameter', () => {
+    test('should accept function parameter', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item">Item 0</div>
@@ -398,7 +398,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(items[1]?.className).toBe('item') // removed
     })
 
-    it('should accept function parameter with switch', () => {
+    test('should accept function parameter with switch', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item">Item 0</div>
@@ -416,7 +416,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(items[1]?.className).toBe('item item-1')
     })
 
-    it('should handle empty string gracefully', () => {
+    test('should handle empty string gracefully', () => {
       // Setup
       document.body.innerHTML = '<div id="test" class="existing"></div>'
 
@@ -428,7 +428,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('existing')
     })
 
-    it('should return jQuery object for chaining', () => {
+    test('should return jQuery object for chaining', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -440,7 +440,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(result[0]).toBe(document.getElementById('test'))
     })
 
-    it('should handle empty collection', () => {
+    test('should handle empty collection', () => {
       // Test - should not throw
       const result = $('.non-existent').toggleClass('test')
       expect(result).toHaveProperty('length', 0)
@@ -448,7 +448,7 @@ describe('jQuery Class Manipulation Methods', () => {
   })
 
   describe('class manipulation edge cases', () => {
-    it('should handle classes with special characters', () => {
+    test('should handle classes with special characters', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -462,7 +462,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect($('#test').hasClass('my.class')).toBe(true)
     })
 
-    it('should normalize whitespace in class names', () => {
+    test('should normalize whitespace in class names', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -474,7 +474,7 @@ describe('jQuery Class Manipulation Methods', () => {
       expect(element?.className).toBe('class1 class2 class3')
     })
 
-    it('should handle class operations on elements with existing whitespace', () => {
+    test('should handle class operations on elements with existing whitespace', () => {
       // Setup
       document.body.innerHTML =
         '<div id="test" class="  existing1   existing2  "></div>'

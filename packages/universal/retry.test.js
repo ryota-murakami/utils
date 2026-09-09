@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest'
 
 import retry from './retry.js'
 
@@ -14,7 +14,7 @@ describe('retry', () => {
   })
 
   describe('successful execution', () => {
-    it('should return result when function succeeds on first try', async () => {
+    test('should return result when function succeeds on first try', async () => {
       const mockFn = vi.fn(async () => 'success')
 
       const result = await retry(mockFn)
@@ -27,7 +27,7 @@ describe('retry', () => {
       })
     })
 
-    it('should return result when function succeeds after retries', async () => {
+    test('should return result when function succeeds after retries', async () => {
       let attemptCount = 0
       const mockFn = vi.fn(async () => {
         attemptCount++
@@ -43,7 +43,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(3)
     })
 
-    it('should work with async functions returning promises', async () => {
+    test('should work with async functions returning promises', async () => {
       const mockFn = vi.fn(async () => {
         await new Promise((resolve) => setTimeout(resolve, 100))
         return 'async result'
@@ -57,7 +57,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(1)
     })
 
-    it('should work with functions returning non-promise values', async () => {
+    test('should work with functions returning non-promise values', async () => {
       const mockFn = vi.fn(() => 'sync result')
 
       const result = await retry(mockFn)
@@ -68,7 +68,7 @@ describe('retry', () => {
   })
 
   describe('retry behavior', () => {
-    it('should use default retries value of 3', async () => {
+    test('should use default retries value of 3', async () => {
       const mockFn = vi.fn(async () => {
         throw new Error('Always fail')
       })
@@ -77,7 +77,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(3)
     })
 
-    it('should respect custom retries option', async () => {
+    test('should respect custom retries option', async () => {
       const mockFn = vi.fn(async () => {
         throw new Error('Always fail')
       })
@@ -86,7 +86,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(5)
     })
 
-    it('should call function with correct tries parameter', async () => {
+    test('should call function with correct tries parameter', async () => {
       const mockFn = vi.fn(async ({ tries }) => {
         if (tries < 3) {
           throw new Error(`Attempt ${tries} failed`)
@@ -111,7 +111,7 @@ describe('retry', () => {
       })
     })
 
-    it('should handle zero retries', async () => {
+    test('should handle zero retries', async () => {
       const mockFn = vi.fn(async () => {
         throw new Error('Immediate failure')
       })
@@ -122,7 +122,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(0)
     })
 
-    it('should handle single retry', async () => {
+    test('should handle single retry', async () => {
       const mockFn = vi.fn(async () => {
         throw new Error('Single attempt failure')
       })
@@ -135,7 +135,7 @@ describe('retry', () => {
   })
 
   describe('bail functionality', () => {
-    it('should exit early when bail is called', async () => {
+    test('should exit early when bail is called', async () => {
       const mockFn = vi.fn(async ({ bail, tries }) => {
         const error = new Error(`Critical error on attempt ${tries}`)
         bail(error)
@@ -149,7 +149,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(1)
     })
 
-    it('should throw bail error even when function succeeds', async () => {
+    test('should throw bail error even when function succeeds', async () => {
       const mockFn = vi.fn(async ({ bail }) => {
         bail(new Error('Bailed out'))
         return 'This success should be ignored'
@@ -159,7 +159,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(1)
     })
 
-    it('should handle bail with different error types', async () => {
+    test('should handle bail with different error types', async () => {
       const customError = new TypeError('Type error bail')
       const mockFn = vi.fn(async ({ bail }) => {
         bail(customError)
@@ -169,7 +169,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(1)
     })
 
-    it('should prioritize function error over bail error when both occur', async () => {
+    test('should prioritize function error over bail error when both occur', async () => {
       const mockFn = vi.fn(async ({ bail, tries }) => {
         bail(new Error('Bail error'))
         throw new Error('Function error') // This error is thrown first, caught by try-catch
@@ -182,7 +182,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(3) // Retries because function error was thrown
     })
 
-    it('should handle bail called multiple times', async () => {
+    test('should handle bail called multiple times', async () => {
       const mockFn = vi.fn(async ({ bail }) => {
         bail(new Error('First bail'))
         bail(new Error('Second bail')) // Overwrites the first bail
@@ -196,7 +196,7 @@ describe('retry', () => {
   })
 
   describe('error handling', () => {
-    it('should throw last error when all retries exhausted', async () => {
+    test('should throw last error when all retries exhausted', async () => {
       let attemptCount = 0
       const mockFn = vi.fn(async () => {
         attemptCount++
@@ -209,7 +209,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(3)
     })
 
-    it('should handle different error types', async () => {
+    test('should handle different error types', async () => {
       const errors = [
         new TypeError('Type error'),
         new ReferenceError('Reference error'),
@@ -227,7 +227,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(3)
     })
 
-    it('should handle non-Error thrown values', async () => {
+    test('should handle non-Error thrown values', async () => {
       const mockFn = vi.fn(async () => {
         throw 'String error'
       })
@@ -236,7 +236,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(2)
     })
 
-    it('should handle functions that throw synchronously', async () => {
+    test('should handle functions that throw synchronously', async () => {
       const mockFn = vi.fn(() => {
         throw new Error('Sync error')
       })
@@ -247,7 +247,7 @@ describe('retry', () => {
   })
 
   describe('complex scenarios', () => {
-    it('should handle mixed success and failure patterns', async () => {
+    test('should handle mixed success and failure patterns', async () => {
       const results = ['fail', 'fail', 'success', 'fail']
       let attemptCount = 0
 
@@ -265,7 +265,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(3)
     })
 
-    it('should handle async operations with delays', async () => {
+    test('should handle async operations with delays', async () => {
       let attemptCount = 0
       const mockFn = vi.fn(async () => {
         attemptCount++
@@ -287,7 +287,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(3)
     })
 
-    it('should handle functions that access external state', async () => {
+    test('should handle functions that access external state', async () => {
       let externalCounter = 0
 
       const mockFn = vi.fn(async ({ tries }) => {
@@ -308,7 +308,7 @@ describe('retry', () => {
   })
 
   describe('options handling', () => {
-    it('should handle empty options object', async () => {
+    test('should handle empty options object', async () => {
       const mockFn = vi.fn(async () => 'success')
 
       const result = await retry(mockFn, {})
@@ -317,7 +317,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(1)
     })
 
-    it('should handle undefined options', async () => {
+    test('should handle undefined options', async () => {
       const mockFn = vi.fn(async () => 'success')
 
       const result = await retry(mockFn, undefined)
@@ -326,7 +326,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(1)
     })
 
-    it('should handle null options', async () => {
+    test('should handle null options', async () => {
       const mockFn = vi.fn(async () => 'success')
 
       // The code does { retries = 3 } = options, which will fail with null
@@ -334,7 +334,7 @@ describe('retry', () => {
       await expect(retry(mockFn, null)).rejects.toThrow()
     })
 
-    it('should handle extra options gracefully', async () => {
+    test('should handle extra options gracefully', async () => {
       const mockFn = vi.fn(async () => 'success')
 
       const result = await retry(mockFn, {
@@ -347,7 +347,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(1)
     })
 
-    it('should handle non-integer retries', async () => {
+    test('should handle non-integer retries', async () => {
       const mockFn = vi.fn(async () => {
         throw new Error('Always fail')
       })
@@ -361,7 +361,7 @@ describe('retry', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle function that returns null', async () => {
+    test('should handle function that returns null', async () => {
       const mockFn = vi.fn(async () => null)
 
       const result = await retry(mockFn)
@@ -370,7 +370,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(1)
     })
 
-    it('should handle function that returns undefined', async () => {
+    test('should handle function that returns undefined', async () => {
       const mockFn = vi.fn(async () => undefined)
 
       const result = await retry(mockFn)
@@ -379,7 +379,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(1)
     })
 
-    it('should handle function that returns falsy values', async () => {
+    test('should handle function that returns falsy values', async () => {
       const falsyValues = [false, 0, '', null, undefined]
 
       for (const value of falsyValues) {
@@ -389,7 +389,7 @@ describe('retry', () => {
       }
     })
 
-    it('should handle very high retry counts', async () => {
+    test('should handle very high retry counts', async () => {
       let attemptCount = 0
       const mockFn = vi.fn(async () => {
         attemptCount++
@@ -405,7 +405,7 @@ describe('retry', () => {
       expect(mockFn).toHaveBeenCalledTimes(100)
     })
 
-    it('should handle bail with non-Error objects', async () => {
+    test('should handle bail with non-Error objects', async () => {
       const mockFn = vi.fn(async ({ bail }) => {
         bail({ message: 'Custom error object', code: 500 })
       })
@@ -419,7 +419,7 @@ describe('retry', () => {
   })
 
   describe('integration patterns', () => {
-    it('should work with network-like operations', async () => {
+    test('should work with network-like operations', async () => {
       let networkAttempts = 0
       const mockNetworkCall = vi.fn(async ({ tries, bail }) => {
         networkAttempts++
@@ -444,7 +444,7 @@ describe('retry', () => {
       expect(mockNetworkCall).toHaveBeenCalledTimes(3)
     })
 
-    it('should work with resource cleanup patterns', async () => {
+    test('should work with resource cleanup patterns', async () => {
       const resources = []
 
       const mockResourceOperation = vi.fn(async ({ tries, bail }) => {
@@ -469,7 +469,7 @@ describe('retry', () => {
       expect(resources).toEqual(['resource-3']) // Only successful resource remains
     })
 
-    it('should work with conditional bail scenarios', async () => {
+    test('should work with conditional bail scenarios', async () => {
       const mockOperation = vi.fn(async ({ tries, bail }) => {
         const error = new Error(`Attempt ${tries} failed`)
 

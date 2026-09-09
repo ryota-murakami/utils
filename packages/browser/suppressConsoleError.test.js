@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest'
 
 describe('suppressConsoleError', () => {
   let originalConsoleError
@@ -30,11 +30,11 @@ describe('suppressConsoleError', () => {
   })
 
   describe('module import and setup', () => {
-    it('should import without throwing errors', async () => {
+    test('should import without throwing errors', async () => {
       await expect(import('./suppressConsoleError.js')).resolves.toBeDefined()
     })
 
-    it('should modify console.error when imported', async () => {
+    test('should modify console.error when imported', async () => {
       const beforeImport = console.error
 
       await import('./suppressConsoleError.js')
@@ -51,7 +51,7 @@ describe('suppressConsoleError', () => {
       await import('./suppressConsoleError.js')
     })
 
-    it('should suppress ReactDOM.render deprecation warnings', () => {
+    test('should suppress ReactDOM.render deprecation warnings', () => {
       const reactDOMError =
         "ReactDOM.render is no longer supported in React 18. Use createRoot instead. Until you switch to the new API, your app will behave as if it's running React 17."
 
@@ -61,7 +61,7 @@ describe('suppressConsoleError', () => {
       expect(mockConsoleError).not.toHaveBeenCalled()
     })
 
-    it('should suppress React act() warnings', () => {
+    test('should suppress React act() warnings', () => {
       const actWarning =
         'Warning: An update to TestComponent inside a test was not wrapped in act(...)'
 
@@ -71,7 +71,7 @@ describe('suppressConsoleError', () => {
       expect(mockConsoleError).not.toHaveBeenCalled()
     })
 
-    it('should suppress partial ReactDOM.render messages', () => {
+    test('should suppress partial ReactDOM.render messages', () => {
       const partialMessages = [
         'ReactDOM.render is no longer supported in React 18.',
         'Something before ReactDOM.render is no longer supported in React 18. and after',
@@ -85,7 +85,7 @@ describe('suppressConsoleError', () => {
       })
     })
 
-    it('should suppress partial act() warning messages', () => {
+    test('should suppress partial act() warning messages', () => {
       const actMessages = [
         'Warning: An update to Component inside a test was not wrapped in act',
         'Before Warning: An update to MyComponent inside a test was not wrapped in act after',
@@ -105,7 +105,7 @@ describe('suppressConsoleError', () => {
       await import('./suppressConsoleError.js')
     })
 
-    it('should pass through other error messages', () => {
+    test('should pass through other error messages', () => {
       const normalErrors = [
         'This is a normal error',
         'TypeError: Cannot read property of undefined',
@@ -120,7 +120,7 @@ describe('suppressConsoleError', () => {
       })
     })
 
-    it('should pass through errors with multiple arguments', () => {
+    test('should pass through errors with multiple arguments', () => {
       const error = 'Error occurred'
       const details = { code: 500, message: 'Server error' }
       const stack = 'Error stack trace...'
@@ -130,7 +130,7 @@ describe('suppressConsoleError', () => {
       expect(mockConsoleError).toHaveBeenCalledWith(error, details, stack)
     })
 
-    it('should pass through React errors that are not suppressed', () => {
+    test('should pass through React errors that are not suppressed', () => {
       const reactErrors = [
         'Warning: Failed prop type',
         'Warning: Each child in a list should have a unique "key" prop',
@@ -144,7 +144,7 @@ describe('suppressConsoleError', () => {
       })
     })
 
-    it('should pass through similar but different messages', () => {
+    test('should pass through similar but different messages', () => {
       const similarButDifferent = [
         'ReactDOM.render is deprecated', // Missing the exact phrase
         'Warning: An update inside a test', // Missing the exact phrase
@@ -164,7 +164,7 @@ describe('suppressConsoleError', () => {
       await import('./suppressConsoleError.js')
     })
 
-    it('should maintain proper this context', () => {
+    test('should maintain proper this context', () => {
       // Test that the original console.error is called with proper context
       const normalError = 'Normal error message'
 
@@ -173,13 +173,13 @@ describe('suppressConsoleError', () => {
       expect(mockConsoleError).toHaveBeenCalledWith(normalError)
     })
 
-    it('should handle errors with no arguments', () => {
+    test('should handle errors with no arguments', () => {
       console.error()
 
       expect(mockConsoleError).toHaveBeenCalledWith()
     })
 
-    it('should handle errors with non-string first argument', () => {
+    test('should handle errors with non-string first argument', () => {
       const errorObj = new Error('Test error')
       const numberError = 404
       const booleanError = false
@@ -193,7 +193,7 @@ describe('suppressConsoleError', () => {
       expect(mockConsoleError).toHaveBeenNthCalledWith(3, booleanError)
     })
 
-    it('should handle null and undefined arguments', () => {
+    test('should handle null and undefined arguments', () => {
       console.error(null)
       console.error(undefined)
       console.error(null, 'additional info')
@@ -213,7 +213,7 @@ describe('suppressConsoleError', () => {
       await import('./suppressConsoleError.js')
     })
 
-    it('should handle very long error messages', () => {
+    test('should handle very long error messages', () => {
       const longError = 'Normal error: ' + 'A'.repeat(10000)
 
       console.error(longError)
@@ -221,7 +221,7 @@ describe('suppressConsoleError', () => {
       expect(mockConsoleError).toHaveBeenCalledWith(longError)
     })
 
-    it('should handle Unicode and special characters', () => {
+    test('should handle Unicode and special characters', () => {
       const unicodeError = 'Error with unicode: 🚨 ñórmål érrör 中文'
 
       console.error(unicodeError)
@@ -229,14 +229,14 @@ describe('suppressConsoleError', () => {
       expect(mockConsoleError).toHaveBeenCalledWith(unicodeError)
     })
 
-    it('should handle errors when original console.error throws', () => {
+    test('should handle errors when original console.error throws', () => {
       // Test that the wrapper function doesn't throw even if the underlying implementation has issues
       const normalError = 'This should pass through'
 
       expect(() => console.error(normalError)).not.toThrow()
     })
 
-    it('should handle case sensitivity', () => {
+    test('should handle case sensitivity', () => {
       const caseVariations = [
         'reactdom.render is no longer supported in React 18.',
         'REACTDOM.RENDER IS NO LONGER SUPPORTED IN REACT 18.',
@@ -256,7 +256,7 @@ describe('suppressConsoleError', () => {
       await import('./suppressConsoleError.js')
     })
 
-    it('should handle many console.error calls efficiently', () => {
+    test('should handle many console.error calls efficiently', () => {
       const startTime = performance.now()
 
       // Mix of suppressed and passed-through errors
@@ -282,7 +282,7 @@ describe('suppressConsoleError', () => {
       expect(mockConsoleError).toHaveBeenCalledTimes(333)
     })
 
-    it('should not significantly impact performance for normal errors', () => {
+    test('should not significantly impact performance for normal errors', () => {
       const iterations = 100
       const startTime = performance.now()
 
@@ -304,7 +304,7 @@ describe('suppressConsoleError', () => {
       await import('./suppressConsoleError.js')
     })
 
-    it('should suppress React 18 warnings in test environments', () => {
+    test('should suppress React 18 warnings in test environments', () => {
       // Simulate common React 18 warnings that appear in tests
       const react18Warnings = [
         'ReactDOM.render is no longer supported in React 18. Use createRoot instead.',
@@ -319,7 +319,7 @@ describe('suppressConsoleError', () => {
       })
     })
 
-    it('should suppress act() warnings with various component names', () => {
+    test('should suppress act() warnings with various component names', () => {
       const componentNames = [
         'App',
         'UserList',
@@ -336,7 +336,7 @@ describe('suppressConsoleError', () => {
       })
     })
 
-    it('should maintain normal error reporting for application errors', () => {
+    test('should maintain normal error reporting for application errors', () => {
       const appErrors = [
         'API request failed: 404 Not Found',
         'Validation failed: Email is required',

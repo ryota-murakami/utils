@@ -9,7 +9,7 @@ vi.mock('node:fs/promises', () => ({
 }))
 
 describe('readFileAsJson', () => {
-  it("returns the file's parsed contents when it exists", async () => {
+  test("returns the file's parsed contents when it exists", async () => {
     const data = { abc: 123 }
 
     mockReadFile.mockResolvedValue(JSON.stringify(data))
@@ -19,7 +19,7 @@ describe('readFileAsJson', () => {
     expect(actual).toEqual(data)
   })
 
-  it("throws an error when the file doesn't exist", async () => {
+  test("throws an error when the file doesn't exist", async () => {
     const error = new Error('Oh no!')
 
     mockReadFile.mockRejectedValue(error)

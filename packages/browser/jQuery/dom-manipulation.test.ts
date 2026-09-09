@@ -1,5 +1,5 @@
 /// <reference path="./global.d.ts" />
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, test, expect, beforeEach } from 'vitest'
 import './core.js'
 
 describe('jQuery DOM Manipulation', () => {
@@ -9,7 +9,7 @@ describe('jQuery DOM Manipulation', () => {
   })
 
   describe('.html()', () => {
-    it('should get HTML content of first element', () => {
+    test('should get HTML content of first element', () => {
       // Setup
       document.body.innerHTML = `
         <div id="test1"><p>Hello</p></div>
@@ -23,7 +23,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(html).toBe('<p>Hello</p>')
     })
 
-    it('should set HTML content for all matched elements', () => {
+    test('should set HTML content for all matched elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="target">Old content 1</div>
@@ -39,7 +39,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(divs[1]?.innerHTML).toBe('<strong>New content</strong>')
     })
 
-    it('should return empty string for empty elements', () => {
+    test('should return empty string for empty elements', () => {
       // Setup
       document.body.innerHTML = '<div id="empty"></div>'
 
@@ -50,7 +50,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(html).toBe('')
     })
 
-    it('should return undefined for empty collection', () => {
+    test('should return undefined for empty collection', () => {
       // Test
       const html = $('#non-existent').html()
 
@@ -58,7 +58,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(html).toBeUndefined()
     })
 
-    it('should support function parameter', () => {
+    test('should support function parameter', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item">Item 0</div>
@@ -76,7 +76,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(items[1]?.innerHTML).toBe('<span>Updated 1</span>')
     })
 
-    it('should return jQuery object for chaining when setting', () => {
+    test('should return jQuery object for chaining when setting', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -90,7 +90,7 @@ describe('jQuery DOM Manipulation', () => {
   })
 
   describe('.text()', () => {
-    it('should get combined text of all matched elements', () => {
+    test('should get combined text of all matched elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="text">Hello </div>
@@ -104,7 +104,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(text).toBe('Hello World')
     })
 
-    it('should set text content for all matched elements', () => {
+    test('should set text content for all matched elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="target">Old text 1</div>
@@ -120,7 +120,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(divs[1]?.textContent).toBe('New text')
     })
 
-    it('should escape HTML when setting text', () => {
+    test('should escape HTML when setting text', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -133,7 +133,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(div?.innerHTML).toBe('&lt;script&gt;alert("XSS")&lt;/script&gt;')
     })
 
-    it('should return empty string for empty elements', () => {
+    test('should return empty string for empty elements', () => {
       // Setup
       document.body.innerHTML = '<div id="empty"></div>'
 
@@ -144,7 +144,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(text).toBe('')
     })
 
-    it('should return empty string for empty collection', () => {
+    test('should return empty string for empty collection', () => {
       // Test
       const text = $('#non-existent').text()
 
@@ -152,7 +152,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(text).toBe('')
     })
 
-    it('should support function parameter', () => {
+    test('should support function parameter', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item">Item 0</div>
@@ -170,7 +170,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(items[1]?.textContent).toBe('Item 1 - Updated 1')
     })
 
-    it('should return jQuery object for chaining when setting', () => {
+    test('should return jQuery object for chaining when setting', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -182,7 +182,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(result[0]).toBe(document.getElementById('test'))
     })
 
-    it('should get text from nested elements', () => {
+    test('should get text from nested elements', () => {
       // Setup
       document.body.innerHTML = `
         <div id="nested">
@@ -202,7 +202,7 @@ describe('jQuery DOM Manipulation', () => {
   })
 
   describe('.val()', () => {
-    it('should get value of input element', () => {
+    test('should get value of input element', () => {
       // Setup
       document.body.innerHTML =
         '<input type="text" id="input" value="Test value">'
@@ -214,7 +214,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(value).toBe('Test value')
     })
 
-    it('should set value of input elements', () => {
+    test('should set value of input elements', () => {
       // Setup
       document.body.innerHTML = `
         <input type="text" class="input" value="Old">
@@ -232,7 +232,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(inputs[1]?.value).toBe('New value')
     })
 
-    it('should get value of textarea', () => {
+    test('should get value of textarea', () => {
       // Setup
       document.body.innerHTML =
         '<textarea id="textarea">Textarea content</textarea>'
@@ -244,7 +244,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(value).toBe('Textarea content')
     })
 
-    it('should set value of textarea', () => {
+    test('should set value of textarea', () => {
       // Setup
       document.body.innerHTML = '<textarea id="textarea">Old content</textarea>'
 
@@ -258,7 +258,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(textarea.value).toBe('New content')
     })
 
-    it('should get selected value of select element', () => {
+    test('should get selected value of select element', () => {
       // Setup
       document.body.innerHTML = `
         <select id="select">
@@ -275,7 +275,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(value).toBe('2')
     })
 
-    it('should set selected value of select element', () => {
+    test('should set selected value of select element', () => {
       // Setup
       document.body.innerHTML = `
         <select id="select">
@@ -293,7 +293,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(select.value).toBe('3')
     })
 
-    it('should get array of selected values for select-multiple', () => {
+    test('should get array of selected values for select-multiple', () => {
       // Setup
       document.body.innerHTML = `
         <select id="multi" multiple>
@@ -310,7 +310,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(values).toEqual(['1', '3'])
     })
 
-    it('should set multiple selected values for select-multiple', () => {
+    test('should set multiple selected values for select-multiple', () => {
       // Setup
       document.body.innerHTML = `
         <select id="multi" multiple>
@@ -332,7 +332,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(options[2]?.selected).toBe(true)
     })
 
-    it('should return undefined for empty collection', () => {
+    test('should return undefined for empty collection', () => {
       // Test
       const value = $('#non-existent').val()
 
@@ -340,7 +340,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(value).toBeUndefined()
     })
 
-    it('should return undefined for non-form elements', () => {
+    test('should return undefined for non-form elements', () => {
       // Setup
       document.body.innerHTML = '<div id="div">Not a form element</div>'
 
@@ -351,7 +351,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(value).toBeUndefined()
     })
 
-    it('should support function parameter', () => {
+    test('should support function parameter', () => {
       // Setup
       document.body.innerHTML = `
         <input type="text" class="input" value="Value 0">
@@ -371,7 +371,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(inputs[1]?.value).toBe('Value 1 - Updated 1')
     })
 
-    it('should return jQuery object for chaining when setting', () => {
+    test('should return jQuery object for chaining when setting', () => {
       // Setup
       document.body.innerHTML = '<input type="text" id="input">'
 
@@ -383,7 +383,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(result[0]).toBe(document.getElementById('input'))
     })
 
-    it('should handle checkbox values', () => {
+    test('should handle checkbox values', () => {
       // Setup
       document.body.innerHTML = `
         <input type="checkbox" id="checkbox" value="checkValue">
@@ -396,7 +396,7 @@ describe('jQuery DOM Manipulation', () => {
       expect(value).toBe('checkValue')
     })
 
-    it('should handle radio button values', () => {
+    test('should handle radio button values', () => {
       // Setup
       document.body.innerHTML = `
         <input type="radio" name="radio" value="radio1">

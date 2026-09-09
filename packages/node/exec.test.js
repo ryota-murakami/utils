@@ -1,6 +1,6 @@
 import { spawn } from 'node:child_process'
 
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest'
 
 import { exec } from './exec.js'
 
@@ -28,7 +28,7 @@ describe('exec', () => {
   })
 
   describe('successful command execution', () => {
-    it('should execute a simple command successfully', async () => {
+    test('should execute a simple command successfully', async () => {
       // Setup mock to simulate successful execution
       mockChild.on.mockImplementation((event, callback) => {
         if (event === 'exit') {
@@ -47,7 +47,7 @@ describe('exec', () => {
       await expect(promise).resolves.toBeUndefined()
     })
 
-    it('should execute command with custom options', async () => {
+    test('should execute command with custom options', async () => {
       const customOptions = {
         cwd: '/tmp',
         env: { NODE_ENV: 'test' },
@@ -69,7 +69,7 @@ describe('exec', () => {
       })
     })
 
-    it('should override default options with provided options', async () => {
+    test('should override default options with provided options', async () => {
       const customOptions = {
         shell: false,
         stdio: 'pipe',
@@ -91,7 +91,7 @@ describe('exec', () => {
   })
 
   describe('failed command execution', () => {
-    it('should reject when command exits with non-zero code', async () => {
+    test('should reject when command exits with non-zero code', async () => {
       mockChild.on.mockImplementation((event, callback) => {
         if (event === 'exit') {
           // Simulate failure with exit code 1
@@ -104,7 +104,7 @@ describe('exec', () => {
       await expect(promise).rejects.toBeUndefined()
     })
 
-    it('should reject with different exit codes', async () => {
+    test('should reject with different exit codes', async () => {
       const testCases = [1, 2, 127, 255]
 
       for (const exitCode of testCases) {
@@ -121,7 +121,7 @@ describe('exec', () => {
   })
 
   describe('command variations', () => {
-    it('should handle commands with arguments', async () => {
+    test('should handle commands with arguments', async () => {
       mockChild.on.mockImplementation((event, callback) => {
         if (event === 'exit') {
           setTimeout(() => callback(0), 0)
@@ -136,7 +136,7 @@ describe('exec', () => {
       })
     })
 
-    it('should handle commands with pipes and redirections', async () => {
+    test('should handle commands with pipes and redirections', async () => {
       mockChild.on.mockImplementation((event, callback) => {
         if (event === 'exit') {
           setTimeout(() => callback(0), 0)
@@ -154,7 +154,7 @@ describe('exec', () => {
       )
     })
 
-    it('should handle commands with environment variables', async () => {
+    test('should handle commands with environment variables', async () => {
       mockChild.on.mockImplementation((event, callback) => {
         if (event === 'exit') {
           setTimeout(() => callback(0), 0)
@@ -169,7 +169,7 @@ describe('exec', () => {
       })
     })
 
-    it('should handle complex shell commands', async () => {
+    test('should handle complex shell commands', async () => {
       mockChild.on.mockImplementation((event, callback) => {
         if (event === 'exit') {
           setTimeout(() => callback(0), 0)
@@ -188,7 +188,7 @@ describe('exec', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle empty command string', async () => {
+    test('should handle empty command string', async () => {
       mockChild.on.mockImplementation((event, callback) => {
         if (event === 'exit') {
           setTimeout(() => callback(0), 0)
@@ -203,7 +203,7 @@ describe('exec', () => {
       })
     })
 
-    it('should handle commands with special characters', async () => {
+    test('should handle commands with special characters', async () => {
       mockChild.on.mockImplementation((event, callback) => {
         if (event === 'exit') {
           setTimeout(() => callback(0), 0)
@@ -219,7 +219,7 @@ describe('exec', () => {
       })
     })
 
-    it('should handle undefined options', async () => {
+    test('should handle undefined options', async () => {
       mockChild.on.mockImplementation((event, callback) => {
         if (event === 'exit') {
           setTimeout(() => callback(0), 0)
@@ -234,7 +234,7 @@ describe('exec', () => {
       })
     })
 
-    it('should handle null options', async () => {
+    test('should handle null options', async () => {
       mockChild.on.mockImplementation((event, callback) => {
         if (event === 'exit') {
           setTimeout(() => callback(0), 0)
@@ -251,7 +251,7 @@ describe('exec', () => {
   })
 
   describe('concurrent execution', () => {
-    it('should handle multiple concurrent executions', async () => {
+    test('should handle multiple concurrent executions', async () => {
       spawnMock.mockImplementation(() => {
         const child = {
           on: vi.fn((event, callback) => {
@@ -274,7 +274,7 @@ describe('exec', () => {
       expect(spawnMock).toHaveBeenCalledTimes(3)
     })
 
-    it('should handle mixed success and failure in concurrent executions', async () => {
+    test('should handle mixed success and failure in concurrent executions', async () => {
       let callCount = 0
       spawnMock.mockImplementation(() => {
         const exitCode = callCount++ % 2 === 0 ? 0 : 1 // Alternate between success and failure
@@ -303,7 +303,7 @@ describe('exec', () => {
   })
 
   describe('error handling', () => {
-    it('should handle spawn errors gracefully', async () => {
+    test('should handle spawn errors gracefully', async () => {
       spawnMock.mockImplementation(() => {
         throw new Error('Spawn failed')
       })
@@ -311,7 +311,7 @@ describe('exec', () => {
       await expect(exec('invalid-command')).rejects.toThrow('Spawn failed')
     })
 
-    it('should handle child process events correctly', async () => {
+    test('should handle child process events correctly', async () => {
       const exitCallback = vi.fn()
 
       mockChild.on.mockImplementation((event, callback) => {
@@ -331,7 +331,7 @@ describe('exec', () => {
   })
 
   describe('integration scenarios', () => {
-    it('should work with real-world command patterns', async () => {
+    test('should work with real-world command patterns', async () => {
       const testCommands = [
         'npm install',
         'git commit -m "test message"',
@@ -359,7 +359,7 @@ describe('exec', () => {
       }
     })
 
-    it('should handle options commonly used in build systems', async () => {
+    test('should handle options commonly used in build systems', async () => {
       const buildOptions = {
         cwd: '/project/root',
         env: {

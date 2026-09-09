@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 import {
   reverse,
@@ -11,20 +11,20 @@ import {
 describe('advanced', () => {
   describe('reverse', () => {
     describe('basic functionality', () => {
-      it('should reverse simple strings', () => {
+      test('should reverse simple strings', () => {
         expect(reverse('hello')).toBe('olleh')
         expect(reverse('world')).toBe('dlrow')
         expect(reverse('abc')).toBe('cba')
         expect(reverse('12345')).toBe('54321')
       })
 
-      it('should reverse strings with spaces', () => {
+      test('should reverse strings with spaces', () => {
         expect(reverse('hello world')).toBe('dlrow olleh')
         expect(reverse('the quick brown fox')).toBe('xof nworb kciuq eht')
         expect(reverse('a b c')).toBe('c b a')
       })
 
-      it('should handle single characters', () => {
+      test('should handle single characters', () => {
         expect(reverse('a')).toBe('a')
         expect(reverse('1')).toBe('1')
         expect(reverse('!')).toBe('!')
@@ -32,17 +32,17 @@ describe('advanced', () => {
     })
 
     describe('edge cases', () => {
-      it('should handle empty strings', () => {
+      test('should handle empty strings', () => {
         expect(reverse('')).toBe('')
       })
 
-      it('should handle palindromes', () => {
+      test('should handle palindromes', () => {
         expect(reverse('racecar')).toBe('racecar')
         expect(reverse('level')).toBe('level')
         expect(reverse('a')).toBe('a')
       })
 
-      it('should handle strings with special characters', () => {
+      test('should handle strings with special characters', () => {
         expect(reverse('hello!')).toBe('!olleh')
         expect(reverse('a@b#c$')).toBe('$c#b@a')
         expect(reverse('12!@#')).toBe('#@!21')
@@ -50,19 +50,19 @@ describe('advanced', () => {
     })
 
     describe('unicode support', () => {
-      it('should handle Unicode characters correctly', () => {
+      test('should handle Unicode characters correctly', () => {
         expect(reverse('café')).toBe('éfac')
         expect(reverse('naïve')).toBe('evïan')
         expect(reverse('résumé')).toBe('émusér')
       })
 
-      it('should handle emojis correctly', () => {
+      test('should handle emojis correctly', () => {
         expect(reverse('🎉🎊🎈')).toBe('🎈🎊🎉')
         expect(reverse('Hello 👋')).toBe('👋 olleH')
         expect(reverse('🌍🌎🌏')).toBe('🌏🌎🌍')
       })
 
-      it('should handle complex Unicode characters', () => {
+      test('should handle complex Unicode characters', () => {
         // Note: Complex emojis with ZWJ sequences may not reverse as expected
         const familyEmoji = '👨‍👩‍👧‍👦'
         const reversed = reverse(familyEmoji)
@@ -72,14 +72,14 @@ describe('advanced', () => {
         expect(flagResult.length).toBeGreaterThan(0) // Should still have some codepoints
       })
 
-      it('should handle mixed Unicode content', () => {
+      test('should handle mixed Unicode content', () => {
         expect(reverse('Hello 🌍 World')).toBe('dlroW 🌍 olleH')
         expect(reverse('Café ☕ & 🥐')).toBe('🥐 & ☕ éfaC')
       })
     })
 
     describe('performance', () => {
-      it('should handle large strings efficiently', () => {
+      test('should handle large strings efficiently', () => {
         const largeString = 'abcdefghij'.repeat(1000)
 
         const startTime = performance.now()
@@ -95,35 +95,35 @@ describe('advanced', () => {
 
   describe('isPalindrome', () => {
     describe('basic functionality - strict mode', () => {
-      it('should detect simple palindromes', () => {
+      test('should detect simple palindromes', () => {
         expect(isPalindrome('racecar')).toBe(true)
         expect(isPalindrome('level')).toBe(true)
         expect(isPalindrome('noon')).toBe(true)
         expect(isPalindrome('madam')).toBe(true)
       })
 
-      it('should be case insensitive by default', () => {
+      test('should be case insensitive by default', () => {
         expect(isPalindrome('Racecar')).toBe(true)
         expect(isPalindrome('Level')).toBe(true)
         expect(isPalindrome('Madam')).toBe(true)
         expect(isPalindrome('RaceCar')).toBe(true)
       })
 
-      it('should detect non-palindromes', () => {
+      test('should detect non-palindromes', () => {
         expect(isPalindrome('hello')).toBe(false)
         expect(isPalindrome('world')).toBe(false)
         expect(isPalindrome('almost')).toBe(false)
         expect(isPalindrome('palindrom')).toBe(false)
       })
 
-      it('should handle strings with spaces in strict mode', () => {
+      test('should handle strings with spaces in strict mode', () => {
         expect(isPalindrome('race car')).toBe(false) // Strict mode considers spaces
         expect(isPalindrome('a man a plan a canal panama')).toBe(false) // Strict mode
       })
     })
 
     describe('non-strict mode', () => {
-      it('should ignore spaces and punctuation', () => {
+      test('should ignore spaces and punctuation', () => {
         expect(isPalindrome('race car', { strict: false })).toBe(true)
         expect(
           isPalindrome('A man, a plan, a canal: Panama', { strict: false }),
@@ -131,7 +131,7 @@ describe('advanced', () => {
         expect(isPalindrome('race a car', { strict: false })).toBe(false)
       })
 
-      it('should ignore punctuation and special characters', () => {
+      test('should ignore punctuation and special characters', () => {
         expect(isPalindrome("Madam, I'm Adam", { strict: false })).toBe(true)
         expect(
           isPalindrome('Was it a car or a cat I saw?', { strict: false }),
@@ -139,14 +139,14 @@ describe('advanced', () => {
         expect(isPalindrome("No 'x' in Nixon", { strict: false })).toBe(true)
       })
 
-      it('should be case insensitive', () => {
+      test('should be case insensitive', () => {
         expect(isPalindrome('RaceCar', { strict: false })).toBe(true)
         expect(
           isPalindrome('A Man A Plan A Canal Panama', { strict: false }),
         ).toBe(true)
       })
 
-      it('should handle numbers and letters', () => {
+      test('should handle numbers and letters', () => {
         expect(isPalindrome('race a car', { strict: false })).toBe(false)
         expect(isPalindrome('A Santa at NASA', { strict: false })).toBe(true)
         expect(isPalindrome('12321', { strict: false })).toBe(true)
@@ -154,25 +154,25 @@ describe('advanced', () => {
     })
 
     describe('edge cases', () => {
-      it('should handle empty strings', () => {
+      test('should handle empty strings', () => {
         expect(isPalindrome('')).toBe(true)
         expect(isPalindrome('', { strict: false })).toBe(true)
       })
 
-      it('should handle single characters', () => {
+      test('should handle single characters', () => {
         expect(isPalindrome('a')).toBe(true)
         expect(isPalindrome('A')).toBe(true)
         expect(isPalindrome('1')).toBe(true)
         expect(isPalindrome('!', { strict: false })).toBe(true)
       })
 
-      it('should handle strings with only special characters', () => {
+      test('should handle strings with only special characters', () => {
         expect(isPalindrome('!!!')).toBe(true)
         expect(isPalindrome('!@#@!')).toBe(true)
         expect(isPalindrome('!@#$!', { strict: false })).toBe(true) // Only alphanumeric considered
       })
 
-      it('should handle two-character strings', () => {
+      test('should handle two-character strings', () => {
         expect(isPalindrome('aa')).toBe(true)
         expect(isPalindrome('ab')).toBe(false)
         expect(isPalindrome('Aa')).toBe(true)
@@ -182,13 +182,13 @@ describe('advanced', () => {
     })
 
     describe('unicode support', () => {
-      it('should handle Unicode palindromes', () => {
+      test('should handle Unicode palindromes', () => {
         expect(isPalindrome('tàt')).toBe(true)
         expect(isPalindrome('été')).toBe(true) // French summer
         expect(isPalindrome('אבא')).toBe(true) // Hebrew "dad" is a palindrome
       })
 
-      it('should handle emojis', () => {
+      test('should handle emojis', () => {
         expect(isPalindrome('🎉🎊🎉')).toBe(true)
         expect(isPalindrome('🎉🎊🎈')).toBe(false)
         expect(isPalindrome('a🎉a')).toBe(true)
@@ -196,7 +196,7 @@ describe('advanced', () => {
     })
 
     describe('performance', () => {
-      it('should handle large palindromes efficiently', () => {
+      test('should handle large palindromes efficiently', () => {
         const largePalindrome = 'a'.repeat(5000) + 'b' + 'a'.repeat(5000)
 
         const startTime = performance.now()
@@ -207,7 +207,7 @@ describe('advanced', () => {
         expect(endTime - startTime).toBeLessThan(50)
       })
 
-      it('should handle large non-palindromes efficiently', () => {
+      test('should handle large non-palindromes efficiently', () => {
         const largeString = 'abcdefghij'.repeat(1000)
 
         const startTime = performance.now()
@@ -222,25 +222,25 @@ describe('advanced', () => {
 
   describe('levenshteinDistance', () => {
     describe('basic functionality', () => {
-      it('should calculate distance for simple cases', () => {
+      test('should calculate distance for simple cases', () => {
         expect(levenshteinDistance('cat', 'bat')).toBe(1) // substitute c->b
         expect(levenshteinDistance('hello', 'hell')).toBe(1) // delete o
         expect(levenshteinDistance('hell', 'hello')).toBe(1) // insert o
       })
 
-      it('should handle identical strings', () => {
+      test('should handle identical strings', () => {
         expect(levenshteinDistance('hello', 'hello')).toBe(0)
         expect(levenshteinDistance('', '')).toBe(0)
         expect(levenshteinDistance('a', 'a')).toBe(0)
       })
 
-      it('should handle empty strings', () => {
+      test('should handle empty strings', () => {
         expect(levenshteinDistance('', 'abc')).toBe(3) // insert 3
         expect(levenshteinDistance('abc', '')).toBe(3) // delete 3
         expect(levenshteinDistance('', '')).toBe(0)
       })
 
-      it('should calculate complex distances', () => {
+      test('should calculate complex distances', () => {
         expect(levenshteinDistance('kitten', 'sitting')).toBe(3) // k->s, e->i, +g
         expect(levenshteinDistance('saturday', 'sunday')).toBe(3) // s->s, a->u, t->n, delete ur, delete da, delete y (3 operations)
         expect(levenshteinDistance('hello', 'world')).toBe(4)
@@ -248,18 +248,18 @@ describe('advanced', () => {
     })
 
     describe('edge cases', () => {
-      it('should handle single character strings', () => {
+      test('should handle single character strings', () => {
         expect(levenshteinDistance('a', 'b')).toBe(1) // substitute
         expect(levenshteinDistance('a', '')).toBe(1) // delete
         expect(levenshteinDistance('', 'a')).toBe(1) // insert
       })
 
-      it('should handle completely different strings', () => {
+      test('should handle completely different strings', () => {
         expect(levenshteinDistance('abc', 'xyz')).toBe(3)
         expect(levenshteinDistance('123', 'abc')).toBe(3)
       })
 
-      it('should be symmetric', () => {
+      test('should be symmetric', () => {
         const pairs = [
           ['hello', 'world'],
           ['kitten', 'sitting'],
@@ -278,12 +278,12 @@ describe('advanced', () => {
     })
 
     describe('unicode support', () => {
-      it('should handle Unicode characters', () => {
+      test('should handle Unicode characters', () => {
         expect(levenshteinDistance('café', 'cave')).toBe(2) // é->v, +e
         expect(levenshteinDistance('naïve', 'naive')).toBe(1) // ï->i
       })
 
-      it('should handle emojis', () => {
+      test('should handle emojis', () => {
         expect(levenshteinDistance('🎉', '🎊')).toBe(1) // substitute
         expect(levenshteinDistance('a🎉', 'a🎊')).toBe(1) // substitute emoji
         expect(levenshteinDistance('🎉🎊', '🎈🎁')).toBe(2) // substitute both
@@ -291,7 +291,7 @@ describe('advanced', () => {
     })
 
     describe('performance', () => {
-      it('should handle moderately large strings efficiently', () => {
+      test('should handle moderately large strings efficiently', () => {
         const str1 = 'a'.repeat(100)
         const str2 = 'b'.repeat(100)
 
@@ -303,7 +303,7 @@ describe('advanced', () => {
         expect(endTime - startTime).toBeLessThan(100)
       })
 
-      it('should handle strings of different lengths', () => {
+      test('should handle strings of different lengths', () => {
         const str1 = 'short'
         const str2 = 'a very long string with many characters'
 
@@ -317,7 +317,7 @@ describe('advanced', () => {
     })
 
     describe('algorithmic correctness', () => {
-      it('should satisfy triangle inequality', () => {
+      test('should satisfy triangle inequality', () => {
         const strings = ['hello', 'world', 'help', 'helm']
 
         // For any three strings a, b, c: distance(a,c) <= distance(a,b) + distance(b,c)
@@ -338,23 +338,23 @@ describe('advanced', () => {
 
   describe('similarity', () => {
     describe('basic functionality', () => {
-      it('should return 100 for identical strings', () => {
+      test('should return 100 for identical strings', () => {
         expect(similarity('hello', 'hello')).toBe(100)
         expect(similarity('', '')).toBe(100)
         expect(similarity('test', 'test')).toBe(100)
       })
 
-      it('should return 0 for completely different strings of same length', () => {
+      test('should return 0 for completely different strings of same length', () => {
         expect(similarity('abc', 'xyz')).toBe(0)
         expect(similarity('123', 'abc')).toBe(0)
       })
 
-      it('should return 0 when one string is empty', () => {
+      test('should return 0 when one string is empty', () => {
         expect(similarity('abc', '')).toBe(0)
         expect(similarity('', 'abc')).toBe(0)
       })
 
-      it('should calculate reasonable similarity scores', () => {
+      test('should calculate reasonable similarity scores', () => {
         expect(similarity('hello', 'hell')).toBe(80) // 4/5 = 80%
         expect(similarity('cat', 'bat')).toBe(66.67) // 2/3 = 66.67%
         expect(similarity('hello', 'world')).toBe(20) // 1/5 = 20%
@@ -362,13 +362,13 @@ describe('advanced', () => {
     })
 
     describe('edge cases', () => {
-      it('should handle single character strings', () => {
+      test('should handle single character strings', () => {
         expect(similarity('a', 'a')).toBe(100)
         expect(similarity('a', 'b')).toBe(0)
         expect(similarity('a', '')).toBe(0)
       })
 
-      it('should be symmetric', () => {
+      test('should be symmetric', () => {
         const pairs = [
           ['hello', 'world'],
           ['kitten', 'sitting'],
@@ -382,7 +382,7 @@ describe('advanced', () => {
         })
       })
 
-      it('should return percentage between 0 and 100', () => {
+      test('should return percentage between 0 and 100', () => {
         const testCases = [
           ['hello', 'world'],
           ['kitten', 'sitting'],
@@ -402,7 +402,7 @@ describe('advanced', () => {
     })
 
     describe('real-world examples', () => {
-      it('should give reasonable scores for similar words', () => {
+      test('should give reasonable scores for similar words', () => {
         expect(similarity('color', 'colour')).toBeGreaterThan(80)
         expect(similarity('organize', 'organise')).toBeGreaterThan(85)
         expect(similarity('JavaScript', 'Javascript')).toBeGreaterThanOrEqual(
@@ -410,7 +410,7 @@ describe('advanced', () => {
         )
       })
 
-      it('should give low scores for different words', () => {
+      test('should give low scores for different words', () => {
         expect(similarity('apple', 'orange')).toBeLessThan(30)
         expect(similarity('cat', 'elephant')).toBeLessThan(30)
         expect(similarity('hello', 'goodbye')).toBeLessThan(30)
@@ -418,7 +418,7 @@ describe('advanced', () => {
     })
 
     describe('performance', () => {
-      it('should handle moderately large strings efficiently', () => {
+      test('should handle moderately large strings efficiently', () => {
         const str1 = 'a'.repeat(50) + 'different' + 'b'.repeat(50)
         const str2 = 'a'.repeat(50) + 'similar' + 'b'.repeat(50)
 
@@ -434,22 +434,22 @@ describe('advanced', () => {
 
   describe('longestCommonSubsequence', () => {
     describe('basic functionality', () => {
-      it('should find LCS for simple cases', () => {
+      test('should find LCS for simple cases', () => {
         expect(longestCommonSubsequence('ABCDGH', 'AEDFHR')).toBe('ADH')
         expect(longestCommonSubsequence('AGGTAB', 'GXTXAYB')).toBe('GTAB')
       })
 
-      it('should handle identical strings', () => {
+      test('should handle identical strings', () => {
         expect(longestCommonSubsequence('hello', 'hello')).toBe('hello')
         expect(longestCommonSubsequence('abc', 'abc')).toBe('abc')
       })
 
-      it('should handle completely different strings', () => {
+      test('should handle completely different strings', () => {
         expect(longestCommonSubsequence('abc', 'xyz')).toBe('')
         expect(longestCommonSubsequence('123', 'abc')).toBe('')
       })
 
-      it('should handle substrings', () => {
+      test('should handle substrings', () => {
         expect(longestCommonSubsequence('hello', 'ello')).toBe('ello')
         expect(longestCommonSubsequence('hello', 'hell')).toBe('hell')
         expect(longestCommonSubsequence('programming', 'program')).toBe(
@@ -459,19 +459,19 @@ describe('advanced', () => {
     })
 
     describe('edge cases', () => {
-      it('should handle empty strings', () => {
+      test('should handle empty strings', () => {
         expect(longestCommonSubsequence('', 'abc')).toBe('')
         expect(longestCommonSubsequence('abc', '')).toBe('')
         expect(longestCommonSubsequence('', '')).toBe('')
       })
 
-      it('should handle single character strings', () => {
+      test('should handle single character strings', () => {
         expect(longestCommonSubsequence('a', 'a')).toBe('a')
         expect(longestCommonSubsequence('a', 'b')).toBe('')
         expect(longestCommonSubsequence('a', 'ab')).toBe('a')
       })
 
-      it('should handle reversed strings', () => {
+      test('should handle reversed strings', () => {
         const result1 = longestCommonSubsequence('abc', 'cba')
         expect(['a', 'b', 'c']).toContain(result1) // Could be any single character
         expect(result1).toHaveLength(1)
@@ -482,7 +482,7 @@ describe('advanced', () => {
     })
 
     describe('complex cases', () => {
-      it('should find LCS in longer strings', () => {
+      test('should find LCS in longer strings', () => {
         const result1 = longestCommonSubsequence('programming', 'algorithm')
         expect(result1.length).toBeGreaterThanOrEqual(3) // Should find a reasonable LCS
         expect(result1).toMatch(/[gri]+/) // Should contain some combination of these chars
@@ -491,12 +491,12 @@ describe('advanced', () => {
         expect(result2.length).toBeGreaterThanOrEqual(2) // Should find at least 2 chars
       })
 
-      it('should handle strings with repeated characters', () => {
+      test('should handle strings with repeated characters', () => {
         expect(longestCommonSubsequence('aaa', 'aa')).toBe('aa')
         expect(longestCommonSubsequence('ababa', 'babb')).toBe('bab')
       })
 
-      it('should find one of multiple valid LCS', () => {
+      test('should find one of multiple valid LCS', () => {
         // When multiple LCS exist of the same length, algorithm should return one of them
         const result = longestCommonSubsequence('ABC', 'AC')
         expect(['A', 'C', 'AC']).toContain(result)
@@ -505,20 +505,20 @@ describe('advanced', () => {
     })
 
     describe('unicode support', () => {
-      it('should handle Unicode characters', () => {
+      test('should handle Unicode characters', () => {
         expect(longestCommonSubsequence('café', 'cave')).toBe('ca')
         const result = longestCommonSubsequence('résumé', 'resume')
         expect(result.length).toBeGreaterThanOrEqual(4) // Should find at least 'rsum' or 'resu'
       })
 
-      it('should handle emojis', () => {
+      test('should handle emojis', () => {
         expect(longestCommonSubsequence('🎉🎊🎈', '🎊🎈🎁')).toBe('🎊🎈')
         expect(longestCommonSubsequence('a🎉b', 'a🎊b')).toBe('ab')
       })
     })
 
     describe('algorithmic properties', () => {
-      it('should satisfy LCS properties', () => {
+      test('should satisfy LCS properties', () => {
         // LCS length should be <= length of shorter string
         const testCases = [
           ['hello', 'world'],
@@ -537,7 +537,7 @@ describe('advanced', () => {
         })
       })
 
-      it('should be commutative for length', () => {
+      test('should be commutative for length', () => {
         const pairs = [
           ['hello', 'world'],
           ['programming', 'algorithm'],
@@ -555,7 +555,7 @@ describe('advanced', () => {
     })
 
     describe('performance', () => {
-      it('should handle moderately sized strings efficiently', () => {
+      test('should handle moderately sized strings efficiently', () => {
         const str1 = 'abcdefghijklmnop'
         const str2 = 'acegikmo'
 
@@ -570,7 +570,7 @@ describe('advanced', () => {
   })
 
   describe('integration tests', () => {
-    it('should work together for string analysis', () => {
+    test('should work together for string analysis', () => {
       const str1 = 'programming'
       const str2 = 'algorithm'
 
@@ -587,7 +587,7 @@ describe('advanced', () => {
       expect(lcs.length).toBeGreaterThan(0)
     })
 
-    it('should handle palindrome analysis', () => {
+    test('should handle palindrome analysis', () => {
       const palindrome = 'racecar'
       const notPalindrome = 'hello'
 
@@ -602,7 +602,7 @@ describe('advanced', () => {
       )
     })
 
-    it('should maintain string immutability', () => {
+    test('should maintain string immutability', () => {
       const original1 = 'hello world'
       const original2 = 'goodbye world'
       const original1Copy = original1

@@ -7,7 +7,7 @@ vi.mock('./use-study-demo', () => ({
 }))
 
 describe('Use Study Page', () => {
-  it('should render the learning page heading and summary', () => {
+  test('should render the learning page heading and summary', () => {
     const { getByText } = render(<UseStudyPage />)
 
     expect(getByText('Learn React `use()`')).toBeInTheDocument()
@@ -16,7 +16,7 @@ describe('Use Study Page', () => {
     ).toBeInTheDocument()
   })
 
-  it('should render official docs and home links', () => {
+  test('should render official docs and home links', () => {
     const { getByText } = render(<UseStudyPage />)
 
     const homeLink = getByText('Back to home').closest('a')
@@ -31,7 +31,7 @@ describe('Use Study Page', () => {
     expect(docsLink).toHaveAttribute('rel', 'noopener noreferrer')
   })
 
-  it('should render study sections and demo placeholder', () => {
+  test('should render study sections and demo placeholder', () => {
     const { getByText } = render(<UseStudyPage />)
 
     expect(getByText('Interactive demo')).toBeInTheDocument()

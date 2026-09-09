@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest'
 
 describe('isClient', () => {
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('isClient', () => {
   })
 
   describe('browser environment detection', () => {
-    it('should detect browser environment with window object', async () => {
+    test('should detect browser environment with window object', async () => {
       // In test environment with happy-dom, window should be available
       expect(typeof window).toBe('object')
       expect(window.document).toBeDefined()
@@ -22,7 +22,7 @@ describe('isClient', () => {
       })
     })
 
-    it('should detect browser environment with proper DOM APIs', async () => {
+    test('should detect browser environment with proper DOM APIs', async () => {
       // Verify the exact conditions checked by isClient
       const hasWindow = typeof window !== 'undefined'
       const hasDocument = window.document
@@ -39,7 +39,7 @@ describe('isClient', () => {
   })
 
   describe('server environment simulation', () => {
-    it('should detect server environment when window is undefined', async () => {
+    test('should detect server environment when window is undefined', async () => {
       // Store original window
       const originalWindow = global.window
 
@@ -60,7 +60,7 @@ describe('isClient', () => {
       }
     })
 
-    it('should detect server environment when document is missing', async () => {
+    test('should detect server environment when document is missing', async () => {
       // Store original values
       const originalWindow = global.window
       const originalDocument = global.window?.document
@@ -85,7 +85,7 @@ describe('isClient', () => {
       }
     })
 
-    it('should detect server environment when createElement is missing', async () => {
+    test('should detect server environment when createElement is missing', async () => {
       // Store original values
       const originalWindow = global.window
       const originalCreateElement = global.window?.document?.createElement
@@ -115,7 +115,7 @@ describe('isClient', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle window as non-object', async () => {
+    test('should handle window as non-object', async () => {
       // Store original window
       const originalWindow = global.window
 
@@ -136,7 +136,7 @@ describe('isClient', () => {
       }
     })
 
-    it('should handle document as falsy value', async () => {
+    test('should handle document as falsy value', async () => {
       // Store original values
       const originalWindow = global.window
 
@@ -159,7 +159,7 @@ describe('isClient', () => {
       }
     })
 
-    it('should handle createElement as non-function', async () => {
+    test('should handle createElement as non-function', async () => {
       // Store original values
       const originalWindow = global.window
 
@@ -188,13 +188,13 @@ describe('isClient', () => {
   })
 
   describe('type checking', () => {
-    it('should be a boolean value', async () => {
+    test('should be a boolean value', async () => {
       return import('./isClient.js').then((module) => {
         expect(typeof module.default).toBe('boolean')
       })
     })
 
-    it('should be either true or false, never undefined', async () => {
+    test('should be either true or false, never undefined', async () => {
       return import('./isClient.js').then((module) => {
         const value = module.default as unknown as boolean
         expect(value === true || value === false).toBe(true)
@@ -205,7 +205,7 @@ describe('isClient', () => {
   })
 
   describe('consistency', () => {
-    it('should return the same value on multiple imports', async () => {
+    test('should return the same value on multiple imports', async () => {
       return Promise.all([
         import('./isClient.js'),
         import('./isClient.js'),
@@ -217,7 +217,7 @@ describe('isClient', () => {
       })
     })
 
-    it('should be computed at module load time, not at runtime', async () => {
+    test('should be computed at module load time, not at runtime', async () => {
       return import('./isClient.js').then((module) => {
         const value1 = module.default
 
@@ -238,7 +238,7 @@ describe('isClient', () => {
   })
 
   describe('practical usage', () => {
-    it('should work for conditional code execution', async () => {
+    test('should work for conditional code execution', async () => {
       return import('./isClient.js').then((module) => {
         const isClient = module.default
 
@@ -257,7 +257,7 @@ describe('isClient', () => {
       })
     })
 
-    it('should work for feature detection patterns', async () => {
+    test('should work for feature detection patterns', async () => {
       return import('./isClient.js').then((module) => {
         const isClient = module.default
 

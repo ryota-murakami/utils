@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 import { Badge, badgeVariants } from './badge'
 
@@ -16,7 +16,7 @@ vi.mock('@radix-ui/react-slot', () => ({
 }))
 
 describe('Badge', () => {
-  it('should render with default variant', () => {
+  test('should render with default variant', () => {
     const { container } = render(<Badge>Default Badge</Badge>)
 
     const badge = container.firstChild as HTMLElement
@@ -25,7 +25,7 @@ describe('Badge', () => {
     expect(badge.textContent).toBe('Default Badge')
   })
 
-  it('should render with different variants', () => {
+  test('should render with different variants', () => {
     const variants = ['default', 'secondary', 'destructive', 'outline'] as const
 
     variants.forEach((variant) => {
@@ -39,7 +39,7 @@ describe('Badge', () => {
     })
   })
 
-  it('should apply custom className', () => {
+  test('should apply custom className', () => {
     const { container } = render(
       <Badge className="custom-class">Custom Badge</Badge>,
     )
@@ -48,7 +48,7 @@ describe('Badge', () => {
     expect(badge.className).toContain('custom-class')
   })
 
-  it('should render as child component when asChild is true', () => {
+  test('should render as child component when asChild is true', () => {
     const { container } = render(
       <Badge asChild>
         <a href="/test">Link Badge</a>
@@ -61,7 +61,7 @@ describe('Badge', () => {
     expect(badge).toHaveAttribute('data-slot', 'badge')
   })
 
-  it('should pass through additional props', () => {
+  test('should pass through additional props', () => {
     const { container } = render(
       <Badge data-testid="test-badge" role="status" aria-label="Test badge">
         Test Badge
@@ -74,7 +74,7 @@ describe('Badge', () => {
     expect(badge).toHaveAttribute('aria-label', 'Test badge')
   })
 
-  it('should handle onClick events', () => {
+  test('should handle onClick events', () => {
     const handleClick = vi.fn()
     const { container } = render(
       <Badge onClick={handleClick}>Clickable Badge</Badge>,
@@ -86,7 +86,7 @@ describe('Badge', () => {
     expect(handleClick).toHaveBeenCalledTimes(1)
   })
 
-  it('should render with complex content', () => {
+  test('should render with complex content', () => {
     const { getByText } = render(
       <Badge>
         <span>Icon</span>
@@ -98,7 +98,7 @@ describe('Badge', () => {
     expect(getByText('Text')).toBeInTheDocument()
   })
 
-  it('should handle empty content', () => {
+  test('should handle empty content', () => {
     const { container } = render(<Badge />)
 
     const badge = container.firstChild as HTMLElement
@@ -107,13 +107,13 @@ describe('Badge', () => {
   })
 
   describe('badgeVariants', () => {
-    it('should return correct classes for default variant', () => {
+    test('should return correct classes for default variant', () => {
       const classes = badgeVariants({ variant: 'default' })
       expect(typeof classes).toBe('string')
       // We can't test exact classes due to the mock, but we ensure it returns a string
     })
 
-    it('should return correct classes for all variants', () => {
+    test('should return correct classes for all variants', () => {
       const variants = [
         'default',
         'secondary',
@@ -128,7 +128,7 @@ describe('Badge', () => {
       })
     })
 
-    it('should return classes when no variant is specified', () => {
+    test('should return classes when no variant is specified', () => {
       const classes = badgeVariants()
       expect(typeof classes).toBe('string')
       expect(classes.length).toBeGreaterThan(0)
@@ -136,7 +136,7 @@ describe('Badge', () => {
   })
 
   describe('accessibility', () => {
-    it('should be focusable when interactive', () => {
+    test('should be focusable when interactive', () => {
       const { container } = render(
         <Badge tabIndex={0} onClick={() => {}}>
           Interactive Badge
@@ -147,7 +147,7 @@ describe('Badge', () => {
       expect(badge).toHaveAttribute('tabIndex', '0')
     })
 
-    it('should support ARIA attributes', () => {
+    test('should support ARIA attributes', () => {
       const { container } = render(
         <Badge
           aria-label="Status indicator"
@@ -166,7 +166,7 @@ describe('Badge', () => {
   })
 
   describe('type safety', () => {
-    it('should accept all span props', () => {
+    test('should accept all span props', () => {
       // This test ensures TypeScript compatibility
       expect(() => {
         render(
@@ -185,7 +185,7 @@ describe('Badge', () => {
   })
 
   describe('styling integration', () => {
-    it('should combine variant classes with custom className', () => {
+    test('should combine variant classes with custom className', () => {
       const { container } = render(
         <Badge variant="destructive" className="extra-class">
           Combined Classes
@@ -197,7 +197,7 @@ describe('Badge', () => {
       expect(badge.className).toContain('extra-class')
     })
 
-    it('should handle conditional className', () => {
+    test('should handle conditional className', () => {
       const isActive = true
       const { container } = render(
         <Badge className={isActive ? 'active' : 'inactive'}>
@@ -212,19 +212,19 @@ describe('Badge', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle null children', () => {
+    test('should handle null children', () => {
       expect(() => {
         render(<Badge>{null}</Badge>)
       }).not.toThrow()
     })
 
-    it('should handle undefined variant', () => {
+    test('should handle undefined variant', () => {
       expect(() => {
         render(<Badge variant={undefined}>Undefined Variant</Badge>)
       }).not.toThrow()
     })
 
-    it('should handle boolean children', () => {
+    test('should handle boolean children', () => {
       const { container } = render(
         <Badge>
           {true && 'Conditional Text'}
@@ -238,7 +238,7 @@ describe('Badge', () => {
   })
 
   describe('asChild behavior', () => {
-    it('should preserve data-slot when using asChild', () => {
+    test('should preserve data-slot when using asChild', () => {
       const { container } = render(
         <Badge asChild>
           <button type="button">Button Badge</button>
@@ -249,7 +249,7 @@ describe('Badge', () => {
       expect(element).toHaveAttribute('data-slot', 'badge')
     })
 
-    it('should work with different child elements', () => {
+    test('should work with different child elements', () => {
       const childElements = [
         <a key="link" href="/test">
           Link

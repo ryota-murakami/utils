@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest'
 
 import { getImageRect } from './getImageRect.js'
 
@@ -57,22 +57,22 @@ describe('getImageRect', () => {
   })
 
   describe('basic functionality', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(typeof getImageRect).toBe('function')
     })
 
-    it('should return a Promise', () => {
+    test('should return a Promise', () => {
       const result = getImageRect('https://example.com/image.jpg')
       expect(result).toBeInstanceOf(Promise)
     })
 
-    it('should create a new Image instance', () => {
+    test('should create a new Image instance', () => {
       getImageRect('https://example.com/image.jpg')
 
       expect(Image).toHaveBeenCalledTimes(1)
     })
 
-    it('should set up load and error event listeners', () => {
+    test('should set up load and error event listeners', () => {
       getImageRect('https://example.com/image.jpg')
 
       expect(mockImage.addEventListener).toHaveBeenCalledWith(
@@ -86,7 +86,7 @@ describe('getImageRect', () => {
       expect(mockImage.addEventListener).toHaveBeenCalledTimes(2)
     })
 
-    it('should set the image src to the provided URL', () => {
+    test('should set the image src to the provided URL', () => {
       const url = 'https://example.com/image.jpg'
       getImageRect(url)
 
@@ -95,7 +95,7 @@ describe('getImageRect', () => {
   })
 
   describe('successful image loading', () => {
-    it('should resolve with image dimensions on load', async () => {
+    test('should resolve with image dimensions on load', async () => {
       mockImage.naturalWidth = 800
       mockImage.naturalHeight = 600
 
@@ -108,7 +108,7 @@ describe('getImageRect', () => {
       expect(result).toEqual({ width: 800, height: 600 })
     })
 
-    it('should handle square images', async () => {
+    test('should handle square images', async () => {
       mockImage.naturalWidth = 500
       mockImage.naturalHeight = 500
 
@@ -119,7 +119,7 @@ describe('getImageRect', () => {
       expect(result).toEqual({ width: 500, height: 500 })
     })
 
-    it('should handle portrait images', async () => {
+    test('should handle portrait images', async () => {
       mockImage.naturalWidth = 400
       mockImage.naturalHeight = 800
 
@@ -130,7 +130,7 @@ describe('getImageRect', () => {
       expect(result).toEqual({ width: 400, height: 800 })
     })
 
-    it('should handle landscape images', async () => {
+    test('should handle landscape images', async () => {
       mockImage.naturalWidth = 1200
       mockImage.naturalHeight = 800
 
@@ -141,7 +141,7 @@ describe('getImageRect', () => {
       expect(result).toEqual({ width: 1200, height: 800 })
     })
 
-    it('should handle very large images', async () => {
+    test('should handle very large images', async () => {
       mockImage.naturalWidth = 5000
       mockImage.naturalHeight = 3000
 
@@ -152,7 +152,7 @@ describe('getImageRect', () => {
       expect(result).toEqual({ width: 5000, height: 3000 })
     })
 
-    it('should handle very small images', async () => {
+    test('should handle very small images', async () => {
       mockImage.naturalWidth = 1
       mockImage.naturalHeight = 1
 
@@ -165,7 +165,7 @@ describe('getImageRect', () => {
   })
 
   describe('error handling', () => {
-    it('should reject when image fails to load', async () => {
+    test('should reject when image fails to load', async () => {
       const error = new Error('Failed to load image')
 
       const promise = getImageRect('https://example.com/nonexistent.jpg')
@@ -176,7 +176,7 @@ describe('getImageRect', () => {
       await expect(promise).rejects.toBe(error)
     })
 
-    it('should handle network errors', async () => {
+    test('should handle network errors', async () => {
       const networkError = new Error('Network error')
 
       const promise = getImageRect('https://unreachable.example.com/image.jpg')
@@ -185,7 +185,7 @@ describe('getImageRect', () => {
       await expect(promise).rejects.toBe(networkError)
     })
 
-    it('should handle 404 errors', async () => {
+    test('should handle 404 errors', async () => {
       const notFoundError = new Error('404 Not Found')
 
       const promise = getImageRect('https://example.com/missing.jpg')
@@ -194,7 +194,7 @@ describe('getImageRect', () => {
       await expect(promise).rejects.toBe(notFoundError)
     })
 
-    it('should handle invalid image formats', async () => {
+    test('should handle invalid image formats', async () => {
       const formatError = new Error('Invalid image format')
 
       const promise = getImageRect('https://example.com/not-an-image.txt')
@@ -203,7 +203,7 @@ describe('getImageRect', () => {
       await expect(promise).rejects.toBe(formatError)
     })
 
-    it('should handle CORS errors', async () => {
+    test('should handle CORS errors', async () => {
       const corsError = new Error('CORS error')
 
       const promise = getImageRect('https://other-domain.com/protected.jpg')
@@ -214,7 +214,7 @@ describe('getImageRect', () => {
   })
 
   describe('URL handling', () => {
-    it('should handle HTTPS URLs', async () => {
+    test('should handle HTTPS URLs', async () => {
       mockImage.naturalWidth = 800
       mockImage.naturalHeight = 600
 
@@ -228,7 +228,7 @@ describe('getImageRect', () => {
       expect(result).toEqual({ width: 800, height: 600 })
     })
 
-    it('should handle HTTP URLs', async () => {
+    test('should handle HTTP URLs', async () => {
       mockImage.naturalWidth = 800
       mockImage.naturalHeight = 600
 
@@ -242,7 +242,7 @@ describe('getImageRect', () => {
       expect(result).toEqual({ width: 800, height: 600 })
     })
 
-    it('should handle relative URLs', async () => {
+    test('should handle relative URLs', async () => {
       mockImage.naturalWidth = 800
       mockImage.naturalHeight = 600
 
@@ -256,7 +256,7 @@ describe('getImageRect', () => {
       expect(result).toEqual({ width: 800, height: 600 })
     })
 
-    it('should handle data URLs', async () => {
+    test('should handle data URLs', async () => {
       mockImage.naturalWidth = 100
       mockImage.naturalHeight = 100
 
@@ -271,7 +271,7 @@ describe('getImageRect', () => {
       expect(result).toEqual({ width: 100, height: 100 })
     })
 
-    it('should handle blob URLs', async () => {
+    test('should handle blob URLs', async () => {
       mockImage.naturalWidth = 800
       mockImage.naturalHeight = 600
 
@@ -285,7 +285,7 @@ describe('getImageRect', () => {
       expect(result).toEqual({ width: 800, height: 600 })
     })
 
-    it('should handle URLs with query parameters', async () => {
+    test('should handle URLs with query parameters', async () => {
       mockImage.naturalWidth = 800
       mockImage.naturalHeight = 600
 
@@ -299,7 +299,7 @@ describe('getImageRect', () => {
       expect(result).toEqual({ width: 800, height: 600 })
     })
 
-    it('should handle URLs with fragments', async () => {
+    test('should handle URLs with fragments', async () => {
       mockImage.naturalWidth = 800
       mockImage.naturalHeight = 600
 
@@ -326,7 +326,7 @@ describe('getImageRect', () => {
     ]
 
     formats.forEach(({ ext, width, height }) => {
-      it(`should handle ${ext.toUpperCase()} images`, async () => {
+      test(`should handle ${ext.toUpperCase()} images`, async () => {
         mockImage.naturalWidth = width
         mockImage.naturalHeight = height
 
@@ -343,7 +343,7 @@ describe('getImageRect', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle empty URL', async () => {
+    test('should handle empty URL', async () => {
       const promise = getImageRect('')
 
       expect(mockImage.src).toBe('')
@@ -354,7 +354,7 @@ describe('getImageRect', () => {
       await expect(promise).rejects.toBe(error)
     })
 
-    it('should handle malformed URLs', async () => {
+    test('should handle malformed URLs', async () => {
       const malformedUrl = 'not-a-valid-url'
       const promise = getImageRect(malformedUrl)
 
@@ -365,7 +365,7 @@ describe('getImageRect', () => {
       await expect(promise).rejects.toBe(error)
     })
 
-    it('should handle zero dimensions', async () => {
+    test('should handle zero dimensions', async () => {
       mockImage.naturalWidth = 0
       mockImage.naturalHeight = 0
 
@@ -376,7 +376,7 @@ describe('getImageRect', () => {
       expect(result).toEqual({ width: 0, height: 0 })
     })
 
-    it('should handle images with only width or height', async () => {
+    test('should handle images with only width or height', async () => {
       // Test width without height
       mockImage.naturalWidth = 100
       mockImage.naturalHeight = 0
@@ -400,7 +400,7 @@ describe('getImageRect', () => {
   })
 
   describe('concurrent requests', () => {
-    it('should handle multiple concurrent image loads', async () => {
+    test('should handle multiple concurrent image loads', async () => {
       const images = [
         { url: 'https://example.com/image1.jpg', width: 800, height: 600 },
         { url: 'https://example.com/image2.jpg', width: 400, height: 300 },
@@ -448,7 +448,7 @@ describe('getImageRect', () => {
       ])
     })
 
-    it('should handle mixed success and failure', async () => {
+    test('should handle mixed success and failure', async () => {
       const requests = [
         {
           url: 'https://example.com/good1.jpg',
@@ -518,7 +518,7 @@ describe('getImageRect', () => {
   })
 
   describe('performance considerations', () => {
-    it('should not leak memory with many image instances', () => {
+    test('should not leak memory with many image instances', () => {
       const urls = Array.from(
         { length: 100 },
         (_, i) => `https://example.com/image${i}.jpg`,
@@ -531,7 +531,7 @@ describe('getImageRect', () => {
       expect(Image).toHaveBeenCalledTimes(100)
     })
 
-    it('should handle rapid successive calls', () => {
+    test('should handle rapid successive calls', () => {
       const url = 'https://example.com/image.jpg'
 
       for (let i = 0; i < 50; i++) {
@@ -543,7 +543,7 @@ describe('getImageRect', () => {
   })
 
   describe('integration patterns', () => {
-    it('should work with async/await pattern', async () => {
+    test('should work with async/await pattern', async () => {
       mockImage.naturalWidth = 800
       mockImage.naturalHeight = 600
 
@@ -556,7 +556,7 @@ describe('getImageRect', () => {
       expect(height).toBe(600)
     })
 
-    it('should work with Promise.then pattern', async () => {
+    test('should work with Promise.then pattern', async () => {
       mockImage.naturalWidth = 800
       mockImage.naturalHeight = 600
 
@@ -571,7 +571,7 @@ describe('getImageRect', () => {
       })
     })
 
-    it('should work with error handling patterns', async () => {
+    test('should work with error handling patterns', async () => {
       const error = new Error('Load failed')
       const promise = getImageRect('https://example.com/bad.jpg')
 

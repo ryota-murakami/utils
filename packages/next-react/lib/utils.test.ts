@@ -1,41 +1,41 @@
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 import { cn } from './utils'
 
 describe('cn utility function', () => {
   describe('basic functionality', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(typeof cn).toBe('function')
     })
 
-    it('should merge simple class strings', () => {
+    test('should merge simple class strings', () => {
       const result = cn('px-4 py-2', 'bg-blue-500')
       expect(result).toBe('px-4 py-2 bg-blue-500')
     })
 
-    it('should handle single class string', () => {
+    test('should handle single class string', () => {
       const result = cn('text-center')
       expect(result).toBe('text-center')
     })
 
-    it('should handle empty input', () => {
+    test('should handle empty input', () => {
       const result = cn()
       expect(result).toBe('')
     })
 
-    it('should handle empty strings', () => {
+    test('should handle empty strings', () => {
       const result = cn('', '', '')
       expect(result).toBe('')
     })
 
-    it('should filter out falsy values', () => {
+    test('should filter out falsy values', () => {
       const result = cn('px-4', false, null, undefined, '', 'py-2')
       expect(result).toBe('px-4 py-2')
     })
   })
 
   describe('conditional classes with objects', () => {
-    it('should apply classes based on boolean conditions', () => {
+    test('should apply classes based on boolean conditions', () => {
       const result = cn('btn', {
         'btn-primary': true,
         'btn-disabled': false,
@@ -44,7 +44,7 @@ describe('cn utility function', () => {
       expect(result).toBe('btn btn-primary btn-large')
     })
 
-    it('should handle all false conditions', () => {
+    test('should handle all false conditions', () => {
       const result = cn('btn', {
         'btn-primary': false,
         'btn-disabled': false,
@@ -52,7 +52,7 @@ describe('cn utility function', () => {
       expect(result).toBe('btn')
     })
 
-    it('should handle all true conditions', () => {
+    test('should handle all true conditions', () => {
       const result = cn('btn', {
         'btn-primary': true,
         'btn-disabled': true,
@@ -61,7 +61,7 @@ describe('cn utility function', () => {
       expect(result).toBe('btn btn-primary btn-disabled btn-large')
     })
 
-    it('should handle mixed string and object inputs', () => {
+    test('should handle mixed string and object inputs', () => {
       const result = cn(
         'base-class',
         { active: true, disabled: false },
@@ -72,17 +72,17 @@ describe('cn utility function', () => {
   })
 
   describe('array inputs', () => {
-    it('should handle array of class strings', () => {
+    test('should handle array of class strings', () => {
       const result = cn(['px-4', 'py-2'], ['bg-blue-500', 'text-white'])
       expect(result).toBe('px-4 py-2 bg-blue-500 text-white')
     })
 
-    it('should handle nested arrays', () => {
+    test('should handle nested arrays', () => {
       const result = cn(['px-4', ['py-2', 'bg-blue-500']], 'text-white')
       expect(result).toBe('px-4 py-2 bg-blue-500 text-white')
     })
 
-    it('should handle arrays with conditional objects', () => {
+    test('should handle arrays with conditional objects', () => {
       const result = cn(
         ['px-4', { 'py-2': true, 'py-4': false }],
         'bg-blue-500',
@@ -90,7 +90,7 @@ describe('cn utility function', () => {
       expect(result).toBe('px-4 py-2 bg-blue-500')
     })
 
-    it('should filter falsy values in arrays', () => {
+    test('should filter falsy values in arrays', () => {
       const result = cn(
         ['px-4', false, null, 'py-2'],
         ['', undefined, 'bg-blue-500'],
@@ -100,76 +100,76 @@ describe('cn utility function', () => {
   })
 
   describe('tailwind class conflict resolution', () => {
-    it('should resolve padding conflicts (later wins)', () => {
+    test('should resolve padding conflicts (later wins)', () => {
       const result = cn('p-4', 'p-6')
       expect(result).toBe('p-6')
     })
 
-    it('should resolve margin conflicts', () => {
+    test('should resolve margin conflicts', () => {
       const result = cn('m-2', 'm-4', 'm-1')
       expect(result).toBe('m-1')
     })
 
-    it('should resolve text color conflicts', () => {
+    test('should resolve text color conflicts', () => {
       const result = cn('text-red-500', 'text-blue-500', 'text-green-500')
       expect(result).toBe('text-green-500')
     })
 
-    it('should resolve background color conflicts', () => {
+    test('should resolve background color conflicts', () => {
       const result = cn('bg-red-500', 'bg-blue-500')
       expect(result).toBe('bg-blue-500')
     })
 
-    it('should resolve width conflicts', () => {
+    test('should resolve width conflicts', () => {
       const result = cn('w-4', 'w-8', 'w-full')
       expect(result).toBe('w-full')
     })
 
-    it('should resolve height conflicts', () => {
+    test('should resolve height conflicts', () => {
       const result = cn('h-10', 'h-20', 'h-auto')
       expect(result).toBe('h-auto')
     })
 
-    it('should handle complex conflicts with multiple properties', () => {
+    test('should handle complex conflicts with multiple properties', () => {
       const result = cn('p-4 text-red-500 bg-blue-100', 'p-6 text-green-500')
       expect(result).toBe('bg-blue-100 p-6 text-green-500')
     })
 
-    it('should preserve non-conflicting classes', () => {
+    test('should preserve non-conflicting classes', () => {
       const result = cn('px-4 text-red-500', 'py-2 bg-blue-500')
       expect(result).toBe('px-4 text-red-500 py-2 bg-blue-500')
     })
   })
 
   describe('responsive and state variants', () => {
-    it('should handle responsive classes without conflicts', () => {
+    test('should handle responsive classes without conflicts', () => {
       const result = cn('p-4', 'md:p-6', 'lg:p-8')
       expect(result).toBe('p-4 md:p-6 lg:p-8')
     })
 
-    it('should handle hover and focus states', () => {
+    test('should handle hover and focus states', () => {
       const result = cn('bg-blue-500', 'hover:bg-blue-600', 'focus:bg-blue-700')
       expect(result).toBe('bg-blue-500 hover:bg-blue-600 focus:bg-blue-700')
     })
 
-    it('should handle dark mode variants', () => {
+    test('should handle dark mode variants', () => {
       const result = cn('bg-white text-black', 'dark:bg-black dark:text-white')
       expect(result).toBe('bg-white text-black dark:bg-black dark:text-white')
     })
 
-    it('should handle responsive conflicts correctly', () => {
+    test('should handle responsive conflicts correctly', () => {
       const result = cn('p-4 md:p-6', 'md:p-8')
       expect(result).toBe('p-4 md:p-8')
     })
 
-    it('should handle state variant conflicts', () => {
+    test('should handle state variant conflicts', () => {
       const result = cn('hover:bg-blue-500', 'hover:bg-red-500')
       expect(result).toBe('hover:bg-red-500')
     })
   })
 
   describe('component usage patterns', () => {
-    it('should handle button component pattern', () => {
+    test('should handle button component pattern', () => {
       const getButtonClasses = (
         variant: 'primary' | 'secondary',
         className?: string,
@@ -190,7 +190,7 @@ describe('cn utility function', () => {
       )
     })
 
-    it('should handle input component pattern', () => {
+    test('should handle input component pattern', () => {
       const hasError = true
       const isDisabled = false
       const customClass = 'my-input'
@@ -210,7 +210,7 @@ describe('cn utility function', () => {
       )
     })
 
-    it('should handle card component pattern', () => {
+    test('should handle card component pattern', () => {
       const getCardClasses = (
         isInteractive: boolean,
         size: 'small' | 'medium' | 'large',
@@ -232,7 +232,7 @@ describe('cn utility function', () => {
       )
     })
 
-    it('should handle modal/dialog component pattern', () => {
+    test('should handle modal/dialog component pattern', () => {
       const getModalClasses = (
         isOpen: boolean,
         size: 'small' | 'medium' | 'large',
@@ -260,7 +260,7 @@ describe('cn utility function', () => {
   })
 
   describe('edge cases and complex scenarios', () => {
-    it('should handle very long class strings', () => {
+    test('should handle very long class strings', () => {
       const longClasses = Array.from(
         { length: 100 },
         (_, i) => `class-${i}`,
@@ -270,7 +270,7 @@ describe('cn utility function', () => {
       expect(result.split(' ').length).toBe(101)
     })
 
-    it('should handle classes with special characters', () => {
+    test('should handle classes with special characters', () => {
       const result = cn(
         'before:content-[""]',
         'after:content-["→"]',
@@ -281,7 +281,7 @@ describe('cn utility function', () => {
       )
     })
 
-    it('should handle numeric class names', () => {
+    test('should handle numeric class names', () => {
       const result = cn(
         'grid-cols-1',
         'sm:grid-cols-2',
@@ -293,17 +293,17 @@ describe('cn utility function', () => {
       )
     })
 
-    it('should handle arbitrary value classes', () => {
+    test('should handle arbitrary value classes', () => {
       const result = cn('w-[200px]', 'h-[100px]', 'bg-[#1da1f2]')
       expect(result).toBe('w-[200px] h-[100px] bg-[#1da1f2]')
     })
 
-    it('should handle conflicting arbitrary values', () => {
+    test('should handle conflicting arbitrary values', () => {
       const result = cn('w-[200px]', 'w-[300px]')
       expect(result).toBe('w-[300px]')
     })
 
-    it('should handle deeply nested conditions', () => {
+    test('should handle deeply nested conditions', () => {
       const result = cn(
         'base',
         {
@@ -328,7 +328,7 @@ describe('cn utility function', () => {
       expect(result).toContain('array2')
     })
 
-    it('should handle undefined and null in complex scenarios', () => {
+    test('should handle undefined and null in complex scenarios', () => {
       const result = cn(
         'base',
         // @ts-expect-error Testing intentionally falsy expressions
@@ -345,7 +345,7 @@ describe('cn utility function', () => {
   })
 
   describe('performance considerations', () => {
-    it('should handle many class combinations efficiently', () => {
+    test('should handle many class combinations efficiently', () => {
       const startTime = performance.now()
 
       for (let i = 0; i < 1000; i++) {
@@ -365,7 +365,7 @@ describe('cn utility function', () => {
       expect(duration).toBeLessThan(100)
     })
 
-    it('should handle large arrays efficiently', () => {
+    test('should handle large arrays efficiently', () => {
       const largeArray = Array.from({ length: 1000 }, (_, i) => `class-${i}`)
 
       const startTime = performance.now()
@@ -379,7 +379,7 @@ describe('cn utility function', () => {
   })
 
   describe('real-world integration patterns', () => {
-    it('should work with component prop spreading', () => {
+    test('should work with component prop spreading', () => {
       const buttonProps = {
         className: cn('btn', 'btn-primary'),
         disabled: false,
@@ -388,7 +388,7 @@ describe('cn utility function', () => {
       expect(buttonProps.className).toBe('btn btn-primary')
     })
 
-    it('should handle conditional rendering patterns', () => {
+    test('should handle conditional rendering patterns', () => {
       const showBorder = true
       const isLarge = false
       const customClasses = 'my-custom-class'
@@ -405,7 +405,7 @@ describe('cn utility function', () => {
       )
     })
 
-    it('should handle theme-based class application', () => {
+    test('should handle theme-based class application', () => {
       const getThemedClasses = (
         theme: 'light' | 'dark',
         variant: 'danger' | 'primary' | 'secondary',
@@ -428,7 +428,7 @@ describe('cn utility function', () => {
       expect(result).toBe('button bg-black text-white border-red-500')
     })
 
-    it('should handle form validation state classes', () => {
+    test('should handle form validation state classes', () => {
       const getFormClasses = (
         validationState: 'default' | 'success' | 'error' | 'warning',
         isFocused: boolean,
@@ -457,27 +457,27 @@ describe('cn utility function', () => {
   })
 
   describe('type safety and TypeScript integration', () => {
-    it('should accept string inputs', () => {
+    test('should accept string inputs', () => {
       const result = cn('class1', 'class2')
       expect(typeof result).toBe('string')
     })
 
-    it('should accept conditional object inputs', () => {
+    test('should accept conditional object inputs', () => {
       const result = cn({ class1: true, class2: false })
       expect(typeof result).toBe('string')
     })
 
-    it('should accept array inputs', () => {
+    test('should accept array inputs', () => {
       const result = cn(['class1', 'class2'])
       expect(typeof result).toBe('string')
     })
 
-    it('should accept mixed input types', () => {
+    test('should accept mixed input types', () => {
       const result = cn('string', { conditional: true }, ['array', 'items'])
       expect(typeof result).toBe('string')
     })
 
-    it('should handle falsy values gracefully', () => {
+    test('should handle falsy values gracefully', () => {
       const result = cn('valid', null, undefined, false, '', 0)
       expect(result).toBe('valid')
     })

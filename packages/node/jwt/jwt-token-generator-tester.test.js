@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest'
 
 // Mock the required modules
 vi.mock('jsonwebtoken', () => ({
@@ -65,7 +65,7 @@ describe('jwt-token-generator-tester', () => {
   })
 
   describe('initialization', () => {
-    it('should create TokenGenerator with correct configuration', async () => {
+    test('should create TokenGenerator with correct configuration', async () => {
       await import('./token-generator.tester.js')
 
       expect(MockTokenGenerator).toHaveBeenCalledWith('a', 'a', {
@@ -77,7 +77,7 @@ describe('jwt-token-generator-tester', () => {
       })
     })
 
-    it('should call sign method with correct parameters', async () => {
+    test('should call sign method with correct parameters', async () => {
       const mockToken = 'mock-jwt-token'
       mockTokenGenerator.sign.mockReturnValue(mockToken)
 
@@ -94,7 +94,7 @@ describe('jwt-token-generator-tester', () => {
       )
     })
 
-    it('should set up setTimeout with correct delay', async () => {
+    test('should set up setTimeout with correct delay', async () => {
       await import('./token-generator.tester.js')
 
       expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), 3000)
@@ -102,7 +102,7 @@ describe('jwt-token-generator-tester', () => {
   })
 
   describe('token generation and refresh', () => {
-    it('should generate initial token', async () => {
+    test('should generate initial token', async () => {
       const mockToken = 'initial-token'
       mockTokenGenerator.sign.mockReturnValue(mockToken)
 
@@ -111,7 +111,7 @@ describe('jwt-token-generator-tester', () => {
       expect(mockTokenGenerator.sign).toHaveBeenCalled()
     })
 
-    it('should refresh token after timeout', async () => {
+    test('should refresh token after timeout', async () => {
       const initialToken = 'initial-token'
       const refreshedToken = 'refreshed-token'
 
@@ -130,7 +130,7 @@ describe('jwt-token-generator-tester', () => {
       })
     })
 
-    it('should decode both tokens after refresh', async () => {
+    test('should decode both tokens after refresh', async () => {
       const initialToken = 'initial-token'
       const refreshedToken = 'refreshed-token'
       const decodedInitial = { header: {}, payload: { myclaim: 'something' } }
@@ -159,7 +159,7 @@ describe('jwt-token-generator-tester', () => {
       })
     })
 
-    it('should log decoded tokens', async () => {
+    test('should log decoded tokens', async () => {
       const initialToken = 'initial-token'
       const refreshedToken = 'refreshed-token'
       const decodedInitial = {
@@ -189,35 +189,35 @@ describe('jwt-token-generator-tester', () => {
   })
 
   describe('configuration details', () => {
-    it('should use correct algorithm', async () => {
+    test('should use correct algorithm', async () => {
       await import('./token-generator.tester.js')
 
       const config = MockTokenGenerator.mock.calls[0][2]
       expect(config.algorithm).toBe('HS256')
     })
 
-    it('should set correct expiration time', async () => {
+    test('should set correct expiration time', async () => {
       await import('./token-generator.tester.js')
 
       const config = MockTokenGenerator.mock.calls[0][2]
       expect(config.expiresIn).toBe('2m')
     })
 
-    it('should set correct notBefore delay', async () => {
+    test('should set correct notBefore delay', async () => {
       await import('./token-generator.tester.js')
 
       const config = MockTokenGenerator.mock.calls[0][2]
       expect(config.notBefore).toBe('2s')
     })
 
-    it('should include timestamp', async () => {
+    test('should include timestamp', async () => {
       await import('./token-generator.tester.js')
 
       const config = MockTokenGenerator.mock.calls[0][2]
       expect(config.noTimestamp).toBe(false)
     })
 
-    it('should set key ID', async () => {
+    test('should set key ID', async () => {
       await import('./token-generator.tester.js')
 
       const config = MockTokenGenerator.mock.calls[0][2]
@@ -226,35 +226,35 @@ describe('jwt-token-generator-tester', () => {
   })
 
   describe('claims and options', () => {
-    it('should include custom claim', async () => {
+    test('should include custom claim', async () => {
       await import('./token-generator.tester.js')
 
       const claims = mockTokenGenerator.sign.mock.calls[0][0]
       expect(claims).toEqual({ myclaim: 'something' })
     })
 
-    it('should set audience correctly', async () => {
+    test('should set audience correctly', async () => {
       await import('./token-generator.tester.js')
 
       const options = mockTokenGenerator.sign.mock.calls[0][1]
       expect(options.audience).toBe('myaud')
     })
 
-    it('should set issuer correctly', async () => {
+    test('should set issuer correctly', async () => {
       await import('./token-generator.tester.js')
 
       const options = mockTokenGenerator.sign.mock.calls[0][1]
       expect(options.issuer).toBe('myissuer')
     })
 
-    it('should set subject correctly', async () => {
+    test('should set subject correctly', async () => {
       await import('./token-generator.tester.js')
 
       const options = mockTokenGenerator.sign.mock.calls[0][1]
       expect(options.subject).toBe('user')
     })
 
-    it('should set initial JWT ID', async () => {
+    test('should set initial JWT ID', async () => {
       await import('./token-generator.tester.js')
 
       const options = mockTokenGenerator.sign.mock.calls[0][1]
@@ -263,7 +263,7 @@ describe('jwt-token-generator-tester', () => {
   })
 
   describe('refresh behavior', () => {
-    it('should change JWT ID during refresh', async () => {
+    test('should change JWT ID during refresh', async () => {
       const initialToken = 'initial-token'
       mockTokenGenerator.sign.mockReturnValue(initialToken)
 
@@ -276,7 +276,7 @@ describe('jwt-token-generator-tester', () => {
       expect(refreshOptions.jwtid).toBe('2')
     })
 
-    it('should verify audience and issuer during refresh', async () => {
+    test('should verify audience and issuer during refresh', async () => {
       const initialToken = 'initial-token'
       mockTokenGenerator.sign.mockReturnValue(initialToken)
 
@@ -292,7 +292,7 @@ describe('jwt-token-generator-tester', () => {
       })
     })
 
-    it('should use original token for refresh', async () => {
+    test('should use original token for refresh', async () => {
       const initialToken = 'specific-initial-token'
       mockTokenGenerator.sign.mockReturnValue(initialToken)
 
@@ -309,13 +309,13 @@ describe('jwt-token-generator-tester', () => {
   })
 
   describe('timing and execution flow', () => {
-    it('should wait 3 seconds before refresh', async () => {
+    test('should wait 3 seconds before refresh', async () => {
       await import('./token-generator.tester.js')
 
       expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), 3000)
     })
 
-    it('should execute refresh logic only after timeout', async () => {
+    test('should execute refresh logic only after timeout', async () => {
       await import('./token-generator.tester.js')
 
       // Before timeout execution
@@ -332,7 +332,7 @@ describe('jwt-token-generator-tester', () => {
   })
 
   describe('error handling', () => {
-    it('should handle token generation errors gracefully', async () => {
+    test('should handle token generation errors gracefully', async () => {
       mockTokenGenerator.sign.mockImplementation(() => {
         throw new Error('Token generation failed')
       })
@@ -343,7 +343,7 @@ describe('jwt-token-generator-tester', () => {
       )
     })
 
-    it('should handle token refresh errors gracefully', async () => {
+    test('should handle token refresh errors gracefully', async () => {
       const initialToken = 'initial-token'
       mockTokenGenerator.sign.mockReturnValue(initialToken)
       mockTokenGenerator.refresh.mockImplementation(() => {
@@ -358,7 +358,7 @@ describe('jwt-token-generator-tester', () => {
       expect(() => timeoutCallback()).toThrow('Token refresh failed')
     })
 
-    it('should handle decode errors gracefully', async () => {
+    test('should handle decode errors gracefully', async () => {
       const initialToken = 'initial-token'
       const refreshedToken = 'refreshed-token'
 
@@ -377,7 +377,7 @@ describe('jwt-token-generator-tester', () => {
   })
 
   describe('integration scenario', () => {
-    it('should complete full workflow successfully', async () => {
+    test('should complete full workflow successfully', async () => {
       const initialToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...'
       const refreshedToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...'
       const decodedInitial = {

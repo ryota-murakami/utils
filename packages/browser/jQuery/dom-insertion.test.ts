@@ -1,5 +1,5 @@
 /// <reference path="./global.d.ts" />
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, test, expect, beforeEach } from 'vitest'
 import './core.js'
 
 describe('jQuery DOM Insertion Methods', () => {
@@ -9,7 +9,7 @@ describe('jQuery DOM Insertion Methods', () => {
   })
 
   describe('.append()', () => {
-    it('should append HTML string to elements', () => {
+    test('should append HTML string to elements', () => {
       // Setup
       document.body.innerHTML = '<div id="container">Original</div>'
 
@@ -22,7 +22,7 @@ describe('jQuery DOM Insertion Methods', () => {
       )
     })
 
-    it('should append element to elements', () => {
+    test('should append element to elements', () => {
       // Setup
       document.body.innerHTML = '<div id="container">Original</div>'
       const span = document.createElement('span')
@@ -37,7 +37,7 @@ describe('jQuery DOM Insertion Methods', () => {
       )
     })
 
-    it('should append to multiple elements', () => {
+    test('should append to multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="target">Div 1</div>
@@ -53,7 +53,7 @@ describe('jQuery DOM Insertion Methods', () => {
       expect(divs[1]?.innerHTML).toBe('Div 2<strong>!</strong>')
     })
 
-    it('should append jQuery object', () => {
+    test('should append jQuery object', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">Original</div>
@@ -71,7 +71,7 @@ describe('jQuery DOM Insertion Methods', () => {
       expect(document.body.querySelectorAll('#toAppend').length).toBe(1)
     })
 
-    it('should accept function parameter', () => {
+    test('should accept function parameter', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item">Item 0</div>
@@ -89,7 +89,7 @@ describe('jQuery DOM Insertion Methods', () => {
       expect(items[1]?.innerHTML).toBe('Item 1<span> - Index 1</span>')
     })
 
-    it('should return jQuery object for chaining', () => {
+    test('should return jQuery object for chaining', () => {
       // Setup
       document.body.innerHTML = '<div id="test"></div>'
 
@@ -103,7 +103,7 @@ describe('jQuery DOM Insertion Methods', () => {
   })
 
   describe('.prepend()', () => {
-    it('should prepend HTML string to elements', () => {
+    test('should prepend HTML string to elements', () => {
       // Setup
       document.body.innerHTML = '<div id="container">Original</div>'
 
@@ -116,7 +116,7 @@ describe('jQuery DOM Insertion Methods', () => {
       )
     })
 
-    it('should prepend element to elements', () => {
+    test('should prepend element to elements', () => {
       // Setup
       document.body.innerHTML = '<div id="container">Original</div>'
       const span = document.createElement('span')
@@ -131,7 +131,7 @@ describe('jQuery DOM Insertion Methods', () => {
       )
     })
 
-    it('should prepend to multiple elements', () => {
+    test('should prepend to multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div class="target">Div 1</div>
@@ -147,7 +147,7 @@ describe('jQuery DOM Insertion Methods', () => {
       expect(divs[1]?.innerHTML).toBe('<strong>!</strong>Div 2')
     })
 
-    it('should prepend jQuery object', () => {
+    test('should prepend jQuery object', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">Original</div>
@@ -165,7 +165,7 @@ describe('jQuery DOM Insertion Methods', () => {
       expect(document.body.querySelectorAll('#toPrepend').length).toBe(1)
     })
 
-    it('should accept function parameter', () => {
+    test('should accept function parameter', () => {
       // Setup
       document.body.innerHTML = `
         <div class="item">Item 0</div>
@@ -185,7 +185,7 @@ describe('jQuery DOM Insertion Methods', () => {
   })
 
   describe('.before()', () => {
-    it('should insert HTML before elements', () => {
+    test('should insert HTML before elements', () => {
       // Setup
       document.body.innerHTML = '<div id="target">Target</div>'
 
@@ -198,7 +198,7 @@ describe('jQuery DOM Insertion Methods', () => {
       )
     })
 
-    it('should insert element before elements', () => {
+    test('should insert element before elements', () => {
       // Setup
       document.body.innerHTML = '<div id="target">Target</div>'
       const span = document.createElement('span')
@@ -213,7 +213,7 @@ describe('jQuery DOM Insertion Methods', () => {
       )
     })
 
-    it('should insert before multiple elements', () => {
+    test('should insert before multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -232,7 +232,7 @@ describe('jQuery DOM Insertion Methods', () => {
       )
     })
 
-    it('should insert jQuery object before element', () => {
+    test('should insert jQuery object before element', () => {
       // Setup
       document.body.innerHTML = `
         <div id="target">Target</div>
@@ -250,7 +250,7 @@ describe('jQuery DOM Insertion Methods', () => {
       expect(document.querySelectorAll('#toInsert').length).toBe(1)
     })
 
-    it('should accept function parameter', () => {
+    test('should accept function parameter', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -273,7 +273,7 @@ describe('jQuery DOM Insertion Methods', () => {
   })
 
   describe('.after()', () => {
-    it('should insert HTML after elements', () => {
+    test('should insert HTML after elements', () => {
       // Setup
       document.body.innerHTML = '<div id="target">Target</div>'
 
@@ -286,7 +286,7 @@ describe('jQuery DOM Insertion Methods', () => {
       )
     })
 
-    it('should insert element after elements', () => {
+    test('should insert element after elements', () => {
       // Setup
       document.body.innerHTML = '<div id="target">Target</div>'
       const span = document.createElement('span')
@@ -301,7 +301,7 @@ describe('jQuery DOM Insertion Methods', () => {
       )
     })
 
-    it('should insert after multiple elements', () => {
+    test('should insert after multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -320,7 +320,7 @@ describe('jQuery DOM Insertion Methods', () => {
       )
     })
 
-    it('should insert jQuery object after element', () => {
+    test('should insert jQuery object after element', () => {
       // Setup
       document.body.innerHTML = `
         <div id="target">Target</div>
@@ -338,7 +338,7 @@ describe('jQuery DOM Insertion Methods', () => {
       expect(document.querySelectorAll('#toInsert').length).toBe(1)
     })
 
-    it('should accept function parameter', () => {
+    test('should accept function parameter', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -361,7 +361,7 @@ describe('jQuery DOM Insertion Methods', () => {
   })
 
   describe('.appendTo()', () => {
-    it('should append elements to target', () => {
+    test('should append elements to target', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">Container</div>
@@ -379,7 +379,7 @@ describe('jQuery DOM Insertion Methods', () => {
       expect(document.body.querySelectorAll('#toAppend').length).toBe(1)
     })
 
-    it('should append newly created elements to target', () => {
+    test('should append newly created elements to target', () => {
       // Setup
       document.body.innerHTML = '<div id="container">Container</div>'
 
@@ -392,7 +392,7 @@ describe('jQuery DOM Insertion Methods', () => {
       )
     })
 
-    it('should append to multiple targets', () => {
+    test('should append to multiple targets', () => {
       // Setup
       document.body.innerHTML = `
         <div class="container">Container 1</div>
@@ -408,7 +408,7 @@ describe('jQuery DOM Insertion Methods', () => {
       expect(containers[1]?.innerHTML).toBe('Container 2<span>Content</span>')
     })
 
-    it('should return the appended elements', () => {
+    test('should return the appended elements', () => {
       // Setup
       document.body.innerHTML = '<div id="container"></div>'
 
@@ -422,7 +422,7 @@ describe('jQuery DOM Insertion Methods', () => {
   })
 
   describe('.prependTo()', () => {
-    it('should prepend elements to target', () => {
+    test('should prepend elements to target', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">Container</div>
@@ -440,7 +440,7 @@ describe('jQuery DOM Insertion Methods', () => {
       expect(document.body.querySelectorAll('#toPrepend').length).toBe(1)
     })
 
-    it('should prepend newly created elements to target', () => {
+    test('should prepend newly created elements to target', () => {
       // Setup
       document.body.innerHTML = '<div id="container">Container</div>'
 
@@ -453,7 +453,7 @@ describe('jQuery DOM Insertion Methods', () => {
       )
     })
 
-    it('should prepend to multiple targets', () => {
+    test('should prepend to multiple targets', () => {
       // Setup
       document.body.innerHTML = `
         <div class="container">Container 1</div>
@@ -469,7 +469,7 @@ describe('jQuery DOM Insertion Methods', () => {
       expect(containers[1]?.innerHTML).toBe('<span>Content</span>Container 2')
     })
 
-    it('should return the prepended elements', () => {
+    test('should return the prepended elements', () => {
       // Setup
       document.body.innerHTML = '<div id="container"></div>'
 
@@ -483,7 +483,7 @@ describe('jQuery DOM Insertion Methods', () => {
   })
 
   describe('.insertBefore()', () => {
-    it('should insert elements before target', () => {
+    test('should insert elements before target', () => {
       // Setup
       document.body.innerHTML = `
         <div id="target">Target</div>
@@ -501,7 +501,7 @@ describe('jQuery DOM Insertion Methods', () => {
       expect(document.querySelectorAll('#toInsert').length).toBe(1)
     })
 
-    it('should insert newly created elements before target', () => {
+    test('should insert newly created elements before target', () => {
       // Setup
       document.body.innerHTML = '<div id="target">Target</div>'
 
@@ -514,7 +514,7 @@ describe('jQuery DOM Insertion Methods', () => {
       )
     })
 
-    it('should insert before multiple targets', () => {
+    test('should insert before multiple targets', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -533,7 +533,7 @@ describe('jQuery DOM Insertion Methods', () => {
       )
     })
 
-    it('should return the inserted elements', () => {
+    test('should return the inserted elements', () => {
       // Setup
       document.body.innerHTML = '<div id="target">Target</div>'
 
@@ -547,7 +547,7 @@ describe('jQuery DOM Insertion Methods', () => {
   })
 
   describe('.insertAfter()', () => {
-    it('should insert elements after target', () => {
+    test('should insert elements after target', () => {
       // Setup
       document.body.innerHTML = `
         <div id="target">Target</div>
@@ -565,7 +565,7 @@ describe('jQuery DOM Insertion Methods', () => {
       expect(document.querySelectorAll('#toInsert').length).toBe(1)
     })
 
-    it('should insert newly created elements after target', () => {
+    test('should insert newly created elements after target', () => {
       // Setup
       document.body.innerHTML = '<div id="target">Target</div>'
 
@@ -578,7 +578,7 @@ describe('jQuery DOM Insertion Methods', () => {
       )
     })
 
-    it('should insert after multiple targets', () => {
+    test('should insert after multiple targets', () => {
       // Setup
       document.body.innerHTML = `
         <div>
@@ -597,7 +597,7 @@ describe('jQuery DOM Insertion Methods', () => {
       )
     })
 
-    it('should return the inserted elements', () => {
+    test('should return the inserted elements', () => {
       // Setup
       document.body.innerHTML = '<div id="target">Target</div>'
 

@@ -2,7 +2,7 @@ import { spawn } from 'child_process'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -43,22 +43,22 @@ const runCLI = async (input) => {
 
 describe('snake-to-cameled-space CLI', () => {
   describe('basic functionality', () => {
-    it('should convert simple kebab-case to title case', async () => {
+    test('should convert simple kebab-case to title case', async () => {
       const result = await runCLI('hello-world')
       expect(result.stdout).toBe('Hello World')
     })
 
-    it('should handle single words', async () => {
+    test('should handle single words', async () => {
       const result = await runCLI('test')
       expect(result.stdout).toBe('Test')
     })
 
-    it('should handle multiple hyphens', async () => {
+    test('should handle multiple hyphens', async () => {
       const result = await runCLI('one-two-three-four')
       expect(result.stdout).toBe('One Two Three Four')
     })
 
-    it('should handle the documented example', async () => {
+    test('should handle the documented example', async () => {
       const input =
         'code-piece-of-complete-guide-to-react-client-rendering-behavior'
       const expected =
@@ -70,95 +70,95 @@ describe('snake-to-cameled-space CLI', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle empty string', async () => {
+    test('should handle empty string', async () => {
       const result = await runCLI('')
       expect(result.stdout).toBe('')
     })
 
-    it('should handle strings without hyphens', async () => {
+    test('should handle strings without hyphens', async () => {
       const result = await runCLI('singleword')
       expect(result.stdout).toBe('Singleword')
     })
 
-    it('should handle consecutive hyphens', async () => {
+    test('should handle consecutive hyphens', async () => {
       const result = await runCLI('double--hyphen')
       expect(result.stdout).toBe('Double  Hyphen')
     })
 
-    it('should handle hyphens at the beginning', async () => {
+    test('should handle hyphens at the beginning', async () => {
       const result = await runCLI('-leading-hyphen')
       expect(result.stdout).toBe(' Leading Hyphen')
     })
 
-    it('should handle hyphens at the end', async () => {
+    test('should handle hyphens at the end', async () => {
       const result = await runCLI('trailing-hyphen-')
       expect(result.stdout).toBe('Trailing Hyphen ')
     })
 
-    it('should handle only hyphens', async () => {
+    test('should handle only hyphens', async () => {
       const result = await runCLI('---')
       expect(result.stdout).toBe('   ')
     })
   })
 
   describe('string variations', () => {
-    it('should handle strings with numbers', async () => {
+    test('should handle strings with numbers', async () => {
       const result = await runCLI('item-1-test-2')
       expect(result.stdout).toBe('Item 1 Test 2')
     })
 
-    it('should handle strings with mixed case', async () => {
+    test('should handle strings with mixed case', async () => {
       const result = await runCLI('iPhone-app-store')
       expect(result.stdout).toBe('IPhone App Store')
     })
 
-    it('should handle component names', async () => {
+    test('should handle component names', async () => {
       const result = await runCLI('button-primary-large')
       expect(result.stdout).toBe('Button Primary Large')
     })
 
-    it('should handle file names', async () => {
+    test('should handle file names', async () => {
       const result = await runCLI('user-profile-component')
       expect(result.stdout).toBe('User Profile Component')
     })
 
-    it('should handle API endpoint names', async () => {
+    test('should handle API endpoint names', async () => {
       const result = await runCLI('api-v1-users-profile')
       expect(result.stdout).toBe('Api V1 Users Profile')
     })
   })
 
   describe('special characters', () => {
-    it('should handle strings with special characters', async () => {
+    test('should handle strings with special characters', async () => {
       const result = await runCLI('user@domain-test')
       expect(result.stdout).toBe('User@domain Test')
     })
 
-    it('should handle strings with dots', async () => {
+    test('should handle strings with dots', async () => {
       const result = await runCLI('file.txt-backup')
       expect(result.stdout).toBe('File.txt Backup')
     })
 
-    it('should handle strings with underscores within words', async () => {
+    test('should handle strings with underscores within words', async () => {
       const result = await runCLI('snake_case-to-kebab')
       expect(result.stdout).toBe('Snake_case To Kebab')
     })
   })
 
   describe('Unicode support', () => {
-    it('should handle Unicode characters', async () => {
+    test('should handle Unicode characters', async () => {
       const result = await runCLI('café-résumé')
       expect(result.stdout).toBe('Café Résumé')
     })
 
-    it('should handle emojis', async () => {
+    test('should handle emojis', async () => {
       const result = await runCLI('hello-world-👋')
       expect(result.stdout).toBe('Hello World 👋')
     })
   })
 
   describe('real-world examples', () => {
-    it('should handle React component names', async () => {
+    test('should handle React component names', async () => {
       const examples = [
         ['nav-menu-item', 'Nav Menu Item'],
         ['form-input-field', 'Form Input Field'],
@@ -173,7 +173,7 @@ describe('snake-to-cameled-space CLI', () => {
       }
     })
 
-    it('should handle CSS class names', async () => {
+    test('should handle CSS class names', async () => {
       const examples = [
         ['btn-primary-lg', 'Btn Primary Lg'],
         ['text-center-bold', 'Text Center Bold'],
@@ -186,7 +186,7 @@ describe('snake-to-cameled-space CLI', () => {
       }
     })
 
-    it('should handle package names', async () => {
+    test('should handle package names', async () => {
       const examples = [
         ['react-router-dom', 'React Router Dom'],
         ['styled-components', 'Styled Components'],
@@ -201,7 +201,7 @@ describe('snake-to-cameled-space CLI', () => {
   })
 
   describe('CLI behavior', () => {
-    it('should handle no arguments gracefully', async () => {
+    test('should handle no arguments gracefully', async () => {
       // When no argument is provided, process.argv[2] will be undefined
       try {
         const result = await runCLI()
@@ -214,13 +214,13 @@ describe('snake-to-cameled-space CLI', () => {
       }
     })
 
-    it('should output to stdout', async () => {
+    test('should output to stdout', async () => {
       const result = await runCLI('test-output')
       expect(result.stdout).toBe('Test Output')
       expect(result.stderr).toBe('')
     })
 
-    it('should exit successfully with valid input', async () => {
+    test('should exit successfully with valid input', async () => {
       // This is implicitly tested by all other tests not throwing
       const result = await runCLI('valid-input')
       expect(result.stdout).toBe('Valid Input')
@@ -228,7 +228,7 @@ describe('snake-to-cameled-space CLI', () => {
   })
 
   describe('performance and large inputs', () => {
-    it('should handle very long strings', async () => {
+    test('should handle very long strings', async () => {
       const longInput = Array(100).fill('word').join('-')
       const expectedOutput = Array(100).fill('Word').join(' ')
 
@@ -236,7 +236,7 @@ describe('snake-to-cameled-space CLI', () => {
       expect(result.stdout).toBe(expectedOutput)
     })
 
-    it('should handle many hyphens', async () => {
+    test('should handle many hyphens', async () => {
       const manyHyphens = 'a-'.repeat(50) + 'b'
       // This produces "a-a-a-...-a-b", so each 'a' and 'b' should be capitalized
       const expectedOutput = Array(50).fill('A').join(' ') + ' B'
@@ -247,7 +247,7 @@ describe('snake-to-cameled-space CLI', () => {
   })
 
   describe('consistency', () => {
-    it('should produce consistent results', async () => {
+    test('should produce consistent results', async () => {
       const input = 'consistent-test-case'
 
       // Run multiple times and verify same output

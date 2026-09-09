@@ -1,5 +1,5 @@
 import { http, HttpResponse } from 'msw'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, test, expect, beforeEach } from 'vitest'
 
 import { server } from '../mocks/server'
 
@@ -13,7 +13,7 @@ describe('API utilities', () => {
 
   describe('login function', () => {
     describe('successful login', () => {
-      it('should return user data for valid credentials', async () => {
+      test('should return user data for valid credentials', async () => {
         const credentials = {
           email: 'test@example.com',
           password: 'password123',
@@ -28,7 +28,7 @@ describe('API utilities', () => {
         })
       })
 
-      it('should handle custom successful login scenarios', async () => {
+      test('should handle custom successful login scenarios', async () => {
         // Override the handler for this specific test
         server.use(
           http.post('/api/login', async ({ request }) => {
@@ -61,7 +61,7 @@ describe('API utilities', () => {
     })
 
     describe('failed login', () => {
-      it('should throw error for invalid credentials', async () => {
+      test('should throw error for invalid credentials', async () => {
         const credentials = {
           email: 'test@example.com',
           password: 'wrongpassword',
@@ -70,7 +70,7 @@ describe('API utilities', () => {
         await expect(login(credentials)).rejects.toThrow('Invalid credentials')
       })
 
-      it('should throw error for network failures', async () => {
+      test('should throw error for network failures', async () => {
         const credentials = {
           email: 'network@error.com',
           password: 'password123',
@@ -79,7 +79,7 @@ describe('API utilities', () => {
         await expect(login(credentials)).rejects.toThrow('Network error')
       })
 
-      it('should handle different error status codes', async () => {
+      test('should handle different error status codes', async () => {
         server.use(
           http.post('/api/login', () => {
             return HttpResponse.json(
@@ -97,7 +97,7 @@ describe('API utilities', () => {
         await expect(login(credentials)).rejects.toThrow('Server unavailable')
       })
 
-      it('should throw generic error when no message provided', async () => {
+      test('should throw generic error when no message provided', async () => {
         server.use(
           http.post('/api/login', () => {
             return HttpResponse.json({}, { status: 400 })
@@ -114,7 +114,7 @@ describe('API utilities', () => {
     })
 
     describe('edge cases', () => {
-      it('should handle empty credentials', async () => {
+      test('should handle empty credentials', async () => {
         const credentials = {
           email: '',
           password: '',
@@ -123,7 +123,7 @@ describe('API utilities', () => {
         await expect(login(credentials)).rejects.toThrow('Invalid credentials')
       })
 
-      it('should handle special characters in credentials', async () => {
+      test('should handle special characters in credentials', async () => {
         server.use(
           http.post('/api/login', async ({ request }) => {
             const credentials = (await request.json()) as {
@@ -154,7 +154,7 @@ describe('API utilities', () => {
 
   describe('getUser function', () => {
     describe('successful user fetch', () => {
-      it('should return user data for valid ID', async () => {
+      test('should return user data for valid ID', async () => {
         const result = await getUser(1)
 
         expect(result).toEqual({
@@ -165,7 +165,7 @@ describe('API utilities', () => {
         })
       })
 
-      it('should handle different user IDs', async () => {
+      test('should handle different user IDs', async () => {
         server.use(
           http.get('/api/user/:id', ({ params }) => {
             const { id } = params
@@ -190,7 +190,7 @@ describe('API utilities', () => {
     })
 
     describe('failed user fetch', () => {
-      it('should throw error for non-existent user', async () => {
+      test('should throw error for non-existent user', async () => {
         server.use(
           http.get('/api/user/:id', () => {
             return HttpResponse.json(
@@ -203,7 +203,7 @@ describe('API utilities', () => {
         await expect(getUser(999)).rejects.toThrow('Failed to fetch user')
       })
 
-      it('should handle server errors', async () => {
+      test('should handle server errors', async () => {
         server.use(
           http.get('/api/user/:id', () => {
             return HttpResponse.json(
@@ -216,7 +216,7 @@ describe('API utilities', () => {
         await expect(getUser(1)).rejects.toThrow('Failed to fetch user')
       })
 
-      it('should handle network errors', async () => {
+      test('should handle network errors', async () => {
         server.use(
           http.get('/api/user/:id', () => {
             return HttpResponse.error()
@@ -228,7 +228,7 @@ describe('API utilities', () => {
     })
 
     describe('edge cases', () => {
-      it('should handle zero as user ID', async () => {
+      test('should handle zero as user ID', async () => {
         server.use(
           http.get('/api/user/0', () => {
             return HttpResponse.json({
@@ -245,7 +245,7 @@ describe('API utilities', () => {
         expect(result.name).toBe('System Admin')
       })
 
-      it('should handle large user IDs', async () => {
+      test('should handle large user IDs', async () => {
         const largeId = 999999999
 
         server.use(
@@ -267,7 +267,7 @@ describe('API utilities', () => {
 
   describe('getPosts function', () => {
     describe('successful posts fetch', () => {
-      it('should return posts with default pagination', async () => {
+      test('should return posts with default pagination', async () => {
         const result = await getPosts()
 
         expect(result.posts).toHaveLength(10)
@@ -285,7 +285,7 @@ describe('API utilities', () => {
         expect(result.posts[0]).toHaveProperty('userId')
       })
 
-      it('should return posts with custom pagination', async () => {
+      test('should return posts with custom pagination', async () => {
         const result = await getPosts(2, 5)
 
         expect(result.posts).toHaveLength(5)
@@ -300,7 +300,7 @@ describe('API utilities', () => {
         expect(result.posts[0]?.id).toBe(6) // (page 2 - 1) * limit 5 + 1
       })
 
-      it('should handle empty results', async () => {
+      test('should handle empty results', async () => {
         server.use(
           http.get('/api/posts', () => {
             return HttpResponse.json({
@@ -321,7 +321,7 @@ describe('API utilities', () => {
         expect(result.pagination.total).toBe(0)
       })
 
-      it('should handle large pagination values', async () => {
+      test('should handle large pagination values', async () => {
         const result = await getPosts(100, 50)
 
         expect(result.pagination.page).toBe(100)
@@ -330,7 +330,7 @@ describe('API utilities', () => {
     })
 
     describe('failed posts fetch', () => {
-      it('should throw error when posts fetch fails', async () => {
+      test('should throw error when posts fetch fails', async () => {
         server.use(
           http.get('/api/posts', () => {
             return HttpResponse.json(
@@ -343,7 +343,7 @@ describe('API utilities', () => {
         await expect(getPosts()).rejects.toThrow('Failed to fetch posts')
       })
 
-      it('should handle different HTTP error statuses', async () => {
+      test('should handle different HTTP error statuses', async () => {
         const errorStatuses = [400, 401, 403, 404, 503]
 
         for (const status of errorStatuses) {
@@ -357,7 +357,7 @@ describe('API utilities', () => {
         }
       })
 
-      it('should handle network errors', async () => {
+      test('should handle network errors', async () => {
         server.use(
           http.get('/api/posts', () => {
             return HttpResponse.error()
@@ -369,14 +369,14 @@ describe('API utilities', () => {
     })
 
     describe('edge cases and parameter validation', () => {
-      it('should handle zero page number', async () => {
+      test('should handle zero page number', async () => {
         const result = await getPosts(0, 10)
 
         expect(result.pagination.page).toBe(0)
         expect(result.pagination.limit).toBe(10)
       })
 
-      it('should handle zero limit', async () => {
+      test('should handle zero limit', async () => {
         server.use(
           http.get('/api/posts', ({ request }) => {
             const url = new URL(request.url)
@@ -400,7 +400,7 @@ describe('API utilities', () => {
         expect(result.pagination.limit).toBe(0)
       })
 
-      it('should handle negative parameters', async () => {
+      test('should handle negative parameters', async () => {
         const result = await getPosts(-1, -5)
 
         // The MSW handler will still process these, though they may not be meaningful
@@ -410,7 +410,7 @@ describe('API utilities', () => {
     })
 
     describe('response structure validation', () => {
-      it('should return posts with all required fields', async () => {
+      test('should return posts with all required fields', async () => {
         const result = await getPosts()
 
         result.posts.forEach((post) => {
@@ -426,7 +426,7 @@ describe('API utilities', () => {
         })
       })
 
-      it('should return pagination with all required fields', async () => {
+      test('should return pagination with all required fields', async () => {
         const result = await getPosts()
 
         expect(result.pagination).toHaveProperty('page')
@@ -440,7 +440,7 @@ describe('API utilities', () => {
         expect(typeof result.pagination.totalPages).toBe('number')
       })
 
-      it('should handle posts with custom content', async () => {
+      test('should handle posts with custom content', async () => {
         server.use(
           http.get('/api/posts', () => {
             return HttpResponse.json({
@@ -471,7 +471,7 @@ describe('API utilities', () => {
   })
 
   describe('performance and concurrent requests', () => {
-    it('should handle multiple concurrent API calls', async () => {
+    test('should handle multiple concurrent API calls', async () => {
       const startTime = performance.now()
 
       const promises = [
@@ -493,7 +493,7 @@ describe('API utilities', () => {
       expect(duration).toBeLessThan(1000)
     })
 
-    it('should handle rapid sequential calls', async () => {
+    test('should handle rapid sequential calls', async () => {
       const startTime = performance.now()
 
       // Make 10 rapid sequential calls
@@ -510,7 +510,7 @@ describe('API utilities', () => {
   })
 
   describe('type safety and interface compliance', () => {
-    it('should return correctly typed login response', async () => {
+    test('should return correctly typed login response', async () => {
       const result = await login({
         email: 'test@example.com',
         password: 'password123',
@@ -524,7 +524,7 @@ describe('API utilities', () => {
       }
     })
 
-    it('should return correctly typed user response', async () => {
+    test('should return correctly typed user response', async () => {
       const result = await getUser(1)
 
       expect(typeof result.id).toBe('number')
@@ -533,7 +533,7 @@ describe('API utilities', () => {
       expect(typeof result.createdAt).toBe('string')
     })
 
-    it('should return correctly typed posts response', async () => {
+    test('should return correctly typed posts response', async () => {
       const result = await getPosts()
 
       expect(Array.isArray(result.posts)).toBe(true)

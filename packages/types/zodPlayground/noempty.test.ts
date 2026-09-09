@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest'
 import z from 'zod'
 
 describe('noempty zodPlayground', () => {
@@ -17,7 +17,7 @@ describe('noempty zodPlayground', () => {
       numArr: z.array(z.number()),
     })
 
-    it('should allow empty arrays', () => {
+    test('should allow empty arrays', () => {
       const result = schema.safeParse({ numArr: [] })
 
       expect(result.success).toBe(true)
@@ -26,7 +26,7 @@ describe('noempty zodPlayground', () => {
       }
     })
 
-    it('should allow non-empty arrays', () => {
+    test('should allow non-empty arrays', () => {
       const result = schema.safeParse({ numArr: [1, 2, 3] })
 
       expect(result.success).toBe(true)
@@ -35,7 +35,7 @@ describe('noempty zodPlayground', () => {
       }
     })
 
-    it('should validate array element types', () => {
+    test('should validate array element types', () => {
       const result = schema.safeParse({ numArr: [1, 'invalid', 3] })
 
       expect(result.success).toBe(false)
@@ -50,7 +50,7 @@ describe('noempty zodPlayground', () => {
       }
     })
 
-    it('should reject non-array values', () => {
+    test('should reject non-array values', () => {
       const result = schema.safeParse({ numArr: 'not-an-array' })
 
       expect(result.success).toBe(false)
@@ -66,7 +66,7 @@ describe('noempty zodPlayground', () => {
       }
     })
 
-    it('should require numArr property', () => {
+    test('should require numArr property', () => {
       const result = schema.safeParse({})
 
       expect(result.success).toBe(false)
@@ -86,7 +86,7 @@ describe('noempty zodPlayground', () => {
       numArr: z.array(z.number()).nonempty(),
     })
 
-    it('should reject empty arrays', () => {
+    test('should reject empty arrays', () => {
       const result = schemaNoemptySchema.safeParse({ numArr: [] })
 
       expect(result.success).toBe(false)
@@ -104,7 +104,7 @@ describe('noempty zodPlayground', () => {
       }
     })
 
-    it('should allow single element arrays', () => {
+    test('should allow single element arrays', () => {
       const result = schemaNoemptySchema.safeParse({ numArr: [42] })
 
       expect(result.success).toBe(true)
@@ -113,7 +113,7 @@ describe('noempty zodPlayground', () => {
       }
     })
 
-    it('should allow multiple element arrays', () => {
+    test('should allow multiple element arrays', () => {
       const result = schemaNoemptySchema.safeParse({ numArr: [1, 2, 3, 4, 5] })
 
       expect(result.success).toBe(true)
@@ -122,7 +122,7 @@ describe('noempty zodPlayground', () => {
       }
     })
 
-    it('should still validate element types in non-empty arrays', () => {
+    test('should still validate element types in non-empty arrays', () => {
       const result = schemaNoemptySchema.safeParse({ numArr: [1, 'invalid'] })
 
       expect(result.success).toBe(false)
@@ -136,7 +136,7 @@ describe('noempty zodPlayground', () => {
       }
     })
 
-    it('should have appropriate error message for empty arrays', () => {
+    test('should have appropriate error message for empty arrays', () => {
       const result = schemaNoemptySchema.safeParse({ numArr: [] })
 
       expect(result.success).toBe(false)
@@ -160,7 +160,7 @@ describe('noempty zodPlayground', () => {
       numArr: z.array(z.number()).nonempty(),
     })
 
-    it('should show different behavior for empty arrays', () => {
+    test('should show different behavior for empty arrays', () => {
       const emptyArray = { numArr: [] }
 
       const regularResult = regularSchema.safeParse(emptyArray)
@@ -170,7 +170,7 @@ describe('noempty zodPlayground', () => {
       expect(nonemptyResult.success).toBe(false)
     })
 
-    it('should show same behavior for valid non-empty arrays', () => {
+    test('should show same behavior for valid non-empty arrays', () => {
       const validArray = { numArr: [1, 2, 3] }
 
       const regularResult = regularSchema.safeParse(validArray)
@@ -184,7 +184,7 @@ describe('noempty zodPlayground', () => {
       }
     })
 
-    it('should show same behavior for invalid types', () => {
+    test('should show same behavior for invalid types', () => {
       const invalidData = { numArr: 'not-an-array' }
 
       const regularResult = regularSchema.safeParse(invalidData)
@@ -200,7 +200,7 @@ describe('noempty zodPlayground', () => {
       numArr: z.array(z.number()).nonempty(),
     })
 
-    it('should handle null arrays', () => {
+    test('should handle null arrays', () => {
       const result = nonemptySchema.safeParse({ numArr: null })
 
       expect(result.success).toBe(false)
@@ -213,7 +213,7 @@ describe('noempty zodPlayground', () => {
       }
     })
 
-    it('should handle undefined arrays', () => {
+    test('should handle undefined arrays', () => {
       const result = nonemptySchema.safeParse({ numArr: undefined })
 
       expect(result.success).toBe(false)
@@ -226,7 +226,7 @@ describe('noempty zodPlayground', () => {
       }
     })
 
-    it('should handle arrays with mixed valid/invalid types', () => {
+    test('should handle arrays with mixed valid/invalid types', () => {
       const result = nonemptySchema.safeParse({
         numArr: [1, 2, 'invalid', null, 5, undefined],
       })
@@ -250,7 +250,7 @@ describe('noempty zodPlayground', () => {
       }
     })
 
-    it('should handle very large arrays', () => {
+    test('should handle very large arrays', () => {
       const largeArray = Array.from({ length: 10000 }, (_, i) => i)
       const result = nonemptySchema.safeParse({ numArr: largeArray })
 
@@ -262,7 +262,7 @@ describe('noempty zodPlayground', () => {
       }
     })
 
-    it('should handle arrays with special number values', () => {
+    test('should handle arrays with special number values', () => {
       // Zod v4 treats Infinity as invalid - test only finite special numbers
       const specialNumbers = [
         0,
@@ -283,14 +283,14 @@ describe('noempty zodPlayground', () => {
       }
     })
 
-    it('should reject arrays with Infinity values', () => {
+    test('should reject arrays with Infinity values', () => {
       const result = nonemptySchema.safeParse({ numArr: [1, Infinity, 3] })
 
       // Zod v4 rejects Infinity as invalid number
       expect(result.success).toBe(false)
     })
 
-    it('should reject arrays with NaN values', () => {
+    test('should reject arrays with NaN values', () => {
       const result = nonemptySchema.safeParse({ numArr: [1, NaN, 3] })
 
       expect(result.success).toBe(false)
@@ -314,7 +314,7 @@ describe('noempty zodPlayground', () => {
       numArr: z.array(z.number()).nonempty(),
     })
 
-    it('should infer correct types for regular schema', () => {
+    test('should infer correct types for regular schema', () => {
       type RegularType = z.infer<typeof regularSchema>
 
       const validData: RegularType = { numArr: [] }
@@ -323,7 +323,7 @@ describe('noempty zodPlayground', () => {
       expect(result.success).toBe(true)
     })
 
-    it('should infer correct types for nonempty schema', () => {
+    test('should infer correct types for nonempty schema', () => {
       type NonemptyType = z.infer<typeof nonemptySchema>
 
       // TypeScript should allow this assignment
@@ -333,7 +333,7 @@ describe('noempty zodPlayground', () => {
       expect(result.success).toBe(true)
     })
 
-    it('should work with parse instead of safeParse for valid data', () => {
+    test('should work with parse instead of safeParse for valid data', () => {
       const validData = { numArr: [1, 2, 3] }
 
       expect(() => regularSchema.parse(validData)).not.toThrow()
@@ -346,7 +346,7 @@ describe('noempty zodPlayground', () => {
       expect(nonemptyParsed).toEqual(validData)
     })
 
-    it('should throw for parse with invalid data', () => {
+    test('should throw for parse with invalid data', () => {
       const invalidData = { numArr: [] }
 
       expect(() => regularSchema.parse(invalidData)).not.toThrow()
@@ -359,7 +359,7 @@ describe('noempty zodPlayground', () => {
       numArr: z.array(z.number()).nonempty(),
     })
 
-    it('should handle validation performance for large valid arrays', () => {
+    test('should handle validation performance for large valid arrays', () => {
       const largeValidArray = {
         numArr: Array.from({ length: 1000 }, (_, i) => i),
       }
@@ -372,7 +372,7 @@ describe('noempty zodPlayground', () => {
       expect(endTime - startTime).toBeLessThan(300) // Should be reasonably fast
     })
 
-    it('should handle validation performance for arrays with errors', () => {
+    test('should handle validation performance for arrays with errors', () => {
       const arrayWithErrors = {
         numArr: Array.from({ length: 100 }, (_, i) =>
           i % 10 === 0 ? 'invalid' : i,

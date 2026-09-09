@@ -1,10 +1,10 @@
 import { renderHook } from '@testing-library/react'
-import { describe, it, expect, vi } from 'vitest'
+import { describe, test, expect, vi } from 'vitest'
 
 import useUpdateEffect from './use-update-effect'
 
 describe('useUpdateEffect', () => {
-  it('simulates componentDidUpdate', () => {
+  test('simulates componentDidUpdate', () => {
     const effect = vi.fn()
     const { rerender } = renderHook(() => useUpdateEffect(effect))
 
@@ -17,7 +17,7 @@ describe('useUpdateEffect', () => {
     expect(effect).toHaveBeenCalledTimes(3)
   })
 
-  it('simulates componentDidUpdate with single dependency change', () => {
+  test('simulates componentDidUpdate with single dependency change', () => {
     const effect = vi.fn()
     let num = 0
     const { rerender } = renderHook(() => useUpdateEffect(effect, [num]))
@@ -34,7 +34,7 @@ describe('useUpdateEffect', () => {
     expect(effect).toHaveBeenCalledTimes(3)
   })
 
-  it('does not run when the dependency identity is unchanged', () => {
+  test('does not run when the dependency identity is unchanged', () => {
     const effect = vi.fn()
     const stableValue = 'stable'
     const { rerender } = renderHook(() =>
@@ -47,7 +47,7 @@ describe('useUpdateEffect', () => {
     expect(effect).not.toHaveBeenCalled()
   })
 
-  it('simulates componentDidUpdate with multiple dependency change', () => {
+  test('simulates componentDidUpdate with multiple dependency change', () => {
     const effect = vi.fn()
     let arg1 = { like: false }
     let arg2 = 0
@@ -67,21 +67,21 @@ describe('useUpdateEffect', () => {
     expect(effect).toHaveBeenCalledTimes(2)
   })
 
-  it('should not run effect on initial render', () => {
+  test('should not run effect on initial render', () => {
     const effect = vi.fn()
     renderHook(() => useUpdateEffect(effect))
 
     expect(effect).toHaveBeenCalledTimes(0)
   })
 
-  it('should not run effect on initial render with single dependency change', () => {
+  test('should not run effect on initial render with single dependency change', () => {
     const effect = vi.fn()
     renderHook(() => useUpdateEffect(effect, [1]))
 
     expect(effect).toHaveBeenCalledTimes(0)
   })
 
-  it('runs cleanup before the next update effect and on unmount', () => {
+  test('runs cleanup before the next update effect and on unmount', () => {
     const cleanup = vi.fn()
     const effect = vi.fn(() => cleanup)
     let value = 0
@@ -106,7 +106,7 @@ describe('useUpdateEffect', () => {
     expect(cleanup).toHaveBeenCalledTimes(2)
   })
 
-  it('rejects empty dependency lists at the type level', () => {
+  test('rejects empty dependency lists at the type level', () => {
     const effect = vi.fn()
     renderHook(() =>
       // @ts-expect-error - omit deps for every update, or pass non-empty deps.

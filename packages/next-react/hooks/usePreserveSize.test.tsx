@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import React from 'react'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, test, expect, beforeEach } from 'vitest'
 
 import { usePreserveSize } from './usePreserveSize'
 
@@ -53,7 +53,7 @@ describe('usePreserveSize', () => {
       .offsetHeight
   })
 
-  it('should not apply styles in initial state (isTransitioning=false)', () => {
+  test('should not apply styles in initial state (isTransitioning=false)', () => {
     render(<TestComponent isTransitioning={false} content="Initial content" />)
 
     const container = screen.getByTestId('container')
@@ -61,7 +61,7 @@ describe('usePreserveSize', () => {
     expect(container.style.minHeight).toBe('')
   })
 
-  it('should set ref when isTransitioning is true', () => {
+  test('should set ref when isTransitioning is true', () => {
     render(<TestComponent isTransitioning={true} content="Content" />)
 
     const container = screen.getByTestId('container')
@@ -69,7 +69,7 @@ describe('usePreserveSize', () => {
     expect(screen.getByTestId('loading')).toBeInTheDocument()
   })
 
-  it('should switch from content to loading', async () => {
+  test('should switch from content to loading', async () => {
     const { rerender } = render(
       <TestComponent isTransitioning={false} content="Content" />,
     )
@@ -86,7 +86,7 @@ describe('usePreserveSize', () => {
     expect(screen.getByTestId('loading')).toBeInTheDocument()
   })
 
-  it('should return from loading to content', async () => {
+  test('should return from loading to content', async () => {
     const { rerender } = render(
       <TestComponent isTransitioning={true} content="Content" />,
     )
@@ -104,7 +104,7 @@ describe('usePreserveSize', () => {
     expect(screen.getByText('New content')).toBeInTheDocument()
   })
 
-  it('should ref object work correctly', () => {
+  test('should ref object work correctly', () => {
     const TestRefComponent: React.FC = () => {
       const { ref, style } = usePreserveSize(false)
 
@@ -122,7 +122,7 @@ describe('usePreserveSize', () => {
     // Note: ref.current verification in JSDOM is limited, so only basic existence check
   })
 
-  it('should have correct style object structure', async () => {
+  test('should have correct style object structure', async () => {
     const TestStyleComponent: React.FC<{ isTransitioning: boolean }> = ({
       isTransitioning,
     }) => {

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 import {
   assertCast,
@@ -9,20 +9,20 @@ import {
 
 describe('typeHelpers', () => {
   describe('assertCast', () => {
-    it('should not throw for any value (type assertion only)', () => {
+    test('should not throw for any value (type assertion only)', () => {
       expect(() => assertCast<string>(123)).not.toThrow()
       expect(() => assertCast<number>('hello')).not.toThrow()
       expect(() => assertCast<boolean>(null)).not.toThrow()
       expect(() => assertCast<object>(undefined)).not.toThrow()
     })
 
-    it('should be a no-op function for runtime', () => {
+    test('should be a no-op function for runtime', () => {
       const value = 'test'
       assertCast<string>(value)
       expect(value).toBe('test') // value unchanged
     })
 
-    it('should work with complex types', () => {
+    test('should work with complex types', () => {
       const obj = { name: 'Alice', age: 30 }
       expect(() => assertCast<{ name: string; age: number }>(obj)).not.toThrow()
 
@@ -30,7 +30,7 @@ describe('typeHelpers', () => {
       expect(() => assertCast<number[]>(arr)).not.toThrow()
     })
 
-    it('should handle edge cases', () => {
+    test('should handle edge cases', () => {
       expect(() => assertCast<any>(null)).not.toThrow()
       expect(() => assertCast<never>(undefined)).not.toThrow()
       expect(() => assertCast<unknown>('anything')).not.toThrow()
@@ -38,35 +38,35 @@ describe('typeHelpers', () => {
   })
 
   describe('safeAssign', () => {
-    it('should assign properties to target object', () => {
+    test('should assign properties to target object', () => {
       const target = { name: '', age: 0, active: false }
       safeAssign(target, { name: 'Alice' }, { age: 30 })
 
       expect(target).toEqual({ name: 'Alice', age: 30, active: false })
     })
 
-    it('should handle multiple source objects', () => {
+    test('should handle multiple source objects', () => {
       const target = { a: 1, b: 2, c: 3 }
       safeAssign(target, { a: 10 }, { b: 20 }, { c: 30 })
 
       expect(target).toEqual({ a: 10, b: 20, c: 30 })
     })
 
-    it('should overwrite properties from left to right', () => {
+    test('should overwrite properties from left to right', () => {
       const target = { value: 0 }
       safeAssign(target, { value: 1 }, { value: 2 }, { value: 3 })
 
       expect(target.value).toBe(3)
     })
 
-    it('should handle empty assignment', () => {
+    test('should handle empty assignment', () => {
       const target = { name: 'test' }
       safeAssign(target)
 
       expect(target).toEqual({ name: 'test' }) // unchanged
     })
 
-    it('should handle partial assignments', () => {
+    test('should handle partial assignments', () => {
       const target = { name: 'Alice', age: 30, email: 'alice@example.com' }
       safeAssign(target, { age: 31 }) // only update age
 
@@ -77,7 +77,7 @@ describe('typeHelpers', () => {
       })
     })
 
-    it('should add new properties', () => {
+    test('should add new properties', () => {
       const target = { name: 'Alice' } as any
       safeAssign(target, { age: 30, email: 'alice@example.com' })
 
@@ -88,7 +88,7 @@ describe('typeHelpers', () => {
       })
     })
 
-    it('should handle nested objects (shallow assignment)', () => {
+    test('should handle nested objects (shallow assignment)', () => {
       const target = { user: { name: 'Alice' }, settings: { theme: 'dark' } }
       const newUser = { name: 'Bob' }
       safeAssign(target, { user: newUser })
@@ -97,7 +97,7 @@ describe('typeHelpers', () => {
       expect(target.settings).toEqual({ theme: 'dark' }) // unchanged
     })
 
-    it('should work with various object types', () => {
+    test('should work with various object types', () => {
       const target = { count: 0, items: [] as string[], metadata: {} }
       safeAssign(target, {
         count: 5,
@@ -112,7 +112,7 @@ describe('typeHelpers', () => {
   })
 
   describe('assertIsDefined', () => {
-    it('should not throw for defined values (compile-time check only)', () => {
+    test('should not throw for defined values (compile-time check only)', () => {
       expect(() => assertIsDefined('test')).not.toThrow()
       expect(() => assertIsDefined(123)).not.toThrow()
       expect(() => assertIsDefined(true)).not.toThrow()
@@ -120,17 +120,17 @@ describe('typeHelpers', () => {
       expect(() => assertIsDefined({})).not.toThrow()
     })
 
-    it('should not throw for undefined (no runtime checking)', () => {
+    test('should not throw for undefined (no runtime checking)', () => {
       expect(() => assertIsDefined(undefined)).not.toThrow()
     })
 
-    it('should be a no-op function for runtime', () => {
+    test('should be a no-op function for runtime', () => {
       const value = 'test'
       assertIsDefined(value)
       expect(value).toBe('test') // value unchanged
     })
 
-    it('should handle falsy values that are not undefined', () => {
+    test('should handle falsy values that are not undefined', () => {
       expect(() => assertIsDefined(null)).not.toThrow()
       expect(() => assertIsDefined(0)).not.toThrow()
       expect(() => assertIsDefined('')).not.toThrow()
@@ -139,7 +139,7 @@ describe('typeHelpers', () => {
   })
 
   describe('assertIsDefinedWithError', () => {
-    it('should not throw for defined values', () => {
+    test('should not throw for defined values', () => {
       expect(() => assertIsDefinedWithError('test')).not.toThrow()
       expect(() => assertIsDefinedWithError(123)).not.toThrow()
       expect(() => assertIsDefinedWithError(true)).not.toThrow()
@@ -147,26 +147,26 @@ describe('typeHelpers', () => {
       expect(() => assertIsDefinedWithError({})).not.toThrow()
     })
 
-    it('should not throw for falsy values that are not null or undefined', () => {
+    test('should not throw for falsy values that are not null or undefined', () => {
       expect(() => assertIsDefinedWithError(0)).not.toThrow()
       expect(() => assertIsDefinedWithError('')).not.toThrow()
       expect(() => assertIsDefinedWithError(false)).not.toThrow()
       expect(() => assertIsDefinedWithError(NaN)).not.toThrow()
     })
 
-    it('should throw for null values', () => {
+    test('should throw for null values', () => {
       expect(() => assertIsDefinedWithError(null)).toThrow(
         'null is not defined',
       )
     })
 
-    it('should throw for undefined values', () => {
+    test('should throw for undefined values', () => {
       expect(() => assertIsDefinedWithError(undefined)).toThrow(
         'undefined is not defined',
       )
     })
 
-    it('should throw with correct error message', () => {
+    test('should throw with correct error message', () => {
       try {
         assertIsDefinedWithError(null)
         expect.fail('Should have thrown')
@@ -184,7 +184,7 @@ describe('typeHelpers', () => {
       }
     })
 
-    it('should work in practical scenarios', () => {
+    test('should work in practical scenarios', () => {
       const getValue = (flag: boolean): string | null => (flag ? 'value' : null)
 
       const validValue = getValue(true)
@@ -194,7 +194,7 @@ describe('typeHelpers', () => {
       expect(() => assertIsDefinedWithError(nullValue)).toThrow()
     })
 
-    it('should handle objects with null/undefined properties', () => {
+    test('should handle objects with null/undefined properties', () => {
       const obj = {
         validProp: 'test',
         nullProp: null,
@@ -206,7 +206,7 @@ describe('typeHelpers', () => {
       expect(() => assertIsDefinedWithError(obj.undefinedProp)).toThrow()
     })
 
-    it('should work with array elements', () => {
+    test('should work with array elements', () => {
       const arr = ['valid', null, undefined, 'also-valid']
 
       expect(() => assertIsDefinedWithError(arr[0])).not.toThrow()
@@ -217,7 +217,7 @@ describe('typeHelpers', () => {
   })
 
   describe('integration scenarios', () => {
-    it('should work together in complex type scenarios', () => {
+    test('should work together in complex type scenarios', () => {
       interface User {
         name: string
         age: number
@@ -243,7 +243,7 @@ describe('typeHelpers', () => {
       })
     })
 
-    it('should handle real-world API response scenarios', () => {
+    test('should handle real-world API response scenarios', () => {
       interface ApiResponse {
         data: any
         status: number

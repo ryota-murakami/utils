@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 import {
   Card,
@@ -18,7 +18,7 @@ vi.mock('@/lib/utils', () => ({
 
 describe('Card Components', () => {
   describe('Card', () => {
-    it('should render with default styling', () => {
+    test('should render with default styling', () => {
       const { container } = render(<Card>Card Content</Card>)
 
       const card = container.firstChild as HTMLElement
@@ -27,7 +27,7 @@ describe('Card Components', () => {
       expect(card.textContent).toBe('Card Content')
     })
 
-    it('should apply custom className', () => {
+    test('should apply custom className', () => {
       const { container } = render(
         <Card className="custom-card">Custom Card</Card>,
       )
@@ -36,7 +36,7 @@ describe('Card Components', () => {
       expect(card.className).toContain('custom-card')
     })
 
-    it('should pass through additional props', () => {
+    test('should pass through additional props', () => {
       const { container } = render(
         <Card data-testid="test-card" role="article" id="main-card">
           Test Card
@@ -51,7 +51,7 @@ describe('Card Components', () => {
   })
 
   describe('CardHeader', () => {
-    it('should render with correct data-slot', () => {
+    test('should render with correct data-slot', () => {
       const { container } = render(<CardHeader>Header Content</CardHeader>)
 
       const header = container.firstChild as HTMLElement
@@ -59,7 +59,7 @@ describe('Card Components', () => {
       expect(header.textContent).toBe('Header Content')
     })
 
-    it('should apply custom className', () => {
+    test('should apply custom className', () => {
       const { container } = render(
         <CardHeader className="custom-header">Header</CardHeader>,
       )
@@ -70,7 +70,7 @@ describe('Card Components', () => {
   })
 
   describe('CardTitle', () => {
-    it('should render with correct data-slot', () => {
+    test('should render with correct data-slot', () => {
       const { container } = render(<CardTitle>Title Text</CardTitle>)
 
       const title = container.firstChild as HTMLElement
@@ -78,7 +78,7 @@ describe('Card Components', () => {
       expect(title.textContent).toBe('Title Text')
     })
 
-    it('should apply custom className', () => {
+    test('should apply custom className', () => {
       const { container } = render(
         <CardTitle className="custom-title">Title</CardTitle>,
       )
@@ -89,7 +89,7 @@ describe('Card Components', () => {
   })
 
   describe('CardDescription', () => {
-    it('should render with correct data-slot', () => {
+    test('should render with correct data-slot', () => {
       const { container } = render(
         <CardDescription>Description text</CardDescription>,
       )
@@ -99,7 +99,7 @@ describe('Card Components', () => {
       expect(description.textContent).toBe('Description text')
     })
 
-    it('should apply custom className', () => {
+    test('should apply custom className', () => {
       const { container } = render(
         <CardDescription className="custom-description">
           Description
@@ -112,7 +112,7 @@ describe('Card Components', () => {
   })
 
   describe('CardAction', () => {
-    it('should render with correct data-slot', () => {
+    test('should render with correct data-slot', () => {
       const { container } = render(<CardAction>Action Content</CardAction>)
 
       const action = container.firstChild as HTMLElement
@@ -120,7 +120,7 @@ describe('Card Components', () => {
       expect(action.textContent).toBe('Action Content')
     })
 
-    it('should apply custom className', () => {
+    test('should apply custom className', () => {
       const { container } = render(
         <CardAction className="custom-action">Action</CardAction>,
       )
@@ -131,7 +131,7 @@ describe('Card Components', () => {
   })
 
   describe('CardContent', () => {
-    it('should render with correct data-slot', () => {
+    test('should render with correct data-slot', () => {
       const { container } = render(<CardContent>Content</CardContent>)
 
       const content = container.firstChild as HTMLElement
@@ -139,7 +139,7 @@ describe('Card Components', () => {
       expect(content.textContent).toBe('Content')
     })
 
-    it('should apply custom className', () => {
+    test('should apply custom className', () => {
       const { container } = render(
         <CardContent className="custom-content">Content</CardContent>,
       )
@@ -150,7 +150,7 @@ describe('Card Components', () => {
   })
 
   describe('CardFooter', () => {
-    it('should render with correct data-slot', () => {
+    test('should render with correct data-slot', () => {
       const { container } = render(<CardFooter>Footer</CardFooter>)
 
       const footer = container.firstChild as HTMLElement
@@ -158,7 +158,7 @@ describe('Card Components', () => {
       expect(footer.textContent).toBe('Footer')
     })
 
-    it('should apply custom className', () => {
+    test('should apply custom className', () => {
       const { container } = render(
         <CardFooter className="custom-footer">Footer</CardFooter>,
       )
@@ -169,7 +169,7 @@ describe('Card Components', () => {
   })
 
   describe('Composite Card', () => {
-    it('should render complete card structure', () => {
+    test('should render complete card structure', () => {
       const { getByText, container } = render(
         <Card>
           <CardHeader>
@@ -214,7 +214,7 @@ describe('Card Components', () => {
       expect(header).toContainElement(action as HTMLElement)
     })
 
-    it('should work with minimal structure', () => {
+    test('should work with minimal structure', () => {
       const { getByText } = render(
         <Card>
           <CardContent>Simple card content</CardContent>
@@ -224,7 +224,7 @@ describe('Card Components', () => {
       expect(getByText('Simple card content')).toBeInTheDocument()
     })
 
-    it('should handle missing optional components', () => {
+    test('should handle missing optional components', () => {
       const { getByText } = render(
         <Card>
           <CardHeader>
@@ -242,7 +242,7 @@ describe('Card Components', () => {
   })
 
   describe('Event Handling', () => {
-    it('should handle click events on card', () => {
+    test('should handle click events on card', () => {
       const handleClick = vi.fn()
       const { container } = render(
         <Card onClick={handleClick}>Clickable Card</Card>,
@@ -254,7 +254,7 @@ describe('Card Components', () => {
       expect(handleClick).toHaveBeenCalledTimes(1)
     })
 
-    it('should handle events on card components', () => {
+    test('should handle events on card components', () => {
       const handleHeaderClick = vi.fn()
       const handleFooterClick = vi.fn()
 
@@ -282,7 +282,7 @@ describe('Card Components', () => {
   })
 
   describe('Accessibility', () => {
-    it('should support ARIA attributes', () => {
+    test('should support ARIA attributes', () => {
       const { container } = render(
         <Card
           role="article"
@@ -304,7 +304,7 @@ describe('Card Components', () => {
       expect(card).toHaveAttribute('aria-describedby', 'card-desc')
     })
 
-    it('should be keyboard navigable when interactive', () => {
+    test('should be keyboard navigable when interactive', () => {
       const { container } = render(
         <Card tabIndex={0} onKeyDown={() => {}}>
           Keyboard navigable card
@@ -317,7 +317,7 @@ describe('Card Components', () => {
   })
 
   describe('Edge Cases', () => {
-    it('should handle empty components', () => {
+    test('should handle empty components', () => {
       expect(() => {
         render(
           <Card>
@@ -329,7 +329,7 @@ describe('Card Components', () => {
       }).not.toThrow()
     })
 
-    it('should handle null children', () => {
+    test('should handle null children', () => {
       expect(() => {
         render(
           <Card>
@@ -343,7 +343,7 @@ describe('Card Components', () => {
       }).not.toThrow()
     })
 
-    it('should handle conditional rendering', () => {
+    test('should handle conditional rendering', () => {
       const showAction = false
       const { container } = render(
         <Card>
@@ -360,7 +360,7 @@ describe('Card Components', () => {
   })
 
   describe('TypeScript Props', () => {
-    it('should accept all div props', () => {
+    test('should accept all div props', () => {
       expect(() => {
         render(
           <Card
@@ -376,7 +376,7 @@ describe('Card Components', () => {
       }).not.toThrow()
     })
 
-    it('should work with refs', () => {
+    test('should work with refs', () => {
       const ref = { current: null }
 
       expect(() => {

@@ -1,6 +1,6 @@
 import { exec } from 'child_process'
 
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest'
 
 import { git } from './git.js'
 
@@ -22,7 +22,7 @@ describe('git', () => {
   })
 
   describe('successful git commands', () => {
-    it('should execute simple git command and return trimmed output', async () => {
+    test('should execute simple git command and return trimmed output', async () => {
       const mockOutput = '  main  \n'
       mockExec.mockImplementation((command, callback) => {
         expect(command).toBe('git branch --show-current')
@@ -38,7 +38,7 @@ describe('git', () => {
       )
     })
 
-    it('should handle git status command', async () => {
+    test('should handle git status command', async () => {
       const mockOutput = ' M file1.js\n A file2.js\n?? file3.js\n'
       mockExec.mockImplementation((command, callback) => {
         expect(command).toBe('git status --porcelain')
@@ -50,7 +50,7 @@ describe('git', () => {
       expect(result).toBe('M file1.js\n A file2.js\n?? file3.js')
     })
 
-    it('should handle git log command', async () => {
+    test('should handle git log command', async () => {
       const mockOutput = 'abc123 Initial commit\ndef456 Add feature\n'
       mockExec.mockImplementation((command, callback) => {
         expect(command).toBe('git log --oneline -5')
@@ -62,7 +62,7 @@ describe('git', () => {
       expect(result).toBe('abc123 Initial commit\ndef456 Add feature')
     })
 
-    it('should handle git rev-parse command', async () => {
+    test('should handle git rev-parse command', async () => {
       const mockOutput = 'abc123def456789\n'
       mockExec.mockImplementation((command, callback) => {
         expect(command).toBe('git rev-parse HEAD')
@@ -74,7 +74,7 @@ describe('git', () => {
       expect(result).toBe('abc123def456789')
     })
 
-    it('should handle git config command', async () => {
+    test('should handle git config command', async () => {
       const mockOutput = 'user@example.com\n'
       mockExec.mockImplementation((command, callback) => {
         expect(command).toBe('git config user.email')
@@ -88,7 +88,7 @@ describe('git', () => {
   })
 
   describe('git commands with various arguments', () => {
-    it('should handle commands with multiple flags', async () => {
+    test('should handle commands with multiple flags', async () => {
       const mockOutput = 'feature/new-feature\n'
       mockExec.mockImplementation((command, callback) => {
         expect(command).toBe('git branch --show-current --no-color')
@@ -100,7 +100,7 @@ describe('git', () => {
       expect(result).toBe('feature/new-feature')
     })
 
-    it('should handle commands with file paths', async () => {
+    test('should handle commands with file paths', async () => {
       const mockOutput = 'commit abc123\nAuthor: John Doe\n'
       mockExec.mockImplementation((command, callback) => {
         expect(command).toBe('git log -1 src/file.js')
@@ -112,7 +112,7 @@ describe('git', () => {
       expect(result).toBe('commit abc123\nAuthor: John Doe')
     })
 
-    it('should handle commands with special characters', async () => {
+    test('should handle commands with special characters', async () => {
       const mockOutput = 'Changes committed\n'
       mockExec.mockImplementation((command, callback) => {
         expect(command).toBe('git commit -m "Fix: resolve issue #123"')
@@ -124,7 +124,7 @@ describe('git', () => {
       expect(result).toBe('Changes committed')
     })
 
-    it('should handle commands with environment-like syntax', async () => {
+    test('should handle commands with environment-like syntax', async () => {
       const mockOutput = 'Switched to branch main\n'
       mockExec.mockImplementation((command, callback) => {
         expect(command).toBe('git -c user.name="Test User" checkout main')
@@ -138,7 +138,7 @@ describe('git', () => {
   })
 
   describe('empty and whitespace output handling', () => {
-    it('should handle empty output', async () => {
+    test('should handle empty output', async () => {
       mockExec.mockImplementation((command, callback) => {
         callback(null, '')
       })
@@ -148,7 +148,7 @@ describe('git', () => {
       expect(result).toBe('')
     })
 
-    it('should handle output with only whitespace', async () => {
+    test('should handle output with only whitespace', async () => {
       mockExec.mockImplementation((command, callback) => {
         callback(null, '   \n\t  \n  ')
       })
@@ -158,7 +158,7 @@ describe('git', () => {
       expect(result).toBe('')
     })
 
-    it('should handle output with leading and trailing whitespace', async () => {
+    test('should handle output with leading and trailing whitespace', async () => {
       const mockOutput = '\n\t  main  \n\t\n'
       mockExec.mockImplementation((command, callback) => {
         callback(null, mockOutput)
@@ -169,7 +169,7 @@ describe('git', () => {
       expect(result).toBe('main')
     })
 
-    it('should preserve internal whitespace but trim edges', async () => {
+    test('should preserve internal whitespace but trim edges', async () => {
       const mockOutput = '  commit abc123\n  Author: John  Doe  \n'
       mockExec.mockImplementation((command, callback) => {
         callback(null, mockOutput)
@@ -182,7 +182,7 @@ describe('git', () => {
   })
 
   describe('error handling', () => {
-    it('should reject when git command fails', async () => {
+    test('should reject when git command fails', async () => {
       const mockError = new Error('fatal: not a git repository')
       mockExec.mockImplementation((command, callback) => {
         callback(mockError)
@@ -191,7 +191,7 @@ describe('git', () => {
       await expect(git('status')).rejects.toThrow('fatal: not a git repository')
     })
 
-    it('should reject with command not found error', async () => {
+    test('should reject with command not found error', async () => {
       const mockError = new Error('git: command not found')
       mockError.code = 'ENOENT'
       mockExec.mockImplementation((command, callback) => {
@@ -201,7 +201,7 @@ describe('git', () => {
       await expect(git('version')).rejects.toThrow('git: command not found')
     })
 
-    it('should reject with permission denied error', async () => {
+    test('should reject with permission denied error', async () => {
       const mockError = new Error('Permission denied')
       mockError.code = 'EACCES'
       mockExec.mockImplementation((command, callback) => {
@@ -211,7 +211,7 @@ describe('git', () => {
       await expect(git('push origin main')).rejects.toThrow('Permission denied')
     })
 
-    it('should reject with network related errors', async () => {
+    test('should reject with network related errors', async () => {
       const mockError = new Error('Could not resolve hostname github.com')
       mockExec.mockImplementation((command, callback) => {
         callback(mockError)
@@ -222,7 +222,7 @@ describe('git', () => {
       ).rejects.toThrow('Could not resolve hostname github.com')
     })
 
-    it('should handle git errors with non-zero exit codes', async () => {
+    test('should handle git errors with non-zero exit codes', async () => {
       const mockError = new Error(
         'Command failed: git diff --name-only HEAD~1..HEAD',
       )
@@ -238,7 +238,7 @@ describe('git', () => {
   })
 
   describe('concurrent git operations', () => {
-    it('should handle multiple concurrent git commands', async () => {
+    test('should handle multiple concurrent git commands', async () => {
       const commands = [
         'status --porcelain',
         'branch --show-current',
@@ -269,7 +269,7 @@ describe('git', () => {
       ])
     })
 
-    it('should handle mixed success and failure in concurrent operations', async () => {
+    test('should handle mixed success and failure in concurrent operations', async () => {
       mockExec.mockImplementation((command, callback) => {
         if (command.includes('success')) {
           callback(null, 'success output\n')
@@ -295,7 +295,7 @@ describe('git', () => {
   })
 
   describe('real-world git command scenarios', () => {
-    it('should handle git diff commands', async () => {
+    test('should handle git diff commands', async () => {
       const mockOutput = 'diff --git a/file.js b/file.js\n+++ added line\n'
       mockExec.mockImplementation((command, callback) => {
         callback(null, mockOutput)
@@ -306,7 +306,7 @@ describe('git', () => {
       expect(result).toBe('diff --git a/file.js b/file.js\n+++ added line')
     })
 
-    it('should handle git remote commands', async () => {
+    test('should handle git remote commands', async () => {
       const mockOutput = 'origin\tupstream\n'
       mockExec.mockImplementation((command, callback) => {
         callback(null, mockOutput)
@@ -317,7 +317,7 @@ describe('git', () => {
       expect(result).toBe('origin\tupstream')
     })
 
-    it('should handle git tag commands', async () => {
+    test('should handle git tag commands', async () => {
       const mockOutput = 'v1.0.0\nv1.1.0\nv2.0.0\n'
       mockExec.mockImplementation((command, callback) => {
         callback(null, mockOutput)
@@ -328,7 +328,7 @@ describe('git', () => {
       expect(result).toBe('v1.0.0\nv1.1.0\nv2.0.0')
     })
 
-    it('should handle git stash commands', async () => {
+    test('should handle git stash commands', async () => {
       const mockOutput = 'stash@{0}: WIP on main: abc123 Work in progress\n'
       mockExec.mockImplementation((command, callback) => {
         callback(null, mockOutput)
@@ -339,7 +339,7 @@ describe('git', () => {
       expect(result).toBe('stash@{0}: WIP on main: abc123 Work in progress')
     })
 
-    it('should handle git worktree commands', async () => {
+    test('should handle git worktree commands', async () => {
       const mockOutput =
         '/path/to/main      abc123 [main]\n/path/to/feature  def456 [feature]\n'
       mockExec.mockImplementation((command, callback) => {
@@ -355,7 +355,7 @@ describe('git', () => {
   })
 
   describe('edge cases and special scenarios', () => {
-    it('should handle empty git arguments', async () => {
+    test('should handle empty git arguments', async () => {
       mockExec.mockImplementation((command, callback) => {
         expect(command).toBe('git ')
         callback(new Error('usage: git [--version] [--help]'))
@@ -364,7 +364,7 @@ describe('git', () => {
       await expect(git('')).rejects.toThrow('usage: git [--version] [--help]')
     })
 
-    it('should handle very long git command output', async () => {
+    test('should handle very long git command output', async () => {
       const longOutput = 'line\n'.repeat(10000) + 'end\n'
       mockExec.mockImplementation((command, callback) => {
         callback(null, longOutput)
@@ -376,7 +376,7 @@ describe('git', () => {
       expect(result.endsWith('end')).toBe(true)
     })
 
-    it('should handle unicode characters in git output', async () => {
+    test('should handle unicode characters in git output', async () => {
       const unicodeOutput = '🚀 feat: add new feature\n✨ improvement\n'
       mockExec.mockImplementation((command, callback) => {
         callback(null, unicodeOutput)
@@ -387,7 +387,7 @@ describe('git', () => {
       expect(result).toBe('🚀 feat: add new feature\n✨ improvement')
     })
 
-    it('should handle binary data in git output gracefully', async () => {
+    test('should handle binary data in git output gracefully', async () => {
       // Simulate binary data that might come from git commands
       const binaryOutput =
         Buffer.from([
@@ -404,7 +404,7 @@ describe('git', () => {
   })
 
   describe('performance and timeout scenarios', () => {
-    it('should handle slow git commands', async () => {
+    test('should handle slow git commands', async () => {
       const slowOutput = 'Slow command result\n'
       mockExec.mockImplementation((command, callback) => {
         // Simulate slow command
@@ -419,7 +419,7 @@ describe('git', () => {
       expect(endTime - startTime).toBeGreaterThanOrEqual(100)
     })
 
-    it('should handle multiple rapid-fire git commands', async () => {
+    test('should handle multiple rapid-fire git commands', async () => {
       let callCount = 0
       mockExec.mockImplementation((command, callback) => {
         const count = ++callCount
@@ -439,7 +439,7 @@ describe('git', () => {
   })
 
   describe('integration patterns', () => {
-    it('should work with common git workflow commands', async () => {
+    test('should work with common git workflow commands', async () => {
       const gitWorkflow = [
         { cmd: 'status --porcelain', output: ' M file.js\n' },
         { cmd: 'add .', output: '' },
@@ -464,7 +464,7 @@ describe('git', () => {
       }
     })
 
-    it('should handle git commands used in CI/CD environments', async () => {
+    test('should handle git commands used in CI/CD environments', async () => {
       const ciCommands = [
         { cmd: 'rev-parse --verify HEAD', output: 'abc123def456\n' },
         { cmd: 'describe --always --tags', output: 'v1.2.3-4-gabc123d\n' },

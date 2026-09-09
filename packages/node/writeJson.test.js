@@ -1,7 +1,7 @@
 import fs from 'fs'
 import os from 'os'
 
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { writeJson } from './writeJson.js'
 
@@ -31,7 +31,7 @@ describe('writeJson', () => {
   })
 
   describe('object handling', () => {
-    it('should write object to JSON file with correct formatting', () => {
+    test('should write object to JSON file with correct formatting', () => {
       const testObject = { name: 'test', value: 42 }
       const fileName = 'testObject'
 
@@ -43,7 +43,7 @@ describe('writeJson', () => {
       )
     })
 
-    it('should handle complex objects', () => {
+    test('should handle complex objects', () => {
       const complexObject = {
         string: 'hello',
         number: 123,
@@ -66,7 +66,7 @@ describe('writeJson', () => {
       )
     })
 
-    it('should handle empty objects', () => {
+    test('should handle empty objects', () => {
       const emptyObject = {}
       const fileName = 'empty'
 
@@ -75,7 +75,7 @@ describe('writeJson', () => {
       expect(fs.writeFileSync).toHaveBeenCalledWith('empty.json', '{}\n')
     })
 
-    it('should add RegExp toJSON serialization for objects', () => {
+    test('should add RegExp toJSON serialization for objects', () => {
       const objectWithRegex = {
         pattern: /test/gi,
         name: 'regex test',
@@ -100,7 +100,7 @@ describe('writeJson', () => {
   })
 
   describe('array handling', () => {
-    it('should wrap arrays in object with fileName as key', () => {
+    test('should wrap arrays in object with fileName as key', () => {
       const testArray = ['item1', 'item2', 'item3']
       const fileName = 'testArray'
 
@@ -112,7 +112,7 @@ describe('writeJson', () => {
       )
     })
 
-    it('should handle empty arrays', () => {
+    test('should handle empty arrays', () => {
       const emptyArray = []
       const fileName = 'emptyArray'
 
@@ -124,7 +124,7 @@ describe('writeJson', () => {
       )
     })
 
-    it('should handle arrays with mixed types', () => {
+    test('should handle arrays with mixed types', () => {
       const mixedArray = ['string', 42, true, null, { key: 'value' }]
       const fileName = 'mixed'
 
@@ -140,7 +140,7 @@ describe('writeJson', () => {
       )
     })
 
-    it('should handle nested arrays', () => {
+    test('should handle nested arrays', () => {
       const nestedArray = [
         [1, 2],
         [3, 4],
@@ -162,7 +162,7 @@ describe('writeJson', () => {
   })
 
   describe('file naming', () => {
-    it('should add .json extension to filename', () => {
+    test('should add .json extension to filename', () => {
       const data = { test: true }
 
       writeJson('filename', data)
@@ -178,7 +178,7 @@ describe('writeJson', () => {
       )
     })
 
-    it('should work with filenames containing special characters', () => {
+    test('should work with filenames containing special characters', () => {
       const data = { test: true }
 
       writeJson('file_with_underscores', data)
@@ -196,7 +196,7 @@ describe('writeJson', () => {
   })
 
   describe('line ending handling', () => {
-    it('should use platform-specific line endings for objects', () => {
+    test('should use platform-specific line endings for objects', () => {
       // Mock different EOL values
       const windowsEOL = '\r\n'
       const unixEOL = '\n'
@@ -230,7 +230,7 @@ describe('writeJson', () => {
       )
     })
 
-    it('should use platform-specific line endings for arrays', () => {
+    test('should use platform-specific line endings for arrays', () => {
       const windowsEOL = '\r\n'
       const testArray = ['item1', 'item2']
 
@@ -249,7 +249,7 @@ describe('writeJson', () => {
   })
 
   describe('RegExp serialization', () => {
-    it('should set RegExp.prototype.toJSON to RegExp.prototype.toString', () => {
+    test('should set RegExp.prototype.toJSON to RegExp.prototype.toString', () => {
       const objectWithRegex = { pattern: /test/g }
 
       expect(RegExp.prototype.toJSON).toBeUndefined()
@@ -259,7 +259,7 @@ describe('writeJson', () => {
       expect(RegExp.prototype.toJSON).toBe(RegExp.prototype.toString)
     })
 
-    it('should serialize RegExp objects correctly', () => {
+    test('should serialize RegExp objects correctly', () => {
       const regex = /test pattern/gi
       const objectWithRegex = { regex: regex }
 
@@ -273,7 +273,7 @@ describe('writeJson', () => {
       )
     })
 
-    it('should not affect array processing RegExp handling', () => {
+    test('should not affect array processing RegExp handling', () => {
       const arrayWithRegex = [/pattern1/g, 'string', /pattern2/i]
 
       writeJson('array-regex', arrayWithRegex)
@@ -284,7 +284,7 @@ describe('writeJson', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle null values', () => {
+    test('should handle null values', () => {
       writeJson('null-test', null)
 
       // Check that writeFileSync was called
@@ -300,7 +300,7 @@ describe('writeJson', () => {
       expect(content).toBe('null' + os.EOL)
     })
 
-    it('should handle undefined values', () => {
+    test('should handle undefined values', () => {
       writeJson('undefined-test', undefined)
 
       expect(fs.writeFileSync).toHaveBeenCalledWith(
@@ -309,7 +309,7 @@ describe('writeJson', () => {
       )
     })
 
-    it('should handle objects with circular references gracefully', () => {
+    test('should handle objects with circular references gracefully', () => {
       const circular = { a: 1 }
       circular.self = circular
 
@@ -317,7 +317,7 @@ describe('writeJson', () => {
       expect(() => writeJson('circular', circular)).toThrow()
     })
 
-    it('should handle very large objects', () => {
+    test('should handle very large objects', () => {
       const largeObject = {}
       for (let i = 0; i < 1000; i++) {
         largeObject[`key${i}`] = `value${i}`
@@ -337,7 +337,7 @@ describe('writeJson', () => {
   })
 
   describe('integration scenarios', () => {
-    it('should handle real-world configuration objects', () => {
+    test('should handle real-world configuration objects', () => {
       const config = {
         name: 'MyApp',
         version: '1.0.0',
@@ -364,7 +364,7 @@ describe('writeJson', () => {
       )
     })
 
-    it('should handle data export scenarios', () => {
+    test('should handle data export scenarios', () => {
       const users = [
         { id: 1, name: 'Alice', email: 'alice@example.com' },
         { id: 2, name: 'Bob', email: 'bob@example.com' },

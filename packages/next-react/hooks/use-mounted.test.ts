@@ -15,20 +15,20 @@
  */
 
 import { renderHook } from '@testing-library/react'
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 import { useMounted } from '@/hooks/use-mounted'
 
 describe('useMounted', () => {
   describe('Client-side behavior', () => {
-    it('should return true when rendered on client', () => {
+    test('should return true when rendered on client', () => {
       const { result } = renderHook(() => useMounted())
 
       // On client, useSyncExternalStore uses getClientSnapshot which returns true
       expect(result.current).toBe(true)
     })
 
-    it('should return stable value across re-renders', () => {
+    test('should return stable value across re-renders', () => {
       const { result, rerender } = renderHook(() => useMounted())
 
       const initialValue = result.current
@@ -44,7 +44,7 @@ describe('useMounted', () => {
       expect(result.current).toBe(true)
     })
 
-    it('should be usable in conditional rendering', () => {
+    test('should be usable in conditional rendering', () => {
       const { result } = renderHook(() => {
         const isMounted = useMounted()
         return isMounted ? 'client' : 'server'
@@ -55,13 +55,13 @@ describe('useMounted', () => {
   })
 
   describe('Hook API', () => {
-    it('should return boolean type', () => {
+    test('should return boolean type', () => {
       const { result } = renderHook(() => useMounted())
 
       expect(typeof result.current).toBe('boolean')
     })
 
-    it('should not throw errors when called', () => {
+    test('should not throw errors when called', () => {
       expect(() => {
         renderHook(() => useMounted())
       }).not.toThrow()
@@ -77,7 +77,7 @@ describe('useMounted', () => {
      * These tests verify the hook works correctly on the client side,
      * which is the post-hydration behavior.
      */
-    it('should handle initial render without errors', () => {
+    test('should handle initial render without errors', () => {
       // Simulates that the hook can be called without errors
       // even if it's the "first" render (mimics hydration)
       const { result } = renderHook(() => useMounted())
@@ -88,7 +88,7 @@ describe('useMounted', () => {
   })
 
   describe('Integration with components', () => {
-    it('should work with multiple components using the hook', () => {
+    test('should work with multiple components using the hook', () => {
       // Render multiple hooks simultaneously
       const { result: result1 } = renderHook(() => useMounted())
       const { result: result2 } = renderHook(() => useMounted())
@@ -100,7 +100,7 @@ describe('useMounted', () => {
       expect(result3.current).toBe(true)
     })
 
-    it('should work in nested hook calls', () => {
+    test('should work in nested hook calls', () => {
       const { result } = renderHook(() => {
         const isMounted = useMounted()
         // Simulates using the hook value for conditional logic

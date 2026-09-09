@@ -1,69 +1,69 @@
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 import { difference, intersection, union } from './setOperations.js'
 
 describe('difference', () => {
   describe('basic functionality', () => {
-    it('should return elements in first array but not in second', () => {
+    test('should return elements in first array but not in second', () => {
       const result = difference([1, 2, 3, 4], [2, 3, 5])
       expect(result).toEqual([1, 4])
     })
 
-    it('should work with strings', () => {
+    test('should work with strings', () => {
       const result = difference(['a', 'b', 'c'], ['b', 'd'])
       expect(result).toEqual(['a', 'c'])
     })
 
-    it('should preserve order from first array', () => {
+    test('should preserve order from first array', () => {
       const result = difference([5, 3, 1, 4, 2], [2, 4])
       expect(result).toEqual([5, 3, 1])
     })
 
-    it('should handle duplicates in first array', () => {
+    test('should handle duplicates in first array', () => {
       const result = difference([1, 2, 2, 3, 3], [2])
       expect(result).toEqual([1, 3, 3])
     })
   })
 
   describe('edge cases', () => {
-    it('should handle empty first array', () => {
+    test('should handle empty first array', () => {
       const result = difference([], [1, 2, 3])
       expect(result).toEqual([])
     })
 
-    it('should handle empty second array', () => {
+    test('should handle empty second array', () => {
       const result = difference([1, 2, 3], [])
       expect(result).toEqual([1, 2, 3])
     })
 
-    it('should handle both arrays empty', () => {
+    test('should handle both arrays empty', () => {
       const result = difference([], [])
       expect(result).toEqual([])
     })
 
-    it('should handle no common elements', () => {
+    test('should handle no common elements', () => {
       const result = difference([1, 2, 3], [4, 5, 6])
       expect(result).toEqual([1, 2, 3])
     })
 
-    it('should handle all elements in common', () => {
+    test('should handle all elements in common', () => {
       const result = difference([1, 2, 3], [1, 2, 3, 4])
       expect(result).toEqual([])
     })
   })
 
   describe('special values', () => {
-    it('should handle null and undefined', () => {
+    test('should handle null and undefined', () => {
       const result = difference([null, undefined, 1], [null, 2])
       expect(result).toEqual([undefined, 1])
     })
 
-    it('should handle NaN correctly', () => {
+    test('should handle NaN correctly', () => {
       const result = difference([NaN, 1, 2], [NaN, 3])
       expect(result).toEqual([1, 2])
     })
 
-    it('should handle objects by reference', () => {
+    test('should handle objects by reference', () => {
       const obj1 = { id: 1 }
       const obj2 = { id: 2 }
       const obj3 = { id: 1 } // Different reference than obj1
@@ -76,71 +76,71 @@ describe('difference', () => {
 
 describe('intersection', () => {
   describe('basic functionality', () => {
-    it('should return common elements', () => {
+    test('should return common elements', () => {
       const result = intersection([1, 2, 3, 4], [2, 3, 5])
       expect(result).toEqual([2, 3])
     })
 
-    it('should work with strings', () => {
+    test('should work with strings', () => {
       const result = intersection(['a', 'b', 'c'], ['b', 'c', 'd'])
       expect(result).toEqual(['b', 'c'])
     })
 
-    it('should preserve order from first array', () => {
+    test('should preserve order from first array', () => {
       const result = intersection([3, 1, 4, 2], [2, 3, 5])
       expect(result).toEqual([3, 2])
     })
 
-    it('should remove duplicates from result', () => {
+    test('should remove duplicates from result', () => {
       const result = intersection([1, 2, 2, 3], [2, 2, 4])
       expect(result).toEqual([2])
     })
 
-    it('should handle duplicates in both arrays', () => {
+    test('should handle duplicates in both arrays', () => {
       const result = intersection([1, 2, 2, 3, 3], [2, 3, 3, 4])
       expect(result).toEqual([2, 3])
     })
   })
 
   describe('edge cases', () => {
-    it('should handle empty first array', () => {
+    test('should handle empty first array', () => {
       const result = intersection([], [1, 2, 3])
       expect(result).toEqual([])
     })
 
-    it('should handle empty second array', () => {
+    test('should handle empty second array', () => {
       const result = intersection([1, 2, 3], [])
       expect(result).toEqual([])
     })
 
-    it('should handle both arrays empty', () => {
+    test('should handle both arrays empty', () => {
       const result = intersection([], [])
       expect(result).toEqual([])
     })
 
-    it('should handle no common elements', () => {
+    test('should handle no common elements', () => {
       const result = intersection([1, 2, 3], [4, 5, 6])
       expect(result).toEqual([])
     })
 
-    it('should handle identical arrays', () => {
+    test('should handle identical arrays', () => {
       const result = intersection([1, 2, 3], [1, 2, 3])
       expect(result).toEqual([1, 2, 3])
     })
   })
 
   describe('special values', () => {
-    it('should handle null and undefined', () => {
+    test('should handle null and undefined', () => {
       const result = intersection([null, undefined, 1], [null, 2])
       expect(result).toEqual([null])
     })
 
-    it('should handle NaN correctly', () => {
+    test('should handle NaN correctly', () => {
       const result = intersection([NaN, 1, 2], [NaN, 3])
       expect(result).toEqual([NaN])
     })
 
-    it('should handle objects by reference', () => {
+    test('should handle objects by reference', () => {
       const obj1 = { id: 1 }
       const obj2 = { id: 2 }
       const obj3 = { id: 1 } // Different reference than obj1
@@ -153,71 +153,71 @@ describe('intersection', () => {
 
 describe('union', () => {
   describe('basic functionality', () => {
-    it('should combine unique elements from multiple arrays', () => {
+    test('should combine unique elements from multiple arrays', () => {
       const result = union([1, 2], [2, 3], [3, 4])
       expect(result).toEqual([1, 2, 3, 4])
     })
 
-    it('should work with strings', () => {
+    test('should work with strings', () => {
       const result = union(['a', 'b'], ['b', 'c'], ['c', 'd'])
       expect(result).toEqual(['a', 'b', 'c', 'd'])
     })
 
-    it('should preserve order of first occurrence', () => {
+    test('should preserve order of first occurrence', () => {
       const result = union([3, 1], [1, 4], [4, 2])
       expect(result).toEqual([3, 1, 4, 2])
     })
 
-    it('should work with single array', () => {
+    test('should work with single array', () => {
       const result = union([1, 2, 2, 3])
       expect(result).toEqual([1, 2, 3])
     })
 
-    it('should work with two arrays', () => {
+    test('should work with two arrays', () => {
       const result = union([1, 2, 3], [3, 4, 5])
       expect(result).toEqual([1, 2, 3, 4, 5])
     })
   })
 
   describe('edge cases', () => {
-    it('should handle empty arrays', () => {
+    test('should handle empty arrays', () => {
       const result = union([], [1, 2], [], [3])
       expect(result).toEqual([1, 2, 3])
     })
 
-    it('should handle all empty arrays', () => {
+    test('should handle all empty arrays', () => {
       const result = union([], [], [])
       expect(result).toEqual([])
     })
 
-    it('should handle no arguments', () => {
+    test('should handle no arguments', () => {
       const result = union()
       expect(result).toEqual([])
     })
 
-    it('should handle single empty array', () => {
+    test('should handle single empty array', () => {
       const result = union([])
       expect(result).toEqual([])
     })
 
-    it('should handle arrays with duplicates', () => {
+    test('should handle arrays with duplicates', () => {
       const result = union([1, 1, 2], [2, 2, 3], [3, 3, 1])
       expect(result).toEqual([1, 2, 3])
     })
   })
 
   describe('special values', () => {
-    it('should handle null and undefined', () => {
+    test('should handle null and undefined', () => {
       const result = union([null, 1], [undefined, 1], [null])
       expect(result).toEqual([null, 1, undefined])
     })
 
-    it('should handle NaN correctly', () => {
+    test('should handle NaN correctly', () => {
       const result = union([NaN, 1], [NaN, 2])
       expect(result).toEqual([NaN, 1, 2])
     })
 
-    it('should handle objects by reference', () => {
+    test('should handle objects by reference', () => {
       const obj1 = { id: 1 }
       const obj2 = { id: 2 }
       const obj3 = { id: 1 } // Different reference than obj1
@@ -228,12 +228,12 @@ describe('union', () => {
   })
 
   describe('many arrays', () => {
-    it('should handle many small arrays', () => {
+    test('should handle many small arrays', () => {
       const result = union([1], [2], [3], [4], [5])
       expect(result).toEqual([1, 2, 3, 4, 5])
     })
 
-    it('should handle array with overlapping elements', () => {
+    test('should handle array with overlapping elements', () => {
       const result = union([1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5, 6])
       expect(result).toEqual([1, 2, 3, 4, 5, 6])
     })
@@ -241,7 +241,7 @@ describe('union', () => {
 })
 
 describe('set operations immutability', () => {
-  it('should not modify input arrays', () => {
+  test('should not modify input arrays', () => {
     const arr1 = [1, 2, 3]
     const arr2 = [2, 3, 4]
     const arr1Copy = [...arr1]
@@ -255,7 +255,7 @@ describe('set operations immutability', () => {
     expect(arr2).toEqual(arr2Copy)
   })
 
-  it('should return new arrays', () => {
+  test('should return new arrays', () => {
     const arr1 = [1, 2, 3]
     const arr2 = [2, 3, 4]
 
@@ -273,7 +273,7 @@ describe('set operations immutability', () => {
 })
 
 describe('set operations performance', () => {
-  it('should handle large arrays efficiently', () => {
+  test('should handle large arrays efficiently', () => {
     const largeArray1 = Array.from({ length: 5000 }, (_, i) => i)
     const largeArray2 = Array.from({ length: 5000 }, (_, i) => i + 2500)
 
@@ -291,7 +291,7 @@ describe('set operations performance', () => {
 })
 
 describe('set operations type safety', () => {
-  it('should work with complex objects', () => {
+  test('should work with complex objects', () => {
     interface User {
       id: number
       name: string
@@ -316,7 +316,7 @@ describe('set operations type safety', () => {
     expect(uni).toHaveLength(3)
   })
 
-  it('should work with readonly arrays', () => {
+  test('should work with readonly arrays', () => {
     const readonly1: readonly number[] = [1, 2, 3]
     const readonly2: readonly number[] = [2, 3, 4]
 
@@ -331,7 +331,7 @@ describe('set operations type safety', () => {
 })
 
 describe('practical use cases', () => {
-  it('should work for permission management', () => {
+  test('should work for permission management', () => {
     const userPermissions = ['read', 'write', 'delete']
     const rolePermissions = ['read', 'write', 'admin']
     const requiredPermissions = ['read', 'admin']
@@ -349,7 +349,7 @@ describe('practical use cases', () => {
     expect(allPermissions).toEqual(['read', 'write', 'delete', 'admin'])
   })
 
-  it('should work for tag management', () => {
+  test('should work for tag management', () => {
     const post1Tags = ['javascript', 'react', 'frontend']
     const post2Tags = ['react', 'typescript', 'backend']
     const post3Tags = ['javascript', 'nodejs', 'backend']

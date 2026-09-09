@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, test, expect, vi } from 'vitest'
 
 import transformer from './eqeqeq.codemod.js'
 
@@ -23,7 +23,7 @@ const mockJscodeshift = (source) => ({
 })
 
 describe('node/eqeqeq.codemod', () => {
-  it('should transform == to === in binary expressions', () => {
+  test('should transform == to === in binary expressions', () => {
     const mockApi = {
       jscodeshift: Object.assign(mockJscodeshift, {
         BinaryExpression: 'BinaryExpression',
@@ -46,7 +46,7 @@ describe('node/eqeqeq.codemod', () => {
     expect(result).toBe('if (a === b) { return true; }')
   })
 
-  it('should handle multiple == operators', () => {
+  test('should handle multiple == operators', () => {
     const mockApi = {
       jscodeshift: Object.assign(mockJscodeshift, {
         BinaryExpression: 'BinaryExpression',
@@ -69,7 +69,7 @@ describe('node/eqeqeq.codemod', () => {
     expect(result).toBe('if (a === b && c === d) { return true; }')
   })
 
-  it('should not affect === operators', () => {
+  test('should not affect === operators', () => {
     const mockApi = {
       jscodeshift: Object.assign(mockJscodeshift, {
         BinaryExpression: 'BinaryExpression',
@@ -92,7 +92,7 @@ describe('node/eqeqeq.codemod', () => {
     expect(result).toBe('if (a === b) { return true; }')
   })
 
-  it('should handle empty source', () => {
+  test('should handle empty source', () => {
     const mockApi = {
       jscodeshift: Object.assign(mockJscodeshift, {
         BinaryExpression: 'BinaryExpression',
@@ -116,7 +116,7 @@ describe('node/eqeqeq.codemod', () => {
   })
 
   describe('real-world code examples', () => {
-    it('should handle function comparisons', () => {
+    test('should handle function comparisons', () => {
       const mockApi = {
         jscodeshift: Object.assign(mockJscodeshift, {
           BinaryExpression: 'BinaryExpression',
@@ -143,7 +143,7 @@ describe('node/eqeqeq.codemod', () => {
       expect(result).toContain('a === b')
     })
 
-    it('should handle object property comparisons', () => {
+    test('should handle object property comparisons', () => {
       const mockApi = {
         jscodeshift: Object.assign(mockJscodeshift, {
           BinaryExpression: 'BinaryExpression',
@@ -169,7 +169,7 @@ describe('node/eqeqeq.codemod', () => {
       )
     })
 
-    it('should handle null and undefined comparisons', () => {
+    test('should handle null and undefined comparisons', () => {
       const mockApi = {
         jscodeshift: Object.assign(mockJscodeshift, {
           BinaryExpression: 'BinaryExpression',
@@ -197,7 +197,7 @@ describe('node/eqeqeq.codemod', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle complex expressions', () => {
+    test('should handle complex expressions', () => {
       const mockApi = {
         jscodeshift: Object.assign(mockJscodeshift, {
           BinaryExpression: 'BinaryExpression',
@@ -220,7 +220,7 @@ describe('node/eqeqeq.codemod', () => {
       expect(result).toBe('if ((a + b) === (c * d)) { return true; }')
     })
 
-    it('should handle array and function call comparisons', () => {
+    test('should handle array and function call comparisons', () => {
       const mockApi = {
         jscodeshift: Object.assign(mockJscodeshift, {
           BinaryExpression: 'BinaryExpression',
@@ -245,7 +245,7 @@ describe('node/eqeqeq.codemod', () => {
   })
 
   describe('transformation correctness', () => {
-    it('should maintain code structure and spacing', () => {
+    test('should maintain code structure and spacing', () => {
       // This is a conceptual test since our mock is simplified
       const mockApi = {
         jscodeshift: Object.assign(mockJscodeshift, {
@@ -272,7 +272,7 @@ describe('node/eqeqeq.codemod', () => {
       expect(result).not.toContain(' == ') // Should not have == with spaces
     })
 
-    it('should be idempotent (running twice should have same result)', () => {
+    test('should be idempotent (running twice should have same result)', () => {
       const mockApi = {
         jscodeshift: Object.assign(mockJscodeshift, {
           BinaryExpression: 'BinaryExpression',
@@ -301,11 +301,11 @@ describe('node/eqeqeq.codemod', () => {
   })
 
   describe('function signature and API', () => {
-    it('should export a default function', () => {
+    test('should export a default function', () => {
       expect(typeof transformer).toBe('function')
     })
 
-    it('should accept file and api parameters', () => {
+    test('should accept file and api parameters', () => {
       const mockApi = {
         jscodeshift: Object.assign(mockJscodeshift, {
           BinaryExpression: 'BinaryExpression',
@@ -326,7 +326,7 @@ describe('node/eqeqeq.codemod', () => {
       expect(() => transformer(file, mockApi)).not.toThrow()
     })
 
-    it('should return transformed source code', () => {
+    test('should return transformed source code', () => {
       const mockApi = {
         jscodeshift: Object.assign(mockJscodeshift, {
           BinaryExpression: 'BinaryExpression',
@@ -351,7 +351,7 @@ describe('node/eqeqeq.codemod', () => {
   })
 
   describe('jscodeshift integration', () => {
-    it('should use correct jscodeshift APIs', () => {
+    test('should use correct jscodeshift APIs', () => {
       const mockFind = vi.fn().mockReturnValue({
         replaceWith: vi.fn().mockReturnValue({
           toSource: vi.fn().mockReturnValue('transformed'),
@@ -380,7 +380,7 @@ describe('node/eqeqeq.codemod', () => {
       })
     })
 
-    it('should use template expressions correctly', () => {
+    test('should use template expressions correctly', () => {
       const mockTemplate = vi.fn().mockReturnValue('template result')
 
       const mockApi = {

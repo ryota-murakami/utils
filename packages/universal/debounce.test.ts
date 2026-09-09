@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest'
 
 import { debounce } from './debounce.js'
 
@@ -14,17 +14,17 @@ describe('debounce', () => {
   })
 
   describe('basic functionality', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(typeof debounce).toBe('function')
     })
 
-    it('should return a function', () => {
+    test('should return a function', () => {
       const mockFn = vi.fn()
       const debouncedFn = debounce(300, mockFn)
       expect(typeof debouncedFn).toBe('function')
     })
 
-    it('should delay function execution', () => {
+    test('should delay function execution', () => {
       const mockFn = vi.fn()
       const debouncedFn = debounce(300, mockFn)
 
@@ -35,7 +35,7 @@ describe('debounce', () => {
       expect(mockFn).toHaveBeenCalledWith('test')
     })
 
-    it('should only execute the last call when called multiple times rapidly', () => {
+    test('should only execute the last call when called multiple times rapidly', () => {
       const mockFn = vi.fn()
       const debouncedFn = debounce(300, mockFn)
 
@@ -51,7 +51,7 @@ describe('debounce', () => {
   })
 
   describe('timing behavior', () => {
-    it('should reset the timer on subsequent calls', () => {
+    test('should reset the timer on subsequent calls', () => {
       const mockFn = vi.fn()
       const debouncedFn = debounce(300, mockFn)
 
@@ -66,7 +66,7 @@ describe('debounce', () => {
       expect(mockFn).toHaveBeenCalledWith('test2')
     })
 
-    it('should handle zero timeout', () => {
+    test('should handle zero timeout', () => {
       const mockFn = vi.fn()
       const debouncedFn = debounce(0, mockFn)
 
@@ -75,7 +75,7 @@ describe('debounce', () => {
       expect(mockFn).toHaveBeenCalledWith('test')
     })
 
-    it('should handle long timeouts', () => {
+    test('should handle long timeouts', () => {
       const mockFn = vi.fn()
       const debouncedFn = debounce(5000, mockFn)
 
@@ -89,7 +89,7 @@ describe('debounce', () => {
   })
 
   describe('argument handling', () => {
-    it('should pass through single argument', () => {
+    test('should pass through single argument', () => {
       const mockFn = vi.fn()
       const debouncedFn = debounce(300, mockFn)
 
@@ -98,7 +98,7 @@ describe('debounce', () => {
       expect(mockFn).toHaveBeenCalledWith('single-arg')
     })
 
-    it('should pass through multiple arguments', () => {
+    test('should pass through multiple arguments', () => {
       const mockFn = vi.fn()
       const debouncedFn = debounce(300, mockFn)
 
@@ -107,7 +107,7 @@ describe('debounce', () => {
       expect(mockFn).toHaveBeenCalledWith('arg1', 'arg2', 'arg3')
     })
 
-    it('should handle no arguments', () => {
+    test('should handle no arguments', () => {
       const mockFn = vi.fn()
       const debouncedFn = debounce(300, mockFn)
 
@@ -116,7 +116,7 @@ describe('debounce', () => {
       expect(mockFn).toHaveBeenCalledWith()
     })
 
-    it('should handle different argument types', () => {
+    test('should handle different argument types', () => {
       const mockFn = vi.fn()
       const debouncedFn = debounce(300, mockFn)
 
@@ -128,7 +128,7 @@ describe('debounce', () => {
   })
 
   describe('callback context', () => {
-    it('should work with arrow functions', () => {
+    test('should work with arrow functions', () => {
       const mockFn = vi.fn((x: number, y: number) => x + y)
       const debouncedFn = debounce(300, mockFn)
 
@@ -137,7 +137,7 @@ describe('debounce', () => {
       expect(mockFn).toHaveBeenCalledWith(5, 3)
     })
 
-    it('should work with regular functions', () => {
+    test('should work with regular functions', () => {
       const mockFn = vi.fn(function (this: any, value: string) {
         return value.toUpperCase()
       })
@@ -150,7 +150,7 @@ describe('debounce', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle rapid consecutive calls', () => {
+    test('should handle rapid consecutive calls', () => {
       const mockFn = vi.fn()
       const debouncedFn = debounce(300, mockFn)
 
@@ -163,7 +163,7 @@ describe('debounce', () => {
       expect(mockFn).toHaveBeenCalledWith('call-99')
     })
 
-    it('should allow execution after the debounced period', () => {
+    test('should allow execution after the debounced period', () => {
       const mockFn = vi.fn()
       const debouncedFn = debounce(300, mockFn)
 
@@ -180,7 +180,7 @@ describe('debounce', () => {
   })
 
   describe('type safety', () => {
-    it('should maintain type safety for typed functions', () => {
+    test('should maintain type safety for typed functions', () => {
       const typedFn = (x: number, y: string): string => `${x}-${y}`
       const debouncedFn = debounce(300, typedFn)
 

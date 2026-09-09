@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react'
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, test, expect, beforeEach, vi } from 'vitest'
 
 import { useIsMobile } from './use-mobile'
 
@@ -13,7 +13,7 @@ describe('useIsMobile', () => {
   })
 
   describe('initial state', () => {
-    it('should return false for desktop screen width (>= 768px)', () => {
+    test('should return false for desktop screen width (>= 768px)', () => {
       // Set window width to desktop size
       window.innerWidth = 1024
 
@@ -22,7 +22,7 @@ describe('useIsMobile', () => {
       expect(result.current).toBe(false)
     })
 
-    it('should return true for mobile screen width (< 768px)', () => {
+    test('should return true for mobile screen width (< 768px)', () => {
       // Set window width to mobile size
       window.innerWidth = 375
 
@@ -33,7 +33,7 @@ describe('useIsMobile', () => {
   })
 
   describe('media query setup', () => {
-    it('should create media query with correct breakpoint', () => {
+    test('should create media query with correct breakpoint', () => {
       const { result } = renderHook(() => useIsMobile())
 
       // Verify that matchMedia can be called with the correct breakpoint
@@ -43,14 +43,16 @@ describe('useIsMobile', () => {
       expect(result.current).toBeDefined()
     })
 
-    it('should add event listener for media query changes', () => {
+    test('should add event listener for media query changes', () => {
       const matchMediaSpy = vi.spyOn(window, 'matchMedia')
       const addEventListenerSpy = vi.fn()
 
       // Intercept matchMedia calls and spy on addEventListener
       matchMediaSpy.mockImplementation((query: string) => {
         const mql = originalMatchMedia.call(window, query)
-        vi.spyOn(mql, 'addEventListener').mockImplementation(addEventListenerSpy)
+        vi.spyOn(mql, 'addEventListener').mockImplementation(
+          addEventListenerSpy,
+        )
         return mql
       })
 
@@ -65,23 +67,25 @@ describe('useIsMobile', () => {
   })
 
   describe('media query changes', () => {
-    it('should update when media query changes from desktop to mobile', () => {
+    test('should update when media query changes from desktop to mobile', () => {
       // Start with desktop width
       window.innerWidth = 1024
 
       let changeHandler: (() => void) | undefined
       const matchMediaSpy = vi.spyOn(window, 'matchMedia')
-      
+
       // Capture the change handler by intercepting matchMedia calls
       matchMediaSpy.mockImplementation((query: string) => {
         const mql = originalMatchMedia.call(window, query)
         const originalAddEventListener = mql.addEventListener.bind(mql)
-        vi.spyOn(mql, 'addEventListener').mockImplementation((event: string, handler: EventListenerOrEventListenerObject) => {
-          if (event === 'change') {
-            changeHandler = handler as () => void
-          }
-          return originalAddEventListener(event, handler)
-        })
+        vi.spyOn(mql, 'addEventListener').mockImplementation(
+          (event: string, handler: EventListenerOrEventListenerObject) => {
+            if (event === 'change') {
+              changeHandler = handler as () => void
+            }
+            return originalAddEventListener(event, handler)
+          },
+        )
         return mql
       })
 
@@ -99,23 +103,25 @@ describe('useIsMobile', () => {
       expect(result.current).toBe(true)
     })
 
-    it('should update when media query changes from mobile to desktop', () => {
+    test('should update when media query changes from mobile to desktop', () => {
       // Start with mobile width
       window.innerWidth = 375
 
       let changeHandler: (() => void) | undefined
       const matchMediaSpy = vi.spyOn(window, 'matchMedia')
-      
+
       // Capture the change handler by intercepting matchMedia calls
       matchMediaSpy.mockImplementation((query: string) => {
         const mql = originalMatchMedia.call(window, query)
         const originalAddEventListener = mql.addEventListener.bind(mql)
-        vi.spyOn(mql, 'addEventListener').mockImplementation((event: string, handler: EventListenerOrEventListenerObject) => {
-          if (event === 'change') {
-            changeHandler = handler as () => void
-          }
-          return originalAddEventListener(event, handler)
-        })
+        vi.spyOn(mql, 'addEventListener').mockImplementation(
+          (event: string, handler: EventListenerOrEventListenerObject) => {
+            if (event === 'change') {
+              changeHandler = handler as () => void
+            }
+            return originalAddEventListener(event, handler)
+          },
+        )
         return mql
       })
 
@@ -135,7 +141,7 @@ describe('useIsMobile', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle exact breakpoint boundary (767px) as mobile', () => {
+    test('should handle exact breakpoint boundary (767px) as mobile', () => {
       window.innerWidth = 767
 
       const { result } = renderHook(() => useIsMobile())
@@ -143,7 +149,7 @@ describe('useIsMobile', () => {
       expect(result.current).toBe(true)
     })
 
-    it('should handle breakpoint boundary (768px) as desktop', () => {
+    test('should handle breakpoint boundary (768px) as desktop', () => {
       window.innerWidth = 768
 
       const { result } = renderHook(() => useIsMobile())
@@ -153,14 +159,16 @@ describe('useIsMobile', () => {
   })
 
   describe('cleanup', () => {
-    it('should remove event listener on unmount', () => {
+    test('should remove event listener on unmount', () => {
       const removeEventListenerSpy = vi.fn()
       const matchMediaSpy = vi.spyOn(window, 'matchMedia')
-      
+
       // Intercept matchMedia calls and spy on removeEventListener
       matchMediaSpy.mockImplementation((query: string) => {
         const mql = originalMatchMedia.call(window, query)
-        vi.spyOn(mql, 'removeEventListener').mockImplementation(removeEventListenerSpy)
+        vi.spyOn(mql, 'removeEventListener').mockImplementation(
+          removeEventListenerSpy,
+        )
         return mql
       })
 
@@ -176,7 +184,7 @@ describe('useIsMobile', () => {
   })
 
   describe('SSR considerations', () => {
-    it('should handle undefined initial state', () => {
+    test('should handle undefined initial state', () => {
       const { result } = renderHook(() => useIsMobile())
 
       // The hook should return a boolean, not undefined
@@ -185,7 +193,7 @@ describe('useIsMobile', () => {
   })
 
   describe('multiple instances', () => {
-    it('should work correctly with multiple hook instances', () => {
+    test('should work correctly with multiple hook instances', () => {
       window.innerWidth = 1024
 
       const { result: result1 } = renderHook(() => useIsMobile())

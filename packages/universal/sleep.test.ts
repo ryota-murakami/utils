@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest'
 
 import sleep from './sleep.js'
 
@@ -14,16 +14,16 @@ describe('sleep', () => {
   })
 
   describe('basic functionality', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(typeof sleep).toBe('function')
     })
 
-    it('should return a Promise', () => {
+    test('should return a Promise', () => {
       const result = sleep(100)
       expect(result).toBeInstanceOf(Promise)
     })
 
-    it('should resolve after specified delay', async () => {
+    test('should resolve after specified delay', async () => {
       const promise = sleep(1000)
 
       // Advance timers to complete the delay
@@ -32,7 +32,7 @@ describe('sleep', () => {
       await expect(promise).resolves.toBeUndefined()
     })
 
-    it('should resolve with undefined', async () => {
+    test('should resolve with undefined', async () => {
       const promise = sleep(500)
       vi.advanceTimersByTime(500)
       const result = await promise
@@ -42,13 +42,13 @@ describe('sleep', () => {
   })
 
   describe('timing', () => {
-    it('should handle zero delay', async () => {
+    test('should handle zero delay', async () => {
       const promise = sleep(0)
       vi.advanceTimersByTime(0)
       await expect(promise).resolves.toBeUndefined()
     })
 
-    it('should handle various delays', async () => {
+    test('should handle various delays', async () => {
       const delays = [1, 10, 100, 1000]
 
       for (const delay of delays) {
@@ -58,7 +58,7 @@ describe('sleep', () => {
       }
     })
 
-    it('should handle large delays', async () => {
+    test('should handle large delays', async () => {
       const promise = sleep(10000)
       vi.advanceTimersByTime(10000)
       await expect(promise).resolves.toBeUndefined()
@@ -66,7 +66,7 @@ describe('sleep', () => {
   })
 
   describe('concurrent usage', () => {
-    it('should handle multiple concurrent sleep calls', async () => {
+    test('should handle multiple concurrent sleep calls', async () => {
       const promises = [sleep(100), sleep(200), sleep(300)]
 
       vi.advanceTimersByTime(300)
@@ -75,7 +75,7 @@ describe('sleep', () => {
       expect(results).toEqual([undefined, undefined, undefined])
     })
 
-    it('should work with Promise.all', async () => {
+    test('should work with Promise.all', async () => {
       const promises = [sleep(100), sleep(200), sleep(150)]
       const allPromise = Promise.all(promises)
 
@@ -87,7 +87,7 @@ describe('sleep', () => {
       ])
     })
 
-    it('should work with Promise.race', async () => {
+    test('should work with Promise.race', async () => {
       const promises = [sleep(300), sleep(100), sleep(200)]
       const racePromise = Promise.race(promises)
 
@@ -97,37 +97,37 @@ describe('sleep', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle negative delays', async () => {
+    test('should handle negative delays', async () => {
       const promise = sleep(-100)
       vi.advanceTimersByTime(0)
       await expect(promise).resolves.toBeUndefined()
     })
 
-    it('should handle decimal delays', async () => {
+    test('should handle decimal delays', async () => {
       const promise = sleep(100.5)
       vi.advanceTimersByTime(100)
       await expect(promise).resolves.toBeUndefined()
     })
 
-    it('should handle very large numbers', async () => {
+    test('should handle very large numbers', async () => {
       const promise = sleep(Number.MAX_SAFE_INTEGER)
       vi.advanceTimersByTime(Number.MAX_SAFE_INTEGER)
       await expect(promise).resolves.toBeUndefined()
     })
 
-    it('should handle NaN', async () => {
+    test('should handle NaN', async () => {
       const promise = sleep(NaN)
       vi.advanceTimersByTime(0)
       await expect(promise).resolves.toBeUndefined()
     })
 
-    it('should handle Infinity gracefully', () => {
+    test('should handle Infinity gracefully', () => {
       expect(async () => sleep(Infinity)).not.toThrow()
     })
   })
 
   describe('async patterns', () => {
-    it('should work with then() callbacks', async () => {
+    test('should work with then() callbacks', async () => {
       const result: string[] = []
 
       const promise = sleep(100).then(() => {
@@ -140,7 +140,7 @@ describe('sleep', () => {
       expect(result).toEqual(['completed'])
     })
 
-    it('should work in Promise.resolve context', async () => {
+    test('should work in Promise.resolve context', async () => {
       const promise = Promise.resolve().then(async () => sleep(100))
 
       // Wait for the sleep call to be made
@@ -151,13 +151,13 @@ describe('sleep', () => {
   })
 
   describe('error handling', () => {
-    it('should not throw errors for valid inputs', () => {
+    test('should not throw errors for valid inputs', () => {
       expect(async () => sleep(0)).not.toThrow()
       expect(async () => sleep(100)).not.toThrow()
       expect(async () => sleep(1000)).not.toThrow()
     })
 
-    it('should handle being called multiple times rapidly', async () => {
+    test('should handle being called multiple times rapidly', async () => {
       const promises = []
 
       for (let i = 0; i < 10; i++) {
@@ -173,7 +173,7 @@ describe('sleep', () => {
   })
 
   describe('real timer integration', () => {
-    it('should work with real timers for very short delays', async () => {
+    test('should work with real timers for very short delays', async () => {
       vi.useRealTimers()
 
       const promise = sleep(1)
@@ -184,13 +184,13 @@ describe('sleep', () => {
   })
 
   describe('type safety', () => {
-    it('should accept number parameters', () => {
+    test('should accept number parameters', () => {
       expect(async () => sleep(100)).not.toThrow()
       expect(async () => sleep(0)).not.toThrow()
       expect(async () => sleep(1.5)).not.toThrow()
     })
 
-    it('should return Promise<void>', async () => {
+    test('should return Promise<void>', async () => {
       const result = sleep(100)
       expect(result).toBeInstanceOf(Promise)
 

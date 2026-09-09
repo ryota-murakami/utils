@@ -1,17 +1,17 @@
 import shallowEqualScalar from './shallowEqualScalar.js'
 
 describe('shallowEqualScalar', () => {
-  it('should return true if both arguments are the same object', () => {
+  test('should return true if both arguments are the same object', () => {
     const o = { a: 1, b: 2 }
     expect(shallowEqualScalar(o, o)).toBe(true)
   })
 
-  it('should return false if either argument is null', () => {
+  test('should return false if either argument is null', () => {
     expect(shallowEqualScalar(null, {})).toBe(false)
     expect(shallowEqualScalar({}, null)).toBe(false)
   })
 
-  it('should return true if arguments fields are equal', () => {
+  test('should return true if arguments fields are equal', () => {
     expect(
       shallowEqualScalar(
         { a: 1, b: 2, c: undefined },
@@ -24,26 +24,26 @@ describe('shallowEqualScalar', () => {
     )
   })
 
-  it('should return false if first argument has too many keys', () => {
+  test('should return false if first argument has too many keys', () => {
     expect(shallowEqualScalar({ a: 1, b: 2, c: 3 }, { a: 1, b: 2 })).toBe(false)
   })
 
-  it('should return false if second argument has too many keys', () => {
+  test('should return false if second argument has too many keys', () => {
     expect(shallowEqualScalar({ a: 1, b: 2 }, { a: 1, b: 2, c: 3 })).toBe(false)
   })
 
-  it('should return false if arguments have keys dont have same value', () => {
+  test('should return false if arguments have keys dont have same value', () => {
     expect(shallowEqualScalar({ a: 1, b: 2 }, { a: 1, b: 3 })).toBe(false)
   })
 
-  it('should return false if arguments have field that are objects', () => {
+  test('should return false if arguments have field that are objects', () => {
     const o = {}
     expect(shallowEqualScalar({ a: 1, b: 2, c: o }, { a: 1, b: 2, c: o })).toBe(
       false,
     )
   })
 
-  it('should return false if arguments have different keys', () => {
+  test('should return false if arguments have different keys', () => {
     expect(
       shallowEqualScalar(
         { a: 1, b: 2, c: undefined },

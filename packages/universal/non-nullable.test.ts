@@ -1,9 +1,9 @@
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 import { nonNullable } from './non-nullable.js'
 
 describe('nonNullable', () => {
-  it('should return true for truthy values', () => {
+  test('should return true for truthy values', () => {
     expect(nonNullable(1)).toBe(true)
     expect(nonNullable('hello')).toBe(true)
     expect(nonNullable(true)).toBe(true)
@@ -13,22 +13,22 @@ describe('nonNullable', () => {
     expect(nonNullable(Symbol('test'))).toBe(true)
   })
 
-  it('should return true for falsy values that are not null or undefined', () => {
+  test('should return true for falsy values that are not null or undefined', () => {
     expect(nonNullable(0)).toBe(true)
     expect(nonNullable('')).toBe(true)
     expect(nonNullable(false)).toBe(true)
     expect(nonNullable(NaN)).toBe(true)
   })
 
-  it('should return false for null', () => {
+  test('should return false for null', () => {
     expect(nonNullable(null)).toBe(false)
   })
 
-  it('should return false for undefined', () => {
+  test('should return false for undefined', () => {
     expect(nonNullable(undefined)).toBe(false)
   })
 
-  it('should work as array filter', () => {
+  test('should work as array filter', () => {
     const mixed = [1, null, 'hello', undefined, true, 0, '', false]
     const filtered = mixed.filter(nonNullable)
 
@@ -37,7 +37,7 @@ describe('nonNullable', () => {
     expect(filtered).not.toContain(undefined)
   })
 
-  it('should work with complex array filtering', () => {
+  test('should work with complex array filtering', () => {
     const users = [
       { name: 'Alice', age: 30 },
       null,
@@ -54,7 +54,7 @@ describe('nonNullable', () => {
     ).toBe(true)
   })
 
-  it('should handle edge cases with objects', () => {
+  test('should handle edge cases with objects', () => {
     const objWithNull = { value: null }
     const objWithUndefined = { value: undefined }
     const objWithValue = { value: 'test' }
@@ -64,7 +64,7 @@ describe('nonNullable', () => {
     expect(nonNullable(objWithValue)).toBe(true)
   })
 
-  it('should work with function return values', () => {
+  test('should work with function return values', () => {
     const maybeGetValue = (flag: boolean): string | null => {
       return flag ? 'value' : null
     }
@@ -79,7 +79,7 @@ describe('nonNullable', () => {
     expect(nonNullable(maybeGetValue2(false))).toBe(false)
   })
 
-  it('should preserve type information when used as type guard', () => {
+  test('should preserve type information when used as type guard', () => {
     const value: string | null = 'test'
 
     if (nonNullable(value)) {
@@ -89,7 +89,7 @@ describe('nonNullable', () => {
     }
   })
 
-  it('should work with union types in arrays', () => {
+  test('should work with union types in arrays', () => {
     const mixedValues: (number | string | null | undefined | boolean)[] = [
       1,
       null,

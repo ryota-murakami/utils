@@ -1,11 +1,11 @@
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 import { template, templateAdvanced } from './template.js'
 
 describe('template', () => {
   describe('template', () => {
     describe('basic functionality', () => {
-      it('should replace simple placeholders', () => {
+      test('should replace simple placeholders', () => {
         expect(template('Hello {name}!', { name: 'World' })).toBe(
           'Hello World!',
         )
@@ -18,7 +18,7 @@ describe('template', () => {
         expect(template('Count: {count}', { count: 42 })).toBe('Count: 42')
       })
 
-      it('should handle nested object properties', () => {
+      test('should handle nested object properties', () => {
         const data = {
           user: { name: 'John', id: 123 },
           config: { theme: 'dark', version: '1.0.0' },
@@ -32,7 +32,7 @@ describe('template', () => {
         )
       })
 
-      it('should handle array access', () => {
+      test('should handle array access', () => {
         const data = {
           users: [{ name: 'John' }, { name: 'Jane' }],
           colors: ['red', 'green', 'blue'],
@@ -49,7 +49,7 @@ describe('template', () => {
         )
       })
 
-      it('should handle different data types', () => {
+      test('should handle different data types', () => {
         const data = {
           string: 'hello',
           number: 42,
@@ -69,7 +69,7 @@ describe('template', () => {
     })
 
     describe('edge cases', () => {
-      it('should handle missing keys with fallback', () => {
+      test('should handle missing keys with fallback', () => {
         expect(
           template('Hello {missing}', {}, { fallback: '[not found]' }),
         ).toBe('Hello [not found]')
@@ -81,13 +81,13 @@ describe('template', () => {
         )
       })
 
-      it('should handle missing keys without fallback', () => {
+      test('should handle missing keys without fallback', () => {
         expect(template('Hello {missing}', {})).toBe('Hello ')
         expect(template('Hi {name}', {})).toBe('Hi ')
         expect(template('Count: {count}', {})).toBe('Count: ')
       })
 
-      it('should handle null and undefined values', () => {
+      test('should handle null and undefined values', () => {
         const data = {
           nullValue: null,
           undefinedValue: undefined,
@@ -112,26 +112,26 @@ describe('template', () => {
         ).toBe('Empty: ')
       })
 
-      it('should handle empty template strings', () => {
+      test('should handle empty template strings', () => {
         expect(template('', { name: 'World' })).toBe('')
         expect(template('   ', { name: 'World' })).toBe('   ')
       })
 
-      it('should handle templates with no placeholders', () => {
+      test('should handle templates with no placeholders', () => {
         expect(template('Hello World', { name: 'Test' })).toBe('Hello World')
         expect(template('No placeholders here!', {})).toBe(
           'No placeholders here!',
         )
       })
 
-      it('should handle malformed placeholders', () => {
+      test('should handle malformed placeholders', () => {
         expect(template('Hello {', { name: 'World' })).toBe('Hello {')
         expect(template('Hello }', { name: 'World' })).toBe('Hello }')
         expect(template('Hello {}', { name: 'World' })).toBe('Hello ')
         expect(template('Hello {  }', { name: 'World' })).toBe('Hello ')
       })
 
-      it.skip('should handle nested placeholders (should not evaluate)', () => {
+      test.skip('should handle nested placeholders (should not evaluate)', () => {
         expect(template('Hello {{name}}', { name: 'World' })).toBe(
           'Hello {World}',
         )
@@ -143,7 +143,7 @@ describe('template', () => {
 
     describe('options', () => {
       describe('prefix and suffix', () => {
-        it('should add prefix and suffix to values', () => {
+        test('should add prefix and suffix to values', () => {
           expect(
             template('Price: {price}', { price: '99.99' }, { prefix: '$' }),
           ).toBe('Price: $99.99')
@@ -159,7 +159,7 @@ describe('template', () => {
           ).toBe('Value: (42)')
         })
 
-        it('should not add prefix/suffix to fallback values', () => {
+        test('should not add prefix/suffix to fallback values', () => {
           expect(
             template('Price: {missing}', {}, { prefix: '$', fallback: 'N/A' }),
           ).toBe('Price: N/A')
@@ -174,7 +174,7 @@ describe('template', () => {
       })
 
       describe('escapeHtml', () => {
-        it('should escape HTML when enabled', () => {
+        test('should escape HTML when enabled', () => {
           const data = { html: '<script>alert("xss")</script>' }
           expect(template('Content: {html}', data, { escapeHtml: true })).toBe(
             'Content: &lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;',
@@ -187,14 +187,14 @@ describe('template', () => {
           )
         })
 
-        it('should escape various HTML characters', () => {
+        test('should escape various HTML characters', () => {
           const data = { text: 'Hello & "World" <tag>' }
           expect(template('{text}', data, { escapeHtml: true })).toBe(
             'Hello &amp; &quot;World&quot; &lt;tag&gt;',
           )
         })
 
-        it('should not escape fallback values', () => {
+        test('should not escape fallback values', () => {
           expect(
             template(
               '{missing}',
@@ -206,7 +206,7 @@ describe('template', () => {
       })
 
       describe('combined options', () => {
-        it('should apply all options together', () => {
+        test('should apply all options together', () => {
           const data = { price: '99.99', html: '<b>Bold</b>' }
           const options = {
             prefix: '$',
@@ -229,7 +229,7 @@ describe('template', () => {
     })
 
     describe('complex nested data', () => {
-      it('should handle deeply nested objects', () => {
+      test('should handle deeply nested objects', () => {
         const data = {
           level1: {
             level2: {
@@ -247,7 +247,7 @@ describe('template', () => {
         ).toBe('Deep: deep value')
       })
 
-      it('should handle mixed arrays and objects', () => {
+      test('should handle mixed arrays and objects', () => {
         const data = {
           company: {
             departments: [
@@ -273,7 +273,7 @@ describe('template', () => {
         ).toBe('Role: Designer')
       })
 
-      it('should handle invalid nested paths gracefully', () => {
+      test('should handle invalid nested paths gracefully', () => {
         const data = { user: { name: 'John' } }
 
         expect(template('Missing: {user.missing.path}', data)).toBe('Missing: ')
@@ -283,7 +283,7 @@ describe('template', () => {
     })
 
     describe('performance', () => {
-      it('should handle large templates efficiently', () => {
+      test('should handle large templates efficiently', () => {
         const data = { name: 'World', count: 42 }
         const largeTemplate = 'Hello {name}! Count: {count}. '.repeat(1000)
 
@@ -296,7 +296,7 @@ describe('template', () => {
         expect(endTime - startTime).toBeLessThan(100)
       })
 
-      it('should handle large data objects efficiently', () => {
+      test('should handle large data objects efficiently', () => {
         const data: Record<string, any> = {}
         for (let i = 0; i < 1000; i++) {
           data[`key${i}`] = `value${i}`
@@ -312,7 +312,7 @@ describe('template', () => {
     })
 
     describe('real-world examples', () => {
-      it('should handle email templates', () => {
+      test('should handle email templates', () => {
         const data = {
           user: { name: 'John Doe', email: 'john@example.com' },
           order: { id: '12345', total: 99.99, items: 3 },
@@ -334,7 +334,7 @@ describe('template', () => {
         expect(result).toContain('john@example.com')
       })
 
-      it('should handle configuration templates', () => {
+      test('should handle configuration templates', () => {
         const config = {
           server: { host: 'localhost', port: 3000 },
           database: { url: 'mongodb://localhost:27017/myapp' },
@@ -350,7 +350,7 @@ describe('template', () => {
         )
       })
 
-      it('should handle internationalization templates', () => {
+      test('should handle internationalization templates', () => {
         const i18n = {
           messages: {
             welcome: 'Welcome',
@@ -371,7 +371,7 @@ describe('template', () => {
 
   describe('templateAdvanced', () => {
     describe('conditional logic', () => {
-      it('should handle ternary-like conditionals', () => {
+      test('should handle ternary-like conditionals', () => {
         expect(
           templateAdvanced('Hello {user.name ? user.name : "Guest"}', {
             user: { name: 'John' },
@@ -387,7 +387,7 @@ describe('template', () => {
         ).toBe('Hello Missing')
       })
 
-      it('should handle equality checks', () => {
+      test('should handle equality checks', () => {
         expect(
           templateAdvanced('{count} item{count === 1 ? "" : "s"}', {
             count: 1,
@@ -405,7 +405,7 @@ describe('template', () => {
         ).toBe('0 items')
       })
 
-      it('should handle string equality checks', () => {
+      test('should handle string equality checks', () => {
         expect(
           templateAdvanced(
             'Status: {status === "active" ? "Online" : "Offline"}',
@@ -420,7 +420,7 @@ describe('template', () => {
         ).toBe('Status: Offline')
       })
 
-      it('should handle inequality checks', () => {
+      test('should handle inequality checks', () => {
         expect(
           templateAdvanced(
             'Role: {role !== "admin" ? "User" : "Administrator"}',
@@ -435,7 +435,7 @@ describe('template', () => {
         ).toBe('Role: Administrator')
       })
 
-      it('should handle nested property conditions', () => {
+      test('should handle nested property conditions', () => {
         const data = { user: { role: 'admin', active: true } }
         expect(
           templateAdvanced(
@@ -453,7 +453,7 @@ describe('template', () => {
     })
 
     describe('edge cases', () => {
-      it('should handle missing properties in conditions', () => {
+      test('should handle missing properties in conditions', () => {
         expect(
           templateAdvanced('Hello {missing ? "Found" : "Guest"}', {}),
         ).toBe('Hello Guest')
@@ -462,7 +462,7 @@ describe('template', () => {
         ).toBe('Count: Other')
       })
 
-      it('should handle complex nested conditionals', () => {
+      test('should handle complex nested conditionals', () => {
         const data = { user: { permissions: { canEdit: true } } }
         expect(
           templateAdvanced(
@@ -472,7 +472,7 @@ describe('template', () => {
         ).toBe('Edit: Allowed')
       })
 
-      it('should handle literal strings with spaces', () => {
+      test('should handle literal strings with spaces', () => {
         expect(
           templateAdvanced(
             'Message: {user.name ? user.name : "Anonymous User"}',
@@ -487,7 +487,7 @@ describe('template', () => {
         ).toBe('Status: Not Active')
       })
 
-      it('should fall back to regular template for non-conditional placeholders', () => {
+      test('should fall back to regular template for non-conditional placeholders', () => {
         expect(
           templateAdvanced('Hello {name}! {count} items.', {
             name: 'John',
@@ -498,7 +498,7 @@ describe('template', () => {
     })
 
     describe('mixed usage', () => {
-      it('should handle both conditional and regular placeholders', () => {
+      test('should handle both conditional and regular placeholders', () => {
         const data = { user: { name: 'John', isAdmin: true }, count: 3 }
         const template =
           'User: {user.name} ({user.isAdmin ? "Admin" : "User"}) - {count} item{count === 1 ? "" : "s"}'
@@ -508,7 +508,7 @@ describe('template', () => {
         )
       })
 
-      it('should handle multiple conditionals in one template', () => {
+      test('should handle multiple conditionals in one template', () => {
         const data = { count: 0, user: { premium: false } }
         const template =
           '{count === 0 ? "No" : count} item{count === 1 ? "" : "s"} for {user.premium ? "premium" : "free"} user'
@@ -518,7 +518,7 @@ describe('template', () => {
     })
 
     describe('performance', () => {
-      it('should handle complex templates efficiently', () => {
+      test('should handle complex templates efficiently', () => {
         const data = { items: [], user: { role: 'admin' }, count: 0 }
         const complexTemplate =
           'Status: {user.role === "admin" ? "Administrator" : "User"} with {count === 0 ? "no" : count} item{count === 1 ? "" : "s"}'
@@ -534,7 +534,7 @@ describe('template', () => {
   })
 
   describe('integration tests', () => {
-    it('should handle complex real-world scenarios', () => {
+    test('should handle complex real-world scenarios', () => {
       const data = {
         user: {
           name: 'John Doe',
@@ -565,7 +565,7 @@ describe('template', () => {
       expect(result).toContain('Projects: 1/2 active')
     })
 
-    it('should maintain string immutability', () => {
+    test('should maintain string immutability', () => {
       const original = 'Hello {name}!'
       const originalCopy = original
       const data = { name: 'World' }

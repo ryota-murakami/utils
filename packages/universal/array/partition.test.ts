@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 import { partition } from './partition.js'
 
 describe('partition', () => {
   describe('basic functionality', () => {
-    it('should separate numbers into even and odd', () => {
+    test('should separate numbers into even and odd', () => {
       const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
       const [evens, odds] = partition(numbers, (n) => n % 2 === 0)
 
@@ -12,7 +12,7 @@ describe('partition', () => {
       expect(odds).toEqual([1, 3, 5, 7, 9])
     })
 
-    it('should separate objects by property', () => {
+    test('should separate objects by property', () => {
       const users = [
         { name: 'Alice', active: true, age: 30 },
         { name: 'Bob', active: false, age: 25 },
@@ -35,7 +35,7 @@ describe('partition', () => {
       ])
     })
 
-    it('should use index parameter in predicate', () => {
+    test('should use index parameter in predicate', () => {
       const items = ['a', 'b', 'c', 'd', 'e', 'f']
       const [evenIndices, oddIndices] = partition(
         items,
@@ -46,7 +46,7 @@ describe('partition', () => {
       expect(oddIndices).toEqual(['b', 'd', 'f']) // Indices 1, 3, 5
     })
 
-    it('should work with string predicates', () => {
+    test('should work with string predicates', () => {
       const emails = [
         'valid@email.com',
         'invalid-email',
@@ -61,7 +61,7 @@ describe('partition', () => {
       expect(invalidEmails).toEqual(['invalid-email', 'also-invalid'])
     })
 
-    it('should work with complex predicates', () => {
+    test('should work with complex predicates', () => {
       const products = [
         { name: 'Laptop', price: 1000, category: 'electronics' },
         { name: 'Book', price: 15, category: 'books' },
@@ -86,13 +86,13 @@ describe('partition', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle empty arrays', () => {
+    test('should handle empty arrays', () => {
       const [truthy, falsy] = partition([], () => true)
       expect(truthy).toEqual([])
       expect(falsy).toEqual([])
     })
 
-    it('should handle single element arrays', () => {
+    test('should handle single element arrays', () => {
       const [truthy, falsy] = partition([42], (n) => n > 40)
       expect(truthy).toEqual([42])
       expect(falsy).toEqual([])
@@ -102,19 +102,19 @@ describe('partition', () => {
       expect(falsy2).toEqual([5])
     })
 
-    it('should handle all elements matching predicate', () => {
+    test('should handle all elements matching predicate', () => {
       const [truthy, falsy] = partition([2, 4, 6, 8], (n) => n % 2 === 0)
       expect(truthy).toEqual([2, 4, 6, 8])
       expect(falsy).toEqual([])
     })
 
-    it('should handle no elements matching predicate', () => {
+    test('should handle no elements matching predicate', () => {
       const [truthy, falsy] = partition([1, 3, 5, 7], (n) => n % 2 === 0)
       expect(truthy).toEqual([])
       expect(falsy).toEqual([1, 3, 5, 7])
     })
 
-    it('should handle null and undefined values', () => {
+    test('should handle null and undefined values', () => {
       const values = [1, null, 2, undefined, 3, null]
       const [nullish, nonNullish] = partition(
         values,
@@ -127,7 +127,7 @@ describe('partition', () => {
   })
 
   describe('type safety', () => {
-    it('should work with different data types', () => {
+    test('should work with different data types', () => {
       const mixed = [1, 'two', 3, 'four', 5]
       const [numbers, strings] = partition(
         mixed,
@@ -138,7 +138,7 @@ describe('partition', () => {
       expect(strings).toEqual(['two', 'four'])
     })
 
-    it('should preserve object types', () => {
+    test('should preserve object types', () => {
       interface User {
         id: number
         name: string
@@ -158,7 +158,7 @@ describe('partition', () => {
       expect(regularUsers[0]?.name).toBe('Bob')
     })
 
-    it('should work with union types', () => {
+    test('should work with union types', () => {
       type Item = { type: 'A'; valueA: number } | { type: 'B'; valueB: string }
 
       const items: Item[] = [
@@ -175,7 +175,7 @@ describe('partition', () => {
   })
 
   describe('immutability', () => {
-    it('should not modify the original array', () => {
+    test('should not modify the original array', () => {
       const original = [1, 2, 3, 4, 5]
       const originalCopy = [...original]
 
@@ -184,7 +184,7 @@ describe('partition', () => {
       expect(original).toEqual(originalCopy)
     })
 
-    it('should not modify original objects', () => {
+    test('should not modify original objects', () => {
       const users = [
         { id: 1, name: 'Alice', active: true },
         { id: 2, name: 'Bob', active: false },
@@ -200,7 +200,7 @@ describe('partition', () => {
   })
 
   describe('performance', () => {
-    it('should handle large arrays efficiently', () => {
+    test('should handle large arrays efficiently', () => {
       const largeArray = Array.from({ length: 10000 }, (_, i) => i)
 
       const startTime = performance.now()
@@ -212,7 +212,7 @@ describe('partition', () => {
       expect(endTime - startTime).toBeLessThan(50) // Should be reasonably fast
     })
 
-    it('should only iterate through the array once', () => {
+    test('should only iterate through the array once', () => {
       let callCount = 0
       const items = [1, 2, 3, 4, 5]
 
@@ -226,7 +226,7 @@ describe('partition', () => {
   })
 
   describe('error handling', () => {
-    it('should handle predicate function throwing errors', () => {
+    test('should handle predicate function throwing errors', () => {
       const items = [1, 2, 3]
       const predicate = (n: number) => {
         if (n === 2) throw new Error('Predicate error')
@@ -236,7 +236,7 @@ describe('partition', () => {
       expect(() => partition(items, predicate)).toThrow('Predicate error')
     })
 
-    it('should handle boolean coercion correctly', () => {
+    test('should handle boolean coercion correctly', () => {
       const values = [0, 1, '', 'hello', false, true, null, undefined, [], {}]
       const [truthy, falsy] = partition(values, Boolean)
 
@@ -246,7 +246,7 @@ describe('partition', () => {
   })
 
   describe('practical use cases', () => {
-    it('should separate valid and invalid data', () => {
+    test('should separate valid and invalid data', () => {
       const data = [
         { email: 'valid@example.com', age: 25 },
         { email: 'invalid-email', age: 30 },
@@ -269,7 +269,7 @@ describe('partition', () => {
       ])
     })
 
-    it('should separate files by type', () => {
+    test('should separate files by type', () => {
       const files = [
         'document.pdf',
         'image.jpg',
@@ -293,7 +293,7 @@ describe('partition', () => {
       ])
     })
 
-    it('should separate tasks by priority', () => {
+    test('should separate tasks by priority', () => {
       const tasks = [
         { id: 1, title: 'Fix bug', priority: 'high', completed: false },
         { id: 2, title: 'Write tests', priority: 'medium', completed: true },
@@ -314,7 +314,7 @@ describe('partition', () => {
   })
 
   describe('readonly arrays', () => {
-    it('should work with readonly arrays', () => {
+    test('should work with readonly arrays', () => {
       const readonlyArray: readonly number[] = [1, 2, 3, 4, 5]
       const [evens, odds] = partition(readonlyArray, (n) => n % 2 === 0)
 

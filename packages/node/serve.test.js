@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest'
 
 // Note: This file tests the serve.js CLI application
 // Due to its complexity and many dependencies, we'll focus on testing
@@ -39,7 +39,7 @@ describe('serve.js CLI application', () => {
   })
 
   describe('CLI structure and exports', () => {
-    it('should be a CLI script with proper shebang', async () => {
+    test('should be a CLI script with proper shebang', async () => {
       const fs = await import('fs')
       const path = await import('path')
       const { fileURLToPath } = await import('url')
@@ -52,7 +52,7 @@ describe('serve.js CLI application', () => {
       expect(content.startsWith('#!/usr/bin/env node')).toBe(true)
     })
 
-    it('should use strict mode', async () => {
+    test('should use strict mode', async () => {
       const fs = await import('fs')
       const path = await import('path')
       const { fileURLToPath } = await import('url')
@@ -70,14 +70,14 @@ describe('serve.js CLI application', () => {
     // Test the parseEndpoint function logic
     // Since the function is not exported, we'll test its behavior through the CLI
 
-    it('should handle numeric port parsing', () => {
+    test('should handle numeric port parsing', () => {
       // Simulate parsing a simple port number
       const numericPort = '3000'
       const isNumeric = !isNaN(numericPort)
       expect(isNumeric).toBe(true)
     })
 
-    it('should handle TCP protocol URLs', () => {
+    test('should handle TCP protocol URLs', () => {
       // Test TCP URL parsing logic
       const { parse } = require('url')
       const url = parse('tcp://localhost:8080')
@@ -87,7 +87,7 @@ describe('serve.js CLI application', () => {
       expect(url.port).toBe('8080')
     })
 
-    it('should handle UNIX domain sockets', () => {
+    test('should handle UNIX domain sockets', () => {
       const { parse } = require('url')
       const url = parse('unix:/var/run/socket.sock')
 
@@ -95,7 +95,7 @@ describe('serve.js CLI application', () => {
       expect(url.pathname).toBe('/var/run/socket.sock')
     })
 
-    it('should handle Windows named pipes', () => {
+    test('should handle Windows named pipes', () => {
       const pipeStr = 'pipe:\\\\.\\pipe\\MyPipe'
       const cutStr = pipeStr.replace(/^pipe:/, '')
 
@@ -104,7 +104,7 @@ describe('serve.js CLI application', () => {
   })
 
   describe('network address detection', () => {
-    it('should detect IPv4 non-internal addresses', () => {
+    test('should detect IPv4 non-internal addresses', () => {
       // Mock network interfaces similar to os.networkInterfaces()
       const mockInterfaces = {
         en0: [
@@ -144,7 +144,7 @@ describe('serve.js CLI application', () => {
       expect(networkAddress).toBe('192.168.1.100')
     })
 
-    it('should return undefined when no external IPv4 found', () => {
+    test('should return undefined when no external IPv4 found', () => {
       const mockInterfaces = {
         lo0: [
           {
@@ -172,7 +172,7 @@ describe('serve.js CLI application', () => {
   })
 
   describe('configuration validation', () => {
-    it('should handle serve.json configuration', async () => {
+    test('should handle serve.json configuration', async () => {
       // Test configuration file structure
       const mockConfig = {
         public: './public',
@@ -188,7 +188,7 @@ describe('serve.js CLI application', () => {
       expect(Array.isArray(mockConfig.redirects)).toBe(true)
     })
 
-    it('should handle package.json now.static configuration', () => {
+    test('should handle package.json now.static configuration', () => {
       const mockPackageJson = {
         name: 'my-app',
         now: {
@@ -208,7 +208,7 @@ describe('serve.js CLI application', () => {
   })
 
   describe('HTTPS/SSL configuration', () => {
-    it('should determine HTTP vs HTTPS mode', () => {
+    test('should determine HTTP vs HTTPS mode', () => {
       // Test HTTPS mode detection
       const httpsArgs = {
         '--ssl-cert': '/path/to/cert.pem',
@@ -226,7 +226,7 @@ describe('serve.js CLI application', () => {
       expect(httpMode2).toBe('http')
     })
 
-    it('should validate SSL certificate requirements', () => {
+    test('should validate SSL certificate requirements', () => {
       // Both cert and key are required for HTTPS
       const validSSL = {
         cert: '/path/to/cert.pem',
@@ -250,7 +250,7 @@ describe('serve.js CLI application', () => {
   })
 
   describe('server options and flags', () => {
-    it('should handle CORS configuration', () => {
+    test('should handle CORS configuration', () => {
       const corsEnabled = { '--cors': true }
       const corsDisabled = { '--cors': false }
       const corsUndefined = {}
@@ -260,7 +260,7 @@ describe('serve.js CLI application', () => {
       expect(corsUndefined['--cors']).toBeUndefined()
     })
 
-    it('should handle compression configuration', () => {
+    test('should handle compression configuration', () => {
       // Compression is enabled by default unless --no-compression is set
       const defaultCompression = {}
       const disabledCompression = { '--no-compression': true }
@@ -272,7 +272,7 @@ describe('serve.js CLI application', () => {
       expect(compress2).toBe(false)
     })
 
-    it('should handle clipboard configuration', () => {
+    test('should handle clipboard configuration', () => {
       const defaultClipboard = {}
       const disabledClipboard = { '--no-clipboard': true }
 
@@ -283,7 +283,7 @@ describe('serve.js CLI application', () => {
       expect(clipboard2).toBe(false)
     })
 
-    it('should handle ETag configuration', () => {
+    test('should handle ETag configuration', () => {
       const defaultETag = {}
       const disabledETag = { '--no-etag': true }
 
@@ -295,7 +295,7 @@ describe('serve.js CLI application', () => {
       expect(etag2).toBe(false)
     })
 
-    it('should handle SPA mode configuration', () => {
+    test('should handle SPA mode configuration', () => {
       const spaMode = { '--single': true }
       const normalMode = {}
 
@@ -303,7 +303,7 @@ describe('serve.js CLI application', () => {
       expect(normalMode['--single']).toBeUndefined()
     })
 
-    it('should handle symlinks configuration', () => {
+    test('should handle symlinks configuration', () => {
       const symlinksEnabled = { '--symlinks': true }
       const symlinksDisabled = {}
 
@@ -313,22 +313,22 @@ describe('serve.js CLI application', () => {
   })
 
   describe('argument parsing and validation', () => {
-    it('should handle version flag', () => {
+    test('should handle version flag', () => {
       const versionArgs = { '--version': true }
       expect(versionArgs['--version']).toBe(true)
     })
 
-    it('should handle help flag', () => {
+    test('should handle help flag', () => {
       const helpArgs = { '--help': true }
       expect(helpArgs['--help']).toBe(true)
     })
 
-    it('should handle debug flag', () => {
+    test('should handle debug flag', () => {
       const debugArgs = { '--debug': true }
       expect(debugArgs['--debug']).toBe(true)
     })
 
-    it('should handle listen endpoints', () => {
+    test('should handle listen endpoints', () => {
       const listenArgs = {
         '--listen': [['3000'], ['tcp://localhost:8080'], ['unix:/tmp/socket']],
       }
@@ -337,7 +337,7 @@ describe('serve.js CLI application', () => {
       expect(listenArgs['--listen']).toHaveLength(3)
     })
 
-    it('should validate maximum path arguments', () => {
+    test('should validate maximum path arguments', () => {
       // Script should accept maximum one path argument
       const validArgs = { _: ['./public'] }
       const invalidArgs = { _: ['./public', './dist'] }
@@ -348,7 +348,7 @@ describe('serve.js CLI application', () => {
   })
 
   describe('error handling scenarios', () => {
-    it('should handle port already in use', () => {
+    test('should handle port already in use', () => {
       // Simulate EADDRINUSE error handling
       const error = { code: 'EADDRINUSE' }
       const endpoint = ['3000']
@@ -363,14 +363,14 @@ describe('serve.js CLI application', () => {
       expect(shouldRetry).toBe(true)
     })
 
-    it('should handle invalid configuration files', () => {
+    test('should handle invalid configuration files', () => {
       // Test invalid JSON handling
       const invalidJSON = '{ invalid json }'
 
       expect(() => JSON.parse(invalidJSON)).toThrow()
     })
 
-    it('should handle missing SSL certificate files', () => {
+    test('should handle missing SSL certificate files', () => {
       // Simulate file reading errors
       const error = { code: 'ENOENT', message: 'File not found' }
 
@@ -380,7 +380,7 @@ describe('serve.js CLI application', () => {
   })
 
   describe('help text and documentation', () => {
-    it('should provide comprehensive help text', () => {
+    test('should provide comprehensive help text', () => {
       // Test that help text contains essential information
       const helpSections = [
         'USAGE',
@@ -420,7 +420,7 @@ describe('serve.js CLI application', () => {
   })
 
   describe('environment variable handling', () => {
-    it('should use PORT environment variable as default', () => {
+    test('should use PORT environment variable as default', () => {
       // Test default port selection
       const envPort = process.env.PORT || 5000
       const defaultPort = envPort
@@ -429,7 +429,7 @@ describe('serve.js CLI application', () => {
       expect(defaultPort).toBeGreaterThan(0)
     })
 
-    it('should handle NODE_ENV environment variable', () => {
+    test('should handle NODE_ENV environment variable', () => {
       const isDevelopment = process.env.NODE_ENV !== 'production'
       const isProduction = process.env.NODE_ENV === 'production'
 
@@ -438,7 +438,7 @@ describe('serve.js CLI application', () => {
       expect(isDevelopment).toBe(!isProduction)
     })
 
-    it('should handle update check environment variable', () => {
+    test('should handle update check environment variable', () => {
       // NO_UPDATE_CHECK environment variable disables update checking
       const updateCheckDisabled = process.env.NO_UPDATE_CHECK === '1'
 
@@ -447,7 +447,7 @@ describe('serve.js CLI application', () => {
   })
 
   describe('signal handling and graceful shutdown', () => {
-    it('should handle termination signals', () => {
+    test('should handle termination signals', () => {
       // Test signal handling setup
       const signals = ['SIGINT', 'SIGTERM', 'exit']
 
@@ -457,7 +457,7 @@ describe('serve.js CLI application', () => {
       })
     })
 
-    it('should prevent multiple shutdown executions', () => {
+    test('should prevent multiple shutdown executions', () => {
       // Simulate shutdown handler logic
       let run = false
 
@@ -478,7 +478,7 @@ describe('serve.js CLI application', () => {
   })
 
   describe('URL and path handling', () => {
-    it('should handle different URL schemes', () => {
+    test('should handle different URL schemes', () => {
       const testUrls = [
         'tcp://localhost:3000',
         'unix:/tmp/socket',
@@ -492,7 +492,7 @@ describe('serve.js CLI application', () => {
       })
     })
 
-    it('should resolve relative paths correctly', () => {
+    test('should resolve relative paths correctly', () => {
       const path = require('path')
 
       const cwd = process.cwd()

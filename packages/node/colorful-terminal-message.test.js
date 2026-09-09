@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('colorful-terminal-message', () => {
   let originalSetTimeout
@@ -30,7 +30,7 @@ describe('colorful-terminal-message', () => {
   })
 
   describe('script structure and initialization', () => {
-    it('should have predefined grabber patterns', async () => {
+    test('should have predefined grabber patterns', async () => {
       // Import the script which will set up the timers
       await import('./colorful-terminal-message.js')
 
@@ -39,7 +39,7 @@ describe('colorful-terminal-message', () => {
       expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), 1500)
     })
 
-    it('should set up two timers on module load', async () => {
+    test('should set up two timers on module load', async () => {
       await import('./colorful-terminal-message.js')
 
       expect(setTimeoutSpy).toHaveBeenCalledTimes(2)
@@ -61,7 +61,7 @@ describe('colorful-terminal-message', () => {
   })
 
   describe('message display functionality', () => {
-    it('should display complete message when first timer executes', async () => {
+    test('should display complete message when first timer executes', async () => {
       await import('./colorful-terminal-message.js')
 
       // Get the first timer callback and execute it
@@ -83,7 +83,7 @@ describe('colorful-terminal-message', () => {
       expect(allLoggedContent).toContain('https://indiegogo.com/at/greenlock')
     })
 
-    it('should use random grabber selection', async () => {
+    test('should use random grabber selection', async () => {
       // Test with different random values
       const testCases = [
         { random: 0.0, expectedIndex: 0 }, // First grabber (fire)
@@ -126,7 +126,7 @@ describe('colorful-terminal-message', () => {
       }
     })
 
-    it('should include ANSI color codes in message', async () => {
+    test('should include ANSI color codes in message', async () => {
       await import('./colorful-terminal-message.js')
 
       const firstTimerCallback = setTimeoutSpy.mock.calls[0][0]
@@ -141,7 +141,7 @@ describe('colorful-terminal-message', () => {
       expect(allLoggedContent).toContain('\u001b[0m') // Reset color
     })
 
-    it('should include separator lines', async () => {
+    test('should include separator lines', async () => {
       await import('./colorful-terminal-message.js')
 
       const firstTimerCallback = setTimeoutSpy.mock.calls[0][0]
@@ -164,7 +164,7 @@ describe('colorful-terminal-message', () => {
       vi.spyOn(Math, 'random').mockReturnValue(0.5)
     })
 
-    it('should include all required message components', async () => {
+    test('should include all required message components', async () => {
       await import('./colorful-terminal-message.js')
 
       const firstTimerCallback = setTimeoutSpy.mock.calls[0][0]
@@ -192,7 +192,7 @@ describe('colorful-terminal-message', () => {
       expect(allLoggedContent).toContain('https://indiegogo.com/at/greenlock')
     })
 
-    it('should have proper message structure', async () => {
+    test('should have proper message structure', async () => {
       await import('./colorful-terminal-message.js')
 
       const firstTimerCallback = setTimeoutSpy.mock.calls[0][0]
@@ -208,7 +208,7 @@ describe('colorful-terminal-message', () => {
   })
 
   describe('emoji patterns verification', () => {
-    it('should have four different grabber patterns', async () => {
+    test('should have four different grabber patterns', async () => {
       // This test verifies the structure exists by checking random selection works
       const patterns = []
 
@@ -234,7 +234,7 @@ describe('colorful-terminal-message', () => {
       expect(uniquePatterns.size).toBe(4)
     })
 
-    it('should contain expected emoji types', async () => {
+    test('should contain expected emoji types', async () => {
       const emojiTests = [
         { random: 0.0, expectedEmojis: ['🔥'] },
         { random: 0.25, expectedEmojis: ['🍒'] },
@@ -265,7 +265,7 @@ describe('colorful-terminal-message', () => {
   })
 
   describe('timing behavior', () => {
-    it('should use correct delay values', async () => {
+    test('should use correct delay values', async () => {
       await import('./colorful-terminal-message.js')
 
       // Verify the exact timing values
@@ -273,7 +273,7 @@ describe('colorful-terminal-message', () => {
       expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), 1500)
     })
 
-    it('should set up reading time delay', async () => {
+    test('should set up reading time delay', async () => {
       await import('./colorful-terminal-message.js')
 
       // The second timeout is for giving time to read
@@ -285,21 +285,21 @@ describe('colorful-terminal-message', () => {
   })
 
   describe('script execution model', () => {
-    it('should execute immediately when imported', async () => {
+    test('should execute immediately when imported', async () => {
       await import('./colorful-terminal-message.js')
 
       // Timer should be set immediately
       expect(setTimeoutSpy).toHaveBeenCalled()
     })
 
-    it('should not display message immediately', async () => {
+    test('should not display message immediately', async () => {
       await import('./colorful-terminal-message.js')
 
       // Message should not be displayed until timer executes
       expect(consoleInfoSpy).not.toHaveBeenCalled()
     })
 
-    it('should be self-contained with no exports', async () => {
+    test('should be self-contained with no exports', async () => {
       const module = await import('./colorful-terminal-message.js')
 
       // The script should be self-executing with no exports
@@ -308,7 +308,7 @@ describe('colorful-terminal-message', () => {
   })
 
   describe('edge cases', () => {
-    it('should handle Math.random edge values', async () => {
+    test('should handle Math.random edge values', async () => {
       // Test edge case where Math.random returns exactly 1 (should not happen but test boundary)
       vi.spyOn(Math, 'random').mockReturnValue(0.999999)
 
@@ -320,7 +320,7 @@ describe('colorful-terminal-message', () => {
       expect(consoleInfoSpy).toHaveBeenCalled()
     })
 
-    it('should handle Math.random returning 0', async () => {
+    test('should handle Math.random returning 0', async () => {
       vi.spyOn(Math, 'random').mockReturnValue(0)
 
       await import('./colorful-terminal-message.js')
@@ -333,7 +333,7 @@ describe('colorful-terminal-message', () => {
   })
 
   describe('CLI shebang compatibility', () => {
-    it('should have proper shebang for CLI execution', async () => {
+    test('should have proper shebang for CLI execution', async () => {
       // Read the file content to verify shebang
       const fs = await import('fs')
       const path = await import('path')

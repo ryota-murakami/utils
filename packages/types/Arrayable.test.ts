@@ -1,4 +1,4 @@
-import { describe, it, expectTypeOf } from 'vitest'
+import { describe, test, expectTypeOf } from 'vitest'
 
 // Import the Arrayable type
 // Note: We're testing TypeScript types at compile-time, not runtime behavior
@@ -7,7 +7,7 @@ import { describe, it, expectTypeOf } from 'vitest'
 type Arrayable<T> = T | T[]
 
 describe('Arrayable type', () => {
-  it('should accept single values', () => {
+  test('should accept single values', () => {
     // Single string
     expectTypeOf<string>().toMatchTypeOf<Arrayable<string>>()
 
@@ -21,7 +21,7 @@ describe('Arrayable type', () => {
     expectTypeOf<{ id: number }>().toMatchTypeOf<Arrayable<{ id: number }>>()
   })
 
-  it('should accept arrays of values', () => {
+  test('should accept arrays of values', () => {
     // Array of strings
     expectTypeOf<string[]>().toMatchTypeOf<Arrayable<string>>()
 
@@ -35,7 +35,7 @@ describe('Arrayable type', () => {
     expectTypeOf<{ id: number }[]>().toMatchTypeOf<Arrayable<{ id: number }>>()
   })
 
-  it('should work with complex types', () => {
+  test('should work with complex types', () => {
     interface User {
       id: number
       name: string
@@ -49,7 +49,7 @@ describe('Arrayable type', () => {
     expectTypeOf<User[]>().toMatchTypeOf<Arrayable<User>>()
   })
 
-  it('should work with union types', () => {
+  test('should work with union types', () => {
     type StringOrNumber = string | number
 
     // Single value from union
@@ -62,7 +62,7 @@ describe('Arrayable type', () => {
     >()
   })
 
-  it('should work with generic constraints', () => {
+  test('should work with generic constraints', () => {
     // Arrayable of any type
     expectTypeOf<unknown>().toMatchTypeOf<Arrayable<unknown>>()
     expectTypeOf<unknown[]>().toMatchTypeOf<Arrayable<unknown>>()
@@ -72,7 +72,7 @@ describe('Arrayable type', () => {
     // The type system correctly prevents invalid assignments to never types
   })
 
-  it('should work with nullable types', () => {
+  test('should work with nullable types', () => {
     // Nullable string
     expectTypeOf<string | null>().toMatchTypeOf<Arrayable<string | null>>()
     expectTypeOf<(string | null)[]>().toMatchTypeOf<Arrayable<string | null>>()
@@ -86,7 +86,7 @@ describe('Arrayable type', () => {
     >()
   })
 
-  it('should preserve type information', () => {
+  test('should preserve type information', () => {
     // The type should be distributive over unions
     type NumberOrStringArrayable = Arrayable<number | string>
 
@@ -100,7 +100,7 @@ describe('Arrayable type', () => {
     expectTypeOf<(number | string)[]>().toMatchTypeOf<NumberOrStringArrayable>()
   })
 
-  it('should work in function signatures', () => {
+  test('should work in function signatures', () => {
     // Function accepting Arrayable parameter
     const processItems = (items: Arrayable<string>): string[] => {
       return Array.isArray(items) ? items : [items]
@@ -117,7 +117,7 @@ describe('Arrayable type', () => {
   })
 
   describe('practical usage examples', () => {
-    it('should work with React children pattern', () => {
+    test('should work with React children pattern', () => {
       // Define ReactNode type locally for testing
       type ReactNode = string | number | boolean | null | undefined
 
@@ -138,7 +138,7 @@ describe('Arrayable type', () => {
       expectTypeOf<ReactNode[]>().toMatchTypeOf<ComponentProps['children']>()
     })
 
-    it('should work with API response patterns', () => {
+    test('should work with API response patterns', () => {
       interface ApiResponse<T> {
         data: Arrayable<T>
         success: boolean
@@ -156,7 +156,7 @@ describe('Arrayable type', () => {
       expectTypeOf<User[]>().toMatchTypeOf<ApiResponse<User>['data']>()
     })
 
-    it('should work with configuration patterns', () => {
+    test('should work with configuration patterns', () => {
       interface PluginConfig {
         plugins: Arrayable<string>
         middleware: Arrayable<() => void>

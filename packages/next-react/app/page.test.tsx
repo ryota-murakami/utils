@@ -37,7 +37,7 @@ vi.mock('next/image', () => ({
 }))
 
 describe('Home Page', () => {
-  it('should render the main heading structure', () => {
+  test('should render the main heading structure', () => {
     const { container } = render(<Home />)
 
     // Check for main grid layout
@@ -47,7 +47,7 @@ describe('Home Page', () => {
     expect(gridContainer).toBeInTheDocument()
   })
 
-  it('should render Next.js logo', () => {
+  test('should render Next.js logo', () => {
     const { getByAltText } = render(<Home />)
 
     const logo = getByAltText('Next.js logo')
@@ -58,7 +58,7 @@ describe('Home Page', () => {
     expect(logo).toHaveAttribute('data-priority', 'true')
   })
 
-  it('should render instructions list', () => {
+  test('should render instructions list', () => {
     const { getByText } = render(<Home />)
 
     expect(getByText(/Get started by editing/)).toBeInTheDocument()
@@ -68,7 +68,7 @@ describe('Home Page', () => {
     ).toBeInTheDocument()
   })
 
-  it('should render code element with correct styling', () => {
+  test('should render code element with correct styling', () => {
     const { getByText } = render(<Home />)
 
     const codeElement = getByText('app/page.tsx')
@@ -80,7 +80,7 @@ describe('Home Page', () => {
     expect(codeElement).toHaveClass('rounded')
   })
 
-  it('should render Deploy button with correct attributes', () => {
+  test('should render Deploy button with correct attributes', () => {
     const { getByText } = render(<Home />)
 
     const deployButton = getByText('Deploy now').closest('a')
@@ -93,7 +93,7 @@ describe('Home Page', () => {
     expect(deployButton).toHaveAttribute('rel', 'noopener noreferrer')
   })
 
-  it('should render Read docs button with correct attributes', () => {
+  test('should render Read docs button with correct attributes', () => {
     const { getByText } = render(<Home />)
 
     const docsButton = getByText('Read our docs').closest('a')
@@ -106,7 +106,7 @@ describe('Home Page', () => {
     expect(docsButton).toHaveAttribute('rel', 'noopener noreferrer')
   })
 
-  it('should render Vercel logo in deploy button', () => {
+  test('should render Vercel logo in deploy button', () => {
     const { getByAltText } = render(<Home />)
 
     const vercelLogo = getByAltText('Vercel logomark')
@@ -116,7 +116,7 @@ describe('Home Page', () => {
     expect(vercelLogo).toHaveAttribute('height', '20')
   })
 
-  it('should render app demo links', () => {
+  test('should render app demo links', () => {
     const { getByText } = render(<Home />)
 
     const gmailDemoLink = getByText('Gmail Clone Demo').closest('a')
@@ -126,7 +126,7 @@ describe('Home Page', () => {
     expect(useStudyLink).toHaveAttribute('href', '/use')
   })
 
-  it('should render footer links', () => {
+  test('should render footer links', () => {
     const { getByText } = render(<Home />)
 
     const learnLink = getByText('Learn').closest('a')
@@ -147,7 +147,7 @@ describe('Home Page', () => {
     )
   })
 
-  it('should render footer icons', () => {
+  test('should render footer icons', () => {
     const { getByAltText } = render(<Home />)
 
     const fileIcon = getByAltText('File icon')
@@ -167,7 +167,7 @@ describe('Home Page', () => {
     expect(globeIcon).toHaveAttribute('height', '16')
   })
 
-  it('should have proper semantic structure', () => {
+  test('should have proper semantic structure', () => {
     const { getByRole, container } = render(<Home />)
 
     // Should have main content area
@@ -180,7 +180,7 @@ describe('Home Page', () => {
     expect(footer).toBeInTheDocument()
   })
 
-  it('should have responsive design classes', () => {
+  test('should have responsive design classes', () => {
     const { container } = render(<Home />)
 
     const mainContainer = container.firstChild as HTMLElement
@@ -192,7 +192,7 @@ describe('Home Page', () => {
     expect(main).toHaveClass('sm:items-start')
   })
 
-  it('should have proper button styling', () => {
+  test('should have proper button styling', () => {
     const { getByText } = render(<Home />)
 
     const deployButton = getByText('Deploy now').closest('a')
@@ -209,7 +209,7 @@ describe('Home Page', () => {
     expect(docsButton).toHaveClass('border-black/[.08]')
   })
 
-  it('should have proper accessibility attributes', () => {
+  test('should have proper accessibility attributes', () => {
     const { getAllByRole } = render(<Home />)
 
     // All links should be accessible
@@ -231,7 +231,7 @@ describe('Home Page', () => {
     })
   })
 
-  it('should render the demo links in a responsive row', () => {
+  test('should render the demo links in a responsive row', () => {
     const { getByText } = render(<Home />)
 
     const gmailDemoLink = getByText('Gmail Clone Demo').closest('a')
@@ -242,7 +242,7 @@ describe('Home Page', () => {
     expect(demoContainer).toHaveClass('sm:flex-row')
   })
 
-  it('should render ordered list correctly', () => {
+  test('should render ordered list correctly', () => {
     const { container } = render(<Home />)
 
     const orderedList = container.querySelector('ol')
@@ -253,7 +253,7 @@ describe('Home Page', () => {
     expect(listItems).toHaveLength(2)
   })
 
-  it('should have dark mode classes', () => {
+  test('should have dark mode classes', () => {
     const { getByAltText, container } = render(<Home />)
 
     // Next.js logo should have dark:invert

@@ -1,5 +1,5 @@
 /// <reference path="./global.d.ts" />
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, test, expect, beforeEach, vi } from 'vitest'
 import './core.js'
 
 describe('jQuery Event Handling Methods', () => {
@@ -9,7 +9,7 @@ describe('jQuery Event Handling Methods', () => {
   })
 
   describe('.on()', () => {
-    it('should attach basic event handler', () => {
+    test('should attach basic event handler', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
       const handler = vi.fn()
@@ -25,7 +25,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(handler).toHaveBeenCalledTimes(1)
     })
 
-    it('should attach event handler with data', () => {
+    test('should attach event handler with data', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
       const handler = vi.fn()
@@ -44,7 +44,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(eventArg.data).toEqual(testData)
     })
 
-    it('should support event delegation with selector', () => {
+    test('should support event delegation with selector', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">
@@ -66,7 +66,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(handler).toHaveBeenCalledTimes(2)
     })
 
-    it('should support event delegation with data and selector', () => {
+    test('should support event delegation with data and selector', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">
@@ -89,7 +89,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(eventArg.data).toEqual(testData)
     })
 
-    it('should support multiple events with space-separated string', () => {
+    test('should support multiple events with space-separated string', () => {
       // Setup
       document.body.innerHTML = '<input id="input" type="text" />'
       const handler = vi.fn()
@@ -106,7 +106,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(handler).toHaveBeenCalledTimes(2)
     })
 
-    it('should support events object map', () => {
+    test('should support events object map', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
       const clickHandler = vi.fn()
@@ -128,7 +128,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(mouseoverHandler).toHaveBeenCalledTimes(1)
     })
 
-    it('should support events object map with selector', () => {
+    test('should support events object map with selector', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">
@@ -157,7 +157,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(mouseoverHandler).toHaveBeenCalledTimes(1)
     })
 
-    it('should work on multiple elements', () => {
+    test('should work on multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <button class="btn">Button 1</button>
@@ -177,7 +177,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(handler).toHaveBeenCalledTimes(2)
     })
 
-    it('should return jQuery object for chaining', () => {
+    test('should return jQuery object for chaining', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
 
@@ -189,7 +189,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(result[0]).toBe(document.getElementById('btn'))
     })
 
-    it('should handle dynamically added elements with delegation', () => {
+    test('should handle dynamically added elements with delegation', () => {
       // Setup
       document.body.innerHTML = '<div id="container"></div>'
       const handler = vi.fn()
@@ -214,7 +214,7 @@ describe('jQuery Event Handling Methods', () => {
   })
 
   describe('.off()', () => {
-    it('should remove specific event handler', () => {
+    test('should remove specific event handler', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
       const handler1 = vi.fn()
@@ -234,7 +234,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(handler2).toHaveBeenCalledTimes(1)
     })
 
-    it('should remove all handlers for specific event type', () => {
+    test('should remove all handlers for specific event type', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
       const clickHandler1 = vi.fn()
@@ -258,7 +258,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(mouseoverHandler).toHaveBeenCalledTimes(1)
     })
 
-    it('should remove all event handlers when called without arguments', () => {
+    test('should remove all event handlers when called without arguments', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
       const clickHandler = vi.fn()
@@ -279,7 +279,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(mouseoverHandler).not.toHaveBeenCalled()
     })
 
-    it('should remove delegated event handlers with selector', () => {
+    test('should remove delegated event handlers with selector', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">
@@ -300,7 +300,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(handler).not.toHaveBeenCalled()
     })
 
-    it('should remove multiple event types with space-separated string', () => {
+    test('should remove multiple event types with space-separated string', () => {
       // Setup
       document.body.innerHTML = '<input id="input" type="text" />'
       const handler = vi.fn()
@@ -318,7 +318,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(handler).not.toHaveBeenCalled()
     })
 
-    it('should work on multiple elements', () => {
+    test('should work on multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <button class="btn">Button 1</button>
@@ -339,7 +339,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(handler).not.toHaveBeenCalled()
     })
 
-    it('should return jQuery object for chaining', () => {
+    test('should return jQuery object for chaining', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
 
@@ -353,7 +353,7 @@ describe('jQuery Event Handling Methods', () => {
   })
 
   describe('.trigger()', () => {
-    it('should trigger event handlers', () => {
+    test('should trigger event handlers', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
       const handler = vi.fn()
@@ -366,7 +366,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(handler).toHaveBeenCalledTimes(1)
     })
 
-    it('should trigger event handlers with extra parameters', () => {
+    test('should trigger event handlers with extra parameters', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
       const handler = vi.fn()
@@ -382,7 +382,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(args?.[2]).toBe('param2')
     })
 
-    it('should trigger event handlers with single extra parameter', () => {
+    test('should trigger event handlers with single extra parameter', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
       const handler = vi.fn()
@@ -397,7 +397,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(args?.[1]).toBe('single-param')
     })
 
-    it('should trigger event object', () => {
+    test('should trigger event object', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
       const handler = vi.fn()
@@ -411,7 +411,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(handler).toHaveBeenCalledTimes(1)
     })
 
-    it('should trigger multiple elements', () => {
+    test('should trigger multiple elements', () => {
       // Setup
       document.body.innerHTML = `
         <button class="btn">Button 1</button>
@@ -427,7 +427,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(handler).toHaveBeenCalledTimes(2)
     })
 
-    it('should trigger delegated event handlers', () => {
+    test('should trigger delegated event handlers', () => {
       // Setup
       document.body.innerHTML = `
         <div id="container">
@@ -444,7 +444,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(handler).toHaveBeenCalledTimes(1)
     })
 
-    it('should return jQuery object for chaining', () => {
+    test('should return jQuery object for chaining', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
 
@@ -456,7 +456,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(result[0]).toBe(document.getElementById('btn'))
     })
 
-    it('should handle custom events', () => {
+    test('should handle custom events', () => {
       // Setup
       document.body.innerHTML = '<div id="element">Element</div>'
       const handler = vi.fn()
@@ -471,7 +471,7 @@ describe('jQuery Event Handling Methods', () => {
   })
 
   describe('event shorthand methods', () => {
-    it('should support .click() shorthand', () => {
+    test('should support .click() shorthand', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
       const handler = vi.fn()
@@ -484,7 +484,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(handler).toHaveBeenCalledTimes(1)
     })
 
-    it('should support .click() trigger without handler', () => {
+    test('should support .click() trigger without handler', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
       const handler = vi.fn()
@@ -497,7 +497,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(handler).toHaveBeenCalledTimes(1)
     })
 
-    it('should support common event shorthands', () => {
+    test('should support common event shorthands', () => {
       // Setup
       document.body.innerHTML = `
         <form id="form">
@@ -532,7 +532,7 @@ describe('jQuery Event Handling Methods', () => {
   })
 
   describe('event object properties', () => {
-    it('should provide event object with correct properties', () => {
+    test('should provide event object with correct properties', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
       const handler = vi.fn()
@@ -551,7 +551,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(typeof event.stopPropagation).toBe('function')
     })
 
-    it('should provide event.data when data is passed to .on()', () => {
+    test('should provide event.data when data is passed to .on()', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
       const handler = vi.fn()
@@ -569,7 +569,7 @@ describe('jQuery Event Handling Methods', () => {
   })
 
   describe('event handling edge cases', () => {
-    it('should handle empty collection', () => {
+    test('should handle empty collection', () => {
       // Test - should not throw errors
       expect(() => {
         $('.non-existent').on('click', () => {})
@@ -579,7 +579,7 @@ describe('jQuery Event Handling Methods', () => {
       }).not.toThrow()
     })
 
-    it('should handle false as handler to prevent default', () => {
+    test('should handle false as handler to prevent default', () => {
       // Setup
       document.body.innerHTML = '<a id="link" href="#test">Link</a>'
       let defaultPrevented = false
@@ -601,7 +601,7 @@ describe('jQuery Event Handling Methods', () => {
       expect(defaultPrevented).toBe(true)
     })
 
-    it('should support chaining multiple event operations', () => {
+    test('should support chaining multiple event operations', () => {
       // Setup
       document.body.innerHTML = '<button id="btn">Click me</button>'
       const handler1 = vi.fn()

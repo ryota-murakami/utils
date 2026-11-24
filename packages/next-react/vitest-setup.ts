@@ -8,7 +8,7 @@ import '@testing-library/jest-dom'
 
 // Start MSW server before all tests
 beforeAll(() => {
-  server.listen({ onUnhandledRequest: 'error' })
+  server.listen({ onUnhandledFrame: 'error' })
 })
 
 // Reset handlers after each test

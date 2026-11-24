@@ -138,8 +138,8 @@ describe('assertIsError', () => {
       assertIsError(unknownValue)
 
       // If this compiles and runs without error, the type assertion worked
-      expect((unknownValue as Error).message).toBe('test')
-      expect((unknownValue as Error).name).toBe('Error')
+      expect(unknownValue.message).toBe('test')
+      expect(unknownValue.name).toBe('Error')
     })
 
     test('should work with custom Error types', () => {
@@ -148,8 +148,8 @@ describe('assertIsError', () => {
       assertIsError<CustomError>(unknownValue)
 
       // TypeScript should now know this is a CustomError
-      expect((unknownValue as CustomError).message).toBe('custom test')
-      expect((unknownValue as CustomError).name).toBe('CustomError')
+      expect(unknownValue.message).toBe('custom test')
+      expect(unknownValue.name).toBe('CustomError')
     })
   })
 })

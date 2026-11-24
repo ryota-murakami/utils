@@ -223,7 +223,7 @@ describe('API utilities', () => {
           }),
         )
 
-        await expect(getUser(1)).rejects.toThrow('Failed to fetch')
+        await expect(getUser(1)).rejects.toThrow('Network error')
       })
     })
 
@@ -364,7 +364,7 @@ describe('API utilities', () => {
           }),
         )
 
-        await expect(getPosts()).rejects.toThrow('Failed to fetch')
+        await expect(getPosts()).rejects.toThrow('Network error')
       })
     })
 

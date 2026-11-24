@@ -333,7 +333,7 @@ describe('isError', () => {
       function handleUnknown(value: unknown) {
         if (isError(value)) {
           // TypeScript should recognize value as Error here
-          return (value as Error).message // Type assertion needed for safety
+          return value.message // Type assertion needed for safety
         }
         return 'Not an error'
       }
@@ -348,7 +348,7 @@ describe('isError', () => {
         value: string | Error | { name: string; message: string },
       ) {
         if (isError(value)) {
-          return `Error: ${(value as Error).message}`
+          return `Error: ${value.message}`
         }
         return `Value: ${value}`
       }
@@ -385,7 +385,7 @@ describe('isError', () => {
         undefined,
         [],
         {},
-        () => {},
+        (): void => {},
         new Date(),
         /regex/,
       ]

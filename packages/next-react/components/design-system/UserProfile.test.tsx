@@ -156,7 +156,7 @@ describe('UserProfile', () => {
 
       const loadingStatus = screen.getByRole('status')
       expect(loadingStatus).toHaveAttribute('aria-live', 'polite')
-      expect(loadingStatus).toHaveTextContent(/loading user profile/i)
+      expect(loadingStatus.textContent).toMatch(/loading user profile/i)
     })
   })
 
@@ -238,7 +238,7 @@ describe('UserProfile', () => {
 
       const loadingStatus = screen.getByRole('status')
       expect(loadingStatus).toHaveAttribute('aria-live', 'polite')
-      expect(loadingStatus).toHaveTextContent(/loading user profile/i)
+      expect(loadingStatus.textContent).toMatch(/loading user profile/i)
     })
 
     test('removes loading status after data loads', async () => {

@@ -39,7 +39,7 @@ export function groupBy<T, K extends string | number | symbol>(
     const key = keyGetter(item, i)
 
     if (result[key]) {
-      result[key]!.push(item)
+      result[key].push(item)
     } else {
       result[key] = [item]
     }

@@ -42,15 +42,15 @@ describe('printValue', () => {
 
   describe('functions', () => {
     test('should handle named functions', () => {
-      function namedFunction() {}
+      function namedFunction(): void {}
       expect(printValue(namedFunction)).toBe('[Function namedFunction]')
     })
 
     test('should handle anonymous functions', () => {
-      const anonymousFunction = function () {}
+      const anonymousFunction = function (): void {}
       expect(printValue(anonymousFunction)).toBe('[Function anonymousFunction]')
 
-      const arrowFunction = () => {}
+      const arrowFunction = (): void => {}
       expect(printValue(arrowFunction)).toBe('[Function arrowFunction]')
     })
   })
@@ -136,7 +136,7 @@ describe('printValue', () => {
 
     test('should handle objects with special values', () => {
       const obj = {
-        func: function test() {},
+        func: function test(): void {},
         date: new Date('2023-12-25T10:30:00.000Z'),
         error: new Error('test'),
         regex: /test/g,

@@ -22,7 +22,7 @@ export function debounce<T extends (...args: any[]) => any>(
   callback: T,
 ): (...args: Parameters<T>) => void {
   let timeoutID: ReturnType<typeof setTimeout> | null = null
-  return (...args: Parameters<T>) => {
+  return (...args: Parameters<T>): void => {
     if (timeoutID) clearTimeout(timeoutID)
     timeoutID = setTimeout(() => callback(...args), timeout)
   }

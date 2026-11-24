@@ -126,7 +126,7 @@ describe('betterTypeof', () => {
 
     test('should handle objects created with different patterns', () => {
       // Constructor function
-      function MyConstructor() {}
+      function MyConstructor(): void {}
       expect(betterTypeof(new (MyConstructor as any)())).toBe('MyConstructor')
 
       // Class with custom name
@@ -157,7 +157,7 @@ describe('betterTypeof', () => {
         [],
         {},
         new Date(),
-        () => {},
+        (): void => {},
       ]
 
       testValues.forEach((value) => {

@@ -25,7 +25,7 @@ export function assertCast<T>(_v: any): asserts _v is T {}
 export function safeAssign<T extends Record<string, unknown>>(
   target: T,
   ...args: Array<Partial<NoInfer<T>>>
-) {
+): void {
   Object.assign(target, ...args)
 }
 

@@ -21,7 +21,8 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Feedback components for user notifications, loading states, and progress indicators.',
+        component:
+          'Feedback components for user notifications, loading states, and progress indicators.',
       },
     },
   },
@@ -39,25 +40,25 @@ export const AlertVariants: StoryObj = {
         title="Default Alert"
         description="This is a default alert message with neutral styling."
       />
-      
+
       <Alert
         variant="info"
         title="Information"
         description="This alert provides helpful information to the user."
       />
-      
+
       <Alert
         variant="success"
         title="Success!"
         description="Your action was completed successfully."
       />
-      
+
       <Alert
         variant="warning"
         title="Warning"
         description="Please review this important information."
       />
-      
+
       <Alert
         variant="error"
         title="Error"
@@ -71,17 +72,21 @@ export const AlertDismissible: StoryObj = {
   render: () => {
     const [alerts, setAlerts] = useState([
       { id: 1, variant: 'info' as const, title: 'New Update Available' },
-      { id: 2, variant: 'success' as const, title: 'File Uploaded Successfully' },
+      {
+        id: 2,
+        variant: 'success' as const,
+        title: 'File Uploaded Successfully',
+      },
       { id: 3, variant: 'warning' as const, title: 'Storage Almost Full' },
     ])
-    
-    const dismissAlert = (id: number) => {
-      setAlerts(alerts.filter(alert => alert.id !== id))
+
+    const dismissAlert = (id: number): void => {
+      setAlerts(alerts.filter((alert) => alert.id !== id))
     }
-    
+
     return (
       <div className="w-full max-w-2xl space-y-4">
-        {alerts.map(alert => (
+        {alerts.map((alert) => (
           <Alert
             key={alert.id}
             variant={alert.variant}
@@ -90,7 +95,7 @@ export const AlertDismissible: StoryObj = {
             onDismiss={() => dismissAlert(alert.id)}
           />
         ))}
-        
+
         {alerts.length === 0 && (
           <div className="text-center py-8 text-foreground/50">
             All alerts dismissed
@@ -118,12 +123,16 @@ export const AlertWithActions: StoryObj = {
         description="A new version of the application is available."
         action={
           <div className="flex gap-2">
-            <Button size="sm" variant="primary">Update Now</Button>
-            <Button size="sm" variant="ghost">Later</Button>
+            <Button size="sm" variant="primary">
+              Update Now
+            </Button>
+            <Button size="sm" variant="ghost">
+              Later
+            </Button>
           </div>
         }
       />
-      
+
       <Alert
         variant="warning"
         title="Subscription Expiring"
@@ -143,8 +152,8 @@ export const AlertWithActions: StoryObj = {
 export const ToastDemo: StoryObj = {
   render: () => {
     const [toasts, setToasts] = useState<any[]>([])
-    
-    const showToast = (variant: any) => {
+
+    const showToast = (variant: any): void => {
       const id = Date.now()
       const newToast = {
         id,
@@ -154,11 +163,11 @@ export const ToastDemo: StoryObj = {
       }
       setToasts([...toasts, newToast])
     }
-    
-    const removeToast = (id: number) => {
-      setToasts(toasts.filter(t => t.id !== id))
+
+    const removeToast = (id: number): void => {
+      setToasts(toasts.filter((t) => t.id !== id))
     }
-    
+
     return (
       <div>
         <div className="flex flex-wrap gap-2 mb-8">
@@ -178,9 +187,9 @@ export const ToastDemo: StoryObj = {
             Error Toast
           </Button>
         </div>
-        
+
         <div className="fixed top-4 right-4 space-y-2 z-50">
-          {toasts.map(toast => (
+          {toasts.map((toast) => (
             <Toast
               key={toast.id}
               {...toast}
@@ -196,13 +205,13 @@ export const ToastDemo: StoryObj = {
 export const ToastWithAction: StoryObj = {
   render: () => {
     const [showToast, setShowToast] = useState(true)
-    
+
     return (
       <div>
         <Button onClick={() => setShowToast(true)} variant="primary">
           Show Toast with Action
         </Button>
-        
+
         {showToast && (
           <div className="fixed top-4 right-4 z-50">
             <Toast
@@ -225,8 +234,10 @@ export const ToastWithAction: StoryObj = {
 // Modal Stories
 export const ModalSizes: StoryObj = {
   render: () => {
-    const [modalSize, setModalSize] = useState<'sm' | 'md' | 'lg' | 'xl' | null>(null)
-    
+    const [modalSize, setModalSize] = useState<
+      'sm' | 'md' | 'lg' | 'xl' | null
+    >(null)
+
     return (
       <div>
         <div className="flex flex-wrap gap-2">
@@ -243,7 +254,7 @@ export const ModalSizes: StoryObj = {
             Extra Large Modal
           </Button>
         </div>
-        
+
         {modalSize && (
           <Modal
             isOpen={true}
@@ -262,7 +273,10 @@ export const ModalSizes: StoryObj = {
               </>
             }
           >
-            <p>Modal content goes here. The size of the modal adjusts based on the size prop.</p>
+            <p>
+              Modal content goes here. The size of the modal adjusts based on
+              the size prop.
+            </p>
           </Modal>
         )}
       </div>
@@ -273,14 +287,22 @@ export const ModalSizes: StoryObj = {
 export const ModalWithForm: StoryObj = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false)
-    const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-    
+    const [formData, setFormData] = useState({
+      name: '',
+      email: '',
+      message: '',
+    })
+
     return (
       <div>
-        <Button onClick={() => setIsOpen(true)} variant="gradient" theme="aurora-borealis">
+        <Button
+          onClick={() => setIsOpen(true)}
+          variant="gradient"
+          theme="aurora-borealis"
+        >
           Open Contact Form
         </Button>
-        
+
         <Modal
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
@@ -293,8 +315,8 @@ export const ModalWithForm: StoryObj = {
               <Button variant="ghost" onClick={() => setIsOpen(false)}>
                 Cancel
               </Button>
-              <Button 
-                variant="primary" 
+              <Button
+                variant="primary"
                 onClick={() => {
                   console.log('Form submitted:', formData)
                   setIsOpen(false)
@@ -310,20 +332,26 @@ export const ModalWithForm: StoryObj = {
               label="Name"
               placeholder="Your name"
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
             />
             <Input
               label="Email"
               type="email"
               placeholder="your@email.com"
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
             />
             <Textarea
               label="Message"
               placeholder="Your message..."
               value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, message: e.target.value })
+              }
             />
           </div>
         </Modal>
@@ -336,19 +364,15 @@ export const ModalWithForm: StoryObj = {
 export const ProgressBarVariants: StoryObj = {
   render: () => (
     <div className="w-96 space-y-6">
-      <ProgressBar
-        value={25}
-        label="Default Progress"
-        showValue
-      />
-      
+      <ProgressBar value={25} label="Default Progress" showValue />
+
       <ProgressBar
         value={50}
         variant="gradient"
         label="Gradient Progress"
         showValue
       />
-      
+
       <ProgressBar
         value={75}
         variant="striped"
@@ -356,19 +380,10 @@ export const ProgressBarVariants: StoryObj = {
         showValue
         animated
       />
-      
-      <ProgressBar
-        value={30}
-        size="sm"
-        label="Small"
-      />
-      
-      <ProgressBar
-        value={60}
-        size="lg"
-        label="Large"
-        showValue
-      />
+
+      <ProgressBar value={30} size="sm" label="Small" />
+
+      <ProgressBar value={60} size="lg" label="Large" showValue />
     </div>
   ),
 }
@@ -381,9 +396,9 @@ export const SpinnerVariants: StoryObj = {
       <Spinner size="md" label="Medium" />
       <Spinner size="lg" label="Large" />
       <Spinner size="xl" label="Extra Large" />
-      
+
       <div className="w-full" />
-      
+
       <Spinner variant="default" label="Default" />
       <Spinner variant="primary" label="Primary" />
       <div className="bg-gray-800 p-4 rounded">
@@ -402,7 +417,7 @@ export const SkeletonLoader: StoryObj = {
         <Skeleton variant="text" />
         <Skeleton variant="text" width="60%" />
       </div>
-      
+
       <div className="flex gap-4">
         <Skeleton variant="circular" width={60} height={60} />
         <div className="flex-1 space-y-2">
@@ -410,9 +425,9 @@ export const SkeletonLoader: StoryObj = {
           <Skeleton variant="text" width="80%" />
         </div>
       </div>
-      
+
       <Skeleton variant="rectangular" height={200} />
-      
+
       <div className="grid grid-cols-3 gap-4">
         <Skeleton variant="rounded" height={100} />
         <Skeleton variant="rounded" height={100} />
@@ -434,19 +449,23 @@ export const BadgeVariants: StoryObj = {
         <Badge variant="error">Error</Badge>
         <Badge variant="info">Info</Badge>
       </div>
-      
+
       <div className="flex flex-wrap gap-2">
         <Badge size="sm">Small</Badge>
         <Badge size="md">Medium</Badge>
         <Badge size="lg">Large</Badge>
       </div>
-      
+
       <div className="flex flex-wrap gap-2">
         <Badge dot>With Dot</Badge>
-        <Badge variant="success" dot>Active</Badge>
-        <Badge variant="warning" dot>Pending</Badge>
+        <Badge variant="success" dot>
+          Active
+        </Badge>
+        <Badge variant="warning" dot>
+          Pending
+        </Badge>
       </div>
-      
+
       <div className="flex flex-wrap gap-2">
         <Badge removable onRemove={() => console.log('Removed')}>
           Removable
@@ -469,15 +488,15 @@ export const TooltipPositions: StoryObj = {
       <Tooltip content="Top tooltip" position="top">
         <Button variant="outline">Hover (Top)</Button>
       </Tooltip>
-      
+
       <Tooltip content="Bottom tooltip" position="bottom">
         <Button variant="outline">Hover (Bottom)</Button>
       </Tooltip>
-      
+
       <Tooltip content="Left tooltip" position="left">
         <Button variant="outline">Hover (Left)</Button>
       </Tooltip>
-      
+
       <Tooltip content="Right tooltip" position="right">
         <Button variant="outline">Hover (Right)</Button>
       </Tooltip>
@@ -490,54 +509,79 @@ export const NotificationSystem: StoryObj = {
   render: () => {
     const [notifications, setNotifications] = useState<any[]>([])
     const [modalOpen, setModalOpen] = useState(false)
-    
-    const addNotification = (type: string) => {
+
+    const addNotification = (type: string): void => {
       const id = Date.now()
-      setNotifications([...notifications, { id, type, message: `${type} notification` }])
+      setNotifications([
+        ...notifications,
+        { id, type, message: `${type} notification` },
+      ])
       setTimeout(() => {
-        setNotifications(prev => prev.filter(n => n.id !== id))
+        setNotifications((prev) => prev.filter((n) => n.id !== id))
       }, 5000)
     }
-    
+
     return (
       <div className="min-h-[400px]">
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Notification System Demo</h3>
-          
+
           <div className="flex flex-wrap gap-2">
-            <Button onClick={() => addNotification('success')} variant="gradient" theme="gradient-forest">
+            <Button
+              onClick={() => addNotification('success')}
+              variant="gradient"
+              theme="gradient-forest"
+            >
               Success Notification
             </Button>
-            <Button onClick={() => addNotification('error')} variant="gradient" theme="gradient-rose">
+            <Button
+              onClick={() => addNotification('error')}
+              variant="gradient"
+              theme="gradient-rose"
+            >
               Error Notification
             </Button>
-            <Button onClick={() => setModalOpen(true)} variant="gradient" theme="aurora-borealis">
+            <Button
+              onClick={() => setModalOpen(true)}
+              variant="gradient"
+              theme="aurora-borealis"
+            >
               Open Modal
             </Button>
           </div>
-          
+
           <Alert
             variant="info"
             title="System Status"
             description="All systems are operational"
             dismissible
           />
-          
-          <ProgressBar value={65} label="Upload Progress" showValue animated variant="striped" />
+
+          <ProgressBar
+            value={65}
+            label="Upload Progress"
+            showValue
+            animated
+            variant="striped"
+          />
         </div>
-        
+
         {/* Toast Container */}
         <div className="fixed top-4 right-4 space-y-2 z-50">
-          {notifications.map(notif => (
+          {notifications.map((notif) => (
             <Toast
               key={notif.id}
               variant={notif.type}
               title={notif.message}
-              onClose={() => setNotifications(prev => prev.filter(n => n.id !== notif.id))}
+              onClose={() =>
+                setNotifications((prev) =>
+                  prev.filter((n) => n.id !== notif.id),
+                )
+              }
             />
           ))}
         </div>
-        
+
         {/* Modal */}
         <Modal
           isOpen={modalOpen}

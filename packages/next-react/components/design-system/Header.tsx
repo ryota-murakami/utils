@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import type React from 'react'
 
 import { shadows, radius } from '@/lib/design-system/spacing'
 import { themes } from '@/lib/design-system/themes'
@@ -41,34 +41,34 @@ export const Header: React.FC<HeaderProps> = ({
   height = 'md',
 }) => {
   const selectedTheme = themes[theme]
-  
+
   const variantClasses = {
     default: cn(
       selectedTheme?.card,
       selectedTheme?.border,
       'border-b',
-      shadows.card
+      shadows.card,
     ),
     minimal: cn(
       transparent ? 'bg-transparent' : 'bg-background/80',
       blur && 'backdrop-blur-md',
-      'border-b border-border/50'
+      'border-b border-border/50',
     ),
     bold: cn(
       selectedTheme?.background,
       selectedTheme?.border,
       'border-b-2',
-      shadows.lg
+      shadows.lg,
     ),
     floating: cn(
       selectedTheme?.card,
       selectedTheme?.border,
       radius.xl,
       shadows['glass-elevated'],
-      'mx-4 mt-4'
+      'mx-4 mt-4',
     ),
   }
-  
+
   return (
     <header
       className={cn(
@@ -78,31 +78,25 @@ export const Header: React.FC<HeaderProps> = ({
         blur && selectedTheme?.blur,
         variantClasses[variant],
         'transition-all duration-300',
-        className
+        className,
       )}
     >
       <div className="h-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between">
         {/* Logo Section */}
-        {logo && (
-          <div className="flex-shrink-0">
-            {logo}
-          </div>
-        )}
-        
+        {logo && <div className="flex-shrink-0">{logo}</div>}
+
         {/* Navigation Section */}
         {navigation && (
           <nav className="hidden md:flex items-center space-x-8 flex-1 ml-8">
             {navigation}
           </nav>
         )}
-        
+
         {/* Actions Section */}
         {actions && (
-          <div className="flex items-center space-x-4">
-            {actions}
-          </div>
+          <div className="flex items-center space-x-4">{actions}</div>
         )}
-        
+
         {/* Custom Children */}
         {!logo && !navigation && !actions && children}
       </div>
@@ -129,7 +123,7 @@ export const NavItem: React.FC<NavItemProps> = ({
   className,
 }) => {
   const Component = href ? 'a' : 'button'
-  
+
   return (
     <Component
       href={href}
@@ -140,7 +134,7 @@ export const NavItem: React.FC<NavItemProps> = ({
         active
           ? 'text-primary font-semibold bg-primary/10'
           : 'text-foreground/70 hover:text-foreground hover:bg-foreground/5',
-        className
+        className,
       )}
     >
       {children}

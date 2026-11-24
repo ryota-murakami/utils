@@ -144,7 +144,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     return start && end && date >= start && date <= end
   }
 
-  const handleDateClick = (date: Date) => {
+  const handleDateClick = (date: Date): void => {
     if (!date || isDateDisabled(date)) return
 
     if (range) {
@@ -171,7 +171,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     }
   }
 
-  const navigateMonth = (direction: 'prev' | 'next') => {
+  const navigateMonth = (direction: 'prev' | 'next'): void => {
     setCurrentMonth((prev) => {
       const newDate = new Date(prev)
       if (direction === 'prev') {

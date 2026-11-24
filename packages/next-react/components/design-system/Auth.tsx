@@ -176,7 +176,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
     onSubmit?.({ email, password })
   }
@@ -310,7 +310,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
   const [confirmPassword, setConfirmPassword] = useState('')
   const [passwordError, setPasswordError] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
     if (password !== confirmPassword) {
       setPasswordError('Passwords do not match')
@@ -495,7 +495,7 @@ export const PasswordResetForm: React.FC<PasswordResetFormProps> = ({
 }) => {
   const [email, setEmail] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
     onSubmit?.(email)
   }

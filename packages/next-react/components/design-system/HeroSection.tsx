@@ -1,7 +1,8 @@
 'use client'
 
 import { ArrowRight, Play, ChevronDown } from 'lucide-react'
-import React, {
+import type React from 'react'
+import {
   useEffect,
   useState,
   useRef,
@@ -30,7 +31,7 @@ function useIntersectionVisibility(
   const subscribe = useCallback(
     (callback: () => void) => {
       const element = ref.current
-      if (!element) return () => {}
+      if (!element) return (): void => {}
 
       const observer = new IntersectionObserver(
         (entries) => {
@@ -45,7 +46,7 @@ function useIntersectionVisibility(
       )
 
       observer.observe(element)
-      return () => observer.disconnect()
+      return (): void => observer.disconnect()
     },
     [ref, threshold],
   )
@@ -199,13 +200,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   useEffect(() => {
     if (!parallax) return
 
-    const handleScroll = () => {
+    const handleScroll = (): void => {
       const scrolled = window.scrollY
       setScrollY(scrolled)
     }
 
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    return (): void => window.removeEventListener('scroll', handleScroll)
   }, [parallax])
 
   // Calculate parallax transform

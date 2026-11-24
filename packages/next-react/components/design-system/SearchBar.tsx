@@ -9,7 +9,8 @@ import {
   Loader2,
   ArrowRight,
 } from 'lucide-react'
-import React, { useState, useRef, useEffect, useMemo } from 'react'
+import type React from 'react'
+import { useState, useRef, useEffect, useMemo } from 'react'
 
 import { shadows, radius } from '@/lib/design-system/spacing'
 import { themes } from '@/lib/design-system/themes'
@@ -201,7 +202,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   }, [suggestions, recentSearches, trendingSearches, value])
 
   // Handle input change
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const newValue = e.target.value
     setInternalValue(newValue)
     onChange?.(newValue)
@@ -218,7 +219,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   }
 
   // Handle search submit
-  const handleSearch = () => {
+  const handleSearch = (): void => {
     if (value.trim()) {
       onSearch?.(value, selectedFilters)
       setShowSuggestions(false)
@@ -226,7 +227,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   }
 
   // Handle suggestion selection
-  const handleSuggestionClick = (suggestion: SearchSuggestion) => {
+  const handleSuggestionClick = (suggestion: SearchSuggestion): void => {
     if (suggestion.action) {
       suggestion.action()
     } else {
@@ -240,7 +241,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   }
 
   // Handle keyboard navigation
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent): void => {
     if (!showSuggestions) {
       if (e.key === 'Enter') {
         handleSearch()
@@ -280,7 +281,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   }
 
   // Handle clear
-  const handleClear = () => {
+  const handleClear = (): void => {
     setInternalValue('')
     onChange?.('')
     onClear?.()
@@ -288,7 +289,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   }
 
   // Handle filter change
-  const handleFilterChange = (filterId: string, value: any) => {
+  const handleFilterChange = (filterId: string, value: any): void => {
     const newFilters = { ...selectedFilters, [filterId]: value }
     setSelectedFilters(newFilters)
     onFilterChange?.(filterId, value)
@@ -296,7 +297,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   // Click outside handler
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
+    const handleClickOutside = (e: MouseEvent): void => {
       if (
         containerRef.current &&
         !containerRef.current.contains(e.target as Node)
@@ -307,7 +308,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     }
 
     document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    return (): void =>
+      document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
   // Filter count

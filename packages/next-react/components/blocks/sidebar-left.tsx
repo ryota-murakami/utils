@@ -13,7 +13,7 @@ import {
   Sparkles,
   Trash2,
 } from 'lucide-react'
-import * as React from 'react'
+import type * as React from 'react'
 
 import { NavFavorites } from '@/components/blocks/nav-favorites'
 import { NavMain } from '@/components/blocks/nav-main'

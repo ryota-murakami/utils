@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState, useRef, useMemo, useCallback } from 'react'
+import type React from 'react'
+import { useState, useRef, useMemo, useCallback } from 'react'
 
 import { themes } from '@/lib/design-system/themes'
 import { cn } from '@/lib/utils'
@@ -74,19 +75,20 @@ export const TabView: React.FC<TabViewProps> = ({
 
   // Ref callback to track active tab element
   const createTabRef = useCallback(
-    (tabId: string) => (el: HTMLButtonElement | null) => {
-      if (el) {
-        tabRefs.current.set(tabId, el)
-        // Update active tab element when this is the active tab
-        if (tabId === activeTab) {
-          setActiveTabElement(el)
+    (tabId: string) =>
+      (el: HTMLButtonElement | null): void => {
+        if (el) {
+          tabRefs.current.set(tabId, el)
+          // Update active tab element when this is the active tab
+          if (tabId === activeTab) {
+            setActiveTabElement(el)
+          }
         }
-      }
-    },
+      },
     [activeTab],
   )
 
-  const handleTabClick = (tabId: string) => {
+  const handleTabClick = (tabId: string): void => {
     const tab = tabs.find((t) => t.id === tabId)
     if (tab?.disabled) return
 

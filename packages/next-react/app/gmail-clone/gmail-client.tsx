@@ -128,7 +128,7 @@ export function GmailClient({
   /**
    * Toggles sidebar visibility
    */
-  const handleToggleSidebar = () => {
+  const handleToggleSidebar = (): void => {
     setSidebarOpen((prev) => {
       const newState = !prev
       toast.success(newState ? 'Sidebar expanded' : 'Sidebar collapsed')
@@ -139,7 +139,7 @@ export function GmailClient({
   /**
    * Refreshes email list from database
    */
-  const handleRefresh = async () => {
+  const handleRefresh = async (): Promise<void> => {
     try {
       const freshEmails = await getEmails()
       setEmails(freshEmails)
@@ -154,7 +154,7 @@ export function GmailClient({
    * Toggles the starred status of an email
    * @param emailId - The ID of the email to toggle
    */
-  const handleToggleStar = async (emailId: string) => {
+  const handleToggleStar = async (emailId: string): Promise<void> => {
     try {
       const updated = await toggleStar(emailId)
       setEmails((prev) =>
@@ -176,7 +176,7 @@ export function GmailClient({
   /**
    * Archives the selected emails
    */
-  const handleArchive = async () => {
+  const handleArchive = async (): Promise<void> => {
     try {
       if (selectedIds.size === 0 && selectedEmail) {
         const archived = await archiveEmail(selectedEmail.id)
@@ -222,7 +222,7 @@ export function GmailClient({
   /**
    * Moves selected emails to trash (permanently deletes in this demo)
    */
-  const handleDelete = async () => {
+  const handleDelete = async (): Promise<void> => {
     try {
       if (selectedIds.size === 0 && selectedEmail) {
         const deleted = await deleteEmail(selectedEmail.id)
@@ -251,7 +251,7 @@ export function GmailClient({
    * Toggles email selection checkbox
    * @param emailId - The ID of the email to toggle selection
    */
-  const handleToggleSelect = (emailId: string) => {
+  const handleToggleSelect = (emailId: string): void => {
     setSelectedIds((prev) => {
       const newSet = new Set(prev)
       if (newSet.has(emailId)) {
@@ -266,7 +266,7 @@ export function GmailClient({
   /**
    * Marks the selected email as read/unread
    */
-  const handleMarkAsRead = async () => {
+  const handleMarkAsRead = async (): Promise<void> => {
     if (!selectedEmail) return
 
     try {
@@ -286,7 +286,9 @@ export function GmailClient({
   /**
    * Handles clicking on an email to select and mark as read
    */
-  const handleEmailClick = async (email: EmailWithParsedLabels) => {
+  const handleEmailClick = async (
+    email: EmailWithParsedLabels,
+  ): Promise<void> => {
     setSelectedEmail(email)
     if (!email.read) {
       try {

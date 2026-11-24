@@ -416,7 +416,8 @@ describe('git', () => {
       const endTime = Date.now()
 
       expect(result).toBe('Slow command result')
-      expect(endTime - startTime).toBeGreaterThanOrEqual(100)
+      // Timer granularity can fire the 100ms setTimeout a few ms early on CI
+      expect(endTime - startTime).toBeGreaterThanOrEqual(95)
     })
 
     test('should handle multiple rapid-fire git commands', async () => {

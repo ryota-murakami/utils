@@ -54,7 +54,7 @@ export class PageProgress {
     return PageProgress.instance
   }
 
-  configure(props: PageProgressProps) {
+  configure(props: PageProgressProps): void {
     this.settings = { ...this.settings, ...props }
   }
 
@@ -118,7 +118,7 @@ export class PageProgress {
     return this.set(n)
   }
 
-  trickle() {
+  trickle(): void {
     this.trickleTimer = setTimeout(() => {
       this.inc()
       if (this.status === 'loading') {
@@ -127,7 +127,7 @@ export class PageProgress {
     }, this.settings.trickleSpeed)
   }
 
-  render() {
+  render(): void {
     if (this.barElement) return
 
     const parent = document.querySelector(this.settings.parent)
@@ -234,7 +234,7 @@ export class PageProgress {
     this.barElement = bar
   }
 
-  hide() {
+  hide(): void {
     const container = document.querySelector('#page-progress')
     if (container) {
       container.remove()
@@ -285,7 +285,7 @@ export function usePageProgress(props?: PageProgressProps) {
 
     progressRef.current = PageProgress.getInstance(config)
 
-    return () => {
+    return (): void => {
       if (progressRef.current?.isStarted()) {
         progressRef.current.done()
       }
@@ -380,12 +380,12 @@ export function useRouterProgress(props?: PageProgressProps) {
   useEffect(() => {
     // This would integrate with Next.js router events
     // For now, it's a placeholder that can be extended
-    const handleStart = () => {
+    const handleStart = (): void => {
       setIsNavigating(true)
       progressRef.current.start()
     }
 
-    const handleComplete = () => {
+    const handleComplete = (): void => {
       setIsNavigating(false)
       progressRef.current.done()
     }
@@ -406,7 +406,7 @@ export function useRouterProgress(props?: PageProgressProps) {
       }
     }
 
-    return () => {
+    return (): void => {
       if (typeof window !== 'undefined' && 'navigation' in window) {
         ;(
           window as unknown as { navigation: EventTarget }
@@ -425,22 +425,22 @@ export function useRouterProgress(props?: PageProgressProps) {
 }
 
 // Standalone functions for manual control
-export const startProgress = (props?: PageProgressProps) => {
+export const startProgress = (props?: PageProgressProps): void => {
   PageProgress.getInstance(props).start()
 }
 
-export const doneProgress = () => {
+export const doneProgress = (): void => {
   PageProgress.getInstance().done()
 }
 
-export const setProgress = (n: number) => {
+export const setProgress = (n: number): void => {
   PageProgress.getInstance().set(n)
 }
 
-export const incProgress = (amount?: number) => {
+export const incProgress = (amount?: number): void => {
   PageProgress.getInstance().inc(amount)
 }
 
-export const configureProgress = (props: PageProgressProps) => {
+export const configureProgress = (props: PageProgressProps): void => {
   PageProgress.getInstance().configure(props)
 }

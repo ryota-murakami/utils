@@ -1,7 +1,8 @@
 'use client'
 
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import React, { useState } from 'react'
+import type React from 'react'
+import { useState } from 'react'
 
 import { padding, shadows, radius } from '@/lib/design-system/spacing'
 import { themes } from '@/lib/design-system/themes'
@@ -49,7 +50,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const [internalCollapsed, setInternalCollapsed] = useState(false)
   const collapsed = controlledCollapsed ?? internalCollapsed
 
-  const handleCollapse = () => {
+  const handleCollapse = (): void => {
     const newValue = !collapsed
     setInternalCollapsed(newValue)
     onCollapsedChange?.(newValue)

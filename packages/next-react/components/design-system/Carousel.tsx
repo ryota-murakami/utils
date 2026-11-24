@@ -1,7 +1,8 @@
 'use client'
 
 import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
-import React, {
+import type React from 'react'
+import {
   useState,
   useRef,
   useEffect,
@@ -196,7 +197,7 @@ export const Carousel: React.FC<CarouselProps> = ({
 
   const subscribeToResize = useCallback((callback: () => void) => {
     window.addEventListener('resize', callback)
-    return () => window.removeEventListener('resize', callback)
+    return (): void => window.removeEventListener('resize', callback)
   }, [])
 
   const activeSettings = useSyncExternalStore<Partial<CarouselProps>>(
@@ -251,13 +252,14 @@ export const Carousel: React.FC<CarouselProps> = ({
 
   // Callback ref factory for slides - measures height when current slide's element is set
   const createSlideRef = useCallback(
-    (index: number) => (node: HTMLDivElement | null) => {
-      slideRefs.current[index] = node
-      // Measure height for adaptive height when current slide's element is set
-      if (adaptiveHeight && index === currentIndex && node) {
-        setSlideHeight(node.offsetHeight)
-      }
-    },
+    (index: number) =>
+      (node: HTMLDivElement | null): void => {
+        slideRefs.current[index] = node
+        // Measure height for adaptive height when current slide's element is set
+        if (adaptiveHeight && index === currentIndex && node) {
+          setSlideHeight(node.offsetHeight)
+        }
+      },
     [adaptiveHeight, currentIndex],
   )
 
@@ -269,7 +271,7 @@ export const Carousel: React.FC<CarouselProps> = ({
       goToNext()
     }, autoplaySpeed)
 
-    return () => {
+    return (): void => {
       if (autoplayTimerRef.current) {
         clearTimeout(autoplayTimerRef.current)
       }
@@ -277,7 +279,7 @@ export const Carousel: React.FC<CarouselProps> = ({
   }, [currentIndex, isPlaying, isPaused, autoplaySpeed, goToNext])
 
   // Touch/Mouse handling
-  const handleTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
+  const handleTouchStart = (e: React.TouchEvent | React.MouseEvent): void => {
     if (!swipeable && !draggable) return
 
     const position =
@@ -288,7 +290,7 @@ export const Carousel: React.FC<CarouselProps> = ({
     setIsDragging(true)
   }
 
-  const handleTouchMove = (e: React.TouchEvent | React.MouseEvent) => {
+  const handleTouchMove = (e: React.TouchEvent | React.MouseEvent): void => {
     if (!touchStart) return
 
     const currentPosition =
@@ -303,7 +305,7 @@ export const Carousel: React.FC<CarouselProps> = ({
     }
   }
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = (): void => {
     if (!touchStart || !touchEnd) {
       setIsDragging(false)
       return

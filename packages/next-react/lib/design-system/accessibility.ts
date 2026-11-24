@@ -4,23 +4,26 @@
  * Ensures inclusive design for all users
  */
 
-
 // Screen Reader Only Classes
 export const srOnly = 'sr-only'
 export const notSrOnly = 'not-sr-only'
 
 // Focus Management
 export const focusStyles = {
-  default: 'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
-  inset: 'focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
-  custom: (color: string) => `focus:outline-none focus-visible:ring-2 focus-visible:ring-${color} focus-visible:ring-offset-2`,
+  default:
+    'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+  inset:
+    'focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+  custom: (color: string) =>
+    `focus:outline-none focus-visible:ring-2 focus-visible:ring-${color} focus-visible:ring-offset-2`,
   none: 'focus:outline-none',
 }
 
 // Keyboard Navigation
 export const keyboardNav = {
   tabIndex: (index: number) => ({ tabIndex: index }),
-  skipLink: 'sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50',
+  skipLink:
+    'sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50',
   roving: (isActive: boolean) => ({
     tabIndex: isActive ? 0 : -1,
     'aria-selected': isActive,
@@ -35,7 +38,7 @@ export const aria = {
     assertive: { 'aria-live': 'assertive' as const },
     off: { 'aria-live': 'off' as const },
   },
-  
+
   // Roles
   role: {
     button: { role: 'button' as const },
@@ -54,7 +57,7 @@ export const aria = {
     tablist: { role: 'tablist' as const },
     tabpanel: { role: 'tabpanel' as const },
   },
-  
+
   // States
   state: {
     expanded: (isExpanded: boolean) => ({ 'aria-expanded': isExpanded }),
@@ -63,16 +66,20 @@ export const aria = {
     pressed: (isPressed: boolean) => ({ 'aria-pressed': isPressed }),
     disabled: (isDisabled: boolean) => ({ 'aria-disabled': isDisabled }),
     hidden: (isHidden: boolean) => ({ 'aria-hidden': isHidden }),
-    current: (current: 'page' | 'step' | 'location' | 'date' | 'time' | boolean) => ({ 'aria-current': current }),
+    current: (
+      current: 'page' | 'step' | 'location' | 'date' | 'time' | boolean,
+    ) => ({ 'aria-current': current }),
   },
-  
+
   // Properties
   props: {
     label: (label: string) => ({ 'aria-label': label }),
     labelledBy: (id: string) => ({ 'aria-labelledby': id }),
     describedBy: (id: string) => ({ 'aria-describedby': id }),
     controls: (id: string) => ({ 'aria-controls': id }),
-    orientation: (orientation: 'horizontal' | 'vertical') => ({ 'aria-orientation': orientation }),
+    orientation: (orientation: 'horizontal' | 'vertical') => ({
+      'aria-orientation': orientation,
+    }),
     valueNow: (value: number) => ({ 'aria-valuenow': value }),
     valueMin: (value: number) => ({ 'aria-valuemin': value }),
     valueMax: (value: number) => ({ 'aria-valuemax': value }),
@@ -125,7 +132,9 @@ export const colorContrast = {
 
 // Semantic HTML Helpers
 export const semantic = {
-  landmark: (type: 'main' | 'nav' | 'aside' | 'header' | 'footer' | 'section') => {
+  landmark: (
+    type: 'main' | 'nav' | 'aside' | 'header' | 'footer' | 'section',
+  ) => {
     const landmarks = {
       main: { role: 'main' as const },
       nav: { role: 'navigation' as const },
@@ -136,12 +145,12 @@ export const semantic = {
     }
     return landmarks[type]
   },
-  
+
   heading: (level: 1 | 2 | 3 | 4 | 5 | 6) => ({
     role: 'heading' as const,
     'aria-level': level,
   }),
-  
+
   list: {
     ordered: { role: 'list' as const },
     unordered: { role: 'list' as const },
@@ -156,12 +165,12 @@ export const form = {
     invalid: (isInvalid: boolean) => ({ 'aria-invalid': isInvalid }),
     readonly: (isReadonly: boolean) => ({ 'aria-readonly': isReadonly }),
   },
-  
+
   validation: {
     error: (id: string) => ({ 'aria-errormessage': id }),
     description: (id: string) => ({ 'aria-describedby': id }),
   },
-  
+
   group: {
     fieldset: { role: 'group' as const },
     radiogroup: { role: 'radiogroup' as const },
@@ -169,15 +178,18 @@ export const form = {
 }
 
 // Announce Helper for Dynamic Content
-export function announce(message: string, priority: 'polite' | 'assertive' = 'polite') {
+export function announce(
+  message: string,
+  priority: 'polite' | 'assertive' = 'polite',
+): void {
   const announcement = document.createElement('div')
   announcement.setAttribute('aria-live', priority)
   announcement.setAttribute('aria-atomic', 'true')
   announcement.className = srOnly
   announcement.textContent = message
-  
+
   document.body.appendChild(announcement)
-  
+
   setTimeout(() => {
     document.body.removeChild(announcement)
   }, 1000)
@@ -186,15 +198,17 @@ export function announce(message: string, priority: 'polite' | 'assertive' = 'po
 // Focus Trap Helper
 export function trapFocus(element: HTMLElement) {
   const focusableElements = element.querySelectorAll(
-    'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
   )
-  
+
   const firstFocusable = focusableElements[0] as HTMLElement
-  const lastFocusable = focusableElements[focusableElements.length - 1] as HTMLElement
-  
-  const handleKeyDown = (e: KeyboardEvent) => {
+  const lastFocusable = focusableElements[
+    focusableElements.length - 1
+  ] as HTMLElement
+
+  const handleKeyDown = (e: KeyboardEvent): void => {
     if (e.key !== 'Tab') return
-    
+
     if (e.shiftKey) {
       if (document.activeElement === firstFocusable) {
         e.preventDefault()
@@ -207,11 +221,11 @@ export function trapFocus(element: HTMLElement) {
       }
     }
   }
-  
+
   element.addEventListener('keydown', handleKeyDown)
   firstFocusable?.focus()
-  
-  return () => {
+
+  return (): void => {
     element.removeEventListener('keydown', handleKeyDown)
   }
 }
@@ -232,48 +246,55 @@ export interface VisuallyHiddenProps {
 // Accessibility Checker Helper
 export function checkA11y(element: HTMLElement): string[] {
   const issues: string[] = []
-  
+
   // Check for missing alt text on images
   const images = element.querySelectorAll('img')
-  images.forEach(img => {
+  images.forEach((img) => {
     if (!img.getAttribute('alt')) {
       issues.push(`Image missing alt text: ${img.src}`)
     }
   })
-  
+
   // Check for missing labels on form inputs
   const inputs = element.querySelectorAll('input, textarea, select')
-  inputs.forEach(input => {
+  inputs.forEach((input) => {
     const id = input.getAttribute('id')
     if (!id || !element.querySelector(`label[for="${id}"]`)) {
-      if (!input.getAttribute('aria-label') && !input.getAttribute('aria-labelledby')) {
-        issues.push(`Form input missing label: ${input.outerHTML.substring(0, 50)}...`)
+      if (
+        !input.getAttribute('aria-label') &&
+        !input.getAttribute('aria-labelledby')
+      ) {
+        issues.push(
+          `Form input missing label: ${input.outerHTML.substring(0, 50)}...`,
+        )
       }
     }
   })
-  
+
   // Check for empty buttons
   const buttons = element.querySelectorAll('button')
-  buttons.forEach(button => {
+  buttons.forEach((button) => {
     if (!button.textContent?.trim() && !button.getAttribute('aria-label')) {
       issues.push('Button missing accessible text')
     }
   })
-  
+
   // Check for proper heading hierarchy
   const headings = element.querySelectorAll('h1, h2, h3, h4, h5, h6')
   let lastLevel = 0
-  headings.forEach(heading => {
+  headings.forEach((heading) => {
     const tagChar = heading.tagName[1]
     if (tagChar) {
       const level = parseInt(tagChar, 10)
       if (level > lastLevel + 1) {
-        issues.push(`Heading hierarchy issue: h${lastLevel} followed by h${level}`)
+        issues.push(
+          `Heading hierarchy issue: h${lastLevel} followed by h${level}`,
+        )
       }
       lastLevel = level
     }
   })
-  
+
   return issues
 }
 

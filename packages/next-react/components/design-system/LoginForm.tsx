@@ -80,7 +80,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
     return newErrors
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault()
 
     const validationErrors = validateForm()
@@ -108,7 +108,8 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
   }
 
   const handleInputChange =
-    (field: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    (field: keyof FormData) =>
+    (e: React.ChangeEvent<HTMLInputElement>): void => {
       setFormData((prev) => ({ ...prev, [field]: e.target.value }))
       // Clear field-specific error when user starts typing
       if (errors[field]) {

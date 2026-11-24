@@ -325,7 +325,7 @@ const generateEmails = (count: number) => {
 /**
  * Main seed function
  */
-async function main() {
+async function main(): Promise<void> {
   console.log('🌱 Seeding database...')
 
   // Clear existing emails

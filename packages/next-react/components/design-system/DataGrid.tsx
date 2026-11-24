@@ -175,7 +175,7 @@ export function DataGrid<T extends Record<string, any>>({
           const value =
             typeof column.accessor === 'function'
               ? column.accessor(row)
-              : row[column.accessor as keyof T]
+              : row[column.accessor]
 
           return String(value)
             .toLowerCase()
@@ -192,11 +192,11 @@ export function DataGrid<T extends Record<string, any>>({
           const aValue =
             typeof column.accessor === 'function'
               ? column.accessor(a)
-              : a[column.accessor as keyof T]
+              : a[column.accessor]
           const bValue =
             typeof column.accessor === 'function'
               ? column.accessor(b)
-              : b[column.accessor as keyof T]
+              : b[column.accessor]
 
           if (aValue === bValue) return 0
 
@@ -226,7 +226,7 @@ export function DataGrid<T extends Record<string, any>>({
   ])
 
   // Handle sorting
-  const handleSort = (columnId: string) => {
+  const handleSort = (columnId: string): void => {
     if (!sortable) return
 
     const newDirection =
@@ -237,7 +237,7 @@ export function DataGrid<T extends Record<string, any>>({
   }
 
   // Handle selection
-  const handleSelectAll = () => {
+  const handleSelectAll = (): void => {
     if (selectedRowIds.size === processedData.length) {
       setSelectedRowIds(new Set())
       onSelectionChange?.([])
@@ -248,7 +248,7 @@ export function DataGrid<T extends Record<string, any>>({
     }
   }
 
-  const handleSelectRow = (index: number) => {
+  const handleSelectRow = (index: number): void => {
     const newSelection = new Set(selectedRowIds)
     if (newSelection.has(index)) {
       newSelection.delete(index)
@@ -260,17 +260,17 @@ export function DataGrid<T extends Record<string, any>>({
   }
 
   // Handle drag and drop for rows
-  const handleRowDragStart = (e: React.DragEvent, index: number) => {
+  const handleRowDragStart = (e: React.DragEvent, index: number): void => {
     setDraggedRow(index)
     e.dataTransfer.effectAllowed = 'move'
   }
 
-  const handleRowDragOver = (e: React.DragEvent) => {
+  const handleRowDragOver = (e: React.DragEvent): void => {
     e.preventDefault()
     e.dataTransfer.dropEffect = 'move'
   }
 
-  const handleRowDrop = (e: React.DragEvent, targetIndex: number) => {
+  const handleRowDrop = (e: React.DragEvent, targetIndex: number): void => {
     e.preventDefault()
     if (draggedRow !== null && draggedRow !== targetIndex) {
       onRowReorder?.(draggedRow, targetIndex)
@@ -279,12 +279,18 @@ export function DataGrid<T extends Record<string, any>>({
   }
 
   // Handle column drag and drop
-  const handleColumnDragStart = (e: React.DragEvent, columnId: string) => {
+  const handleColumnDragStart = (
+    e: React.DragEvent,
+    columnId: string,
+  ): void => {
     setDraggedColumn(columnId)
     e.dataTransfer.effectAllowed = 'move'
   }
 
-  const handleColumnDrop = (e: React.DragEvent, targetColumnId: string) => {
+  const handleColumnDrop = (
+    e: React.DragEvent,
+    targetColumnId: string,
+  ): void => {
     e.preventDefault()
     if (draggedColumn && draggedColumn !== targetColumnId) {
       const fromIndex = columns.findIndex((c) => c.id === draggedColumn)
@@ -303,7 +309,7 @@ export function DataGrid<T extends Record<string, any>>({
   }
 
   // Handle column resize
-  const handleResizeStart = (e: React.MouseEvent, columnId: string) => {
+  const handleResizeStart = (e: React.MouseEvent, columnId: string): void => {
     e.preventDefault()
     const column = columns.find((c) => c.id === columnId)
     if (!column) return
@@ -318,7 +324,7 @@ export function DataGrid<T extends Record<string, any>>({
     document.addEventListener('mouseup', handleResizeEnd)
   }
 
-  const handleResizeMove = (e: MouseEvent) => {
+  const handleResizeMove = (e: MouseEvent): void => {
     if (!resizeRef.current) return
 
     const diff = e.clientX - resizeRef.current.startX
@@ -330,14 +336,18 @@ export function DataGrid<T extends Record<string, any>>({
     }))
   }
 
-  const handleResizeEnd = () => {
+  const handleResizeEnd = (): void => {
     resizeRef.current = null
     document.removeEventListener('mousemove', handleResizeMove)
     document.removeEventListener('mouseup', handleResizeEnd)
   }
 
   // Handle cell editing
-  const handleCellEdit = (rowIndex: number, columnId: string, value: any) => {
+  const handleCellEdit = (
+    rowIndex: number,
+    columnId: string,
+    value: any,
+  ): void => {
     // This would typically update the data through a callback
     console.log('Edit cell:', { rowIndex, columnId, value })
     setEditingCell(null)
@@ -348,7 +358,7 @@ export function DataGrid<T extends Record<string, any>>({
     const value =
       typeof column.accessor === 'function'
         ? column.accessor(row)
-        : row[column.accessor as keyof T]
+        : row[column.accessor]
 
     if (
       editingCell?.row === rowIndex &&

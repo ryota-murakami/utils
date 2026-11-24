@@ -21,7 +21,8 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Comprehensive form components including inputs, selects, checkboxes, and more.',
+        component:
+          'Comprehensive form components including inputs, selects, checkboxes, and more.',
       },
     },
   },
@@ -34,7 +35,7 @@ export default meta
 export const SelectDefault: StoryObj = {
   render: () => {
     const [value, setValue] = useState('')
-    
+
     const options: SelectOption[] = [
       { value: 'apple', label: 'Apple' },
       { value: 'google', label: 'Google' },
@@ -42,7 +43,7 @@ export const SelectDefault: StoryObj = {
       { value: 'amazon', label: 'Amazon' },
       { value: 'meta', label: 'Meta', disabled: true },
     ]
-    
+
     return (
       <div className="w-80">
         <Select
@@ -61,7 +62,7 @@ export const SelectDefault: StoryObj = {
 export const SelectWithIcons: StoryObj = {
   render: () => {
     const [value, setValue] = useState('')
-    
+
     const options: SelectOption[] = [
       { value: 'user', label: 'User Profile', icon: <User size={16} /> },
       { value: 'mail', label: 'Email Settings', icon: <Mail size={16} /> },
@@ -69,7 +70,7 @@ export const SelectWithIcons: StoryObj = {
       { value: 'home', label: 'Home Address', icon: <Home size={16} /> },
       { value: 'work', label: 'Work Settings', icon: <Briefcase size={16} /> },
     ]
-    
+
     return (
       <div className="w-80">
         <Select
@@ -92,7 +93,7 @@ export const CheckboxVariants: StoryObj = {
     const [checked1, setChecked1] = useState(false)
     const [checked2, setChecked2] = useState(true)
     const [checked3, setChecked3] = useState(false)
-    
+
     return (
       <div className="space-y-4">
         <Checkbox
@@ -100,7 +101,7 @@ export const CheckboxVariants: StoryObj = {
           checked={checked1}
           onChange={setChecked1}
         />
-        
+
         <Checkbox
           label="Glass Checkbox"
           checked={checked2}
@@ -108,34 +109,21 @@ export const CheckboxVariants: StoryObj = {
           variant="glass"
           theme="glass-aurora"
         />
-        
+
         <Checkbox
           label="Rounded Checkbox"
           checked={checked3}
           onChange={setChecked3}
           variant="rounded"
         />
-        
-        <Checkbox
-          label="Small Size"
-          size="sm"
-        />
-        
-        <Checkbox
-          label="Large Size"
-          size="lg"
-        />
-        
-        <Checkbox
-          label="Disabled Checkbox"
-          disabled
-          checked
-        />
-        
-        <Checkbox
-          label="With Error State"
-          error="This field is required"
-        />
+
+        <Checkbox label="Small Size" size="sm" />
+
+        <Checkbox label="Large Size" size="lg" />
+
+        <Checkbox label="Disabled Checkbox" disabled checked />
+
+        <Checkbox label="With Error State" error="This field is required" />
       </div>
     )
   },
@@ -145,14 +133,14 @@ export const CheckboxVariants: StoryObj = {
 export const RadioGroupDefault: StoryObj = {
   render: () => {
     const [value, setValue] = useState('option1')
-    
+
     const options: RadioOption[] = [
       { value: 'option1', label: 'Option 1' },
       { value: 'option2', label: 'Option 2' },
       { value: 'option3', label: 'Option 3' },
       { value: 'option4', label: 'Option 4', disabled: true },
     ]
-    
+
     return (
       <div className="w-80">
         <RadioGroup
@@ -170,25 +158,25 @@ export const RadioGroupDefault: StoryObj = {
 export const RadioGroupCards: StoryObj = {
   render: () => {
     const [value, setValue] = useState('basic')
-    
+
     const options: RadioOption[] = [
-      { 
-        value: 'basic', 
+      {
+        value: 'basic',
         label: 'Basic Plan',
-        description: '$9/month - Perfect for individuals'
+        description: '$9/month - Perfect for individuals',
       },
-      { 
-        value: 'pro', 
+      {
+        value: 'pro',
         label: 'Pro Plan',
-        description: '$29/month - For professionals'
+        description: '$29/month - For professionals',
       },
-      { 
-        value: 'enterprise', 
+      {
+        value: 'enterprise',
         label: 'Enterprise Plan',
-        description: 'Custom pricing - For large teams'
+        description: 'Custom pricing - For large teams',
       },
     ]
-    
+
     return (
       <div className="w-96">
         <RadioGroup
@@ -211,7 +199,7 @@ export const SwitchVariants: StoryObj = {
     const [checked1, setChecked1] = useState(false)
     const [checked2, setChecked2] = useState(true)
     const [checked3, setChecked3] = useState(false)
-    
+
     return (
       <div className="space-y-4">
         <Switch
@@ -219,26 +207,22 @@ export const SwitchVariants: StoryObj = {
           checked={checked1}
           onChange={setChecked1}
         />
-        
+
         <Switch
           label="Small Switch"
           checked={checked2}
           onChange={setChecked2}
           size="sm"
         />
-        
+
         <Switch
           label="Large Switch"
           checked={checked3}
           onChange={setChecked3}
           size="lg"
         />
-        
-        <Switch
-          label="Disabled Switch"
-          disabled
-          checked
-        />
+
+        <Switch label="Disabled Switch" disabled checked />
       </div>
     )
   },
@@ -253,26 +237,26 @@ export const TextareaVariants: StoryObj = {
         placeholder="Enter your message..."
         hint="Maximum 500 characters"
       />
-      
+
       <Textarea
         label="Glass Textarea"
         variant="glass"
         theme="glass-aurora"
         placeholder="Glass style textarea..."
       />
-      
+
       <Textarea
         label="Minimal Textarea"
         variant="minimal"
         placeholder="Minimal style..."
       />
-      
+
       <Textarea
         label="With Error"
         error="This field is required"
         placeholder="Invalid content..."
       />
-      
+
       <Textarea
         label="Non-resizable"
         resize="none"
@@ -285,10 +269,13 @@ export const TextareaVariants: StoryObj = {
 // File Upload Stories
 export const FileUploadDefault: StoryObj = {
   render: () => {
-    const handleFileSelect = (files: FileList) => {
-      console.log('Selected files:', Array.from(files).map(f => f.name))
+    const handleFileSelect = (files: FileList): void => {
+      console.log(
+        'Selected files:',
+        Array.from(files).map((f) => f.name),
+      )
     }
-    
+
     return (
       <div className="w-96 space-y-6">
         <FileUpload
@@ -296,7 +283,7 @@ export const FileUploadDefault: StoryObj = {
           accept="image/*"
           theme="glass-aurora"
         />
-        
+
         <FileUpload
           variant="default"
           label="Choose File"
@@ -329,7 +316,7 @@ export const SliderVariants: StoryObj = {
     const [value1, setValue1] = useState(50)
     const [value2, setValue2] = useState(75)
     const [value3, setValue3] = useState(30)
-    
+
     return (
       <div className="w-96 space-y-8">
         <Slider
@@ -339,7 +326,7 @@ export const SliderVariants: StoryObj = {
           min={0}
           max={100}
         />
-        
+
         <Slider
           label="Brightness"
           value={value2}
@@ -347,7 +334,7 @@ export const SliderVariants: StoryObj = {
           min={0}
           max={100}
         />
-        
+
         <Slider
           label="Progress"
           value={value3}
@@ -356,12 +343,8 @@ export const SliderVariants: StoryObj = {
           max={100}
           showValue={false}
         />
-        
-        <Slider
-          label="Disabled Slider"
-          value={50}
-          disabled
-        />
+
+        <Slider label="Disabled Slider" value={50} disabled />
       </div>
     )
   },
@@ -373,7 +356,7 @@ export const NumberInputVariants: StoryObj = {
     const [value1, setValue1] = useState(0)
     const [value2, setValue2] = useState(5)
     const [value3, setValue3] = useState(10)
-    
+
     return (
       <div className="space-y-6">
         <NumberInput
@@ -383,7 +366,7 @@ export const NumberInputVariants: StoryObj = {
           min={0}
           max={100}
         />
-        
+
         <NumberInput
           label="Rating"
           value={value2}
@@ -392,14 +375,14 @@ export const NumberInputVariants: StoryObj = {
           max={5}
           theme="glass-aurora"
         />
-        
+
         <NumberInput
           label="Without Controls"
           value={value3}
           onChange={setValue3}
           showControls={false}
         />
-        
+
         <NumberInput
           label="With Error"
           value={150}
@@ -426,36 +409,36 @@ export const CompleteForm: StoryObj = {
       quantity: 1,
       satisfaction: 50,
     })
-    
+
     const companyOptions: SelectOption[] = [
       { value: 'startup', label: 'Startup (1-10 employees)' },
       { value: 'small', label: 'Small (11-50 employees)' },
       { value: 'medium', label: 'Medium (51-200 employees)' },
       { value: 'large', label: 'Large (200+ employees)' },
     ]
-    
+
     const planOptions: RadioOption[] = [
-      { 
-        value: 'basic', 
+      {
+        value: 'basic',
         label: 'Basic',
-        description: 'Essential features for small teams'
+        description: 'Essential features for small teams',
       },
-      { 
-        value: 'pro', 
+      {
+        value: 'pro',
         label: 'Professional',
-        description: 'Advanced features and priority support'
+        description: 'Advanced features and priority support',
       },
-      { 
-        value: 'enterprise', 
+      {
+        value: 'enterprise',
         label: 'Enterprise',
-        description: 'Custom solutions for large organizations'
+        description: 'Custom solutions for large organizations',
       },
     ]
-    
+
     return (
       <div className="max-w-2xl mx-auto p-8 space-y-8">
         <h2 className="text-2xl font-bold">Complete Form Example</h2>
-        
+
         <Select
           label="Company Size"
           options={companyOptions}
@@ -464,7 +447,7 @@ export const CompleteForm: StoryObj = {
           variant="glass"
           theme="glass-aurora"
         />
-        
+
         <RadioGroup
           label="Select Plan"
           name="plan"
@@ -473,7 +456,7 @@ export const CompleteForm: StoryObj = {
           onChange={(value) => setFormData({ ...formData, plan: value })}
           variant="cards"
         />
-        
+
         <div className="space-y-3">
           <label className="text-sm font-medium text-foreground/70">
             Additional Features
@@ -481,43 +464,45 @@ export const CompleteForm: StoryObj = {
           <Checkbox
             label="Advanced Analytics"
             checked={formData.features.analytics}
-            onChange={(checked) => 
-              setFormData({ 
-                ...formData, 
-                features: { ...formData.features, analytics: checked }
+            onChange={(checked) =>
+              setFormData({
+                ...formData,
+                features: { ...formData.features, analytics: checked },
               })
             }
           />
           <Checkbox
             label="24/7 Support"
             checked={formData.features.support}
-            onChange={(checked) => 
-              setFormData({ 
-                ...formData, 
-                features: { ...formData.features, support: checked }
+            onChange={(checked) =>
+              setFormData({
+                ...formData,
+                features: { ...formData.features, support: checked },
               })
             }
           />
           <Checkbox
             label="API Access"
             checked={formData.features.api}
-            onChange={(checked) => 
-              setFormData({ 
-                ...formData, 
-                features: { ...formData.features, api: checked }
+            onChange={(checked) =>
+              setFormData({
+                ...formData,
+                features: { ...formData.features, api: checked },
               })
             }
           />
         </div>
-        
+
         <Textarea
           label="Additional Requirements"
           placeholder="Tell us about your specific needs..."
           value={formData.description}
-          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, description: e.target.value })
+          }
           variant="glass"
         />
-        
+
         <NumberInput
           label="Number of Licenses"
           value={formData.quantity}
@@ -525,15 +510,17 @@ export const CompleteForm: StoryObj = {
           min={1}
           max={100}
         />
-        
+
         <Slider
           label="How satisfied are you with our service?"
           value={formData.satisfaction}
-          onChange={(value) => setFormData({ ...formData, satisfaction: value })}
+          onChange={(value) =>
+            setFormData({ ...formData, satisfaction: value })
+          }
           min={0}
           max={100}
         />
-        
+
         <div className="pt-4 border-t">
           <h3 className="font-medium mb-2">Form Data:</h3>
           <pre className="text-sm bg-foreground/5 p-4 rounded-lg overflow-auto">

@@ -1,7 +1,7 @@
 'use client'
 
 import { Check, CheckCheck, Clock, AlertCircle } from 'lucide-react'
-import React from 'react'
+import type React from 'react'
 
 import { themes } from '@/lib/design-system/themes'
 import { typography } from '@/lib/design-system/typography'

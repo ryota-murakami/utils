@@ -8,7 +8,8 @@ import {
   Info,
   Loader2,
 } from 'lucide-react'
-import React, { useCallback, useEffect, useState } from 'react'
+import type React from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { shadows, radius } from '@/lib/design-system/spacing'
 import { themes } from '@/lib/design-system/themes'
@@ -184,7 +185,7 @@ export const Toast: React.FC<ToastProps> = ({
         handleClose()
       }, duration)
 
-      return () => clearTimeout(timer)
+      return (): void => clearTimeout(timer)
     }
     return undefined
   }, [duration, handleClose])
@@ -324,7 +325,7 @@ export const Modal: React.FC<ModalProps> = ({
       document.body.style.overflow = 'unset'
     }
 
-    return () => {
+    return (): void => {
       document.body.style.overflow = 'unset'
     }
   }, [isOpen])
@@ -692,12 +693,12 @@ export const Tooltip: React.FC<TooltipProps> = ({
   const [isVisible, setIsVisible] = useState(false)
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null)
 
-  const showTooltip = () => {
+  const showTooltip = (): void => {
     const id = setTimeout(() => setIsVisible(true), delay)
     setTimeoutId(id)
   }
 
-  const hideTooltip = () => {
+  const hideTooltip = (): void => {
     if (timeoutId) {
       clearTimeout(timeoutId)
       setTimeoutId(null)

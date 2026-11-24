@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Mail, Lock, User, Phone, CreditCard, Search } from 'lucide-react'
 import { useState } from 'react'
 
-import { 
+import {
   Input,
   LoginForm,
   SignUpForm,
-  PasswordResetForm
+  PasswordResetForm,
 } from '@/components/design-system/Auth'
 
 const meta = {
@@ -15,7 +15,8 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Authentication components for user login, signup, and password reset flows.',
+        component:
+          'Authentication components for user login, signup, and password reset flows.',
       },
     },
   },
@@ -33,7 +34,7 @@ export const InputVariants: StoryObj = {
         placeholder="Enter text..."
         hint="This is a helpful hint"
       />
-      
+
       <Input
         label="Glass Input"
         variant="glass"
@@ -41,26 +42,26 @@ export const InputVariants: StoryObj = {
         placeholder="Glass style input"
         icon={<User size={18} />}
       />
-      
+
       <Input
         label="Minimal Input"
         variant="minimal"
         placeholder="Minimal style"
       />
-      
+
       <Input
         label="Bold Input"
         variant="bold"
         placeholder="Bold border style"
       />
-      
+
       <Input
         label="With Error"
         placeholder="Invalid input"
         error="This field is required"
         value="Invalid data"
       />
-      
+
       <Input
         label="Disabled Input"
         placeholder="Cannot edit"
@@ -81,7 +82,7 @@ export const InputTypes: StoryObj = {
         icon={<Mail size={18} />}
         variant="glass"
       />
-      
+
       <Input
         label="Password Input"
         type="password"
@@ -90,21 +91,21 @@ export const InputTypes: StoryObj = {
         showPasswordToggle
         variant="glass"
       />
-      
+
       <Input
         label="Phone Number"
         type="tel"
         placeholder="+1 (555) 000-0000"
         icon={<Phone size={18} />}
       />
-      
+
       <Input
         label="Search"
         type="search"
         placeholder="Search..."
         icon={<Search size={18} />}
       />
-      
+
       <Input
         label="Credit Card"
         placeholder="0000 0000 0000 0000"
@@ -118,13 +119,13 @@ export const InputTypes: StoryObj = {
 export const LoginFormDefault: StoryObj = {
   render: () => {
     const [loading, setLoading] = useState(false)
-    
-    const handleSubmit = (data: { email: string; password: string }) => {
+
+    const handleSubmit = (data: { email: string; password: string }): void => {
       setLoading(true)
       console.log('Login data:', data)
       setTimeout(() => setLoading(false), 2000)
     }
-    
+
     return (
       <LoginForm
         onSubmit={handleSubmit}
@@ -154,17 +155,17 @@ export const LoginFormThemes: StoryObj = {
         theme="glass-aurora"
         onSubmit={(data) => console.log('Login:', data)}
       />
-      
+
       <LoginForm
         theme="gradient-sunset"
         onSubmit={(data) => console.log('Login:', data)}
       />
-      
+
       <LoginForm
         theme="glass-metallic-gold"
         onSubmit={(data) => console.log('Login:', data)}
       />
-      
+
       <LoginForm
         theme="aurora-borealis"
         onSubmit={(data) => console.log('Login:', data)}
@@ -177,13 +178,17 @@ export const LoginFormThemes: StoryObj = {
 export const SignUpFormDefault: StoryObj = {
   render: () => {
     const [loading, setLoading] = useState(false)
-    
-    const handleSubmit = (data: { name: string; email: string; password: string }) => {
+
+    const handleSubmit = (data: {
+      name: string
+      email: string
+      password: string
+    }): void => {
       setLoading(true)
       console.log('Sign up data:', data)
       setTimeout(() => setLoading(false), 2000)
     }
-    
+
     return (
       <SignUpForm
         onSubmit={handleSubmit}
@@ -209,8 +214,8 @@ export const PasswordResetDefault: StoryObj = {
   render: () => {
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(false)
-    
-    const handleSubmit = (email: string) => {
+
+    const handleSubmit = (email: string): void => {
       setLoading(true)
       console.log('Reset password for:', email)
       setTimeout(() => {
@@ -218,7 +223,7 @@ export const PasswordResetDefault: StoryObj = {
         setSuccess(true)
       }, 2000)
     }
-    
+
     return (
       <PasswordResetForm
         onSubmit={handleSubmit}
@@ -237,7 +242,7 @@ export const PasswordResetDefault: StoryObj = {
 export const CompleteAuthFlow: StoryObj = {
   render: () => {
     const [view, setView] = useState<'login' | 'signup' | 'reset'>('login')
-    
+
     return (
       <div className="min-h-[600px] flex items-center justify-center">
         {view === 'login' && (
@@ -247,14 +252,14 @@ export const CompleteAuthFlow: StoryObj = {
             onSignUp={() => setView('signup')}
           />
         )}
-        
+
         {view === 'signup' && (
           <SignUpForm
             onSubmit={(data) => console.log('Sign up:', data)}
             onLogin={() => setView('login')}
           />
         )}
-        
+
         {view === 'reset' && (
           <PasswordResetForm
             onSubmit={(email) => console.log('Reset:', email)}
@@ -267,7 +272,8 @@ export const CompleteAuthFlow: StoryObj = {
   parameters: {
     docs: {
       description: {
-        story: 'Interactive authentication flow with transitions between login, signup, and password reset.',
+        story:
+          'Interactive authentication flow with transitions between login, signup, and password reset.',
       },
     },
   },

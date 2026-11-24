@@ -1,5 +1,5 @@
 import { Plus } from 'lucide-react'
-import * as React from 'react'
+import type * as React from 'react'
 
 import { Calendars } from '@/components/blocks/calendars'
 import { DatePicker } from '@/components/blocks/date-picker'

@@ -17,7 +17,7 @@ export const Default: Story = {
   render: () => {
     const [isLoading, setIsLoading] = useState(false)
 
-    const startLoading = () => {
+    const startLoading = (): void => {
       setIsLoading(true)
       // Simulating an operation that takes time
       setTimeout(() => {
@@ -40,10 +40,12 @@ export const Default: Story = {
             Content behind the overlay
           </h2>
           <p>
-            While the loading overlay is displayed, you cannot access this content.
+            While the loading overlay is displayed, you cannot access this
+            content.
           </p>
           <p className="mt-2">
-            Due to the backdrop in the background, you cannot interact with any elements below.
+            Due to the backdrop in the background, you cannot interact with any
+            elements below.
           </p>
         </div>
 

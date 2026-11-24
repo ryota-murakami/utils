@@ -387,7 +387,7 @@ export function DataTable({
     getFacetedUniqueValues: getFacetedUniqueValues(),
   })
 
-  function handleDragEnd(event: DragEndEvent) {
+  function handleDragEnd(event: DragEndEvent): void {
     const { active, over } = event
     if (active && over && active.id !== over.id) {
       setData((data) => {

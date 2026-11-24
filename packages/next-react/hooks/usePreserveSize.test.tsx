@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import React from 'react'
+import type React from 'react'
 import { describe, test, expect, beforeEach } from 'vitest'
 
 import { usePreserveSize } from './usePreserveSize'

@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import type React from 'react'
 
 import { containers, padding } from '@/lib/design-system/spacing'
 import { themes } from '@/lib/design-system/themes'
@@ -28,8 +28,9 @@ export const Container: React.FC<ContainerProps> = ({
   fullHeight = false,
 }) => {
   const selectedTheme = themes[theme]
-  const paddingClass = paddingSize === 'none' ? '' : padding.container[paddingSize as keyof typeof padding.container]
-  
+  const paddingClass =
+    paddingSize === 'none' ? '' : padding.container[paddingSize]
+
   return (
     <div
       className={cn(
@@ -44,7 +45,7 @@ export const Container: React.FC<ContainerProps> = ({
           selectedTheme?.border,
           selectedTheme?.shadow,
         ],
-        className
+        className,
       )}
     >
       {children}

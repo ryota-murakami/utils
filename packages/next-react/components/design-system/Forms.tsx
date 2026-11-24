@@ -620,23 +620,23 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   const [files, setFiles] = useState<File[]>([])
   const selectedTheme = themes[theme]
 
-  const handleDragOver = (e: React.DragEvent) => {
+  const handleDragOver = (e: React.DragEvent): void => {
     e.preventDefault()
     setIsDragging(true)
   }
 
-  const handleDragLeave = () => {
+  const handleDragLeave = (): void => {
     setIsDragging(false)
   }
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = (e: React.DragEvent): void => {
     e.preventDefault()
     setIsDragging(false)
     const droppedFiles = Array.from(e.dataTransfer.files)
     handleFiles(droppedFiles)
   }
 
-  const handleFiles = (fileList: File[]) => {
+  const handleFiles = (fileList: File[]): void => {
     const validFiles = fileList.filter((file) => {
       const sizeInMB = file.size / (1024 * 1024)
       return sizeInMB <= maxSize
@@ -651,7 +651,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
     onFileSelect?.(validFiles as any)
   }
 
-  const removeFile = (index: number) => {
+  const removeFile = (index: number): void => {
     setFiles(files.filter((_, i) => i !== index))
   }
 
@@ -856,14 +856,14 @@ export const NumberInput: React.FC<NumberInputProps> = ({
 }) => {
   const selectedTheme = themes[theme]
 
-  const handleIncrement = () => {
+  const handleIncrement = (): void => {
     const newValue = value + step
     if (max === undefined || newValue <= max) {
       onChange?.(newValue)
     }
   }
 
-  const handleDecrement = () => {
+  const handleDecrement = (): void => {
     const newValue = value - step
     if (min === undefined || newValue >= min) {
       onChange?.(newValue)

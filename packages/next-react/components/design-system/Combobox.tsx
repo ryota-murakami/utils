@@ -1,7 +1,8 @@
 'use client'
 
 import { ChevronDown, X, Check, Search, Plus, Loader2 } from 'lucide-react'
-import React, { useState, useRef, useEffect, useMemo } from 'react'
+import type React from 'react'
+import { useState, useRef, useEffect, useMemo } from 'react'
 
 import { shadows, radius } from '@/lib/design-system/spacing'
 import { themes } from '@/lib/design-system/themes'
@@ -205,7 +206,7 @@ export const Combobox: React.FC<ComboboxProps> = ({
     )
 
   // Handle selection
-  const handleSelect = (option: ComboboxOption) => {
+  const handleSelect = (option: ComboboxOption): void => {
     if (option.disabled) return
 
     if (multiple) {
@@ -227,7 +228,7 @@ export const Combobox: React.FC<ComboboxProps> = ({
   }
 
   // Handle create
-  const handleCreate = () => {
+  const handleCreate = (): void => {
     if (searchQuery) {
       onCreate?.(searchQuery)
 
@@ -243,13 +244,16 @@ export const Combobox: React.FC<ComboboxProps> = ({
   }
 
   // Handle clear
-  const handleClear = (e: React.MouseEvent) => {
+  const handleClear = (e: React.MouseEvent): void => {
     e.stopPropagation()
     onChange?.(multiple ? [] : '')
   }
 
   // Handle remove tag
-  const handleRemoveTag = (valueToRemove: string, e?: React.MouseEvent) => {
+  const handleRemoveTag = (
+    valueToRemove: string,
+    e?: React.MouseEvent,
+  ): void => {
     e?.stopPropagation()
     if (multiple) {
       onChange?.(selectedValues.filter((v) => v !== valueToRemove))
@@ -257,7 +261,7 @@ export const Combobox: React.FC<ComboboxProps> = ({
   }
 
   // Handle keyboard navigation
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent): void => {
     if (!isOpen && (e.key === 'Enter' || e.key === ' ')) {
       e.preventDefault()
       setIsOpen(true)
@@ -296,7 +300,7 @@ export const Combobox: React.FC<ComboboxProps> = ({
 
   // Click outside handler
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
+    const handleClickOutside = (e: MouseEvent): void => {
       if (
         containerRef.current &&
         !containerRef.current.contains(e.target as Node)
@@ -306,7 +310,8 @@ export const Combobox: React.FC<ComboboxProps> = ({
     }
 
     document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    return (): void =>
+      document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
   // Get display value

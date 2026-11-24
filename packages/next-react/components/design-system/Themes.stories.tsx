@@ -64,7 +64,7 @@ export const GlassThemes: Story = {
         {Object.entries(themes)
           .filter(([_, theme]) => theme.category === 'glass')
           .map(([key]) => (
-            <ThemeCard key={key} themeName={key as keyof typeof themes} />
+            <ThemeCard key={key} themeName={key} />
           ))}
       </div>
     </div>
@@ -86,7 +86,7 @@ export const AuroraThemes: Story = {
         {Object.entries(themes)
           .filter(([_, theme]) => theme.category === 'aurora')
           .map(([key]) => (
-            <ThemeCard key={key} themeName={key as keyof typeof themes} />
+            <ThemeCard key={key} themeName={key} />
           ))}
       </div>
     </div>
@@ -107,7 +107,7 @@ export const GradientThemes: Story = {
         {Object.entries(themes)
           .filter(([_, theme]) => theme.category === 'gradient')
           .map(([key]) => (
-            <ThemeCard key={key} themeName={key as keyof typeof themes} />
+            <ThemeCard key={key} themeName={key} />
           ))}
       </div>
     </div>
@@ -128,7 +128,7 @@ export const MetallicThemes: Story = {
         {Object.entries(themes)
           .filter(([_, theme]) => theme.category === 'metallic')
           .map(([key]) => (
-            <ThemeCard key={key} themeName={key as keyof typeof themes} />
+            <ThemeCard key={key} themeName={key} />
           ))}
       </div>
     </div>
@@ -146,7 +146,7 @@ export const AllThemes: Story = {
         }
         const categoryArray = acc[category]
         if (categoryArray) {
-          categoryArray.push(key as keyof typeof themes)
+          categoryArray.push(key)
         }
         return acc
       },
@@ -266,13 +266,13 @@ export const InteractiveSelector: Story = {
             <h3 className="font-semibold mb-4">Select Theme</h3>
             <div className="space-y-2 max-h-[600px] overflow-y-auto">
               {Object.keys(themes).map((key) => {
-                const theme = themes[key as keyof typeof themes]
+                const theme = themes[key]
                 if (!theme) return null
                 return (
                   <button
                     type="button"
                     key={key}
-                    onClick={() => setSelectedTheme(key as keyof typeof themes)}
+                    onClick={() => setSelectedTheme(key)}
                     className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                       selectedTheme === key
                         ? 'bg-primary text-primary-foreground'

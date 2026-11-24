@@ -5,7 +5,7 @@ import { useSyncExternalStore } from 'react'
  * No subscription is needed since mounted state never changes after initial render.
  * @returns Cleanup function (no-op)
  */
-const emptySubscribe = () => () => {}
+const emptySubscribe = () => (): void => {}
 
 /**
  * Client snapshot: Always returns true (component is mounted on client).

@@ -1,7 +1,8 @@
 'use client'
 
 import { MoveUp } from 'lucide-react'
-import React, { useSyncExternalStore, useCallback, type ComponentProps } from 'react'
+import type React from 'react'
+import { useSyncExternalStore, useCallback, type ComponentProps } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -18,7 +19,7 @@ const SCROLL_THRESHOLD = 200
  */
 function subscribeToScroll(callback: () => void): () => void {
   window.addEventListener('scroll', callback)
-  return () => window.removeEventListener('scroll', callback)
+  return (): void => window.removeEventListener('scroll', callback)
 }
 
 /**
@@ -66,7 +67,7 @@ export const ScrollToTop: React.FC<Props> = ({
   const visible = useSyncExternalStore(
     subscribeToScroll,
     getScrollVisibility,
-    getServerSnapshot
+    getServerSnapshot,
   )
 
   const scrollToTop = useCallback(() => {
@@ -77,7 +78,10 @@ export const ScrollToTop: React.FC<Props> = ({
   }, [])
 
   // Map size prop to Button component size
-  const buttonSizeMap: Record<'small' | 'normal' | 'large', 'sm' | 'default' | 'lg'> = {
+  const buttonSizeMap: Record<
+    'small' | 'normal' | 'large',
+    'sm' | 'default' | 'lg'
+  > = {
     small: 'sm',
     normal: 'default',
     large: 'lg',

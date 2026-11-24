@@ -14,7 +14,8 @@ import {
   Grid3x3,
   Loader2,
 } from 'lucide-react'
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import type React from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 
 import type { themes } from '@/lib/design-system/themes'
 import { cn } from '@/lib/utils'
@@ -186,7 +187,7 @@ export const Lightbox: React.FC<LightboxProps> = ({
   useEffect(() => {
     if (!isOpen || !keyboard) return
 
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent): void => {
       switch (e.key) {
         case 'Escape':
           onClose()
@@ -213,7 +214,7 @@ export const Lightbox: React.FC<LightboxProps> = ({
     }
 
     document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
+    return (): void => document.removeEventListener('keydown', handleKeyDown)
   }, [
     isOpen,
     keyboard,
@@ -235,7 +236,7 @@ export const Lightbox: React.FC<LightboxProps> = ({
       navigateNext()
     }, slideshowInterval)
 
-    return () => {
+    return (): void => {
       if (slideshowTimerRef.current) {
         clearTimeout(slideshowTimerRef.current)
       }
@@ -243,7 +244,7 @@ export const Lightbox: React.FC<LightboxProps> = ({
   }, [isPlaying, enableSlideshow, slideshowInterval, navigateNext])
 
   // Download
-  const handleDownload = () => {
+  const handleDownload = (): void => {
     if (!currentItem) return
 
     const link = document.createElement('a')
@@ -253,7 +254,7 @@ export const Lightbox: React.FC<LightboxProps> = ({
   }
 
   // Share
-  const handleShare = async () => {
+  const handleShare = async (): Promise<void> => {
     if (!currentItem) return
 
     if (typeof navigator.share === 'function') {
@@ -270,12 +271,12 @@ export const Lightbox: React.FC<LightboxProps> = ({
   }
 
   // Touch handling
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const handleTouchStart = (e: React.TouchEvent): void => {
     if (!swipeable || !e.touches[0]) return
     setTouchStart({ x: e.touches[0].clientX, y: e.touches[0].clientY })
   }
 
-  const handleTouchMove = (e: React.TouchEvent) => {
+  const handleTouchMove = (e: React.TouchEvent): void => {
     if (!swipeable || !touchStart || !e.touches[0]) return
 
     const deltaX = e.touches[0].clientX - touchStart.x
@@ -286,7 +287,7 @@ export const Lightbox: React.FC<LightboxProps> = ({
     }
   }
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
+  const handleTouchEnd = (e: React.TouchEvent): void => {
     if (!swipeable || !touchStart || !e.changedTouches[0]) return
 
     const deltaX = e.changedTouches[0].clientX - touchStart.x
@@ -618,7 +619,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
 
-  const handleImageClick = (index: number) => {
+  const handleImageClick = (index: number): void => {
     setSelectedIndex(index)
     setLightboxOpen(true)
     const image = images[index]

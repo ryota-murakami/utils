@@ -22,11 +22,11 @@
     "buffer": "^6.0.3"
   },
   "devDependencies": {
-    "@testing-library/dom": "^10.4.1",
+    "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "catalog:",
     "@testing-library/user-event": "catalog:",
     "@vitest/browser": "catalog:",
-    "@vitest/browser-playwright": "^4.1.5",
+    "@vitest/browser-playwright": "^5.1.1",
     "eslint": "catalog:",
     "eslint-config-ts-prefixer": "catalog:",
     "globals": "catalog:",

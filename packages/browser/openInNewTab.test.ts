@@ -28,7 +28,7 @@ describe('openInNewTab', () => {
         return mockAnchor as unknown as HTMLElement
       }
       return originalCreateElement.call(document, tagName)
-    }) as typeof document.createElement
+    })
   })
 
   afterEach(() => {
@@ -294,7 +294,7 @@ describe('openInNewTab', () => {
 
       document.createElement = vi.fn(
         () => anchorWithoutClick as unknown as HTMLElement,
-      ) as typeof document.createElement
+      )
 
       // Should throw when trying to call click
       expect(() => openInNewTab('https://example.com')).toThrow()
@@ -336,7 +336,7 @@ describe('openInNewTab', () => {
         addEventListener: vi.fn(),
       }
 
-      const clickHandler = () => openInNewTab('https://docs.example.com')
+      const clickHandler = (): void => openInNewTab('https://docs.example.com')
       mockButton.addEventListener('click', clickHandler)
 
       // Simulate click event

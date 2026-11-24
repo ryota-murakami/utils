@@ -52,4 +52,12 @@ export default tseslint.config(
       'no-undef': 'off',
     },
   },
+  {
+    // The jQuery reimplementation assigns raw HTML by design; injection
+    // safety is the caller's contract, same as upstream jQuery.
+    files: ['jQuery/**/*.ts'],
+    rules: {
+      'browser-security/no-innerhtml': 'off',
+    },
+  },
 )

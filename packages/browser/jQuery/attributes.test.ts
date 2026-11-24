@@ -251,9 +251,7 @@ describe('jQuery Attribute Methods', () => {
       $('.check').prop('checked', true)
 
       // Assert
-      const checkboxes = document.querySelectorAll(
-        '.check',
-      ) as NodeListOf<HTMLInputElement>
+      const checkboxes = document.querySelectorAll<HTMLInputElement>('.check')
       expect(checkboxes[0]?.checked).toBe(true)
       expect(checkboxes[1]?.checked).toBe(true)
     })
@@ -289,9 +287,7 @@ describe('jQuery Attribute Methods', () => {
       })
 
       // Assert
-      const inputs = document.querySelectorAll(
-        '.input',
-      ) as NodeListOf<HTMLInputElement>
+      const inputs = document.querySelectorAll<HTMLInputElement>('.input')
       expect(inputs[0]?.value).toBe('new0-old1')
       expect(inputs[1]?.value).toBe('new1-old2')
     })

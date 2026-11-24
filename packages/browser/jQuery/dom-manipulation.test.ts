@@ -225,9 +225,7 @@ describe('jQuery DOM Manipulation', () => {
       $('.input').val('New value')
 
       // Assert
-      const inputs = document.querySelectorAll(
-        '.input',
-      ) as NodeListOf<HTMLInputElement>
+      const inputs = document.querySelectorAll<HTMLInputElement>('.input')
       expect(inputs[0]?.value).toBe('New value')
       expect(inputs[1]?.value).toBe('New value')
     })
@@ -324,9 +322,8 @@ describe('jQuery DOM Manipulation', () => {
       $('#multi').val(['1', '3'])
 
       // Assert
-      const options = document.querySelectorAll(
-        '#multi option',
-      ) as NodeListOf<HTMLOptionElement>
+      const options =
+        document.querySelectorAll<HTMLOptionElement>('#multi option')
       expect(options[0]?.selected).toBe(true)
       expect(options[1]?.selected).toBe(false)
       expect(options[2]?.selected).toBe(true)
@@ -364,9 +361,7 @@ describe('jQuery DOM Manipulation', () => {
       })
 
       // Assert
-      const inputs = document.querySelectorAll(
-        '.input',
-      ) as NodeListOf<HTMLInputElement>
+      const inputs = document.querySelectorAll<HTMLInputElement>('.input')
       expect(inputs[0]?.value).toBe('Value 0 - Updated 0')
       expect(inputs[1]?.value).toBe('Value 1 - Updated 1')
     })

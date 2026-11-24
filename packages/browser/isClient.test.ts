@@ -196,7 +196,7 @@ describe('isClient', () => {
 
     test('should be either true or false, never undefined', async () => {
       return import('./isClient.js').then((module) => {
-        const value = module.default as unknown as boolean
+        const value = module.default
         expect(value === true || value === false).toBe(true)
         expect(value).not.toBeUndefined()
         expect(value).not.toBeNull()

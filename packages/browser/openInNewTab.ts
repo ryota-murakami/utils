@@ -15,7 +15,7 @@
  * })
  * ```
  */
-export function openInNewTab(url: string) {
+export function openInNewTab(url: string): void {
   const anchor = document.createElement('a')
   anchor.target = '_blank'
   anchor.href = url

@@ -316,7 +316,7 @@ export class JQuery implements JQueryCollection {
       try {
         const elements = searchContext.querySelectorAll(processedSelector)
         Array.from(elements).forEach((el, i) => {
-          this[i] = el as Element
+          this[i] = el
         })
         this.length = elements.length
       } catch {
@@ -444,22 +444,16 @@ export class JQuery implements JQueryCollection {
         } else if (typeof value === 'function') {
           const oldValue = (
             element as
-              | HTMLInputElement
-              | HTMLTextAreaElement
-              | HTMLSelectElement
+              HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
           ).value
           ;(
             element as
-              | HTMLInputElement
-              | HTMLTextAreaElement
-              | HTMLSelectElement
+              HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
           ).value = value(i, oldValue)
         } else if (typeof value === 'string') {
           ;(
             element as
-              | HTMLInputElement
-              | HTMLTextAreaElement
-              | HTMLSelectElement
+              HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
           ).value = value
         }
       }
@@ -614,7 +608,7 @@ export class JQuery implements JQueryCollection {
       if (typeof toInsert === 'string') {
         element.insertAdjacentHTML('beforebegin', toInsert)
       } else if (toInsert instanceof Element) {
-        element.parentNode!.insertBefore(toInsert, element)
+        element.parentNode.insertBefore(toInsert, element)
       } else if (toInsert instanceof JQuery) {
         // Insert all elements from jQuery collection
         for (let j = 0; j < toInsert.length; j++) {
@@ -682,7 +676,7 @@ export class JQuery implements JQueryCollection {
             i < $target.length - 1
               ? (element.cloneNode(true) as Element)
               : element
-          targetElement.parentNode!.insertBefore(toInsert, targetElement)
+          targetElement.parentNode.insertBefore(toInsert, targetElement)
         }
       }
     }
@@ -802,7 +796,7 @@ export class JQuery implements JQueryCollection {
           i < this.length - 1
             ? (replacement.cloneNode(true) as Element)
             : replacement
-        element.parentNode!.insertBefore(toInsert, element)
+        element.parentNode.insertBefore(toInsert, element)
       } else if (replacement instanceof JQuery) {
         // Insert all elements from jQuery collection
         for (let j = 0; j < replacement.length; j++) {
@@ -813,13 +807,13 @@ export class JQuery implements JQueryCollection {
               i < this.length - 1
                 ? (replaceEl.cloneNode(true) as Element)
                 : replaceEl
-            element.parentNode!.insertBefore(toInsert, element)
+            element.parentNode.insertBefore(toInsert, element)
           }
         }
       }
 
       // Remove the original element
-      element.parentNode!.removeChild(element)
+      element.parentNode.removeChild(element)
     }
 
     // Return jQuery collection of removed elements
@@ -847,13 +841,13 @@ export class JQuery implements JQueryCollection {
             i < $target.length - 1
               ? (element.cloneNode(true) as Element)
               : element
-          targetElement.parentNode!.insertBefore(toInsert, targetElement)
-          insertedElements.push(toInsert as Element)
+          targetElement.parentNode.insertBefore(toInsert, targetElement)
+          insertedElements.push(toInsert)
         }
       }
 
       // Remove the target element
-      targetElement.parentNode!.removeChild(targetElement)
+      targetElement.parentNode.removeChild(targetElement)
     }
 
     // Return jQuery collection of inserted elements
@@ -966,9 +960,7 @@ export class JQuery implements JQueryCollection {
   prop(_name: string, _value: (_index: number, _oldProp: any) => any): JQuery
   prop(
     nameOrProperties:
-      | string
-      | Record<string, any>
-      | ((_index: number, _oldProp: any) => any),
+      string | Record<string, any> | ((_index: number, _oldProp: any) => any),
     value?: any | ((_index: number, _oldProp: any) => any),
   ): any | JQuery {
     // Getting property
@@ -1044,8 +1036,7 @@ export class JQuery implements JQueryCollection {
   addClass(_fn: (_index: number, _currentClass: string) => string): JQuery
   addClass(
     classNamesOrFn:
-      | string
-      | ((_index: number, _currentClass: string) => string),
+      string | ((_index: number, _currentClass: string) => string),
   ): JQuery {
     for (let i = 0; i < this.length; i++) {
       const element = this[i]
@@ -1078,8 +1069,7 @@ export class JQuery implements JQueryCollection {
   removeClass(_fn: (_index: number, _currentClass: string) => string): JQuery
   removeClass(
     classNamesOrFn?:
-      | string
-      | ((_index: number, _currentClass: string) => string),
+      string | ((_index: number, _currentClass: string) => string),
   ): JQuery {
     for (let i = 0; i < this.length; i++) {
       const element = this[i]
@@ -2162,7 +2152,7 @@ export class JQuery implements JQueryCollection {
             }
 
             const target = nativeEvent.target as Element
-            if (target && target.matches && target.matches(actualSelector!)) {
+            if (target && target.matches && target.matches(actualSelector)) {
               const jqEvent = nativeEvent as any
 
               // Use defineProperty to set read-only properties

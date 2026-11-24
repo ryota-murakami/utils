@@ -39,9 +39,9 @@ describe('getImageRect', () => {
       mockImage.addEventListener = vi.fn(
         (event: string, handler: (_error?: Error) => void) => {
           if (event === 'load') {
-            mockImage.load = handler as () => void
+            mockImage.load = handler
           } else if (event === 'error') {
-            mockImage.error = handler as (_error: Error) => void
+            mockImage.error = handler
           }
         },
       )
@@ -420,9 +420,9 @@ describe('getImageRect', () => {
           addEventListener: vi.fn(
             (event: string, handler: (_error?: Error) => void) => {
               if (event === 'load') {
-                img.load = handler as () => void
+                img.load = handler
               } else if (event === 'error') {
-                img.error = handler as (_error: Error) => void
+                img.error = handler
               }
             },
           ),
@@ -477,9 +477,9 @@ describe('getImageRect', () => {
           addEventListener: vi.fn(
             (event: string, handler: (_error?: Error) => void) => {
               if (event === 'load') {
-                img.load = handler as () => void
+                img.load = handler
               } else if (event === 'error') {
-                img.error = handler as (_error: Error) => void
+                img.error = handler
               }
             },
           ),
